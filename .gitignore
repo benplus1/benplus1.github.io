@@ -1,2 +1,3 @@
-_site/
-deploy-hugo.md
+node_modules/
+build/
+.now
