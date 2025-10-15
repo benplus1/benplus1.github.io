@@ -1,52 +1,97 @@
 {
   "publications": [
     {
-      "title": "[Paper Title 1]",
+      "title": "Virtual Reality Task Guidance Through Relative 6DoF Pose Specification",
       "authors": [
-        "Author 1*",
-        "Author 2*",
-        "Author 3",
-        "Author 4",
-        "Author 5",
-        "Author 6",
-        "Author 7",
-        "Author 8",
-        "Author 9",
-        "Author 10",
-        "Author 11†",
-        "Author 12†"
+        "Ben Yang",
+        "Xichen He",
+        "Charlie Zou",
+        "Jen-Shuo Liu",
+        "Barbara Tversky",
+        "Steven Feiner"
       ],
-      "venue": "Preprint (2025)",
-      "thumbnail": "images/thumbs/1.jpg",
+      "venue": "ISMAR 2025",
+      "thumbnail": "images/thumbs/task.png",
       "selected": 1,
       "award": "",
       "links": {
-        "pdf": "#",
-        "code": "#",
-        "project": "#"
+        "pdf": "#"
       }
     },
     {
-      "title": "[Paper Title 2]",
+      "title": "Permanent Proxies for Bimanual Selection and Manipulation in VR",
       "authors": [
-        "Author 1*",
-        "Author 2*",
-        "Author 3",
-        "Author 4",
-        "Author 5",
-        "Author 6",
-        "Author 7",
-        "Author 8",
-        "Author 9",
-        "Author 10",
-        "Author 11"
+        "Ben Yang",
+        "Jen-Shuo Liu",
+        "Xichen He",
+        "Barbara Tversky",
+        "Steven Feiner"
       ],
-      "venue": "Preprint (2025)",
-      "thumbnail": "images/thumbs/2.jpg",
+      "venue": "IEEE VR 2025",
+      "thumbnail": "images/thumbs/proxies.png",
+      "selected": 1,
+      "award": "",
+      "links": {
+        "pdf": "https://ieeexplore.ieee.org/document/10972388"
+      }
+    },
+    {
+      "title": "VHard: An XR UI for Kinesthetic Rehearsal of Rock Climbing Moves",
+      "authors": [
+        "Joel Salzman",
+        "Jace Li",
+        "Ben Yang",
+        "Steven Feiner"
+      ],
+      "venue": "ISMAR 2024",
+      "thumbnail": "images/thumbs/vhard.png",
+      "selected": 1,
+      "award": "",
+      "links": {
+        "pdf": "https://ieeexplore.ieee.org/document/10765317"
+      }
+    },
+    {
+      "title": "An XR GUI for Visualizing Messages in ECS Architectures",
+      "authors": [
+        "Ben Yang",
+        "Xichen He",
+        "Jace Li",
+        "Carmine Elvezio",
+        "Steven Feiner"
+      ],
+      "venue": "ISMAR 2024",
+      "thumbnail": "images/thumbs/mercury.png",
+      "selected": 1,
+      "award": "",
+      "links": {
+        "pdf": "https://ieeexplore.ieee.org/document/10765164",
+        "code": "https://github.com/ColumbiaCGUI/MercuryMessaging"
+      }
+    },
+    {
+      "title": "Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis",
+      "authors": [
+        "Alexandra Boghosian",
+        "S. Isabel Cordero",
+        "Carmine Elvezio",
+        "Sofia Sanchez-Zarate",
+        "Ben Yang",
+        "Shengyue Guo",
+        "Qazi Ashikin",
+        "Joel Salzman",
+        "Kirsty Tinto",
+        "Steven Feiner",
+        "Robin Bell"
+      ],
+      "venue": "IGARSS 2023",
+      "thumbnail": "images/thumbs/ice.png",
       "selected": 0,
       "award": "",
       "links": {
-        "pdf": "#"
+        "pdf": "https://ieeexplore.ieee.org/document/10283077",
+        "code": "https://github.com/ColumbiaCGUI/PolXR",
+        "project": "https://pgg.ldeo.columbia.edu/projects/VISER"
       }
     }
   ]
