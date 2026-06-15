@@ -5,6 +5,7 @@ const ME = ['ben yang', 'benjamin yang'];
 
 let allPublications = [];
 let activeTag = 'All';
+let showingSelected = true;
 
 document.addEventListener('DOMContentLoaded', () => {
   loadNews();
@@ -55,6 +56,16 @@ function loadPublications() {
       allPublications = data.publications || [];
       buildFilters();
       renderPublications();
+      const toggle = document.getElementById('toggle-publications');
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          showingSelected = !showingSelected;
+          toggle.textContent = showingSelected ? 'Show all' : 'Show selected';
+          toggle.setAttribute('aria-expanded', String(!showingSelected));
+          document.getElementById('pub-heading').textContent = showingSelected ? 'Selected Publications' : 'Publications';
+          renderPublications();
+        });
+      }
     })
     .catch((err) => { console.error(err); container.innerHTML = 'Could not load publications. See my <a href="https://scholar.google.com/citations?user=wyIkKdgAAAAJ">Google Scholar</a>.'; });
 }
@@ -88,6 +99,7 @@ function renderPublications() {
   const container = document.getElementById('publications-container');
   container.innerHTML = '';
   const list = allPublications
+    .filter((p) => (showingSelected ? p.selected === 1 : true))
     .filter((p) => (activeTag === 'All' ? true : (p.tags || []).includes(activeTag)));
 
   if (!list.length) {
@@ -105,23 +117,30 @@ function renderPublications() {
 function createCard(pub) {
   const card = document.createElement('article');
   card.className = 'pub-card reveal';
+  const L = pub.links || {};
+  const vid = L.video ? ytId(L.video) : null;
 
-  // thumbnail
+  // thumbnail: image (or YouTube poster); a video shows a play badge and opens in-page
   const thumb = document.createElement('div');
   thumb.className = 'pub-thumb';
-  if (pub.thumbnail) {
+  const thumbSrc = pub.thumbnail || (vid ? `https://i.ytimg.com/vi/${vid}/hqdefault.jpg` : '');
+  if (thumbSrc) {
     const img = document.createElement('img');
-    img.src = pub.thumbnail;
+    img.src = thumbSrc;
     img.alt = pub.title + ' — figure';
     img.loading = 'lazy';
     img.decoding = 'async';
     thumb.appendChild(img);
-    thumb.setAttribute('role', 'button');
-    thumb.setAttribute('tabindex', '0');
-    thumb.setAttribute('aria-label', 'Enlarge figure: ' + pub.title);
-    const open = () => openModal(pub.thumbnail, pub.title);
-    thumb.addEventListener('click', open);
-    thumb.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+    if (vid) {
+      const play = document.createElement('span');
+      play.className = 'play-badge';
+      play.setAttribute('aria-hidden', 'true');
+      play.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+      thumb.appendChild(play);
+      wireThumb(thumb, 'Play demo video: ' + pub.title, () => openVideo(vid, pub.title));
+    } else {
+      wireThumb(thumb, 'Enlarge figure: ' + pub.title, () => openImage(thumbSrc, pub.title));
+    }
   } else {
     thumb.classList.add('placeholder');
     thumb.textContent = pub.venue;
@@ -151,7 +170,6 @@ function createCard(pub) {
   // links
   const links = document.createElement('div');
   links.className = 'pub-links';
-  const L = pub.links || {};
   const order = [['pdf', 'PDF'], ['doi', 'DOI'], ['arxiv', 'arXiv'], ['video', 'Video'], ['code', 'Code'], ['project', 'Project']];
   order.forEach(([key, label]) => {
     if (L[key]) {
@@ -166,8 +184,8 @@ function createCard(pub) {
     const b = document.createElement('button');
     b.type = 'button';
     b.className = 'bib-btn';
-    b.textContent = 'BibTeX';
-    b.addEventListener('click', () => copyBibtex(b, pub.bibtex));
+    b.textContent = 'Cite';
+    b.addEventListener('click', () => openCite(pub));
     links.appendChild(b);
   }
   if (links.children.length) content.appendChild(links);
@@ -183,10 +201,30 @@ function tag(text, extra) {
   return s;
 }
 
-function copyBibtex(btn, text) {
-  const done = () => { btn.classList.add('copied'); btn.textContent = 'Copied!'; setTimeout(() => { btn.classList.remove('copied'); btn.textContent = 'BibTeX'; }, 1600); };
-  if (navigator.clipboard) navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
-  else fallbackCopy(text, done);
+function wireThumb(el, label, action) {
+  el.setAttribute('role', 'button');
+  el.setAttribute('tabindex', '0');
+  el.setAttribute('aria-label', label);
+  el.addEventListener('click', action);
+  el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); action(); } });
+}
+function ytId(url) { const m = String(url).match(/(?:youtu\.be\/|[?&]v=|embed\/)([\w-]{11})/); return m ? m[1] : null; }
+function fmtPlain(p) {
+  const a = (p.authors || []).join(', ');
+  const doi = (p.links && p.links.doi) ? ' ' + p.links.doi : '';
+  return `${a}. "${p.title}." ${p.venue}${p.venueDetail ? ' (' + p.venueDetail + ')' : ''}, ${p.year}.${doi}`;
+}
+function risName(n) { const parts = String(n).trim().split(/\s+/); if (parts.length < 2) return n; const last = parts.pop(); return last + ', ' + parts.join(' '); }
+function fmtRIS(p) {
+  const lines = ['TY  - CPAPER'];
+  (p.authors || []).forEach((a) => lines.push('AU  - ' + risName(a)));
+  lines.push('TI  - ' + p.title);
+  if (p.year) lines.push('PY  - ' + p.year);
+  if (p.venue) lines.push('T2  - ' + p.venue);
+  const doiUrl = p.links && p.links.doi;
+  if (doiUrl) { lines.push('DO  - ' + doiUrl.replace(/^https?:\/\/(dx\.)?doi\.org\//, '')); lines.push('UR  - ' + doiUrl); }
+  lines.push('ER  - ');
+  return lines.join('\n');
 }
 function fallbackCopy(text, done) {
   const ta = document.createElement('textarea');
@@ -262,15 +300,16 @@ function initBackToTop() {
 }
 
 /* ---------- theme toggle ---------- */
+const ICON_MOON = '<svg class="ic" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"/></svg>';
+const ICON_SUN = '<svg class="ic" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z"/></svg>';
 function initThemeToggle() {
   const btn = document.getElementById('theme-toggle');
   if (!btn) return;
-  const icon = btn.querySelector('i');
   const sync = () => {
     const dark = document.documentElement.getAttribute('data-theme') === 'dark'
       || (!document.documentElement.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
     btn.setAttribute('aria-pressed', String(dark));
-    if (icon) icon.className = dark ? 'fas fa-sun' : 'fas fa-moon';
+    btn.innerHTML = dark ? ICON_SUN : ICON_MOON;
   };
   sync();
   btn.addEventListener('click', () => {
@@ -283,27 +322,94 @@ function initThemeToggle() {
   });
 }
 
-/* ---------- accessible modal ---------- */
+/* ---------- accessible media / cite modal ---------- */
 let lastFocused = null;
 function initModal() {
-  const modal = document.getElementById('imageModal');
+  const modal = document.getElementById('mediaModal');
   if (!modal) return;
   modal.querySelector('.modal-close').addEventListener('click', closeModal);
   modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
 }
-function openModal(src, alt) {
-  const modal = document.getElementById('imageModal');
-  const img = document.getElementById('modalImage');
+function openModalWith(node, label) {
+  const modal = document.getElementById('mediaModal');
+  const body = document.getElementById('modalBody');
+  if (!modal || !body) return;
   lastFocused = document.activeElement;
-  img.src = src; img.alt = alt || '';
+  body.innerHTML = '';
+  body.appendChild(node);
+  if (label) modal.setAttribute('aria-label', label);
   modal.hidden = false;
   requestAnimationFrame(() => modal.classList.add('show'));
   modal.querySelector('.modal-close').focus();
 }
+function openImage(src, alt) {
+  const img = document.createElement('img');
+  img.className = 'modal-content';
+  img.src = src;
+  img.alt = alt || '';
+  openModalWith(img, 'Figure: ' + (alt || ''));
+}
+function openVideo(id, title) {
+  const wrap = document.createElement('div');
+  wrap.className = 'video-wrap';
+  const f = document.createElement('iframe');
+  f.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+  f.title = 'Demo video: ' + (title || '');
+  f.allow = 'autoplay; fullscreen; encrypted-media; picture-in-picture';
+  wrap.appendChild(f);
+  openModalWith(wrap, 'Demo video: ' + (title || ''));
+}
+function openCite(pub) {
+  const formats = { BibTeX: pub.bibtex || '', Plain: fmtPlain(pub), RIS: fmtRIS(pub) };
+  const box = document.createElement('div');
+  box.className = 'cite-box';
+  const tabs = document.createElement('div');
+  tabs.className = 'cite-tabs';
+  tabs.setAttribute('role', 'tablist');
+  const pre = document.createElement('pre');
+  pre.className = 'cite-pre';
+  pre.tabIndex = 0;
+  const copy = document.createElement('button');
+  copy.type = 'button';
+  copy.className = 'bib-btn cite-copy';
+  copy.textContent = 'Copy';
+  let current = 'BibTeX';
+  const show = (k) => {
+    current = k;
+    pre.textContent = formats[k];
+    tabs.querySelectorAll('button').forEach((b) => {
+      const on = b.dataset.k === k;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-selected', String(on));
+    });
+  };
+  Object.keys(formats).forEach((k) => {
+    const t = document.createElement('button');
+    t.type = 'button';
+    t.className = 'cite-tab';
+    t.dataset.k = k;
+    t.textContent = k;
+    t.setAttribute('role', 'tab');
+    t.addEventListener('click', () => show(k));
+    tabs.appendChild(t);
+  });
+  copy.addEventListener('click', () => {
+    const done = () => { copy.classList.add('copied'); copy.textContent = 'Copied!'; setTimeout(() => { copy.classList.remove('copied'); copy.textContent = 'Copy'; }, 1600); };
+    if (navigator.clipboard) navigator.clipboard.writeText(formats[current]).then(done).catch(() => fallbackCopy(formats[current], done));
+    else fallbackCopy(formats[current], done);
+  });
+  const head = document.createElement('div');
+  head.className = 'cite-head';
+  head.append(tabs, copy);
+  box.append(head, pre);
+  show('BibTeX');
+  openModalWith(box, 'Cite: ' + pub.title);
+}
 function closeModal() {
-  const modal = document.getElementById('imageModal');
+  const modal = document.getElementById('mediaModal');
+  const body = document.getElementById('modalBody');
   modal.classList.remove('show');
-  const finish = () => { modal.hidden = true; if (lastFocused) lastFocused.focus(); };
+  const finish = () => { modal.hidden = true; if (body) body.innerHTML = ''; if (lastFocused) lastFocused.focus(); };
   if (prefersReduced) finish(); else setTimeout(finish, 220);
 }

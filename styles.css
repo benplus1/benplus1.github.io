@@ -1,3 +1,17 @@
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/inter-v20-latin-regular.woff2') format('woff2');}
+@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/inter-v20-latin-500.woff2') format('woff2');}
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('fonts/inter-v20-latin-600.woff2') format('woff2');}
+@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/inter-v20-latin-700.woff2') format('woff2');}
+@font-face{font-family:'Merriweather';font-style:normal;font-weight:300;font-display:swap;src:url('fonts/merriweather-v33-latin-300.woff2') format('woff2');}
+@font-face{font-family:'Merriweather';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/merriweather-v33-latin-regular.woff2') format('woff2');}
+@font-face{font-family:'Merriweather';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/merriweather-v33-latin-700.woff2') format('woff2');}
+
+/* inline svg icons */
+.ic{width:1em;height:1em;fill:currentColor;display:inline-block;vertical-align:-0.125em}
+.social-links-header a .ic{margin-right:0.4rem;color:var(--accent)}
+.theme-toggle .ic{width:1.05rem;height:1.05rem}
+.back-to-top .ic{width:1rem;height:1rem}
+
 /* ============================================================
    Design tokens
    ============================================================ */
@@ -313,11 +327,18 @@ h2 { padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
   .pub-card:hover { transform: translateY(-3px); }
 }
 .pub-thumb {
-  aspect-ratio: 16 / 10; border-radius: var(--radius-sm); overflow: hidden;
+  aspect-ratio: 16 / 10; border-radius: var(--radius-sm); overflow: hidden; position: relative;
   background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--border); cursor: pointer;
 }
 .pub-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--dur) var(--ease-out); }
 .pub-thumb:hover img { transform: scale(1.06); }
+.play-badge {
+  position: absolute; inset: 0; margin: auto; width: 52px; height: 52px; border-radius: 50%;
+  display: grid; place-items: center; background: rgba(0,0,0,.55); color: #fff;
+  pointer-events: none; transition: background-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease-out);
+}
+.play-badge svg { width: 24px; height: 24px; fill: currentColor; margin-left: 2px; }
+.pub-thumb:hover .play-badge { background: var(--accent); transform: scale(1.08); }
 .pub-thumb.placeholder {
   display: grid; place-items: center; cursor: default;
   font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); text-align: center; padding: 0.5rem;
@@ -342,6 +363,27 @@ h2 { padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
 }
 .pub-links a:hover, .bib-btn:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
 .bib-btn.copied { color: #fff; background: var(--accent); border-color: var(--accent); }
+
+/* modal content: image / video / cite */
+.modal-body { display: grid; place-items: center; width: 100%; }
+.video-wrap { width: min(92vw, 1100px); aspect-ratio: 16 / 9; }
+.video-wrap iframe { width: 100%; height: 100%; border: 0; border-radius: var(--radius-sm); background: #000; box-shadow: 0 12px 40px rgba(0,0,0,.4); }
+.cite-box { width: min(92vw, 720px); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; box-shadow: var(--shadow-md); }
+.cite-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 0.7rem; }
+.cite-tabs { display: flex; gap: 0.3rem; }
+.cite-tab {
+  font-family: var(--font-sans); font-size: 0.82rem; font-weight: 500; cursor: pointer;
+  background: transparent; color: var(--muted); border: 1px solid var(--border);
+  border-radius: 999px; padding: 0.25rem 0.7rem; transition: all var(--dur-fast) var(--ease);
+}
+.cite-tab:hover { color: var(--accent); border-color: var(--accent); }
+.cite-tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+.cite-pre {
+  margin: 0; background: var(--surface-2); color: var(--text);
+  font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.5;
+  padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border);
+  white-space: pre-wrap; word-break: break-word; max-height: 52vh; overflow: auto;
+}
 
 /* ============================================================
    Awards / teaching / service / misc
@@ -408,4 +450,24 @@ footer { margin-top: var(--sp-5); padding-top: 1.2rem; padding-bottom: 2rem; bor
     transition-duration: .01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ============================================================
+   Print / Save-as-PDF: clean one-pager on white
+   ============================================================ */
+@media print {
+  :root { --bg: #fff; --surface: #fff; --surface-2: #fff; --text: #000; --muted: #333; --border: #bbb; --accent: #003; }
+  html { scroll-padding-top: 0; }
+  body { color: #000; background: #fff; font-size: 10.5pt; }
+  #site-nav, #scroll-progress, .theme-toggle, .back-to-top, .modal, .pub-filters, #toggle-publications, .play-badge { display: none !important; }
+  .hero { padding-top: 0; }
+  .hero h1 { -webkit-text-fill-color: #000; color: #000; }
+  a { color: #000; text-decoration: underline; background-image: none; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  section { padding-block: 0.5rem 0; break-inside: avoid; }
+  .pub-card, .award-item, .news-list li { break-inside: avoid; box-shadow: none; border-color: #ccc; }
+  .pub-card:hover { transform: none; }
+  .news-list { max-height: none; overflow: visible; }
+  .pub-links a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #555; }
+  .hero-image, .pub-thumb { filter: grayscale(1); }
 }
