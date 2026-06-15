@@ -2,14 +2,21 @@
   "publications": [
     {
       "title": "Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies",
-      "authors": ["Ben Yang", "Shanying Liu", "Kirthana Natarajan", "Steven Feiner"],
+      "authors": [
+        "Ben Yang",
+        "Shanying Liu",
+        "Kirthana Natarajan",
+        "Steven Feiner"
+      ],
       "venue": "IEEE VR 2026",
       "venueDetail": "Research Demo",
       "year": 2026,
       "award": "Best Research Demo, Honorable Mention",
       "thumbnail": "images/thumbs/fastdigit.jpg",
       "selected": 1,
-      "tags": ["XR", "Gaussian Splatting", "Teleoperation"],
+      "tags": [
+        "Gaussian Splatting"
+      ],
       "links": {
         "pdf": "pdf/yang2026-fast-digitization.pdf",
         "doi": "https://doi.org/10.1109/VRW70859.2026.00389",
@@ -19,14 +26,23 @@
     },
     {
       "title": "Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation",
-      "authors": ["Ben Yang", "Xichen He", "Charlie Zou", "Jen-Shuo Liu", "Barbara Tversky", "Steven Feiner"],
+      "authors": [
+        "Ben Yang",
+        "Xichen He",
+        "Charlie Zou",
+        "Jen-Shuo Liu",
+        "Barbara Tversky",
+        "Steven Feiner"
+      ],
       "venue": "IEEE VR 2026 Workshops",
       "venueDetail": "Poster",
       "year": 2026,
       "award": "",
       "thumbnail": "images/thumbs/teleop.jpg",
       "selected": 1,
-      "tags": ["Teleoperation", "XR", "Robotics"],
+      "tags": [
+        "Teleoperation"
+      ],
       "links": {
         "pdf": "https://arxiv.org/pdf/2603.01495",
         "doi": "https://doi.org/10.1109/VRW70859.2026.00191",
@@ -37,14 +53,23 @@
     },
     {
       "title": "Virtual Reality Task Guidance Through Relative 6DoF Pose Specification",
-      "authors": ["Ben Yang", "Xichen He", "Charlie Zou", "Jen-Shuo Liu", "Barbara Tversky", "Steven Feiner"],
+      "authors": [
+        "Ben Yang",
+        "Xichen He",
+        "Charlie Zou",
+        "Jen-Shuo Liu",
+        "Barbara Tversky",
+        "Steven Feiner"
+      ],
       "venue": "IEEE ISMAR 2025",
       "venueDetail": "Adjunct",
       "year": 2025,
       "award": "",
       "thumbnail": "images/thumbs/task.png",
       "selected": 1,
-      "tags": ["XR", "Task Guidance"],
+      "tags": [
+        "Teleoperation"
+      ],
       "links": {
         "pdf": "pdf/yang2025-task-guidance.pdf",
         "doi": "https://doi.org/10.1109/ISMAR-ADJUNCT68609.2025.00247"
@@ -53,14 +78,22 @@
     },
     {
       "title": "Permanent Proxies for Bimanual Selection and Manipulation in VR",
-      "authors": ["Ben Yang", "Jen-Shuo Liu", "Xichen He", "Barbara Tversky", "Steven Feiner"],
+      "authors": [
+        "Ben Yang",
+        "Jen-Shuo Liu",
+        "Xichen He",
+        "Barbara Tversky",
+        "Steven Feiner"
+      ],
       "venue": "IEEE VR 2025 Workshops",
       "venueDetail": "",
       "year": 2025,
       "award": "",
       "thumbnail": "images/thumbs/proxies.png",
       "selected": 1,
-      "tags": ["Proxies", "VR"],
+      "tags": [
+        "Proxies"
+      ],
       "links": {
         "pdf": "pdf/yang2025-permanent-proxies.pdf",
         "doi": "https://doi.org/10.1109/VRW66409.2025.00311",
@@ -70,14 +103,22 @@
     },
     {
       "title": "An XR GUI for Visualizing Messages in ECS Architectures",
-      "authors": ["Ben Yang", "Xichen He", "Jace Li", "Carmine Elvezio", "Steven Feiner"],
+      "authors": [
+        "Ben Yang",
+        "Xichen He",
+        "Jace Li",
+        "Carmine Elvezio",
+        "Steven Feiner"
+      ],
       "venue": "IEEE ISMAR 2024",
       "venueDetail": "Adjunct",
       "year": 2024,
       "award": "",
       "thumbnail": "images/thumbs/mercury.png",
       "selected": 1,
-      "tags": ["XR", "Visualization", "Software Engineering"],
+      "tags": [
+        "Visualization"
+      ],
       "links": {
         "doi": "https://doi.org/10.1109/ISMAR-Adjunct64951.2024.00189",
         "video": "https://youtu.be/dRMyo0BJWqg",
@@ -87,14 +128,25 @@
     },
     {
       "title": "SwEYEpinch and Beyond: Exploring Intuitive, Efficient Text Entry for Extended Reality via Eye and Hand Tracking",
-      "authors": ["Ziheng Li", "Xichen He", "Mengyuan Wu", "Zeyi Tong", "Haowen Wei", "Ben Yang", "Steven Feiner", "Paul Sajda"],
+      "authors": [
+        "Ziheng Li",
+        "Xichen He",
+        "Mengyuan Wu",
+        "Zeyi Tong",
+        "Haowen Wei",
+        "Ben Yang",
+        "Steven Feiner",
+        "Paul Sajda"
+      ],
       "venue": "ACM CHI 2026",
       "venueDetail": "",
       "year": 2026,
       "award": "",
       "thumbnail": "",
       "selected": 0,
-      "tags": ["XR", "Text Entry", "Eye Tracking"],
+      "tags": [
+        "Text Entry"
+      ],
       "links": {
         "pdf": "https://arxiv.org/pdf/2604.03520",
         "doi": "https://doi.org/10.1145/3772318.3791820",
@@ -104,14 +156,21 @@
     },
     {
       "title": "VHard: An XR UI for Kinesthetic Rehearsal of Rock Climbing Moves",
-      "authors": ["Joel Salzman", "Jace Li", "Ben Yang", "Steven Feiner"],
+      "authors": [
+        "Joel Salzman",
+        "Jace Li",
+        "Ben Yang",
+        "Steven Feiner"
+      ],
       "venue": "IEEE ISMAR 2024",
       "venueDetail": "Adjunct",
       "year": 2024,
       "award": "",
       "thumbnail": "images/thumbs/vhard.png",
       "selected": 0,
-      "tags": ["XR", "Climbing"],
+      "tags": [
+        "Climbing"
+      ],
       "links": {
         "doi": "https://doi.org/10.1109/ISMAR-Adjunct64951.2024.00188",
         "video": "https://youtu.be/x0IEVw16LZ0",
@@ -121,14 +180,28 @@
     },
     {
       "title": "Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis",
-      "authors": ["Alexandra Boghosian", "S. Isabel Cordero", "Carmine Elvezio", "Sofia Sanchez-Zarate", "Ben Yang", "Shengyue Guo", "Qazi Ashikin", "Joel Salzman", "Kirsty Tinto", "Steven Feiner", "Robin Bell"],
+      "authors": [
+        "Alexandra Boghosian",
+        "S. Isabel Cordero",
+        "Carmine Elvezio",
+        "Sofia Sanchez-Zarate",
+        "Ben Yang",
+        "Shengyue Guo",
+        "Qazi Ashikin",
+        "Joel Salzman",
+        "Kirsty Tinto",
+        "Steven Feiner",
+        "Robin Bell"
+      ],
       "venue": "IGARSS 2023",
       "venueDetail": "",
       "year": 2023,
       "award": "",
       "thumbnail": "images/thumbs/ice.png",
       "selected": 0,
-      "tags": ["VR", "Visualization", "Science"],
+      "tags": [
+        "Visualization"
+      ],
       "links": {
         "doi": "https://doi.org/10.1109/IGARSS52108.2023.10283077",
         "video": "https://youtu.be/vp7Z44J7t_Q",

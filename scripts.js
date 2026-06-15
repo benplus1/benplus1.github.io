@@ -4,7 +4,6 @@ const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').mat
 const ME = ['ben yang', 'benjamin yang'];
 
 let allPublications = [];
-let showingSelected = true;
 let activeTag = 'All';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -32,12 +31,9 @@ function loadNews() {
   if (!list) return;
   fetchJSON('news.json')
     .then((data) => {
-      const items = data.news || [];
       list.innerHTML = '';
-      items.forEach((n, i) => {
+      (data.news || []).forEach((n) => {
         const li = document.createElement('li');
-        if (i >= 4) li.dataset.extra = 'true';
-        if (i >= 4) li.hidden = true;
         const date = document.createElement('span');
         date.className = 'news-date';
         date.textContent = n.date;
@@ -47,17 +43,6 @@ function loadNews() {
         li.append(date, body);
         list.appendChild(li);
       });
-      const btn = document.getElementById('toggle-news');
-      if (btn && items.length > 4) {
-        btn.hidden = false;
-        btn.addEventListener('click', () => {
-          const hidden = list.querySelector('[data-extra][hidden]');
-          const expand = !!hidden;
-          list.querySelectorAll('[data-extra]').forEach((el) => { el.hidden = !expand; });
-          btn.textContent = expand ? 'Show less' : 'Show all';
-          btn.setAttribute('aria-expanded', String(expand));
-        });
-      }
     })
     .catch((err) => { console.error(err); list.innerHTML = '<li>Could not load news.</li>'; });
 }
@@ -70,16 +55,6 @@ function loadPublications() {
       allPublications = data.publications || [];
       buildFilters();
       renderPublications();
-      const toggle = document.getElementById('toggle-publications');
-      if (toggle) {
-        toggle.addEventListener('click', () => {
-          showingSelected = !showingSelected;
-          toggle.textContent = showingSelected ? 'Show all' : 'Show selected';
-          toggle.setAttribute('aria-expanded', String(!showingSelected));
-          document.getElementById('pub-heading').textContent = showingSelected ? 'Selected Publications' : 'All Publications';
-          renderPublications();
-        });
-      }
     })
     .catch((err) => { console.error(err); container.innerHTML = 'Could not load publications. See my <a href="https://scholar.google.com/citations?user=wyIkKdgAAAAJ">Google Scholar</a>.'; });
 }
@@ -113,7 +88,6 @@ function renderPublications() {
   const container = document.getElementById('publications-container');
   container.innerHTML = '';
   const list = allPublications
-    .filter((p) => (showingSelected ? p.selected === 1 : true))
     .filter((p) => (activeTag === 'All' ? true : (p.tags || []).includes(activeTag)));
 
   if (!list.length) {

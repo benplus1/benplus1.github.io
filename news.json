@@ -1,21 +1,21 @@
 {
-  "_comment": "Reverse-chronological updates. Edit freely; the homepage shows the most recent few with a Show All toggle. Verify the month on non-TRI items if you want them exact.",
+  "_comment": "Reverse-chronological updates from the start of the PhD (Sep 2023). Conference months verified against the official sites.",
   "news": [
     {
       "date": "May 2026",
-      "html": "Started a research internship at <strong>Toyota Research Institute</strong> (Cambridge, MA), working with Mark Zolotas."
+      "html": "Started a research internship at <strong>Toyota Research Institute</strong> in Cambridge, MA."
+    },
+    {
+      "date": "Apr 2026",
+      "html": "Presented <em>SwEYEpinch and Beyond</em> at <strong>ACM CHI 2026</strong> in Barcelona, Spain."
     },
     {
       "date": "Mar 2026",
-      "html": "<em>Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies</em> received a <strong>Best Research Demo Honorable Mention</strong> at IEEE VR 2026."
+      "html": "<em>Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies</em> received a <strong>Best Research Demo Honorable Mention</strong> at <strong>IEEE VR 2026</strong> in Daegu, Korea."
     },
     {
       "date": "Mar 2026",
-      "html": "Presented two first-author works at <strong>IEEE VR 2026</strong>: a research demo on Gaussian-splatted proxies and a poster on bimanual teleoperation."
-    },
-    {
-      "date": "Jan 2026",
-      "html": "<em>SwEYEpinch and Beyond</em> was accepted to <strong>ACM CHI 2026</strong>."
+      "html": "Presented two first-author works at <strong>IEEE VR 2026</strong> (Daegu, Korea): a research demo on Gaussian-splatted proxies and a poster on bimanual teleoperation."
     },
     {
       "date": "Oct 2025",
@@ -24,6 +24,30 @@
     {
       "date": "Sep 2025",
       "html": "Awarded the <strong>Columbia-Dream Sports AI Grant</strong>."
+    },
+    {
+      "date": "Sep 2025",
+      "html": "Began serving as <strong>Head TA</strong> for COMS 6173: VR &amp; AR Seminar."
+    },
+    {
+      "date": "Mar 2025",
+      "html": "Presented <em>Permanent Proxies for Bimanual Selection and Manipulation in VR</em> at <strong>IEEE VR 2025</strong> in Saint-Malo, France."
+    },
+    {
+      "date": "Oct 2024",
+      "html": "Awarded the <strong>EGSC Professional Development Scholarship</strong>."
+    },
+    {
+      "date": "Oct 2024",
+      "html": "Presented two papers at <strong>IEEE ISMAR 2024</strong> in Bellevue, WA: an XR GUI for visualizing ECS messages, and VHard, an XR UI for rehearsing climbing moves."
+    },
+    {
+      "date": "Jan 2024",
+      "html": "Began serving as <strong>Head TA</strong> for COMS 4172: 3DUI and AR."
+    },
+    {
+      "date": "Sep 2023",
+      "html": "Started my PhD in Computer Science at <strong>Columbia University</strong>, advised by Steven Feiner in the CGUI Lab."
     }
   ]
 }
