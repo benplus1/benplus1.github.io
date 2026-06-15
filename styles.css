@@ -477,3 +477,22 @@ footer { margin-top: var(--sp-5); padding-top: 1.2rem; padding-bottom: 2rem; bor
   .pub-links a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #555; }
   .hero-image, .pub-thumb { filter: grayscale(1); }
 }
+
+/* ============================================================
+   Per-paper landing pages
+   ============================================================ */
+.nav-brand { background-image: none; }
+.paper-page { padding-block: var(--sp-5) var(--sp-5); }
+.paper-title { font-size: clamp(1.6rem, 1.3rem + 1.6vw, 2.4rem); line-height: 1.2; letter-spacing: -0.01em; margin: 0.3rem 0 0.7rem; }
+.paper-authors { color: var(--muted); margin-bottom: 0.6rem; max-width: var(--measure); }
+.paper-authors strong { color: var(--text); }
+.paper-award { display: inline-flex; align-items: center; gap: 0.4em; color: #f0c45a; font-family: var(--font-sans); font-size: 0.9rem; font-weight: 600; margin: 0.2rem 0; }
+.paper-award svg { width: 1em; height: 1em; fill: currentColor; }
+[data-theme="light"] .paper-award { color: #7a5600; }
+.paper-linkrow { margin: 1.1rem 0 1.6rem; }
+.paper-figure { margin: 1.4rem 0; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--surface); box-shadow: var(--shadow-sm); }
+.paper-figure img { width: 100%; height: auto; display: block; }
+.paper-page h2 { margin-top: 2rem; }
+.paper-bib { margin-top: 1.6rem; }
+.paper-bib summary { cursor: pointer; font-family: var(--font-sans); font-weight: 600; color: var(--accent); }
+.paper-bib pre { margin-top: 0.6rem; background: var(--surface-2); color: var(--text); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.85rem; overflow: auto; font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }

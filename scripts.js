@@ -178,6 +178,12 @@ function createCard(pub) {
   // links
   const links = document.createElement('div');
   links.className = 'pub-links';
+  if (pub.id) {
+    const d = document.createElement('a');
+    d.href = 'papers/' + pub.id + '.html';
+    d.textContent = 'Details';
+    links.appendChild(d);
+  }
   const order = [['pdf', 'PDF'], ['doi', 'DOI'], ['arxiv', 'arXiv'], ['video', 'Video'], ['code', 'Code'], ['project', 'Project']];
   order.forEach(([key, label]) => {
     if (L[key]) {

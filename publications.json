@@ -22,7 +22,8 @@
         "doi": "https://doi.org/10.1109/VRW70859.2026.00389",
         "video": "https://youtu.be/jwcnjAPASKU"
       },
-      "bibtex": "@inproceedings{yang2026fastdigitization,\n  title={Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies},\n  author={Yang, Ben and Liu, Shanying and Natarajan, Kirthana and Feiner, Steven},\n  booktitle={2026 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},\n  year={2026},\n  doi={10.1109/VRW70859.2026.00389}\n}"
+      "bibtex": "@inproceedings{yang2026fastdigitization,\n  title={Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies},\n  author={Yang, Ben and Liu, Shanying and Natarajan, Kirthana and Feiner, Steven},\n  booktitle={2026 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},\n  year={2026},\n  doi={10.1109/VRW70859.2026.00389}\n}",
+      "id": "fast-digitization"
     },
     {
       "title": "Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation",
@@ -49,7 +50,9 @@
         "arxiv": "https://arxiv.org/abs/2603.01495",
         "video": "https://youtu.be/_pE681sRjHI"
       },
-      "bibtex": "@inproceedings{yang2026bimanual,\n  title={Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation},\n  author={Yang, Ben and He, Xichen and Zou, Charlie and Liu, Jen-Shuo and Tversky, Barbara and Feiner, Steven},\n  booktitle={2026 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},\n  year={2026},\n  doi={10.1109/VRW70859.2026.00191}\n}"
+      "bibtex": "@inproceedings{yang2026bimanual,\n  title={Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation},\n  author={Yang, Ben and He, Xichen and Zou, Charlie and Liu, Jen-Shuo and Tversky, Barbara and Feiner, Steven},\n  booktitle={2026 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},\n  year={2026},\n  doi={10.1109/VRW70859.2026.00191}\n}",
+      "id": "bimanual-teleoperation",
+      "abstract": "We present a bimanual XR interaction approach for specifying remote assembly tasks as hierarchies of relative and absolute object constraints that specify high-level teleoperation goals for robots. Grabbing one object in each hand creates a constraint group (visualized as a hull) and groups can be nested into hierarchies. Each group can be relative (with a robot-specifiable 6DoF pose) or absolute (with an author-specified fixed 6DoF pose) in relation to its parent. A relative group specifies a subassembly that can be constructed at a location chosen by the robot software for efficiency rather than mandated by the user."
     },
     {
       "title": "Virtual Reality Task Guidance Through Relative 6DoF Pose Specification",
@@ -74,7 +77,8 @@
         "pdf": "pdf/yang2025-task-guidance.pdf",
         "doi": "https://doi.org/10.1109/ISMAR-ADJUNCT68609.2025.00247"
       },
-      "bibtex": "@inproceedings{yang2025taskguidance,\n  title={Virtual Reality Task Guidance Through Relative 6DoF Pose Specification},\n  author={Yang, Ben and He, Xichen and Zou, Charlie and Liu, Jen-Shuo and Tversky, Barbara and Feiner, Steven},\n  booktitle={2025 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)},\n  year={2025},\n  doi={10.1109/ISMAR-ADJUNCT68609.2025.00247}\n}"
+      "bibtex": "@inproceedings{yang2025taskguidance,\n  title={Virtual Reality Task Guidance Through Relative 6DoF Pose Specification},\n  author={Yang, Ben and He, Xichen and Zou, Charlie and Liu, Jen-Shuo and Tversky, Barbara and Feiner, Steven},\n  booktitle={2025 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)},\n  year={2025},\n  doi={10.1109/ISMAR-ADJUNCT68609.2025.00247}\n}",
+      "id": "task-guidance"
     },
     {
       "title": "Permanent Proxies for Bimanual Selection and Manipulation in VR",
@@ -99,7 +103,8 @@
         "doi": "https://doi.org/10.1109/VRW66409.2025.00311",
         "video": "https://youtu.be/TRDW5mpFBng"
       },
-      "bibtex": "@inproceedings{yang2025permanentproxies,\n  title={Permanent Proxies for Bimanual Selection and Manipulation in VR},\n  author={Yang, Ben and Liu, Jen-Shuo and He, Xichen and Tversky, Barbara and Feiner, Steven},\n  booktitle={2025 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},\n  pages={1330--1331},\n  year={2025},\n  doi={10.1109/VRW66409.2025.00311}\n}"
+      "bibtex": "@inproceedings{yang2025permanentproxies,\n  title={Permanent Proxies for Bimanual Selection and Manipulation in VR},\n  author={Yang, Ben and Liu, Jen-Shuo and He, Xichen and Tversky, Barbara and Feiner, Steven},\n  booktitle={2025 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},\n  pages={1330--1331},\n  year={2025},\n  doi={10.1109/VRW66409.2025.00311}\n}",
+      "id": "permanent-proxies"
     },
     {
       "title": "An XR GUI for Visualizing Messages in ECS Architectures",
@@ -124,7 +129,8 @@
         "video": "https://youtu.be/dRMyo0BJWqg",
         "code": "https://github.com/ColumbiaCGUI/MercuryMessaging"
       },
-      "bibtex": "@inproceedings{yang2024xrgui,\n  title={An XR GUI for Visualizing Messages in ECS Architectures},\n  author={Yang, Ben and He, Xichen and Li, Jace and Elvezio, Carmine and Feiner, Steven},\n  booktitle={2024 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)},\n  pages={640--641},\n  year={2024},\n  doi={10.1109/ISMAR-Adjunct64951.2024.00189}\n}"
+      "bibtex": "@inproceedings{yang2024xrgui,\n  title={An XR GUI for Visualizing Messages in ECS Architectures},\n  author={Yang, Ben and He, Xichen and Li, Jace and Elvezio, Carmine and Feiner, Steven},\n  booktitle={2024 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)},\n  pages={640--641},\n  year={2024},\n  doi={10.1109/ISMAR-Adjunct64951.2024.00189}\n}",
+      "id": "mercury-ecs-gui"
     },
     {
       "title": "SwEYEpinch and Beyond: Exploring Intuitive, Efficient Text Entry for Extended Reality via Eye and Hand Tracking",
@@ -152,7 +158,9 @@
         "doi": "https://doi.org/10.1145/3772318.3791820",
         "arxiv": "https://arxiv.org/abs/2604.03520"
       },
-      "bibtex": "@inproceedings{li2026sweyepinch,\n  title={SwEYEpinch and Beyond: Exploring Intuitive, Efficient Text Entry for Extended Reality via Eye and Hand Tracking},\n  author={Li, Ziheng and He, Xichen and Wu, Mengyuan and Tong, Zeyi and Wei, Haowen and Yang, Ben and Feiner, Steven and Sajda, Paul},\n  booktitle={Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems},\n  year={2026},\n  doi={10.1145/3772318.3791820}\n}"
+      "bibtex": "@inproceedings{li2026sweyepinch,\n  title={SwEYEpinch and Beyond: Exploring Intuitive, Efficient Text Entry for Extended Reality via Eye and Hand Tracking},\n  author={Li, Ziheng and He, Xichen and Wu, Mengyuan and Tong, Zeyi and Wei, Haowen and Yang, Ben and Feiner, Steven and Sajda, Paul},\n  booktitle={Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems},\n  year={2026},\n  doi={10.1145/3772318.3791820}\n}",
+      "id": "sweyepinch",
+      "abstract": "Despite steady progress, text entry in Extended Reality (XR) often remains slower and more effortful than typing on a physical keyboard or touchscreen. We explore a simple idea: use gaze to swipe through a virtual keyboard for the fast, low-effort where and a manual pinch held throughout the swipe for the when, extending and validating it through a series of user studies. We first show that a basic version including a low-latency decoder with spatiotemporal Dynamic Time Warping and fixation filtering outperforms selecting individual keys sequentially, either by finger tapping each or gazing at each while pinching. We then add mid-swipe prediction and in-gesture cancellation, improving words per minute (WPM) without hurting accuracy. We show that this approach is faster and more preferred than previous gaze-swipe approaches, finger tapping with prediction, or hand swiping with the same additions. Furthermore, a seven-day, 30-session study demonstrates sustained learning, with peak performance reaching 64.7 WPM."
     },
     {
       "title": "VHard: An XR UI for Kinesthetic Rehearsal of Rock Climbing Moves",
@@ -176,7 +184,8 @@
         "video": "https://youtu.be/x0IEVw16LZ0",
         "code": "https://github.com/ColumbiaCGUI/VHard"
       },
-      "bibtex": "@inproceedings{salzman2024vhard,\n  title={VHard: An XR UI for Kinesthetic Rehearsal of Rock Climbing Moves},\n  author={Salzman, Joel and Li, Jace and Yang, Ben and Feiner, Steven},\n  booktitle={2024 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)},\n  pages={638--639},\n  year={2024},\n  doi={10.1109/ISMAR-Adjunct64951.2024.00188}\n}"
+      "bibtex": "@inproceedings{salzman2024vhard,\n  title={VHard: An XR UI for Kinesthetic Rehearsal of Rock Climbing Moves},\n  author={Salzman, Joel and Li, Jace and Yang, Ben and Feiner, Steven},\n  booktitle={2024 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)},\n  pages={638--639},\n  year={2024},\n  doi={10.1109/ISMAR-Adjunct64951.2024.00188}\n}",
+      "id": "vhard"
     },
     {
       "title": "Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis",
@@ -208,7 +217,8 @@
         "code": "https://github.com/ColumbiaCGUI/PolXR",
         "project": "https://pgg.ldeo.columbia.edu/projects/VISER"
       },
-      "bibtex": "@inproceedings{boghosian2023icesheet,\n  title={Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis},\n  author={Boghosian, Alexandra and Cordero, S. Isabel and Elvezio, Carmine and Sanchez-Zarate, Sofia and Yang, Ben and Guo, Shengyue and Ashikin, Qazi and Salzman, Joel and Tinto, Kirsty and Feiner, Steven and Bell, Robin},\n  booktitle={IGARSS 2023 - 2023 IEEE International Geoscience and Remote Sensing Symposium},\n  pages={52--55},\n  year={2023},\n  doi={10.1109/IGARSS52108.2023.10283077}\n}"
+      "bibtex": "@inproceedings{boghosian2023icesheet,\n  title={Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis},\n  author={Boghosian, Alexandra and Cordero, S. Isabel and Elvezio, Carmine and Sanchez-Zarate, Sofia and Yang, Ben and Guo, Shengyue and Ashikin, Qazi and Salzman, Joel and Tinto, Kirsty and Feiner, Steven and Bell, Robin},\n  booktitle={IGARSS 2023 - 2023 IEEE International Geoscience and Remote Sensing Symposium},\n  pages={52--55},\n  year={2023},\n  doi={10.1109/IGARSS52108.2023.10283077}\n}",
+      "id": "ice-sheet"
     }
   ]
 }
