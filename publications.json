@@ -1,98 +1,141 @@
 {
   "publications": [
     {
+      "title": "Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies",
+      "authors": ["Ben Yang", "Shanying Liu", "Kirthana Natarajan", "Steven Feiner"],
+      "venue": "IEEE VR 2026",
+      "venueDetail": "Research Demo",
+      "year": 2026,
+      "award": "Best Research Demo, Honorable Mention",
+      "thumbnail": "images/thumbs/fastdigit.jpg",
+      "selected": 1,
+      "tags": ["XR", "Gaussian Splatting", "Teleoperation"],
+      "links": {
+        "pdf": "pdf/yang2026-fast-digitization.pdf",
+        "doi": "https://doi.org/10.1109/VRW70859.2026.00389",
+        "video": "https://youtu.be/jwcnjAPASKU"
+      },
+      "bibtex": "@inproceedings{yang2026fastdigitization,\n  title={Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies},\n  author={Yang, Ben and Liu, Shanying and Natarajan, Kirthana and Feiner, Steven},\n  booktitle={2026 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},\n  year={2026},\n  doi={10.1109/VRW70859.2026.00389}\n}"
+    },
+    {
+      "title": "Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation",
+      "authors": ["Ben Yang", "Xichen He", "Charlie Zou", "Jen-Shuo Liu", "Barbara Tversky", "Steven Feiner"],
+      "venue": "IEEE VR 2026 Workshops",
+      "venueDetail": "Poster",
+      "year": 2026,
+      "award": "",
+      "thumbnail": "images/thumbs/teleop.jpg",
+      "selected": 1,
+      "tags": ["Teleoperation", "XR", "Robotics"],
+      "links": {
+        "pdf": "https://arxiv.org/pdf/2603.01495",
+        "doi": "https://doi.org/10.1109/VRW70859.2026.00191",
+        "arxiv": "https://arxiv.org/abs/2603.01495",
+        "video": "https://youtu.be/_pE681sRjHI"
+      },
+      "bibtex": "@inproceedings{yang2026bimanual,\n  title={Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation},\n  author={Yang, Ben and He, Xichen and Zou, Charlie and Liu, Jen-Shuo and Tversky, Barbara and Feiner, Steven},\n  booktitle={2026 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},\n  year={2026},\n  doi={10.1109/VRW70859.2026.00191}\n}"
+    },
+    {
       "title": "Virtual Reality Task Guidance Through Relative 6DoF Pose Specification",
-      "authors": [
-        "Ben Yang",
-        "Xichen He",
-        "Charlie Zou",
-        "Jen-Shuo Liu",
-        "Barbara Tversky",
-        "Steven Feiner"
-      ],
-      "venue": "ISMAR 2025",
+      "authors": ["Ben Yang", "Xichen He", "Charlie Zou", "Jen-Shuo Liu", "Barbara Tversky", "Steven Feiner"],
+      "venue": "IEEE ISMAR 2025",
+      "venueDetail": "Adjunct",
+      "year": 2025,
+      "award": "",
       "thumbnail": "images/thumbs/task.png",
       "selected": 1,
-      "award": "",
+      "tags": ["XR", "Task Guidance"],
       "links": {
-        "pdf": "#"
-      }
+        "pdf": "pdf/yang2025-task-guidance.pdf",
+        "doi": "https://doi.org/10.1109/ISMAR-ADJUNCT68609.2025.00247"
+      },
+      "bibtex": "@inproceedings{yang2025taskguidance,\n  title={Virtual Reality Task Guidance Through Relative 6DoF Pose Specification},\n  author={Yang, Ben and He, Xichen and Zou, Charlie and Liu, Jen-Shuo and Tversky, Barbara and Feiner, Steven},\n  booktitle={2025 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)},\n  year={2025},\n  doi={10.1109/ISMAR-ADJUNCT68609.2025.00247}\n}"
     },
     {
       "title": "Permanent Proxies for Bimanual Selection and Manipulation in VR",
-      "authors": [
-        "Ben Yang",
-        "Jen-Shuo Liu",
-        "Xichen He",
-        "Barbara Tversky",
-        "Steven Feiner"
-      ],
-      "venue": "IEEE VR 2025",
+      "authors": ["Ben Yang", "Jen-Shuo Liu", "Xichen He", "Barbara Tversky", "Steven Feiner"],
+      "venue": "IEEE VR 2025 Workshops",
+      "venueDetail": "",
+      "year": 2025,
+      "award": "",
       "thumbnail": "images/thumbs/proxies.png",
       "selected": 1,
-      "award": "",
+      "tags": ["Proxies", "VR"],
       "links": {
-        "pdf": "https://ieeexplore.ieee.org/document/10972388"
-      }
-    },
-    {
-      "title": "VHard: An XR UI for Kinesthetic Rehearsal of Rock Climbing Moves",
-      "authors": [
-        "Joel Salzman",
-        "Jace Li",
-        "Ben Yang",
-        "Steven Feiner"
-      ],
-      "venue": "ISMAR 2024",
-      "thumbnail": "images/thumbs/vhard.png",
-      "selected": 1,
-      "award": "",
-      "links": {
-        "pdf": "https://ieeexplore.ieee.org/document/10765317"
-      }
+        "pdf": "pdf/yang2025-permanent-proxies.pdf",
+        "doi": "https://doi.org/10.1109/VRW66409.2025.00311",
+        "video": "https://youtu.be/TRDW5mpFBng"
+      },
+      "bibtex": "@inproceedings{yang2025permanentproxies,\n  title={Permanent Proxies for Bimanual Selection and Manipulation in VR},\n  author={Yang, Ben and Liu, Jen-Shuo and He, Xichen and Tversky, Barbara and Feiner, Steven},\n  booktitle={2025 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},\n  pages={1330--1331},\n  year={2025},\n  doi={10.1109/VRW66409.2025.00311}\n}"
     },
     {
       "title": "An XR GUI for Visualizing Messages in ECS Architectures",
-      "authors": [
-        "Ben Yang",
-        "Xichen He",
-        "Jace Li",
-        "Carmine Elvezio",
-        "Steven Feiner"
-      ],
-      "venue": "ISMAR 2024",
+      "authors": ["Ben Yang", "Xichen He", "Jace Li", "Carmine Elvezio", "Steven Feiner"],
+      "venue": "IEEE ISMAR 2024",
+      "venueDetail": "Adjunct",
+      "year": 2024,
+      "award": "",
       "thumbnail": "images/thumbs/mercury.png",
       "selected": 1,
-      "award": "",
+      "tags": ["XR", "Visualization", "Software Engineering"],
       "links": {
-        "pdf": "https://ieeexplore.ieee.org/document/10765164",
+        "doi": "https://doi.org/10.1109/ISMAR-Adjunct64951.2024.00189",
+        "video": "https://youtu.be/dRMyo0BJWqg",
         "code": "https://github.com/ColumbiaCGUI/MercuryMessaging"
-      }
+      },
+      "bibtex": "@inproceedings{yang2024xrgui,\n  title={An XR GUI for Visualizing Messages in ECS Architectures},\n  author={Yang, Ben and He, Xichen and Li, Jace and Elvezio, Carmine and Feiner, Steven},\n  booktitle={2024 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)},\n  pages={640--641},\n  year={2024},\n  doi={10.1109/ISMAR-Adjunct64951.2024.00189}\n}"
+    },
+    {
+      "title": "SwEYEpinch and Beyond: Exploring Intuitive, Efficient Text Entry for Extended Reality via Eye and Hand Tracking",
+      "authors": ["Ziheng Li", "Xichen He", "Mengyuan Wu", "Zeyi Tong", "Haowen Wei", "Ben Yang", "Steven Feiner", "Paul Sajda"],
+      "venue": "ACM CHI 2026",
+      "venueDetail": "",
+      "year": 2026,
+      "award": "",
+      "thumbnail": "",
+      "selected": 0,
+      "tags": ["XR", "Text Entry", "Eye Tracking"],
+      "links": {
+        "pdf": "https://arxiv.org/pdf/2604.03520",
+        "doi": "https://doi.org/10.1145/3772318.3791820",
+        "arxiv": "https://arxiv.org/abs/2604.03520"
+      },
+      "bibtex": "@inproceedings{li2026sweyepinch,\n  title={SwEYEpinch and Beyond: Exploring Intuitive, Efficient Text Entry for Extended Reality via Eye and Hand Tracking},\n  author={Li, Ziheng and He, Xichen and Wu, Mengyuan and Tong, Zeyi and Wei, Haowen and Yang, Ben and Feiner, Steven and Sajda, Paul},\n  booktitle={Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems},\n  year={2026},\n  doi={10.1145/3772318.3791820}\n}"
+    },
+    {
+      "title": "VHard: An XR UI for Kinesthetic Rehearsal of Rock Climbing Moves",
+      "authors": ["Joel Salzman", "Jace Li", "Ben Yang", "Steven Feiner"],
+      "venue": "IEEE ISMAR 2024",
+      "venueDetail": "Adjunct",
+      "year": 2024,
+      "award": "",
+      "thumbnail": "images/thumbs/vhard.png",
+      "selected": 0,
+      "tags": ["XR", "Climbing"],
+      "links": {
+        "doi": "https://doi.org/10.1109/ISMAR-Adjunct64951.2024.00188",
+        "video": "https://youtu.be/x0IEVw16LZ0",
+        "code": "https://github.com/ColumbiaCGUI/VHard"
+      },
+      "bibtex": "@inproceedings{salzman2024vhard,\n  title={VHard: An XR UI for Kinesthetic Rehearsal of Rock Climbing Moves},\n  author={Salzman, Joel and Li, Jace and Yang, Ben and Feiner, Steven},\n  booktitle={2024 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)},\n  pages={638--639},\n  year={2024},\n  doi={10.1109/ISMAR-Adjunct64951.2024.00188}\n}"
     },
     {
       "title": "Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis",
-      "authors": [
-        "Alexandra Boghosian",
-        "S. Isabel Cordero",
-        "Carmine Elvezio",
-        "Sofia Sanchez-Zarate",
-        "Ben Yang",
-        "Shengyue Guo",
-        "Qazi Ashikin",
-        "Joel Salzman",
-        "Kirsty Tinto",
-        "Steven Feiner",
-        "Robin Bell"
-      ],
+      "authors": ["Alexandra Boghosian", "S. Isabel Cordero", "Carmine Elvezio", "Sofia Sanchez-Zarate", "Ben Yang", "Shengyue Guo", "Qazi Ashikin", "Joel Salzman", "Kirsty Tinto", "Steven Feiner", "Robin Bell"],
       "venue": "IGARSS 2023",
+      "venueDetail": "",
+      "year": 2023,
+      "award": "",
       "thumbnail": "images/thumbs/ice.png",
       "selected": 0,
-      "award": "",
+      "tags": ["VR", "Visualization", "Science"],
       "links": {
-        "pdf": "https://ieeexplore.ieee.org/document/10283077",
+        "doi": "https://doi.org/10.1109/IGARSS52108.2023.10283077",
+        "video": "https://youtu.be/vp7Z44J7t_Q",
         "code": "https://github.com/ColumbiaCGUI/PolXR",
         "project": "https://pgg.ldeo.columbia.edu/projects/VISER"
-      }
+      },
+      "bibtex": "@inproceedings{boghosian2023icesheet,\n  title={Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis},\n  author={Boghosian, Alexandra and Cordero, S. Isabel and Elvezio, Carmine and Sanchez-Zarate, Sofia and Yang, Ben and Guo, Shengyue and Ashikin, Qazi and Salzman, Joel and Tinto, Kirsty and Feiner, Steven and Bell, Robin},\n  booktitle={IGARSS 2023 - 2023 IEEE International Geoscience and Remote Sensing Symposium},\n  pages={52--55},\n  year={2023},\n  doi={10.1109/IGARSS52108.2023.10283077}\n}"
     }
   ]
 }
