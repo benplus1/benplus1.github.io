@@ -133,7 +133,8 @@
         "code": "https://github.com/ColumbiaCGUI/MercuryMessaging"
       },
       "bibtex": "@inproceedings{yang2024xrgui,\n  title={An XR GUI for Visualizing Messages in ECS Architectures},\n  author={Yang, Ben and He, Xichen and Li, Jace and Elvezio, Carmine and Feiner, Steven},\n  booktitle={2024 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)},\n  pages={640--641},\n  year={2024},\n  doi={10.1109/ISMAR-Adjunct64951.2024.00189}\n}",
-      "id": "mercury-ecs-gui"
+      "id": "mercury-ecs-gui",
+      "abstract": "Entity--Component--System (ECS) architectures are fundamental to many systems for developing extended reality (XR) applications. These applications often contain complex scenes and require intricately connected application logic to connect components together, making debugging and analysis difficult. Graph-based tools have been created to show actions in ECS-based scene hierarchies, but few address interactions that go beyond traditional hierarchical communication. To address this, we present an XR GUI for Mercury (a toolkit to handle cross-component ECS communication) that allows developers to view and edit relationships and interactions between scene entities in Mercury."
     },
     {
       "title": "SwEYEpinch and Beyond: Exploring Intuitive, Efficient Text Entry for Extended Reality via Eye and Hand Tracking",
@@ -188,7 +189,8 @@
         "code": "https://github.com/ColumbiaCGUI/VHard"
       },
       "bibtex": "@inproceedings{salzman2024vhard,\n  title={VHard: An XR UI for Kinesthetic Rehearsal of Rock Climbing Moves},\n  author={Salzman, Joel and Li, Jace and Yang, Ben and Feiner, Steven},\n  booktitle={2024 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)},\n  pages={638--639},\n  year={2024},\n  doi={10.1109/ISMAR-Adjunct64951.2024.00188}\n}",
-      "id": "vhard"
+      "id": "vhard",
+      "abstract": "Rock climbers frequently struggle to complete climbs due to the difficulty of practicing precise movements without actually attempting them. A standard strategy is to kinesthetically rehearse the hand and body positions required while on the ground. However, the lack of live feedback severely hampers this method because climbers can only roughly estimate the distances and positions involved. We introduce VHard, an extended reality (XR) application that visualizes the precision and accuracy of hand placements on a metric digital twin of a MoonBoard climbing wall. VHard augments kinesthetic rehearsal with XR feedback in order to assist climbers in completing difficult boulder problems."
     },
     {
       "title": "Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis",
@@ -221,7 +223,8 @@
         "project": "https://pgg.ldeo.columbia.edu/projects/VISER"
       },
       "bibtex": "@inproceedings{boghosian2023icesheet,\n  title={Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis},\n  author={Boghosian, Alexandra and Cordero, S. Isabel and Elvezio, Carmine and Sanchez-Zarate, Sofia and Yang, Ben and Guo, Shengyue and Ashikin, Qazi and Salzman, Joel and Tinto, Kirsty and Feiner, Steven and Bell, Robin},\n  booktitle={IGARSS 2023 - 2023 IEEE International Geoscience and Remote Sensing Symposium},\n  pages={52--55},\n  year={2023},\n  doi={10.1109/IGARSS52108.2023.10283077}\n}",
-      "id": "ice-sheet"
+      "id": "ice-sheet",
+      "abstract": "Three-dimensional geospatial thinking is an important skillset used by earth scientists and students to analyze and interpret data [1]. This method of inquiry is useful in glaciology, where traditional geophysical survey techniques have been adapted to map three-dimensional (3D) ice sheet structures and inform studies of ice flow, mass change, and history in both Greenland and Antarctica. Ice-penetrating radar images the ice in two-dimensional (2D) cross-sections from the surface to the base. Analysis of this data often requires visual inspection and 3D interpretation, but is hindered by data visualization tools and techniques that rarely transcend the two-dimensionality of the computer screen [2]. Recent advances in Augmented Reality (AR) and Virtual Reality (VR), together referred to as Extended Reality (XR), offer a glimpse into the future of 3D ice-sheet data analysis [3]. These technologies offer users an immersive experience where 3D geospatial datasets can be understood more immediately than with 2D maps, and gestural user interfaces can enhance understanding. Here we present Pol-XR, an XR application that supports both visualization and interpretation of ice-penetrating radar in Antarctica and Greenland."
     }
   ]
 }
