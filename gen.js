@@ -82,6 +82,7 @@ for (const p of data.publications) {
     <script type="application/ld+json">
     ${JSON.stringify(ld, null, 2)}
     </script>
+    <script data-goatcounter="https://theangrybuddhas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body id="top">
     <a class="skip-link" href="#main">Skip to content</a>
