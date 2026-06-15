@@ -23,7 +23,8 @@
         "video": "https://youtu.be/jwcnjAPASKU"
       },
       "bibtex": "@inproceedings{yang2026fastdigitization,\n  title={Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies},\n  author={Yang, Ben and Liu, Shanying and Natarajan, Kirthana and Feiner, Steven},\n  booktitle={2026 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},\n  year={2026},\n  doi={10.1109/VRW70859.2026.00389}\n}",
-      "id": "fast-digitization"
+      "id": "fast-digitization",
+      "abstract": "Capturing real objects as interactive 3D assets in XR typically requires offline photogrammetry. We present Gaussian-Splatted Proxies, a system for fast object digitization in XR using feed-forward 3D Gaussian splatting. With a Quest 3 headset, users select objects detected by the system through the passthrough cameras, then capture images that an edge server reconstructs as interactive Gausasian splats. Our system extracts individual objects from scene reconstructions without any per-scene training by projecting detection bounding boxes into 3D space. The resulting assets can be grabbed, inspected, rotated, and used to select the corresponding objects in the physical world. https://youtu.be/orx3gFPBNpA"
     },
     {
       "title": "Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation",
@@ -78,7 +79,8 @@
         "doi": "https://doi.org/10.1109/ISMAR-ADJUNCT68609.2025.00247"
       },
       "bibtex": "@inproceedings{yang2025taskguidance,\n  title={Virtual Reality Task Guidance Through Relative 6DoF Pose Specification},\n  author={Yang, Ben and He, Xichen and Zou, Charlie and Liu, Jen-Shuo and Tversky, Barbara and Feiner, Steven},\n  booktitle={2025 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)},\n  year={2025},\n  doi={10.1109/ISMAR-ADJUNCT68609.2025.00247}\n}",
-      "id": "task-guidance"
+      "id": "task-guidance",
+      "abstract": "Virtual reality (VR) systems for guiding remote physical tasks typically require object poses to be specified in absolute world coordinates. However, many of these tasks only need object poses to be specified relative to each other. Thus, supporting only absolute pose specification can create inefficiencies in giving or following task guidance when unnecessary constraints are imposed. We are developing a VR task-guidance system that avoids this by enabling relative 6DoF poses to be specified within subsets of objects. We describe our user interface, including how geometric relationships are specified and several ways in which they are visualized, and our plans for validating our approach against existing techniques."
     },
     {
       "title": "Permanent Proxies for Bimanual Selection and Manipulation in VR",
@@ -104,7 +106,8 @@
         "video": "https://youtu.be/TRDW5mpFBng"
       },
       "bibtex": "@inproceedings{yang2025permanentproxies,\n  title={Permanent Proxies for Bimanual Selection and Manipulation in VR},\n  author={Yang, Ben and Liu, Jen-Shuo and He, Xichen and Tversky, Barbara and Feiner, Steven},\n  booktitle={2025 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},\n  pages={1330--1331},\n  year={2025},\n  doi={10.1109/VRW66409.2025.00311}\n}",
-      "id": "permanent-proxies"
+      "id": "permanent-proxies",
+      "abstract": "Copies (proxies) of objects are useful for selecting and manipulating objects in virtual reality (VR). Temporary proxies are destroyed after use and must be recreated for reuse. Permanent proxies persist after use for easy reselection, but can cause clutter. To investigate the benefits and drawbacks of permanent and temporary proxies, we conducted a user study in which participants performed 6DoF tasks with proxies in the Voodoo Dolls technique, revealing that permanent proxies were more efficient for hard reselection and preferred."
     },
     {
       "title": "An XR GUI for Visualizing Messages in ECS Architectures",

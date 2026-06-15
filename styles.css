@@ -49,7 +49,7 @@
   --radius-sm: 8px;
   --sp-2: 1rem;
   --sp-3: 1.5rem;
-  --sp-5: 3.25rem;
+  --sp-5: 2.1rem;
 
   --ease-out: cubic-bezier(.22, 1, .36, 1);
   --ease: cubic-bezier(.4, 0, .2, 1);
@@ -193,7 +193,8 @@ a:focus-visible { background-size: 100% 1.5px; }
 .nav-links {
   list-style: none; padding: 0; margin: 0 auto 0 0.5rem;
   display: flex; gap: 0.35rem; align-items: center;
-  overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none;
+  overflow-x: auto; overflow-y: hidden; touch-action: pan-x;
+  scrollbar-width: none; -ms-overflow-style: none;
 }
 .nav-links::-webkit-scrollbar { display: none; }
 .nav-links a {
@@ -398,7 +399,9 @@ h2 { padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
 .award-year { flex: 0 0 6rem; color: var(--accent); font-weight: 600; font-size: 0.85rem; }
 .award-desc { flex: 1; }
 #teaching p, #services p { margin: 0.35rem 0; }
-.service-title { font-family: var(--font-sans); font-weight: 600; color: var(--accent); margin-bottom: 0.2rem; }
+.service-title { font-family: var(--font-sans); font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; font-size: 0.76rem; margin-bottom: 0.35rem; }
+#teaching .service-category { margin-bottom: 1rem; }
+#teaching p { margin: 0.2rem 0; }
 
 /* ============================================================
    Footer + back to top
@@ -443,7 +446,8 @@ footer { margin-top: var(--sp-5); padding-top: 1.2rem; padding-bottom: 2rem; bor
   .pub-thumb { aspect-ratio: 16 / 9; max-height: 200px; }
   .news-list li { flex-direction: column; gap: 0.15rem; }
   .news-date { flex-basis: auto; }
-  .award-item { flex-direction: column; gap: 0; }
+  .award-item { flex-direction: row; gap: 0.75rem; align-items: baseline; }
+  .award-year { flex: 0 0 5rem; }
 }
 
 /* ============================================================

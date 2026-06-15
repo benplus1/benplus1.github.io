@@ -64,6 +64,7 @@ function loadPublications() {
           toggle.textContent = showingSelected ? 'Show all' : 'Show selected';
           toggle.setAttribute('aria-expanded', String(!showingSelected));
           document.getElementById('pub-heading').textContent = showingSelected ? 'Selected Publications' : 'Publications';
+          buildFilters();
           renderPublications();
         });
       }
@@ -74,8 +75,10 @@ function loadPublications() {
 function buildFilters() {
   const bar = document.getElementById('pub-filters');
   if (!bar) return;
+  const set = allPublications.filter((p) => (showingSelected ? p.selected === 1 : true));
   const tags = ['All'];
-  allPublications.forEach((p) => (p.tags || []).forEach((t) => { if (!tags.includes(t)) tags.push(t); }));
+  set.forEach((p) => (p.tags || []).forEach((t) => { if (!tags.includes(t)) tags.push(t); }));
+  if (!tags.includes(activeTag)) activeTag = 'All';
   bar.innerHTML = '';
   tags.forEach((t) => {
     const b = document.createElement('button');
