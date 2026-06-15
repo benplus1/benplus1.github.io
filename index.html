@@ -23,8 +23,7 @@
     <meta name="twitter:description" content="XR for teleoperation and robotics, 3D reconstruction, and Gaussian splatting.">
     <meta name="twitter:image" content="https://www.cs.columbia.edu/~benyang/images/og-image.png">
 
-    <meta name="theme-color" content="#fbfbf9" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#0e0f12" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#0e0f12">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="icon" href="favicon.ico" sizes="any">
 
@@ -35,9 +34,7 @@
       (function () {
         try {
           var s = localStorage.getItem('theme');
-          var d = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          if (s === 'dark' || (!s && d)) document.documentElement.setAttribute('data-theme', 'dark');
-          else if (s === 'light') document.documentElement.setAttribute('data-theme', 'light');
+          document.documentElement.setAttribute('data-theme', s === 'light' ? 'light' : 'dark');
         } catch (e) {}
       })();
     </script>

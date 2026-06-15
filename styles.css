@@ -80,23 +80,22 @@
   --shadow-md: 0 6px 16px hsl(220 40% 2% / .55), 0 16px 36px hsl(220 40% 2% / .5);
   color-scheme: dark;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    --bg: #0e0f12;
-    --surface: #16181d;
-    --surface-2: #1c1f27;
-    --text: #e8e8ea;
-    --muted: #a2a2ac;
-    --border: #272a33;
-    --accent: #7aa2ff;
-    --accent-strong: #9bb8ff;
-    --accent-soft: rgba(122, 162, 255, 0.14);
-    --grad-a: #7aa2ff;
-    --grad-b: #b794ff;
-    --shadow-sm: 0 1px 2px hsl(220 40% 2% / .5), 0 2px 6px hsl(220 40% 2% / .4);
-    --shadow-md: 0 6px 16px hsl(220 40% 2% / .55), 0 16px 36px hsl(220 40% 2% / .5);
-    color-scheme: dark;
-  }
+/* dark is the default theme (applies when no explicit choice is saved, incl. no-JS) */
+:root:not([data-theme]) {
+  --bg: #0e0f12;
+  --surface: #16181d;
+  --surface-2: #1c1f27;
+  --text: #e8e8ea;
+  --muted: #a2a2ac;
+  --border: #272a33;
+  --accent: #7aa2ff;
+  --accent-strong: #9bb8ff;
+  --accent-soft: rgba(122, 162, 255, 0.14);
+  --grad-a: #7aa2ff;
+  --grad-b: #b794ff;
+  --shadow-sm: 0 1px 2px hsl(220 40% 2% / .5), 0 2px 6px hsl(220 40% 2% / .4);
+  --shadow-md: 0 6px 16px hsl(220 40% 2% / .55), 0 16px 36px hsl(220 40% 2% / .5);
+  color-scheme: dark;
 }
 
 /* ============================================================
@@ -235,6 +234,8 @@ main > section:first-child { padding-top: var(--sp-2); }
 .eyebrow { font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: var(--accent); }
 .hero h1 {
   margin: 0.5rem 0 0.1rem;
+  line-height: 1.15;
+  padding-bottom: 0.08em;
   background: linear-gradient(120deg, var(--grad-a), var(--grad-b));
   -webkit-background-clip: text; background-clip: text;
   color: transparent; -webkit-text-fill-color: transparent;
@@ -352,7 +353,12 @@ h2 { padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
   background: var(--accent-soft); color: var(--accent);
   padding: 0.18em 0.55em; border-radius: 6px; white-space: nowrap;
 }
-.pub-tag.award { background: linear-gradient(120deg, var(--grad-a), var(--grad-b)); color: #fff; }
+.pub-tag.award {
+  display: inline-flex; align-items: center; gap: 0.35em; font-weight: 600;
+  color: #f0c45a; background: rgba(240, 196, 90, 0.13); border: 1px solid rgba(240, 196, 90, 0.34);
+}
+.pub-tag.award svg { width: 0.9em; height: 0.9em; fill: currentColor; flex: 0 0 auto; }
+[data-theme="light"] .pub-tag.award { color: #7a5600; background: rgba(176, 128, 20, 0.12); border-color: rgba(176, 128, 20, 0.4); }
 .pub-tag.type { background: var(--surface-2); color: var(--muted); }
 .pub-links { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.6rem; }
 .pub-links a, .bib-btn {
