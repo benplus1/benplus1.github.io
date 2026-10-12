@@ -56,6 +56,7 @@ function loadPublications() {
       allPublications = data.publications || [];
       buildFilters();
       renderPublications();
+      renderUnderReview(data);
       const toggle = document.getElementById('toggle-publications');
       if (toggle) {
         toggle.addEventListener('click', () => {
@@ -208,6 +209,31 @@ function createCard(pub) {
 
   card.append(thumb, content);
   return card;
+}
+
+/* ---------- under review ---------- */
+// Double-blind entries show only role and venue unless showDoubleBlindTitles is true and a title exists.
+function renderUnderReview(data) {
+  const box = document.getElementById('under-review');
+  const list = document.getElementById('under-review-list');
+  const items = (data && data.underReview) || [];
+  if (!box || !list || !items.length) return;
+  const showTitles = data.showDoubleBlindTitles === true;
+  list.innerHTML = '';
+  items.forEach((u) => {
+    const li = document.createElement('li');
+    const what = (u.authorRole ? u.authorRole.replace(/ /g, '-') + ' paper' : 'Paper') + ' under review at ' + u.venue;
+    if (u.title && (!u.anonymized || showTitles)) {
+      const t = document.createElement('span');
+      t.className = 'under-review-title';
+      t.textContent = u.title;
+      li.append(t, ' \u2014 ' + what.charAt(0).toLowerCase() + what.slice(1));
+    } else {
+      li.textContent = u.anonymized ? `${what} (${u.review || 'double-blind'})` : what;
+    }
+    list.appendChild(li);
+  });
+  box.hidden = false;
 }
 
 function tag(text, extra) {

@@ -390,6 +390,9 @@ h2 { padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
 }
 .pub-links a:hover, .bib-btn:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
 .bib-btn.copied { color: #fff; background: var(--accent); border-color: var(--accent); }
+.under-review { margin-top: 1.5rem; }
+.under-review-list { color: var(--muted); font-size: 0.92rem; }
+.under-review-title { color: var(--text); font-style: italic; }
 
 /* modal content: image / video / cite */
 .modal-body { display: grid; place-items: center; width: 100%; }
