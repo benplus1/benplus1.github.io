@@ -137,7 +137,14 @@ function initials(name) {
 }
 const joinNames = (names) => (names.length <= 2 ? names.join(' and ')
   : `${names.slice(0, -1).join(', ')}, and ${names[names.length - 1]}`);
-const authorsHtml = (p) => p.authors.map((a) => (isMe(a) ? `<span class="me">${esc(a)}</span>` : esc(a))).join(', ');
+// Each name is kept on one line, so no line ends between initials and a surname.
+const authorsHtml = (p) => p.authors.map((a) => `<span class="${isMe(a) ? 'me' : 'nobr'}">${esc(a)}</span>`).join(', ');
+
+// Keeps each hyphenated compound ("Reality-Linked") on one line in a display title.
+const keepCompounds = (html) => String(html).split(/(<[^>]*>)/)
+  .map((part) => (part.startsWith('<') ? part
+    : part.replace(/[A-Za-z0-9À-ÖØ-öø-ÿ]+(?:-[A-Za-z0-9À-ÖØ-öø-ÿ]+)+/g, (word) => `<span class="nobr">${word}</span>`)))
+  .join('');
 
 function durationWords(mss) {
   const [m, s] = mss.split(':').map(Number);
@@ -213,7 +220,7 @@ function pubItem(p, showYear) {
   const out = [`<li class="pub" id="p-${p.id}">`];
   if (showYear) out.push(`<span class="pub-year">${p.year}</span>`);
   out.push('<div class="pub-body">',
-    `<p class="pub-title"><span class="pub-num">[${p.num}]</span><a href="papers/${p.id}.html">${smallCaps(esc(p.title), p.id)}</a></p>`,
+    `<p class="pub-title"><span class="pub-num">[${p.num}]</span><a href="papers/${p.id}.html">${keepCompounds(smallCaps(esc(p.title), p.id))}</a></p>`,
     `<p class="pub-meta pub-authors">${authorsHtml(p)}</p>`,
     `<p class="pub-meta">${homeVenue(p, p.venueFull)}</p>`,
     `<ul class="pub-meta links dots">${linkItems(p, false)}</ul>`,
@@ -306,7 +313,8 @@ function ieeeReference(p) {
   const pages = bib.pages ? `, pp. ${esc(bib.pages.replace(/-+/, '–'))}` : '';
   const status = p.venueDetail === 'to appear' ? ', to appear' : '';
   const doi = bib.doi ? `, doi: ${esc(bib.doi)}` : '';
-  return `${esc(joinNames(p.authors.map(initials)))}, “${smallCaps(esc(p.title), p.id)},” ${where}${pages}${status}${doi}.`;
+  const names = p.authors.map((a) => `<span class="nobr">${esc(initials(a))}</span>`);
+  return `${joinNames(names)}, “${smallCaps(esc(p.title), p.id)},” ${where}${pages}${status}${doi}.`;
 }
 
 function paperPage(p, updated) {
@@ -346,7 +354,7 @@ function paperPage(p, updated) {
   if (doi) ld.sameAs = `https://doi.org/${doi}`;
 
   const body = [
-    `<h1 class="paper-title">${smallCaps(esc(p.title), p.id)}</h1>`,
+    `<h1 class="paper-title">${keepCompounds(smallCaps(esc(p.title), p.id))}</h1>`,
     `<p class="paper-authors">${authorsHtml(p)}</p>`,
   ];
   const detail = p.venueDetail ? ` ${esc(p.venueDetail[0].toUpperCase() + p.venueDetail.slice(1))}.` : '';
@@ -447,7 +455,7 @@ function main() {
 
   const now = new Date();
   const iso = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-  const updated = `<time datetime="${iso}">${now.getDate()} ${MONTHS[now.getMonth()]} ${now.getFullYear()}</time>`;
+  const updated = `<time datetime="${iso}">${now.getDate()}&nbsp;${MONTHS[now.getMonth()]}&nbsp;${now.getFullYear()}</time>`;
 
   const pubParts = [pubList(papers)];
   if (preprints.length) pubParts.push('<h3>Preprints</h3>', pubList(preprints));

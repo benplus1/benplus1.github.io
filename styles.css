@@ -86,7 +86,14 @@ a:hover {
 
 p {
   margin: 0 0 1rem;
+}
+p,
+figcaption,
+.dated {
   text-wrap: pretty;
+}
+.nobr {
+  white-space: nowrap;
 }
 
 h1,
@@ -418,6 +425,7 @@ pre {
   color: var(--link);
   font: inherit;
   font-size: 0.9375rem;
+  text-align: left;
   cursor: pointer;
   text-decoration-line: underline;
   text-decoration-color: var(--link-underline);
