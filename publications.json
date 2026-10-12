@@ -371,7 +371,10 @@
       "tags": [
         "Climbing"
       ],
-      "thumbnail": "",
+      "thumbnail": "images/thumbs/pointgrade.jpg",
+      "teaser": "images/figures/pointgrade.jpg",
+      "teaserAlt": "Left part of a pipeline diagram. A MoonBoard problem goes to BetaMove, which outputs an ordered sequence of moves. A photo of a prescanned MoonBoard leads to a copy that shows only the problem’s holds in red, labeled sample point cloud of holds in problem, which feeds PointNet++, drawn with its network diagram, and a 1024-dimensional feature vector.",
+      "teaserCaption": "The input side of the pipeline: BetaMove orders a MoonBoard problem’s moves, and the problem’s holds, shown in red, are sampled as a point cloud from a prescanned board for PointNet++.",
       "links": {
         "arxiv": "https://arxiv.org/abs/2609.17770"
       },
