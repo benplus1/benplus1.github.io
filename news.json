@@ -2,6 +2,14 @@
   "_comment": "Reverse-chronological updates from the start of the PhD (Sep 2023). Conference months verified against the official sites.",
   "news": [
     {
+      "date": "Nov 2026",
+      "html": "Co-authored <em>Augmenting Human Performance with an XR Agent Learning from Online Behavior and BCI Evidence</em>, to appear at <strong>ACM UIST 2026</strong> in Detroit, MI."
+    },
+    {
+      "date": "Oct 2026",
+      "html": "Presented <em>Delegate the Details: Flexible Assembly Constraint Authoring for Collaborative XR</em> at <strong>IEEE ISMAR 2026</strong> in Bari, Italy."
+    },
+    {
       "date": "May 2026",
       "html": "Started a research internship at <strong>Toyota Research Institute</strong> in Cambridge, MA."
     },
