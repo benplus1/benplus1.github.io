@@ -124,12 +124,43 @@
 
         <section id="research" class="reveal">
             <h2>Research</h2>
-            <p>My research centers on <strong>XR for teleoperation and human-robot interaction</strong> and on <strong>3D immersive reconstruction with Gaussian splatting</strong>. Recent threads:</p>
-            <ul>
-                <li><strong>XR teleoperation and human-robot interaction</strong> — bimanual XR authoring of assembly hierarchies for robot teleoperation (IEEE&nbsp;VR'26) and relative 6DoF task guidance (ISMAR'25).</li>
-                <li><strong>3D immersive reconstruction with Gaussian splatting</strong> — fast digitization of real objects into reality-linked, splatted proxies (IEEE&nbsp;VR'26).</li>
-                <li><strong>Proxies for selection and manipulation in XR</strong> — permanent proxies for bimanual interaction (IEEE&nbsp;VR'25).</li>
-            </ul>
+            <p>My research centers on <strong>XR for teleoperation and human-robot interaction</strong> and on <strong>3D immersive reconstruction with Gaussian splatting</strong>. Three threads:</p>
+            <div class="threads">
+                <article class="thread">
+                    <img class="thread-img" src="images/thumbs/fastdigit.jpg" alt="Headset passthrough view with detected real objects outlined in colored boxes" width="1280" height="720" loading="lazy" decoding="async">
+                    <div class="thread-body">
+                        <h3 class="thread-title">XR teleoperation with real-time 3D Gaussian splatting scene memory</h3>
+                        <p>I use 3D Gaussian splatting, a fast way to rebuild real objects in 3D from camera images, to bring the physical world into XR. On a Meta Quest&nbsp;3, our pipeline digitizes real objects in 2&ndash;4 seconds without per-scene training, as interactive proxies that can be grabbed, inspected, and used to select the physical objects they came from. For teleoperation, a bimanual XR technique lets an operator give a robot high-level assembly goals as nested groups of object constraints, leaving choices such as where to build a subassembly to the robot software.</p>
+                        <div class="pub-links thread-links">
+                            <a href="papers/fast-digitization.html">Fast Digitization (IEEE VR 2026 demo)</a>
+                            <a href="papers/bimanual-teleoperation.html">Bimanual Assembly Hierarchies (IEEE VR 2026 poster)</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="thread">
+                    <img class="thread-img" src="images/thumbs/task.png" alt="VR scene with object parts grouped inside translucent hulls" width="1049" height="553" loading="lazy" decoding="async">
+                    <div class="thread-body">
+                        <h3 class="thread-title">XR authoring for human-robot collaboration</h3>
+                        <p>Many physical tasks only need objects placed relative to each other, not at fixed spots in the room. I design XR interfaces that let people specify just those constraints and delegate the details to a robot. Delegate the Details pairs an XR authoring interface with a robot planner for assembly constraints; we evaluated it in a 20-participant study with offline execution on a UR5e robot arm. Earlier work introduced relative 6DoF pose specification for VR task guidance and compared permanent and temporary proxies (copies of objects used for selection and manipulation), finding permanent proxies more efficient for hard reselection and preferred.</p>
+                        <div class="pub-links thread-links">
+                            <a href="papers/delegate-the-details.html">Delegate the Details (IEEE ISMAR 2026)</a>
+                            <a href="papers/task-guidance.html">VR Task Guidance (IEEE ISMAR 2025)</a>
+                            <a href="papers/permanent-proxies.html">Permanent Proxies (IEEE VR 2025)</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="thread">
+                    <img class="thread-img" src="images/thumbs/mercury.png" alt="XR GUI drawing message routes between traffic lights in a virtual street" width="433" height="197" loading="lazy" decoding="async">
+                    <div class="thread-body">
+                        <h3 class="thread-title">Toolkits for XR development</h3>
+                        <p>XR applications wire many scene objects together with intricate application logic, which makes them hard to build and debug. MercuryMessaging is a Unity toolkit for routing messages and events between objects; I released MercuryMessaging 2.0, which includes networking APIs and speeds up VR app and user study development up to two-fold. Its XR GUI lets developers view and edit the relationships and interactions between scene entities from inside XR.</p>
+                        <div class="pub-links thread-links">
+                            <a href="papers/mercury-ecs-gui.html">XR GUI for ECS Messages (IEEE ISMAR 2024)</a>
+                            <a href="https://github.com/ColumbiaCGUI/MercuryMessaging" target="_blank" rel="noopener">MercuryMessaging on GitHub</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
         </section>
 
         <section id="publications" class="reveal">
