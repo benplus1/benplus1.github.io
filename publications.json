@@ -1,6 +1,57 @@
 {
   "publications": [
     {
+      "title": "Delegate the Details: Flexible Assembly Constraint Authoring for Collaborative XR",
+      "authors": [
+        "Ben Yang",
+        "Xichen He",
+        "Charlie Zou",
+        "Jen-Shuo Liu",
+        "Barbara Tversky",
+        "Steven Feiner"
+      ],
+      "venue": "IEEE ISMAR 2026",
+      "venueDetail": "",
+      "year": 2026,
+      "award": "",
+      "thumbnail": "images/thumbs/teleop.jpg",
+      "selected": 1,
+      "tags": [
+        "Teleoperation"
+      ],
+      "links": {},
+      "bibtex": "@inproceedings{yang2026delegatedetails,\n  title={Delegate the Details: Flexible Assembly Constraint Authoring for Collaborative XR},\n  author={Yang, Ben and He, Xichen and Zou, Charlie and Liu, Jen-Shuo and Tversky, Barbara and Feiner, Steven},\n  booktitle={2026 IEEE International Symposium on Mixed and Augmented Reality (ISMAR)},\n  year={2026}\n}",
+      "id": "delegate-the-details"
+    },
+    {
+      "title": "Augmenting Human Performance with an XR Agent Learning from Online Behavior and BCI Evidence",
+      "authors": [
+        "Z. Li",
+        "X. He",
+        "H. Chen",
+        "C. Zou",
+        "S. Bai",
+        "Ben Yang",
+        "M. Wu",
+        "J. Ledner",
+        "Y.-J. Cheng",
+        "A. Yamauchi",
+        "D. G. Turakhia",
+        "S. Feiner",
+        "P. Sajda"
+      ],
+      "venue": "ACM UIST 2026",
+      "venueDetail": "",
+      "year": 2026,
+      "award": "",
+      "thumbnail": "",
+      "selected": 1,
+      "tags": [],
+      "links": {},
+      "bibtex": "@inproceedings{li2026xragent,\n  title={Augmenting Human Performance with an XR Agent Learning from Online Behavior and BCI Evidence},\n  author={Li, Z. and He, X. and Chen, H. and Zou, C. and Bai, S. and Yang, B. and Wu, M. and Ledner, J. and Cheng, Y.-J. and Yamauchi, A. and Turakhia, D. G. and Feiner, S. and Sajda, P.},\n  booktitle={2026 ACM Symposium on User Interface Software and Technology (UIST)},\n  year={2026}\n}",
+      "id": "xr-agent-bci"
+    },
+    {
       "title": "Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies",
       "authors": [
         "Ben Yang",

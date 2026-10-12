@@ -55,7 +55,8 @@ for (const p of data.publications) {
   const figHtml = p.thumbnail ? `<div class="paper-figure"><img src="../${esc(p.thumbnail)}" alt="${esc(p.title)} — figure" loading="lazy"></div>` : '';
   const absHtml = p.abstract ? `<h2>Abstract</h2><p>${esc(p.abstract)}</p>` : '';
   const bibHtml = p.bibtex ? `<details class="paper-bib"><summary>BibTeX</summary><pre>${esc(p.bibtex)}</pre></details>` : '';
-  const ogDesc = p.abstract ? p.abstract.slice(0, 180) : `${p.venue} ${p.year} · Ben Yang, Columbia University`;
+  const venueYear = String(p.venue).includes(String(p.year)) ? p.venue : `${p.venue} ${p.year}`;
+  const ogDesc = p.abstract ? p.abstract.slice(0, 180) : `${venueYear} · Ben Yang, Columbia University`;
 
   const html = `<!DOCTYPE html>
 <html lang="en">
