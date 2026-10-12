@@ -217,10 +217,6 @@ a:focus-visible { background-size: 100% 1.5px; }
   transition: background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease-out);
 }
 .theme-toggle:hover { color: var(--accent); }
-#scroll-progress {
-  height: 2px; background: linear-gradient(90deg, var(--grad-a), var(--grad-b));
-  width: 0%; transition: width 80ms linear;
-}
 
 /* ============================================================
    Hero
@@ -469,7 +465,7 @@ footer { margin-top: var(--sp-5); padding-top: 1.2rem; padding-bottom: 2rem; bor
   :root { --bg: #fff; --surface: #fff; --surface-2: #fff; --text: #000; --muted: #333; --border: #bbb; --accent: #003; }
   html { scroll-padding-top: 0; }
   body { color: #000; background: #fff; font-size: 10.5pt; }
-  #site-nav, #scroll-progress, .theme-toggle, .back-to-top, .modal, .pub-filters, #toggle-publications, .play-badge { display: none !important; }
+  #site-nav, .theme-toggle, .back-to-top, .modal, .pub-filters, #toggle-publications, .play-badge { display: none !important; }
   .hero { padding-top: 0; }
   .hero h1 { -webkit-text-fill-color: #000; color: #000; }
   a { color: #000; text-decoration: underline; background-image: none; }

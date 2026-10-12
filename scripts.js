@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
   loadPublications();
   initThemeToggle();
   initScrollSpy();
-  initScrollProgress();
   initBackToTop();
   initModal();
   revealObserve(document.querySelectorAll('.reveal'));
@@ -284,21 +283,6 @@ function initScrollSpy() {
     });
   }, { rootMargin: '-45% 0px -45% 0px' });
   sections.forEach((s) => spy.observe(s));
-}
-
-/* ---------- reading progress ---------- */
-function initScrollProgress() {
-  const bar = document.getElementById('scroll-progress');
-  if (!bar) return;
-  let ticking = false;
-  const update = () => {
-    const h = document.documentElement;
-    const max = h.scrollHeight - h.clientHeight;
-    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
-    ticking = false;
-  };
-  window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
-  update();
 }
 
 /* ---------- back to top ---------- */
