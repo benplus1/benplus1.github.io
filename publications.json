@@ -52,8 +52,13 @@
       "award": "",
       "selected": 1,
       "tags": [],
-      "thumbnail": "",
-      "links": {},
+      "thumbnail": "images/thumbs/xr-agent-bci.jpg",
+      "teaser": "images/figures/xr-agent-bci.jpg",
+      "teaserAlt": "Two panels of a diagram. Left, labeled b: evidence-quality sliders feed an online EM loop between a foundational VLM and a virtual prompt, above a grid of drone images marked red or blue. Right, labeled c: a person in a headset aims a controller among floating drones while red outlines and red curved lines mark targets, under a box that reads Agent provides task cues.",
+      "teaserCaption": "(b) Weighted evidence drives an online EM loop between a foundational VLM and a virtual prompt. (c) The agent’s task cues outline likely targets in red and draw lines toward them for a player in a headset.",
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2608.30369"
+      },
       "bibtex": "@inproceedings{li2026xragent,\n  title={Augmenting Human Performance with an XR Agent Learning from Online Behavior and BCI Evidence},\n  author={Li, Z. and He, X. and Chen, H. and Zou, C. and Bai, S. and Yang, B. and Wu, M. and Ledner, J. and Cheng, Y.-J. and Yamauchi, A. and Turakhia, D. G. and Feiner, S. and Sajda, P.},\n  booktitle={2026 ACM Symposium on User Interface Software and Technology (UIST)},\n  year={2026}\n}"
     },
     {

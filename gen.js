@@ -12,8 +12,8 @@ const BASE = 'https://www.cs.columbia.edu/~benyang';
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
   'November', 'December'];
 // Set in small caps (<abbr>) in roman text only: never inside italics, URLs, DOIs, BibTeX or meta tags.
-const ACRONYMS = ['ACM', 'AGU', 'AI', 'AR', 'BCI', 'CGUI', 'CHI', 'COMS', 'ECS', 'EGSC', 'GCC', 'GUI', 'HCI', 'HRI',
-  'ICRA', 'IEEE', 'IGARSS', 'ISMAR', 'MA', 'MI', 'TA', 'UI', 'UIST', 'VR', 'VRST', 'VRW', 'WA', 'WPM', 'XR'];
+const ACRONYMS = ['ACM', 'AGU', 'AI', 'AR', 'BCI', 'CGUI', 'CHI', 'COMS', 'ECS', 'EGSC', 'EM', 'GCC', 'GUI', 'HCI',
+  'HRI', 'ICRA', 'IEEE', 'IGARSS', 'ISMAR', 'MA', 'MI', 'TA', 'UI', 'UIST', 'VLM', 'VR', 'VRST', 'VRW', 'WA', 'WPM', 'XR'];
 const LINK_ORDER = [['pdf', 'PDF'], ['arxiv', 'arXiv'], ['doi', 'DOI'], ['video', 'Video'], ['code', 'Code'],
   ['project', 'Project']];
 const NO_SMALL_CAPS = new Set(['i', 'em', 'cite', 'abbr', 'code', 'pre', 'script', 'style']);
