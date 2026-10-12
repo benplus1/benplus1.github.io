@@ -226,7 +226,18 @@ main:focus { outline: none; }
 }
 .nav-links a:hover { color: var(--text); background-color: var(--accent-soft); }
 .nav-links a.active { color: var(--text); }
-.nav-indicator { display: none; }
+/* sliding underline for the active section (positioned by the scroll spy in scripts.js) */
+.nav-indicator {
+  position: absolute; left: 0; bottom: 3px; height: 2px; margin: 0; pointer-events: none;
+  width: max(0px, calc(var(--w, 0px) - 1.3rem));
+  translate: calc(var(--x, 0px) + 0.65rem) 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--grad-a), var(--grad-b), var(--grad-c));
+  box-shadow: 0 0 10px color-mix(in srgb, var(--grad-b) 55%, transparent);
+  opacity: 0;
+  transition: translate .45s var(--ease-out), width .45s var(--ease-out), opacity var(--dur) var(--ease);
+}
+.nav-indicator.on { opacity: 1; }
 .theme-toggle {
   margin-left: auto; flex: 0 0 auto;
   width: 40px; height: 40px; border-radius: 50%;
@@ -359,8 +370,8 @@ main > section:first-child { padding-top: var(--sp-4); }
 
 .sec-head { margin-bottom: var(--sp-4); }
 .sec-head-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-.sec-head h2 { position: relative; padding-bottom: 0.75rem; }
-.sec-head h2::after {
+.sec-head h2, .paper-page h2 { position: relative; padding-bottom: 0.75rem; }
+.sec-head h2::after, .paper-page h2::after {
   content: ""; position: absolute; left: 0; bottom: 0;
   width: 3rem; height: 3px; border-radius: 3px; background: var(--grad-3);
 }
@@ -639,8 +650,23 @@ footer p { margin: 0 auto; }
 .modal-close:hover { background: rgba(255,255,255,.25); }
 
 /* ============================================================
-   Scroll reveal
+   Motion: one load sequence for the hero, scroll reveals, page fade
+   (everything here sits behind prefers-reduced-motion: no-preference)
    ============================================================ */
+@keyframes rise { from { opacity: 0; translate: 0 18px; } }
+@keyframes float { from { translate: 0 0; } to { translate: 0 -9px; } }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-text > * { animation: rise .9s var(--ease-out) backwards; }
+  .hero-text > :nth-child(2) { animation-delay: 70ms; }
+  .hero-text > :nth-child(3) { animation-delay: 140ms; }
+  .hero-text > :nth-child(4) { animation-delay: 210ms; }
+  .hero-text > :nth-child(5) { animation-delay: 280ms; }
+  .hero-text > :nth-child(6) { animation-delay: 350ms; }
+  .portrait-frame { animation: float 7s ease-in-out infinite alternate; }
+  /* per-paper pages fade in; supporting browsers also cross-fade between pages */
+  .paper-page { animation: rise .7s var(--ease-out) backwards; }
+  @view-transition { navigation: auto; }
+}
 @media (prefers-reduced-motion: no-preference) {
   html.js .reveal {
     opacity: 0; translate: 0 22px;

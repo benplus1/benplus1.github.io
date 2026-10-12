@@ -114,11 +114,7 @@ function renderPublications() {
     container.innerHTML = '<p>No publications match this filter.</p>';
     return;
   }
-  list.forEach((pub, i) => {
-    const card = createCard(pub);
-    card.style.setProperty('--i', Math.min(i, 5));
-    container.appendChild(card);
-  });
+  list.forEach((pub) => container.appendChild(createCard(pub)));
   revealObserve(container.querySelectorAll('.reveal'));
 }
 
@@ -329,29 +325,58 @@ function revealObserve(nodes) {
   }
   if (!revealIO) {
     revealIO = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); revealIO.unobserve(e.target); } });
+      // elements that come into view together reveal one after another: --i sets the CSS transition delay
+      let k = 0;
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.style.setProperty('--i', Math.min(k++, 6));
+        e.target.classList.add('in');
+        revealIO.unobserve(e.target);
+      });
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
   }
   nodes.forEach((n) => revealIO.observe(n));
 }
 
 /* ---------- scroll spy ---------- */
+// The indicator slides under the active link; over the hero no section is active and it hides.
 function initScrollSpy() {
+  const list = document.querySelector('.nav-links');
+  const ind = document.querySelector('.nav-indicator');
+  const hero = document.querySelector('.hero');
   const links = Array.from(document.querySelectorAll('.nav-links a'));
   const map = {};
   links.forEach((l) => { const id = l.getAttribute('href').slice(1); const s = document.getElementById(id); if (s) map[id] = l; });
   const sections = Object.keys(map).map((id) => document.getElementById(id));
   if (!sections.length || !('IntersectionObserver' in window)) return;
-  const spy = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) {
-        links.forEach((l) => { l.classList.remove('active'); l.removeAttribute('aria-current'); });
-        const l = map[e.target.id];
-        if (l) { l.classList.add('active'); l.setAttribute('aria-current', 'true'); }
-      }
+  let active = null;
+  const place = () => {
+    if (!ind) return;
+    ind.classList.toggle('on', !!active);
+    if (!active) return;
+    ind.style.setProperty('--x', active.offsetLeft + 'px');
+    ind.style.setProperty('--w', active.offsetWidth + 'px');
+  };
+  const setActive = (l) => {
+    if (l === active) return;
+    active = l;
+    links.forEach((a) => {
+      a.classList.toggle('active', a === l);
+      if (a === l) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
     });
+    place();
+    // on narrow screens the link row scrolls sideways: keep the active link in view
+    if (l && list.scrollWidth > list.clientWidth + 1) {
+      list.scrollTo({ left: Math.max(0, l.offsetLeft - (list.clientWidth - l.offsetWidth) / 2), behavior: prefersReduced ? 'auto' : 'smooth' });
+    }
+  };
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) setActive(e.target === hero ? null : map[e.target.id]); });
   }, { rootMargin: '-45% 0px -45% 0px' });
   sections.forEach((s) => spy.observe(s));
+  if (hero) spy.observe(hero);
+  window.addEventListener('resize', place);
+  if (document.fonts) document.fonts.ready.then(place);
 }
 
 /* ---------- back to top ---------- */
