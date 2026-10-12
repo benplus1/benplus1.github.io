@@ -22,8 +22,8 @@
       ],
       "thumbnail": "images/thumbs/delegate-the-details.jpg",
       "teaser": "images/figures/delegate-the-details.jpg",
-      "teaserAlt": "VR view of a gear inside an orange hull and, at right, a rod and a peg held with two controllers inside a blue wireframe hull.",
-      "teaserCaption": "Constraint groups drawn as hulls. Parts in a group keep their poses relative to each other; where a group is assembled is left to the robot.",
+      "teaserAlt": "VR view of four pipe parts staged on a wooden pallet. Solid blue lines run from the pallet to a brass flanged pipe and a T-pipe, dashed orange lines run to a gray pipe and a valve, and a controller points at the gray pipe, which sits inside a glowing orange hull.",
+      "teaserCaption": "Parts staged on a pallet in VR, where solid blue links mark prescribed poses, dashed orange links mark delegated ones, and pointing at the gray pipe shows its bounding hull.",
       "links": {},
       "bibtex": "@inproceedings{yang2026delegatedetails,\n  title={Delegate the Details: Flexible Assembly Constraint Authoring for Collaborative XR},\n  author={Yang, Ben and He, Xichen and Zou, Charlie and Liu, Jen-Shuo and Tversky, Barbara and Feiner, Steven},\n  booktitle={2026 IEEE International Symposium on Mixed and Augmented Reality (ISMAR)},\n  year={2026}\n}"
     },
