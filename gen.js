@@ -74,11 +74,11 @@ for (const p of data.publications) {
     <meta property="og:image" content="${img}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="${img}">
-    <meta name="theme-color" content="#0e0f12">
+    <meta name="theme-color" content="#0b0f19">
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
     ${PREPAINT}
-    <link rel="preload" href="../fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="../fonts/merriweather-v33-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/inter-v20-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/merriweather-v33-latin-300.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../styles.css">
     <script type="application/ld+json">
     ${JSON.stringify(ld, null, 2)}
