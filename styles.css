@@ -418,6 +418,8 @@ h2 { padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
 .award-item, .talk-item { display: flex; align-items: baseline; gap: 1rem; padding: 0.25rem 0; }
 .award-year, .talk-date { flex: 0 0 6rem; color: var(--accent); font-weight: 600; font-size: 0.85rem; }
 .award-desc, .talk-desc { flex: 1; }
+.open-source { margin-top: 1.5rem; }
+.open-source p { margin: 0.3rem 0; }
 #teaching p, #services p { margin: 0.35rem 0; }
 .service-title { font-family: var(--font-sans); font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; font-size: 0.76rem; margin-bottom: 0.35rem; }
 #teaching .service-category { margin-bottom: 1rem; }
