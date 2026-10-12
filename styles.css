@@ -566,22 +566,67 @@ pre {
   }
 }
 
+@page {
+  margin: 2cm;
+}
 @media print {
+  /* Chrome fragments the subgrids badly across pages (blocks print over each other), so print one column of blocks. */
+  .page {
+    max-width: 40rem;
+    padding: 0;
+  }
+  .page,
+  .page > *,
+  main > section,
+  .thread,
+  .pubs,
+  .pub,
+  .pub-year,
+  .pub-thumb,
+  .thread > .fig,
+  main.paper > .fig {
+    display: block;
+  }
+  .pub-year {
+    margin: 0 0 0.5rem;
+  }
+  .pub-body {
+    padding-left: 2.6rem;
+  }
+  .pub-thumb {
+    width: 16rem;
+    max-width: calc(100% - 2.6rem);
+    margin: 0.6rem 0 0 2.6rem;
+  }
+  .fig img {
+    width: 30rem;
+  }
+  .fig figcaption {
+    max-width: 30rem;
+    margin-top: 0.6rem;
+  }
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+  .fig,
+  .pub,
+  .dated > li,
+  pre {
+    break-inside: avoid;
+  }
   .contents,
   .copy {
     display: none;
   }
   a,
-  a:visited {
+  a:visited,
+  .more > summary {
     color: var(--ink);
     text-decoration-line: none;
   }
   .fade-ready img.fade:not(.shown) {
     opacity: 1;
-  }
-  .pub,
-  .dated > li {
-    break-inside: avoid;
   }
   .print-url {
     display: inline;
