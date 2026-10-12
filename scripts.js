@@ -53,3 +53,37 @@
     });
   });
 })();
+
+// Home page: the last entry of the contents list switches between the light and dark palettes. It names the
+// palette it switches to, writes data-theme on <html> and remembers the choice; the inline head script on every
+// page applies a remembered choice before the first paint. Without JavaScript the entry stays hidden and the
+// palette follows the system setting.
+(function themeToggle() {
+  var button = document.querySelector('button[data-theme-toggle]');
+  if (!button) return;
+  var root = document.documentElement;
+  var systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+  var current = function () {
+    var chosen = root.getAttribute('data-theme');
+    if (chosen === 'dark' || chosen === 'light') return chosen;
+    return systemDark.matches ? 'dark' : 'light';
+  };
+  var label = function () {
+    var next = current() === 'dark' ? 'Light' : 'Dark';
+    button.textContent = next;
+    button.setAttribute('aria-label', next + ' theme');
+  };
+  button.addEventListener('click', function () {
+    var next = current() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try {
+      localStorage.setItem('theme', next);
+    } catch (err) {
+      console.warn('The theme choice could not be stored, so it lasts only until this page is closed.', err);
+    }
+    label();
+  });
+  systemDark.addEventListener('change', label);
+  label();
+  button.parentElement.hidden = false;
+})();

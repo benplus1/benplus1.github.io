@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141414" media="(prefers-color-scheme: dark)">
 <title>VHard: An XR UI for Kinesthetic Rehearsal of Rock Climbing Moves — Ben Yang</title>
 <meta name="description" content="Rock climbers frequently struggle to complete climbs due to the difficulty of practicing precise movements without actually attempting them. A standard strategy is to kinesthetically rehearse the…">
 <link rel="canonical" href="https://www.cs.columbia.edu/~benyang/papers/vhard.html">
@@ -31,6 +32,7 @@
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preload" href="../fonts/ibarra-real-nova-roman.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../fonts/source-sans-3-roman.woff2" as="font" type="font/woff2" crossorigin>
+<script>(function () { try { var theme = localStorage.getItem('theme'); if (theme === 'dark' || theme === 'light') document.documentElement.setAttribute('data-theme', theme); } catch (err) { console.warn('The stored theme could not be read.', err); } })();</script>
 <link rel="stylesheet" href="../styles.css">
 <script>if (matchMedia('(prefers-reduced-motion: no-preference)').matches) document.documentElement.classList.add('fade-ready');</script>
 <script type="application/ld+json">

@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141414" media="(prefers-color-scheme: dark)">
 <title>Ben Yang — CS PhD Candidate, Columbia University</title>
 <meta name="description" content="Ben Yang is a Computer Science PhD candidate at Columbia University who builds XR interfaces for robot teleoperation and human-robot collaboration and uses 3D Gaussian splatting to bring physical objects into XR. He was a research intern at Toyota Research Institute in 2026.">
 <meta name="author" content="Ben Yang">
@@ -27,6 +28,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/ibarra-real-nova-roman.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/source-sans-3-roman.woff2" as="font" type="font/woff2" crossorigin>
+<script>(function () { try { var theme = localStorage.getItem('theme'); if (theme === 'dark' || theme === 'light') document.documentElement.setAttribute('data-theme', theme); } catch (err) { console.warn('The stored theme could not be read.', err); } })();</script>
 <link rel="stylesheet" href="styles.css">
 <script>if (matchMedia('(prefers-reduced-motion: no-preference)').matches) document.documentElement.classList.add('fade-ready');</script>
 <script type="application/ld+json">
@@ -73,6 +75,7 @@
 <li><a href="#teaching">Teaching &amp; service</a></li>
 <li><a href="#miscellany">Miscellany</a></li>
 <li><a href="#about">About</a></li>
+<li hidden><button class="theme-toggle" type="button" data-theme-toggle>Dark</button></li>
 </ul>
 </nav>
 </header>

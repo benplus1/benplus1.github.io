@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141414" media="(prefers-color-scheme: dark)">
 <title>Permanent Proxies for Bimanual Selection and Manipulation in VR — Ben Yang</title>
 <meta name="description" content="Copies (proxies) of objects are useful for selecting and manipulating objects in virtual reality (VR). Temporary proxies are destroyed after use and must be recreated for reuse. Permanent proxies…">
 <link rel="canonical" href="https://www.cs.columbia.edu/~benyang/papers/permanent-proxies.html">
@@ -33,6 +34,7 @@
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preload" href="../fonts/ibarra-real-nova-roman.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../fonts/source-sans-3-roman.woff2" as="font" type="font/woff2" crossorigin>
+<script>(function () { try { var theme = localStorage.getItem('theme'); if (theme === 'dark' || theme === 'light') document.documentElement.setAttribute('data-theme', theme); } catch (err) { console.warn('The stored theme could not be read.', err); } })();</script>
 <link rel="stylesheet" href="../styles.css">
 <script>if (matchMedia('(prefers-reduced-motion: no-preference)').matches) document.documentElement.classList.add('fade-ready');</script>
 <script type="application/ld+json">

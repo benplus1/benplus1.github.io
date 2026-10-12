@@ -20,6 +20,10 @@ const NO_SMALL_CAPS = new Set(['i', 'em', 'cite', 'abbr', 'code', 'pre', 'script
 const NEWS_VISIBLE = 5;
 const FADE_SCRIPT = '<script>if (matchMedia(\'(prefers-reduced-motion: no-preference)\').matches) '
   + 'document.documentElement.classList.add(\'fade-ready\');</script>';
+// Applies the reader's stored Dark/Light choice before the first paint; index.html carries the same script.
+const THEME_SCRIPT = '<script>(function () { try { var theme = localStorage.getItem(\'theme\'); '
+  + 'if (theme === \'dark\' || theme === \'light\') document.documentElement.setAttribute(\'data-theme\', theme); } '
+  + 'catch (err) { console.warn(\'The stored theme could not be read.\', err); } })();</script>';
 const GOATCOUNTER = '<script data-goatcounter="https://theangrybuddhas.goatcounter.com/count" async '
   + 'src="//gc.zgo.at/count.js"></script>';
 
@@ -392,8 +396,9 @@ function paperPage(p, updated) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141414" media="(prefers-color-scheme: dark)">
 <title>${esc(p.title)} — Ben Yang</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${url}">
@@ -411,6 +416,7 @@ ${meta.join('\n')}
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preload" href="../fonts/ibarra-real-nova-roman.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../fonts/source-sans-3-roman.woff2" as="font" type="font/woff2" crossorigin>
+${THEME_SCRIPT}
 <link rel="stylesheet" href="../styles.css">
 ${FADE_SCRIPT}
 <script type="application/ld+json">

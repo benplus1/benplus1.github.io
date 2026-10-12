@@ -44,6 +44,31 @@
   --date-col: 4.75rem;
   --date-gap: 0.75rem;
 }
+/* Dark palette: follows the system unless the reader picked Light; the Dark/Light button sets data-theme. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #141414;
+    --ink: #e6e4e0;
+    --ink-muted: #a3a09b;
+    --rule: #e6e4e0;
+    --hairline: #2e2e2e;
+    --link: #9db8f0;
+    --link-underline: #5a77b3;
+    --link-visited: #b9ccf5;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #141414;
+  --ink: #e6e4e0;
+  --ink-muted: #a3a09b;
+  --rule: #e6e4e0;
+  --hairline: #2e2e2e;
+  --link: #9db8f0;
+  --link-underline: #5a77b3;
+  --link-visited: #b9ccf5;
+}
 
 html {
   -webkit-text-size-adjust: 100%;
@@ -200,6 +225,21 @@ main > section,
 }
 .contents a:hover,
 .runhead a:hover {
+  text-decoration-color: var(--ink);
+}
+.theme-toggle {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+  text-decoration-line: underline;
+  text-decoration-color: var(--hairline);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+.theme-toggle:hover {
   text-decoration-color: var(--ink);
 }
 
@@ -600,6 +640,20 @@ pre {
   margin: 2cm;
 }
 @media print {
+  /* Paper is white whatever the screen theme. */
+  :root,
+  :root:not([data-theme="light"]),
+  :root[data-theme="dark"] {
+    color-scheme: light;
+    --paper: #ffffff;
+    --ink: #111111;
+    --ink-muted: #5e5e5e;
+    --rule: #111111;
+    --hairline: #d4d4d4;
+    --link: #0033a0;
+    --link-underline: #6685c6;
+    --link-visited: #022169;
+  }
   /* Chrome fragments the subgrids badly across pages (blocks print over each other), so print one column of blocks. */
   .page {
     max-width: 40rem;
