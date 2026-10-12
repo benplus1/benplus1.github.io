@@ -534,6 +534,7 @@ pre {
     grid-row: 2;
   }
   .contents {
+    grid-column: text-start / aside-end;
     grid-row: 3;
   }
   main h2 {
