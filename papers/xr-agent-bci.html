@@ -29,11 +29,13 @@
     <meta property="og:image" content="https://www.cs.columbia.edu/~benyang/images/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://www.cs.columbia.edu/~benyang/images/og-image.png">
-    <meta name="theme-color" content="#0e0f12">
+    <meta name="theme-color" content="#0b0e14">
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    <script>(function(){try{var s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s==='light'?'light':'dark');}catch(e){}})();</script>
-    <link rel="preload" href="../fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="../fonts/merriweather-v33-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <script>(function(){var t='dark';try{t=localStorage.getItem('theme')==='light'?'light':'dark';}catch(e){console.warn('theme: localStorage unavailable, using dark',e);}document.documentElement.setAttribute('data-theme',t);if(t==='light'){var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#f6f7fa');}})();</script>
+    <link rel="preload" href="../fonts/merriweather-v33-latin-300.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/merriweather-v33-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/inter-v20-latin-500.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/inter-v20-latin-600.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../styles.css">
     <script type="application/ld+json">
     {
@@ -107,6 +109,7 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <nav id="site-nav" aria-label="Sections">
         <div class="nav-inner">
+            <a class="monogram" href="../index.html" aria-label="Ben Yang, home">by<span aria-hidden="true">_</span></a>
             <a class="nav-brand" href="../index.html#publications">&larr; All publications</a>
         </div>
     </nav>

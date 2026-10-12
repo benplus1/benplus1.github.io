@@ -9,7 +9,7 @@ const esc = (s) => String(s == null ? '' : s)
   .replace(/"/g, '&quot;');
 const isMe = (a) => /ben yang|benjamin yang/.test(String(a).toLowerCase());
 
-const PREPAINT = `<script>(function(){try{var s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s==='light'?'light':'dark');}catch(e){}})();</script>`;
+const PREPAINT = `<script>(function(){var t='dark';try{t=localStorage.getItem('theme')==='light'?'light':'dark';}catch(e){console.warn('theme: localStorage unavailable, using dark',e);}document.documentElement.setAttribute('data-theme',t);if(t==='light'){var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content','#f6f7fa');}})();</script>`;
 const TROPHY = '<svg viewBox="0 0 576 512" aria-hidden="true" focusable="false"><path d="M552 64H448V24c0-13.255-10.745-24-24-24H152c-13.255 0-24 10.745-24 24v40H24C10.745 64 0 74.745 0 88v56c0 35.64 22.529 71.674 61.81 98.873 31.717 21.972 70.259 35.607 110.502 39.844 8.747 20.514 20.281 38.815 33.612 53.621 25.453 28.27 53.762 44.184 76.076 53.766V424H192c-22.091 0-40 17.909-40 40v24c0 6.627 5.373 12 12 12h248c6.627 0 12-5.373 12-12v-24c0-22.091-17.909-40-40-40h-96.476v-93.896c22.314-9.582 50.623-25.496 76.076-53.766 13.331-14.806 24.865-33.107 33.612-53.621 40.243-4.237 78.785-17.872 110.502-39.844C553.471 215.674 576 179.64 576 144V88c0-13.255-10.745-24-24-24zM99.788 184.846C76.106 168.444 64 152.351 64 144v-16h64.595c1.612 28.53 6.297 54.95 13.354 78.62-15.769-5.387-30.298-12.819-42.161-21.774zM512 144c0 8.351-12.106 24.444-35.788 40.846-11.863 8.955-26.392 16.387-42.161 21.774 7.057-23.67 11.742-50.09 13.354-78.62H512v16z"/></svg>';
 
 const ORDER = [['pdf', 'PDF'], ['doi', 'DOI'], ['arxiv', 'arXiv'], ['video', 'Video'], ['code', 'Code'], ['project', 'Project']];
@@ -74,11 +74,13 @@ for (const p of data.publications) {
     <meta property="og:image" content="${img}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="${img}">
-    <meta name="theme-color" content="#0e0f12">
+    <meta name="theme-color" content="#0b0e14">
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
     ${PREPAINT}
-    <link rel="preload" href="../fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="../fonts/merriweather-v33-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/merriweather-v33-latin-300.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/merriweather-v33-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/inter-v20-latin-500.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/inter-v20-latin-600.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../styles.css">
     <script type="application/ld+json">
     ${JSON.stringify(ld, null, 2)}
@@ -89,6 +91,7 @@ for (const p of data.publications) {
     <a class="skip-link" href="#main">Skip to content</a>
     <nav id="site-nav" aria-label="Sections">
         <div class="nav-inner">
+            <a class="monogram" href="../index.html" aria-label="Ben Yang, home">by<span aria-hidden="true">_</span></a>
             <a class="nav-brand" href="../index.html#publications">&larr; All publications</a>
         </div>
     </nav>
