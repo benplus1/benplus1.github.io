@@ -1,61 +1,61 @@
 {
-  "_comment": "Reverse-chronological updates from the start of the PhD (Sep 2023). Conference months verified against the official sites.",
+  "_comment": "Newest first, from the start of the PhD (Sep 2023); conference months verified against the official sites. date is YYYY-MM. html is one past-tense sentence: <i> for paper titles, no <strong> or <b>. gen.js renders the list into index.html and sets acronyms in small caps outside italics.",
   "news": [
     {
-      "date": "Nov 2026",
-      "html": "Co-authored <em>Augmenting Human Performance with an XR Agent Learning from Online Behavior and BCI Evidence</em>, to appear at <strong>ACM UIST 2026</strong> in Detroit, MI."
+      "date": "2026-11",
+      "html": "Co-authored <i>Augmenting Human Performance with an XR Agent</i>, to appear at ACM UIST 2026 in Detroit, MI."
     },
     {
-      "date": "Oct 2026",
-      "html": "Presented <em>Delegate the Details: Flexible Assembly Constraint Authoring for Collaborative XR</em> at <strong>IEEE ISMAR 2026</strong> in Bari, Italy."
+      "date": "2026-10",
+      "html": "Presented <i>Delegate the Details</i> at IEEE ISMAR 2026 in Bari, Italy."
     },
     {
-      "date": "May 2026",
-      "html": "Started a research internship at <strong>Toyota Research Institute</strong> in Cambridge, MA."
+      "date": "2026-05",
+      "html": "Started a research internship on the Human-Robot Interaction team at Toyota Research Institute in Cambridge, MA."
     },
     {
-      "date": "Apr 2026",
-      "html": "Co-authored <em>SwEYEpinch and Beyond</em>, on XR text entry, published at <strong>ACM CHI 2026</strong> in Barcelona, Spain."
+      "date": "2026-04",
+      "html": "Co-authored <i>SwEYEpinch and Beyond</i>, on XR text entry, published at ACM CHI 2026 in Barcelona, Spain."
     },
     {
-      "date": "Mar 2026",
-      "html": "<em>Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies</em> received a <strong>Best Research Demo Honorable Mention</strong> at <strong>IEEE VR 2026</strong> in Daegu, Korea."
+      "date": "2026-03",
+      "html": "<i>Fast Digitization in XR</i> received the Best Research Demo Award (Honorable Mention) at IEEE VR 2026 in Daegu, South Korea."
     },
     {
-      "date": "Mar 2026",
-      "html": "Presented two first-author works at <strong>IEEE VR 2026</strong> (Daegu, Korea): a research demo on Gaussian-splatted proxies and a poster on bimanual teleoperation."
+      "date": "2026-03",
+      "html": "Presented a research demo on Gaussian-splatted proxies and a poster on bimanual teleoperation at IEEE VR 2026 in Daegu, South Korea."
     },
     {
-      "date": "Oct 2025",
-      "html": "Presented <em>VR Task Guidance Through Relative 6DoF Pose Specification</em> at <strong>IEEE ISMAR 2025</strong> in Daejeon, South Korea."
+      "date": "2025-10",
+      "html": "Presented <i>Virtual Reality Task Guidance</i> at IEEE ISMAR 2025 in Daejeon, South Korea."
     },
     {
-      "date": "Sep 2025",
-      "html": "Awarded the <strong>Columbia-Dream Sports AI Grant</strong>."
+      "date": "2025-09",
+      "html": "Received the Columbia&ndash;Dream Sports AI Grant."
     },
     {
-      "date": "Sep 2025",
-      "html": "Began serving as <strong>Head TA</strong> for COMS 6173: VR &amp; AR Seminar."
+      "date": "2025-09",
+      "html": "Started as head TA for COMS 6173: VR and AR Seminar."
     },
     {
-      "date": "Mar 2025",
-      "html": "Presented <em>Permanent Proxies for Bimanual Selection and Manipulation in VR</em> at <strong>IEEE VR 2025</strong> in Saint-Malo, France."
+      "date": "2025-03",
+      "html": "Presented <i>Permanent Proxies for Bimanual Selection and Manipulation in VR</i> at IEEE VR 2025 in Saint-Malo, France."
     },
     {
-      "date": "Oct 2024",
-      "html": "Awarded the <strong>EGSC Professional Development Scholarship</strong>."
+      "date": "2024-10",
+      "html": "Received the EGSC Professional Development Scholarship."
     },
     {
-      "date": "Oct 2024",
-      "html": "Presented two papers at <strong>IEEE ISMAR 2024</strong> in Bellevue, WA: an XR GUI for visualizing ECS messages, and VHard, an XR UI for rehearsing climbing moves."
+      "date": "2024-10",
+      "html": "Presented two demos at IEEE ISMAR 2024 in Bellevue, WA: an XR GUI for visualizing ECS messages and <i>VHard</i>, for rehearsing climbing moves."
     },
     {
-      "date": "Jan 2024",
-      "html": "Began serving as <strong>Head TA</strong> for COMS 4172: 3DUI and AR."
+      "date": "2024-01",
+      "html": "Started as head TA for COMS 4172: 3D User Interfaces and Augmented Reality."
     },
     {
-      "date": "Sep 2023",
-      "html": "Started my PhD in Computer Science at <strong>Columbia University</strong>, advised by Steven Feiner in the CGUI Lab."
+      "date": "2023-09",
+      "html": "Started my PhD in Computer Science at Columbia University, advised by Steven Feiner in the CGUI Lab."
     }
   ]
 }
