@@ -41,7 +41,7 @@
         "P. Sajda"
       ],
       "venue": "ACM UIST 2026",
-      "venueDetail": "",
+      "venueDetail": "to appear",
       "year": 2026,
       "award": "",
       "thumbnail": "",
@@ -59,10 +59,10 @@
         "Kirthana Natarajan",
         "Steven Feiner"
       ],
-      "venue": "IEEE VR 2026",
+      "venue": "IEEE VR 2026 Workshops (VRW)",
       "venueDetail": "Research Demo",
       "year": 2026,
-      "award": "Best Research Demo, Honorable Mention",
+      "award": "Best Research Demo Award (Honorable Mention)",
       "thumbnail": "images/thumbs/fastdigit.jpg",
       "selected": 1,
       "tags": [
@@ -73,9 +73,9 @@
         "doi": "https://doi.org/10.1109/VRW70859.2026.00389",
         "video": "https://youtu.be/jwcnjAPASKU"
       },
-      "bibtex": "@inproceedings{yang2026fastdigitization,\n  title={Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies},\n  author={Yang, Ben and Liu, Shanying and Natarajan, Kirthana and Feiner, Steven},\n  booktitle={2026 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},\n  year={2026},\n  doi={10.1109/VRW70859.2026.00389}\n}",
+      "bibtex": "@inproceedings{yang2026fastdigitization,\n  title={Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies},\n  author={Yang, Ben and Liu, Shanying and Natarajan, Kirthana and Feiner, Steven},\n  booktitle={2026 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},\n  pages={1429--1430},\n  year={2026},\n  doi={10.1109/VRW70859.2026.00389}\n}",
       "id": "fast-digitization",
-      "abstract": "Capturing real objects as interactive 3D assets in XR typically requires offline photogrammetry. We present Gaussian-Splatted Proxies, a system for fast object digitization in XR using feed-forward 3D Gaussian splatting. With a Quest 3 headset, users select objects detected by the system through the passthrough cameras, then capture images that an edge server reconstructs as interactive Gausasian splats. Our system extracts individual objects from scene reconstructions without any per-scene training by projecting detection bounding boxes into 3D space. The resulting assets can be grabbed, inspected, rotated, and used to select the corresponding objects in the physical world. https://youtu.be/orx3gFPBNpA"
+      "abstract": "Capturing real objects as interactive 3D assets in XR typically requires offline photogrammetry. We present Gaussian-Splatted Proxies, a system for fast object digitization in XR using feed-forward 3D Gaussian splatting. With a Quest 3 headset, users select objects detected by the system through the passthrough cameras, then capture images that an edge server reconstructs as interactive Gaussian splats. Our system extracts individual objects from scene reconstructions without any per-scene training by projecting detection bounding boxes into 3D space. The resulting assets can be grabbed, inspected, rotated, and used to select the corresponding objects in the physical world."
     },
     {
       "title": "Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation",
@@ -87,7 +87,7 @@
         "Barbara Tversky",
         "Steven Feiner"
       ],
-      "venue": "IEEE VR 2026 Workshops",
+      "venue": "IEEE VR 2026 Workshops (VRW)",
       "venueDetail": "Poster",
       "year": 2026,
       "award": "",
@@ -102,7 +102,7 @@
         "arxiv": "https://arxiv.org/abs/2603.01495",
         "video": "https://youtu.be/_pE681sRjHI"
       },
-      "bibtex": "@inproceedings{yang2026bimanual,\n  title={Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation},\n  author={Yang, Ben and He, Xichen and Zou, Charlie and Liu, Jen-Shuo and Tversky, Barbara and Feiner, Steven},\n  booktitle={2026 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},\n  year={2026},\n  doi={10.1109/VRW70859.2026.00191}\n}",
+      "bibtex": "@inproceedings{yang2026bimanual,\n  title={Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation},\n  author={Yang, Ben and He, Xichen and Zou, Charlie and Liu, Jen-Shuo and Tversky, Barbara and Feiner, Steven},\n  booktitle={2026 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},\n  pages={1033--1034},\n  year={2026},\n  doi={10.1109/VRW70859.2026.00191}\n}",
       "id": "bimanual-teleoperation",
       "abstract": "We present a bimanual XR interaction approach for specifying remote assembly tasks as hierarchies of relative and absolute object constraints that specify high-level teleoperation goals for robots. Grabbing one object in each hand creates a constraint group (visualized as a hull) and groups can be nested into hierarchies. Each group can be relative (with a robot-specifiable 6DoF pose) or absolute (with an author-specified fixed 6DoF pose) in relation to its parent. A relative group specifies a subassembly that can be constructed at a location chosen by the robot software for efficiency rather than mandated by the user."
     },
@@ -127,9 +127,9 @@
       ],
       "links": {
         "pdf": "pdf/yang2025-task-guidance.pdf",
-        "doi": "https://doi.org/10.1109/ISMAR-ADJUNCT68609.2025.00247"
+        "doi": "https://doi.org/10.1109/ISMAR-Adjunct68609.2025.00247"
       },
-      "bibtex": "@inproceedings{yang2025taskguidance,\n  title={Virtual Reality Task Guidance Through Relative 6DoF Pose Specification},\n  author={Yang, Ben and He, Xichen and Zou, Charlie and Liu, Jen-Shuo and Tversky, Barbara and Feiner, Steven},\n  booktitle={2025 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)},\n  year={2025},\n  doi={10.1109/ISMAR-ADJUNCT68609.2025.00247}\n}",
+      "bibtex": "@inproceedings{yang2025taskguidance,\n  title={Virtual Reality Task Guidance Through Relative 6DoF Pose Specification},\n  author={Yang, Ben and He, Xichen and Zou, Charlie and Liu, Jen-Shuo and Tversky, Barbara and Feiner, Steven},\n  booktitle={2025 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)},\n  pages={901--902},\n  year={2025},\n  doi={10.1109/ISMAR-Adjunct68609.2025.00247}\n}",
       "id": "task-guidance",
       "abstract": "Virtual reality (VR) systems for guiding remote physical tasks typically require object poses to be specified in absolute world coordinates. However, many of these tasks only need object poses to be specified relative to each other. Thus, supporting only absolute pose specification can create inefficiencies in giving or following task guidance when unnecessary constraints are imposed. We are developing a VR task-guidance system that avoids this by enabling relative 6DoF poses to be specified within subsets of objects. We describe our user interface, including how geometric relationships are specified and several ways in which they are visualized, and our plans for validating our approach against existing techniques."
     },
@@ -276,6 +276,41 @@
       "bibtex": "@inproceedings{boghosian2023icesheet,\n  title={Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis},\n  author={Boghosian, Alexandra and Cordero, S. Isabel and Elvezio, Carmine and Sanchez-Zarate, Sofia and Yang, Ben and Guo, Shengyue and Ashikin, Qazi and Salzman, Joel and Tinto, Kirsty and Feiner, Steven and Bell, Robin},\n  booktitle={IGARSS 2023 - 2023 IEEE International Geoscience and Remote Sensing Symposium},\n  pages={52--55},\n  year={2023},\n  doi={10.1109/IGARSS52108.2023.10283077}\n}",
       "id": "ice-sheet",
       "abstract": "Three-dimensional geospatial thinking is an important skillset used by earth scientists and students to analyze and interpret data [1]. This method of inquiry is useful in glaciology, where traditional geophysical survey techniques have been adapted to map three-dimensional (3D) ice sheet structures and inform studies of ice flow, mass change, and history in both Greenland and Antarctica. Ice-penetrating radar images the ice in two-dimensional (2D) cross-sections from the surface to the base. Analysis of this data often requires visual inspection and 3D interpretation, but is hindered by data visualization tools and techniques that rarely transcend the two-dimensionality of the computer screen [2]. Recent advances in Augmented Reality (AR) and Virtual Reality (VR), together referred to as Extended Reality (XR), offer a glimpse into the future of 3D ice-sheet data analysis [3]. These technologies offer users an immersive experience where 3D geospatial datasets can be understood more immediately than with 2D maps, and gestural user interfaces can enhance understanding. Here we present Pol-XR, an XR application that supports both visualization and interpretation of ice-penetrating radar in Antarctica and Greenland."
+    }
+  ],
+  "_preprintsNote": "Preprints render under Publications after the published papers and are numbered after them; gen.js makes a page for each.",
+  "preprints": [
+    {
+      "id": "pointgrade",
+      "title": "PointGrade: Geometric Priors for Grading MoonBoard Problems",
+      "authors": [
+        "Beatrice Stotz",
+        "Ningna Wang",
+        "Daria Nogina",
+        "Caroline Zhang",
+        "Jiyang Yin",
+        "Amy Huang",
+        "Ben Yang",
+        "Jace Li",
+        "Joel Salzman",
+        "Steven Feiner",
+        "Silvia Sellán"
+      ],
+      "venue": "arXiv preprint arXiv:2609.17770",
+      "venueDetail": "",
+      "year": 2026,
+      "date": "2026-09",
+      "award": "",
+      "selected": 0,
+      "tags": [
+        "Climbing"
+      ],
+      "thumbnail": "",
+      "links": {
+        "arxiv": "https://arxiv.org/abs/2609.17770"
+      },
+      "bibtex": "@misc{stotz2026pointgrade,\n  title={PointGrade: Geometric Priors for Grading MoonBoard Problems},\n  author={Stotz, Beatrice and Wang, Ningna and Nogina, Daria and Zhang, Caroline and Yin, Jiyang and Huang, Amy and Yang, Ben and Li, Jace and Salzman, Joel and Feiner, Steven and Sell{\\'a}n, Silvia},\n  year={2026},\n  eprint={2609.17770},\n  archivePrefix={arXiv},\n  primaryClass={cs.GR}\n}",
+      "abstract": "A MoonBoard is a standardized bouldering wall used in gyms around the world. Climbs up the wall limited to only a subset of holds are known as problems. We introduce PointGrade, a novel machine learning approach to predicting the difficulty of a MoonBoard problem. By sampling a point cloud from pre-scanned meshes of every hold, our model combines 3D object classification architecture with existing sequence-based approaches to difficulty grade prediction. Our method captures latent geometric information contained the climb, outperforming other work on the problem that neglect this data."
     }
   ],
   "_underReviewNote": "underReview renders as the Under review block under Publications; gen.js makes no pages for it. An anonymized (double-blind) entry shows only its role and venue until showDoubleBlindTitles is true and its title is filled in. The double-blind titles must stay out of this public repo while the papers are under review. After the decisions (IEEE VR 2027 about 2026-11-30, ACM CHI 2027 about 2026-12-17), copy each title from the Manuscripts Under Review section of main.tex in Ben's private CV repo (benplus1/CV), then set showDoubleBlindTitles to true.",
