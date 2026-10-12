@@ -254,6 +254,18 @@ main > section:first-child { padding-top: var(--sp-2); }
   border: 5px solid var(--surface); box-shadow: var(--shadow-md), 0 0 0 1px var(--border);
 }
 
+/* "Currently" note at the top of About (a styling hook for redesigns) */
+.currently {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.8rem;
+  max-width: var(--measure); padding: 0.6rem 0.9rem;
+  background: var(--accent-soft); border-left: 3px solid var(--accent); border-radius: var(--radius-sm);
+}
+.currently-label {
+  font-family: var(--font-sans); font-size: 0.76rem; font-weight: 600;
+  letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent);
+}
+.currently p { flex: 1 1 20rem; margin: 0; }
+
 /* ============================================================
    Sections + reveal
    ============================================================ */
