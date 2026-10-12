@@ -169,8 +169,8 @@ main > section,
 :where(.opening, main > section, main.paper, .thread, .pub, .runhead, .colophon) > * {
   grid-column: text;
 }
-/* Grid items keep their margins (nothing collapses), so a gap belongs to the block below it and every
-   block, list row or section ends without a bottom margin. */
+/* Grid items keep their margins (nothing collapses), so the last block of a section, thread or list drops
+   its bottom margin and the gap above the next heading is that heading's own margin. */
 :is(main > section, main.paper, .thread) > :last-child,
 .pub:last-child,
 .dated > li:last-child {
