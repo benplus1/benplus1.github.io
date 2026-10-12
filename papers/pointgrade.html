@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ffffff">
+<title>PointGrade: Geometric Priors for Grading MoonBoard Problems — Ben Yang</title>
+<meta name="description" content="A MoonBoard is a standardized bouldering wall used in gyms around the world. Climbs up the wall limited to only a subset of holds are known as problems. We introduce PointGrade, a novel machine…">
+<link rel="canonical" href="https://www.cs.columbia.edu/~benyang/papers/pointgrade.html">
+<meta name="citation_title" content="PointGrade: Geometric Priors for Grading MoonBoard Problems">
+<meta name="citation_author" content="Beatrice Stotz">
+<meta name="citation_author" content="Ningna Wang">
+<meta name="citation_author" content="Daria Nogina">
+<meta name="citation_author" content="Caroline Zhang">
+<meta name="citation_author" content="Jiyang Yin">
+<meta name="citation_author" content="Amy Huang">
+<meta name="citation_author" content="Ben Yang">
+<meta name="citation_author" content="Jace Li">
+<meta name="citation_author" content="Joel Salzman">
+<meta name="citation_author" content="Steven Feiner">
+<meta name="citation_author" content="Silvia Sellán">
+<meta name="citation_publication_date" content="2026">
+<meta name="citation_arxiv_id" content="2609.17770">
+<meta property="og:title" content="PointGrade: Geometric Priors for Grading MoonBoard Problems">
+<meta property="og:description" content="A MoonBoard is a standardized bouldering wall used in gyms around the world. Climbs up the wall limited to only a subset of holds are known as problems. We introduce PointGrade, a novel machine…">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.cs.columbia.edu/~benyang/papers/pointgrade.html">
+<meta property="og:image" content="https://www.cs.columbia.edu/~benyang/images/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.cs.columbia.edu/~benyang/images/og-image.png">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../fonts/ibarra-real-nova-roman.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/source-sans-3-roman.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../styles.css">
+<script>if (matchMedia('(prefers-reduced-motion: no-preference)').matches) document.documentElement.classList.add('fade-ready');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "headline": "PointGrade: Geometric Priors for Grading MoonBoard Problems",
+  "name": "PointGrade: Geometric Priors for Grading MoonBoard Problems",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Beatrice Stotz"
+    },
+    {
+      "@type": "Person",
+      "name": "Ningna Wang"
+    },
+    {
+      "@type": "Person",
+      "name": "Daria Nogina"
+    },
+    {
+      "@type": "Person",
+      "name": "Caroline Zhang"
+    },
+    {
+      "@type": "Person",
+      "name": "Jiyang Yin"
+    },
+    {
+      "@type": "Person",
+      "name": "Amy Huang"
+    },
+    {
+      "@type": "Person",
+      "name": "Ben Yang"
+    },
+    {
+      "@type": "Person",
+      "name": "Jace Li"
+    },
+    {
+      "@type": "Person",
+      "name": "Joel Salzman"
+    },
+    {
+      "@type": "Person",
+      "name": "Steven Feiner"
+    },
+    {
+      "@type": "Person",
+      "name": "Silvia Sellán"
+    }
+  ],
+  "datePublished": "2026-09",
+  "isPartOf": "arXiv preprint arXiv:2609.17770",
+  "url": "https://www.cs.columbia.edu/~benyang/papers/pointgrade.html",
+  "image": "https://www.cs.columbia.edu/~benyang/images/og-image.png"
+}
+</script>
+<script data-goatcounter="https://theangrybuddhas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<div class="page">
+<header class="runhead"><p><a href="../">Ben Yang</a></p></header>
+<main class="paper">
+<h1 class="paper-title">PointGrade: Geometric Priors for Grading MoonBoard Problems</h1>
+<p class="paper-authors">Beatrice Stotz, Ningna Wang, Daria Nogina, Caroline Zhang, Jiyang Yin, Amy Huang, <span class="me">Ben Yang</span>, Jace Li, Joel Salzman, Steven Feiner, Silvia Sellán</p>
+<p class="paper-venue">arXiv preprint arXiv:2609.17770, 2026.</p>
+<ul class="links dots"><li><a href="https://arxiv.org/abs/2609.17770">arXiv</a></li><li><a href="#cite">BibTeX</a></li></ul>
+<h2>Abstract</h2>
+<p>A MoonBoard is a standardized bouldering wall used in gyms around the world. Climbs up the wall limited to only a subset of holds are known as problems. We introduce PointGrade, a novel machine learning approach to predicting the difficulty of a MoonBoard problem. By sampling a point cloud from pre-scanned meshes of every hold, our model combines 3D object classification architecture with existing sequence-based approaches to difficulty grade prediction. Our method captures latent geometric information contained the climb, outperforming other work on the problem that neglect this data.</p>
+<h2 id="cite">Cite</h2>
+<p class="ref">B. Stotz, N. Wang, D. Nogina, C. Zhang, J. Yin, A. Huang, B. Yang, J. Li, J. Salzman, S. Feiner, and S. Sellán, “PointGrade: Geometric Priors for Grading MoonBoard Problems,” arXiv preprint arXiv:2609.17770, 2026.</p>
+<pre id="bibtex">@misc{stotz2026pointgrade,
+  title={PointGrade: Geometric Priors for Grading MoonBoard Problems},
+  author={Stotz, Beatrice and Wang, Ningna and Nogina, Daria and Zhang, Caroline and Yin, Jiyang and Huang, Amy and Yang, Ben and Li, Jace and Salzman, Joel and Feiner, Steven and Sell{\'a}n, Silvia},
+  year={2026},
+  eprint={2609.17770},
+  archivePrefix={arXiv},
+  primaryClass={cs.GR}
+}</pre>
+<button class="copy" type="button" data-copy="bibtex" hidden>Copy BibTeX</button>
+</main>
+<footer class="colophon">
+<p>Set in Ibarra Real Nova and Source Sans 3. Updated <time datetime="2026-10-12">12 October 2026</time>.<span class="print-url"> https://www.cs.columbia.edu/~benyang/papers/pointgrade.html</span></p>
+</footer>
+</div>
+<script src="../scripts.js" onerror="document.documentElement.classList.remove('fade-ready')"></script>
+</body>
+</html>

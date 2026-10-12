@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis — Ben Yang</title>
-    <meta name="description" content="Three-dimensional geospatial thinking is an important skillset used by earth scientists and students to analyze and interpret data [1]. This method of inquiry is useful in glaciolo">
-    <link rel="canonical" href="https://www.cs.columbia.edu/~benyang/papers/ice-sheet.html">
-    <meta name="citation_title" content="Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis">
-    <meta name="citation_author" content="Alexandra Boghosian">
-    <meta name="citation_author" content="S. Isabel Cordero">
-    <meta name="citation_author" content="Carmine Elvezio">
-    <meta name="citation_author" content="Sofia Sanchez-Zarate">
-    <meta name="citation_author" content="Ben Yang">
-    <meta name="citation_author" content="Shengyue Guo">
-    <meta name="citation_author" content="Qazi Ashikin">
-    <meta name="citation_author" content="Joel Salzman">
-    <meta name="citation_author" content="Kirsty Tinto">
-    <meta name="citation_author" content="Steven Feiner">
-    <meta name="citation_author" content="Robin Bell">
-    <meta name="citation_publication_date" content="2023">
-    <meta name="citation_conference_title" content="IGARSS 2023">
-    <meta name="citation_doi" content="10.1109/IGARSS52108.2023.10283077">
-    <meta property="og:title" content="Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis">
-    <meta property="og:description" content="Three-dimensional geospatial thinking is an important skillset used by earth scientists and students to analyze and interpret data [1]. This method of inquiry is useful in glaciolo">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://www.cs.columbia.edu/~benyang/papers/ice-sheet.html">
-    <meta property="og:image" content="https://www.cs.columbia.edu/~benyang/images/thumbs/ice.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://www.cs.columbia.edu/~benyang/images/thumbs/ice.png">
-    <meta name="theme-color" content="#0e0f12">
-    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    <script>(function(){try{var s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s==='light'?'light':'dark');}catch(e){}})();</script>
-    <link rel="preload" href="../fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="../fonts/merriweather-v33-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="../styles.css">
-    <script type="application/ld+json">
-    {
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ffffff">
+<title>Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis — Ben Yang</title>
+<meta name="description" content="Three-dimensional geospatial thinking is an important skillset used by earth scientists and students to analyze and interpret data [1]. This method of inquiry is useful in glaciology, where…">
+<link rel="canonical" href="https://www.cs.columbia.edu/~benyang/papers/ice-sheet.html">
+<meta name="citation_title" content="Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis">
+<meta name="citation_author" content="Alexandra Boghosian">
+<meta name="citation_author" content="S. Isabel Cordero">
+<meta name="citation_author" content="Carmine Elvezio">
+<meta name="citation_author" content="Sofia Sanchez-Zarate">
+<meta name="citation_author" content="Ben Yang">
+<meta name="citation_author" content="Shengyue Guo">
+<meta name="citation_author" content="Qazi Ashikin">
+<meta name="citation_author" content="Joel Salzman">
+<meta name="citation_author" content="Kirsty Tinto">
+<meta name="citation_author" content="Steven Feiner">
+<meta name="citation_author" content="Robin Bell">
+<meta name="citation_publication_date" content="2023">
+<meta name="citation_conference_title" content="IEEE International Geoscience and Remote Sensing Symposium">
+<meta name="citation_firstpage" content="52">
+<meta name="citation_lastpage" content="55">
+<meta name="citation_doi" content="10.1109/IGARSS52108.2023.10283077">
+<meta property="og:title" content="Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis">
+<meta property="og:description" content="Three-dimensional geospatial thinking is an important skillset used by earth scientists and students to analyze and interpret data [1]. This method of inquiry is useful in glaciology, where…">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.cs.columbia.edu/~benyang/papers/ice-sheet.html">
+<meta property="og:image" content="https://www.cs.columbia.edu/~benyang/images/og/ice-sheet.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.cs.columbia.edu/~benyang/images/og/ice-sheet.jpg">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../fonts/ibarra-real-nova-roman.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/source-sans-3-roman.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../styles.css">
+<script>if (matchMedia('(prefers-reduced-motion: no-preference)').matches) document.documentElement.classList.add('fade-ready');</script>
+<script type="application/ld+json">
+{
   "@context": "https://schema.org",
   "@type": "ScholarlyArticle",
   "headline": "Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis",
@@ -86,41 +92,50 @@
       "name": "Robin Bell"
     }
   ],
-  "datePublished": "2023",
-  "isPartOf": "IGARSS 2023",
+  "datePublished": "2023-07",
+  "isPartOf": "IEEE International Geoscience and Remote Sensing Symposium",
   "url": "https://www.cs.columbia.edu/~benyang/papers/ice-sheet.html",
-  "image": "https://www.cs.columbia.edu/~benyang/images/thumbs/ice.png",
+  "image": "https://www.cs.columbia.edu/~benyang/images/og/ice-sheet.jpg",
   "sameAs": "https://doi.org/10.1109/IGARSS52108.2023.10283077"
 }
-    </script>
-    <script data-goatcounter="https://theangrybuddhas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</script>
+<script data-goatcounter="https://theangrybuddhas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
-<body id="top">
-    <a class="skip-link" href="#main">Skip to content</a>
-    <nav id="site-nav" aria-label="Sections">
-        <div class="nav-inner">
-            <a class="nav-brand" href="../index.html#publications">&larr; All publications</a>
-        </div>
-    </nav>
-    <main id="main" class="paper-page" tabindex="-1">
-        <p class="eyebrow">IGARSS 2023 &middot; 2023</p>
-        <h1 class="paper-title">Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis</h1>
-        <p class="paper-authors">Alexandra Boghosian, S. Isabel Cordero, Carmine Elvezio, Sofia Sanchez-Zarate, <strong>Ben Yang</strong>, Shengyue Guo, Qazi Ashikin, Joel Salzman, Kirsty Tinto, Steven Feiner, Robin Bell</p>
-        
-        <div class="pub-links paper-linkrow"><a href="https://doi.org/10.1109/IGARSS52108.2023.10283077" target="_blank" rel="noopener">DOI</a><a href="https://youtu.be/vp7Z44J7t_Q" target="_blank" rel="noopener">Video</a><a href="https://github.com/ColumbiaCGUI/PolXR" target="_blank" rel="noopener">Code</a><a href="https://pgg.ldeo.columbia.edu/projects/VISER" target="_blank" rel="noopener">Project</a></div>
-        <div class="paper-figure"><img src="../images/thumbs/ice.png" alt="Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis — figure" loading="lazy"></div>
-        <h2>Abstract</h2><p>Three-dimensional geospatial thinking is an important skillset used by earth scientists and students to analyze and interpret data [1]. This method of inquiry is useful in glaciology, where traditional geophysical survey techniques have been adapted to map three-dimensional (3D) ice sheet structures and inform studies of ice flow, mass change, and history in both Greenland and Antarctica. Ice-penetrating radar images the ice in two-dimensional (2D) cross-sections from the surface to the base. Analysis of this data often requires visual inspection and 3D interpretation, but is hindered by data visualization tools and techniques that rarely transcend the two-dimensionality of the computer screen [2]. Recent advances in Augmented Reality (AR) and Virtual Reality (VR), together referred to as Extended Reality (XR), offer a glimpse into the future of 3D ice-sheet data analysis [3]. These technologies offer users an immersive experience where 3D geospatial datasets can be understood more immediately than with 2D maps, and gestural user interfaces can enhance understanding. Here we present Pol-XR, an XR application that supports both visualization and interpretation of ice-penetrating radar in Antarctica and Greenland.</p>
-        <details class="paper-bib"><summary>BibTeX</summary><pre>@inproceedings{boghosian2023icesheet,
+<body>
+<div class="page">
+<header class="runhead"><p><a href="../">Ben Yang</a></p></header>
+<main class="paper">
+<h1 class="paper-title">Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis</h1>
+<p class="paper-authors">Alexandra Boghosian, S. Isabel Cordero, Carmine Elvezio, Sofia Sanchez-Zarate, <span class="me">Ben Yang</span>, Shengyue Guo, Qazi Ashikin, Joel Salzman, Kirsty Tinto, Steven Feiner, Robin Bell</p>
+<p class="paper-venue"><abbr>IEEE</abbr> International Geoscience and Remote Sensing Symposium, 2023.</p>
+<ul class="links dots"><li><a href="https://doi.org/10.1109/IGARSS52108.2023.10283077">DOI</a></li><li><a href="#video">Video (9:11)</a></li><li><a href="https://github.com/ColumbiaCGUI/PolXR">Code</a></li><li><a href="https://pgg.ldeo.columbia.edu/projects/VISER">Project</a></li><li><a href="#cite">BibTeX</a></li></ul>
+<figure class="fig">
+<img class="fade" src="../images/figures/ice-sheet.jpg" width="786" height="442" alt="XR view of ice-penetrating radar cross-sections standing as vertical panels above a terrain surface, with a data panel at right.">
+<figcaption><span class="fig-label">Fig. 1.</span> Ice-penetrating radar cross-sections stand as vertical panels in 3D above the terrain, where they can be inspected and interpreted.</figcaption>
+</figure>
+<h2>Abstract</h2>
+<p>Three-dimensional geospatial thinking is an important skillset used by earth scientists and students to analyze and interpret data [1]. This method of inquiry is useful in glaciology, where traditional geophysical survey techniques have been adapted to map three-dimensional (3D) ice sheet structures and inform studies of ice flow, mass change, and history in both Greenland and Antarctica. Ice-penetrating radar images the ice in two-dimensional (2D) cross-sections from the surface to the base. Analysis of this data often requires visual inspection and 3D interpretation, but is hindered by data visualization tools and techniques that rarely transcend the two-dimensionality of the computer screen [2]. Recent advances in Augmented Reality (<abbr>AR</abbr>) and Virtual Reality (<abbr>VR</abbr>), together referred to as Extended Reality (<abbr>XR</abbr>), offer a glimpse into the future of 3D ice-sheet data analysis [3]. These technologies offer users an immersive experience where 3D geospatial datasets can be understood more immediately than with 2D maps, and gestural user interfaces can enhance understanding. Here we present Pol-<abbr>XR</abbr>, an <abbr>XR</abbr> application that supports both visualization and interpretation of ice-penetrating radar in Antarctica and Greenland.</p>
+<h2 id="video">Video</h2>
+<figure class="fig">
+<a href="https://youtu.be/vp7Z44J7t_Q"><img class="fade" src="../images/figures/ice-sheet-video.jpg" width="1600" height="900" alt="Still from the video: a presenter beside a large video wall showing radar data in 3D. Opens on YouTube." loading="lazy" decoding="async"></a>
+<figcaption><span class="fig-label">Video 1.</span> A live demonstration of the application on a stage video wall. 9 min 11 s; opens on YouTube.</figcaption>
+</figure>
+<h2 id="cite">Cite</h2>
+<p class="ref">A. Boghosian, S. I. Cordero, C. Elvezio, S. Sanchez-Zarate, B. Yang, S. Guo, Q. Ashikin, J. Salzman, K. Tinto, S. Feiner, and R. Bell, “Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis,” in <i>Proc. IEEE International Geoscience and Remote Sensing Symposium</i>, 2023, pp. 52–55, doi: 10.1109/IGARSS52108.2023.10283077.</p>
+<pre id="bibtex">@inproceedings{boghosian2023icesheet,
   title={Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis},
   author={Boghosian, Alexandra and Cordero, S. Isabel and Elvezio, Carmine and Sanchez-Zarate, Sofia and Yang, Ben and Guo, Shengyue and Ashikin, Qazi and Salzman, Joel and Tinto, Kirsty and Feiner, Steven and Bell, Robin},
   booktitle={IGARSS 2023 - 2023 IEEE International Geoscience and Remote Sensing Symposium},
   pages={52--55},
   year={2023},
   doi={10.1109/IGARSS52108.2023.10283077}
-}</pre></details>
-    </main>
-    <footer>
-        <p><a href="../index.html">Ben Yang</a> &middot; CS PhD Candidate, Columbia University</p>
-    </footer>
+}</pre>
+<button class="copy" type="button" data-copy="bibtex" hidden>Copy BibTeX</button>
+</main>
+<footer class="colophon">
+<p>Set in Ibarra Real Nova and Source Sans 3. Updated <time datetime="2026-10-12">12 October 2026</time>.<span class="print-url"> https://www.cs.columbia.edu/~benyang/papers/ice-sheet.html</span></p>
+</footer>
+</div>
+<script src="../scripts.js" onerror="document.documentElement.classList.remove('fade-ready')"></script>
 </body>
 </html>

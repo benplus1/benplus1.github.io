@@ -1,36 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Permanent Proxies for Bimanual Selection and Manipulation in VR — Ben Yang</title>
-    <meta name="description" content="Copies (proxies) of objects are useful for selecting and manipulating objects in virtual reality (VR). Temporary proxies are destroyed after use and must be recreated for reuse. Pe">
-    <link rel="canonical" href="https://www.cs.columbia.edu/~benyang/papers/permanent-proxies.html">
-    <meta name="citation_title" content="Permanent Proxies for Bimanual Selection and Manipulation in VR">
-    <meta name="citation_author" content="Ben Yang">
-    <meta name="citation_author" content="Jen-Shuo Liu">
-    <meta name="citation_author" content="Xichen He">
-    <meta name="citation_author" content="Barbara Tversky">
-    <meta name="citation_author" content="Steven Feiner">
-    <meta name="citation_publication_date" content="2025">
-    <meta name="citation_conference_title" content="IEEE VR 2025 Workshops">
-    <meta name="citation_doi" content="10.1109/VRW66409.2025.00311">
-    <meta name="citation_pdf_url" content="https://www.cs.columbia.edu/~benyang/pdf/yang2025-permanent-proxies.pdf">
-    <meta property="og:title" content="Permanent Proxies for Bimanual Selection and Manipulation in VR">
-    <meta property="og:description" content="Copies (proxies) of objects are useful for selecting and manipulating objects in virtual reality (VR). Temporary proxies are destroyed after use and must be recreated for reuse. Pe">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://www.cs.columbia.edu/~benyang/papers/permanent-proxies.html">
-    <meta property="og:image" content="https://www.cs.columbia.edu/~benyang/images/thumbs/proxies.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://www.cs.columbia.edu/~benyang/images/thumbs/proxies.png">
-    <meta name="theme-color" content="#0e0f12">
-    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    <script>(function(){try{var s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s==='light'?'light':'dark');}catch(e){}})();</script>
-    <link rel="preload" href="../fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="../fonts/merriweather-v33-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="../styles.css">
-    <script type="application/ld+json">
-    {
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ffffff">
+<title>Permanent Proxies for Bimanual Selection and Manipulation in VR — Ben Yang</title>
+<meta name="description" content="Copies (proxies) of objects are useful for selecting and manipulating objects in virtual reality (VR). Temporary proxies are destroyed after use and must be recreated for reuse. Permanent proxies…">
+<link rel="canonical" href="https://www.cs.columbia.edu/~benyang/papers/permanent-proxies.html">
+<meta name="citation_title" content="Permanent Proxies for Bimanual Selection and Manipulation in VR">
+<meta name="citation_author" content="Ben Yang">
+<meta name="citation_author" content="Jen-Shuo Liu">
+<meta name="citation_author" content="Xichen He">
+<meta name="citation_author" content="Barbara Tversky">
+<meta name="citation_author" content="Steven Feiner">
+<meta name="citation_publication_date" content="2025">
+<meta name="citation_conference_title" content="IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)">
+<meta name="citation_firstpage" content="1330">
+<meta name="citation_lastpage" content="1331">
+<meta name="citation_doi" content="10.1109/VRW66409.2025.00311">
+<meta name="citation_pdf_url" content="https://www.cs.columbia.edu/~benyang/pdf/yang2025-permanent-proxies.pdf">
+<meta property="og:title" content="Permanent Proxies for Bimanual Selection and Manipulation in VR">
+<meta property="og:description" content="Copies (proxies) of objects are useful for selecting and manipulating objects in virtual reality (VR). Temporary proxies are destroyed after use and must be recreated for reuse. Permanent proxies…">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.cs.columbia.edu/~benyang/papers/permanent-proxies.html">
+<meta property="og:image" content="https://www.cs.columbia.edu/~benyang/images/og/permanent-proxies.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.cs.columbia.edu/~benyang/images/og/permanent-proxies.jpg">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../fonts/ibarra-real-nova-roman.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/source-sans-3-roman.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../styles.css">
+<script>if (matchMedia('(prefers-reduced-motion: no-preference)').matches) document.documentElement.classList.add('fade-ready');</script>
+<script type="application/ld+json">
+{
   "@context": "https://schema.org",
   "@type": "ScholarlyArticle",
   "headline": "Permanent Proxies for Bimanual Selection and Manipulation in VR",
@@ -57,41 +63,50 @@
       "name": "Steven Feiner"
     }
   ],
-  "datePublished": "2025",
-  "isPartOf": "IEEE VR 2025 Workshops",
+  "datePublished": "2025-03",
+  "isPartOf": "IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)",
   "url": "https://www.cs.columbia.edu/~benyang/papers/permanent-proxies.html",
-  "image": "https://www.cs.columbia.edu/~benyang/images/thumbs/proxies.png",
+  "image": "https://www.cs.columbia.edu/~benyang/images/og/permanent-proxies.jpg",
   "sameAs": "https://doi.org/10.1109/VRW66409.2025.00311"
 }
-    </script>
-    <script data-goatcounter="https://theangrybuddhas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</script>
+<script data-goatcounter="https://theangrybuddhas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
-<body id="top">
-    <a class="skip-link" href="#main">Skip to content</a>
-    <nav id="site-nav" aria-label="Sections">
-        <div class="nav-inner">
-            <a class="nav-brand" href="../index.html#publications">&larr; All publications</a>
-        </div>
-    </nav>
-    <main id="main" class="paper-page" tabindex="-1">
-        <p class="eyebrow">IEEE VR 2025 Workshops &middot; 2025</p>
-        <h1 class="paper-title">Permanent Proxies for Bimanual Selection and Manipulation in VR</h1>
-        <p class="paper-authors"><strong>Ben Yang</strong>, Jen-Shuo Liu, Xichen He, Barbara Tversky, Steven Feiner</p>
-        
-        <div class="pub-links paper-linkrow"><a href="../pdf/yang2025-permanent-proxies.pdf">PDF</a><a href="https://doi.org/10.1109/VRW66409.2025.00311" target="_blank" rel="noopener">DOI</a><a href="https://youtu.be/TRDW5mpFBng" target="_blank" rel="noopener">Video</a></div>
-        <div class="paper-figure"><img src="../images/thumbs/proxies.png" alt="Permanent Proxies for Bimanual Selection and Manipulation in VR — figure" loading="lazy"></div>
-        <h2>Abstract</h2><p>Copies (proxies) of objects are useful for selecting and manipulating objects in virtual reality (VR). Temporary proxies are destroyed after use and must be recreated for reuse. Permanent proxies persist after use for easy reselection, but can cause clutter. To investigate the benefits and drawbacks of permanent and temporary proxies, we conducted a user study in which participants performed 6DoF tasks with proxies in the Voodoo Dolls technique, revealing that permanent proxies were more efficient for hard reselection and preferred.</p>
-        <details class="paper-bib"><summary>BibTeX</summary><pre>@inproceedings{yang2025permanentproxies,
+<body>
+<div class="page">
+<header class="runhead"><p><a href="../">Ben Yang</a></p></header>
+<main class="paper">
+<h1 class="paper-title">Permanent Proxies for Bimanual Selection and Manipulation in <abbr>VR</abbr></h1>
+<p class="paper-authors"><span class="me">Ben Yang</span>, Jen-Shuo Liu, Xichen He, Barbara Tversky, Steven Feiner</p>
+<p class="paper-venue"><abbr>IEEE</abbr> Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (<abbr>VRW</abbr>), 2025. Poster.</p>
+<ul class="links dots"><li><a href="../pdf/yang2025-permanent-proxies.pdf">PDF (121 KB)</a></li><li><a href="https://doi.org/10.1109/VRW66409.2025.00311">DOI</a></li><li><a href="#video">Video (1:00)</a></li><li><a href="#cite">BibTeX</a></li></ul>
+<figure class="fig">
+<img class="fade" src="../images/figures/permanent-proxies.jpg" width="1600" height="900" alt="VR view over a table: a motherboard proxy outlined in yellow near the user’s controller, and a red curve running to a small distant object.">
+<figcaption><span class="fig-label">Fig. 1.</span> Outlined proxies of small and distant objects, each joined to its original by a curve. Manipulating a proxy moves its original, as in the Voodoo Dolls technique.</figcaption>
+</figure>
+<h2>Abstract</h2>
+<p>Copies (proxies) of objects are useful for selecting and manipulating objects in virtual reality (<abbr>VR</abbr>). Temporary proxies are destroyed after use and must be recreated for reuse. Permanent proxies persist after use for easy reselection, but can cause clutter. To investigate the benefits and drawbacks of permanent and temporary proxies, we conducted a user study in which participants performed 6DoF tasks with proxies in the Voodoo Dolls technique, revealing that permanent proxies were more efficient for hard reselection and preferred.</p>
+<h2 id="video">Video</h2>
+<figure class="fig">
+<a href="https://youtu.be/TRDW5mpFBng"><img class="fade" src="../images/figures/permanent-proxies-video.jpg" width="1600" height="900" alt="Still from the video: a motherboard and its proxy on a table, joined by a red curve. Opens on YouTube." loading="lazy" decoding="async"></a>
+<figcaption><span class="fig-label">Video 1.</span> The Voodoo Dolls technique, the two study conditions and the results. 1 min; opens on YouTube.</figcaption>
+</figure>
+<h2 id="cite">Cite</h2>
+<p class="ref">B. Yang, J.-S. Liu, X. He, B. Tversky, and S. Feiner, “Permanent Proxies for Bimanual Selection and Manipulation in <abbr>VR</abbr>,” in <i>Proc. IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)</i>, 2025, pp. 1330–1331, doi: 10.1109/VRW66409.2025.00311.</p>
+<pre id="bibtex">@inproceedings{yang2025permanentproxies,
   title={Permanent Proxies for Bimanual Selection and Manipulation in VR},
   author={Yang, Ben and Liu, Jen-Shuo and He, Xichen and Tversky, Barbara and Feiner, Steven},
   booktitle={2025 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},
   pages={1330--1331},
   year={2025},
   doi={10.1109/VRW66409.2025.00311}
-}</pre></details>
-    </main>
-    <footer>
-        <p><a href="../index.html">Ben Yang</a> &middot; CS PhD Candidate, Columbia University</p>
-    </footer>
+}</pre>
+<button class="copy" type="button" data-copy="bibtex" hidden>Copy BibTeX</button>
+</main>
+<footer class="colophon">
+<p>Set in Ibarra Real Nova and Source Sans 3. Updated <time datetime="2026-10-12">12 October 2026</time>.<span class="print-url"> https://www.cs.columbia.edu/~benyang/papers/permanent-proxies.html</span></p>
+</footer>
+</div>
+<script src="../scripts.js" onerror="document.documentElement.classList.remove('fade-ready')"></script>
 </body>
 </html>

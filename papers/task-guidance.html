@@ -1,37 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virtual Reality Task Guidance Through Relative 6DoF Pose Specification — Ben Yang</title>
-    <meta name="description" content="Virtual reality (VR) systems for guiding remote physical tasks typically require object poses to be specified in absolute world coordinates. However, many of these tasks only need ">
-    <link rel="canonical" href="https://www.cs.columbia.edu/~benyang/papers/task-guidance.html">
-    <meta name="citation_title" content="Virtual Reality Task Guidance Through Relative 6DoF Pose Specification">
-    <meta name="citation_author" content="Ben Yang">
-    <meta name="citation_author" content="Xichen He">
-    <meta name="citation_author" content="Charlie Zou">
-    <meta name="citation_author" content="Jen-Shuo Liu">
-    <meta name="citation_author" content="Barbara Tversky">
-    <meta name="citation_author" content="Steven Feiner">
-    <meta name="citation_publication_date" content="2025">
-    <meta name="citation_conference_title" content="IEEE ISMAR 2025">
-    <meta name="citation_doi" content="10.1109/ISMAR-ADJUNCT68609.2025.00247">
-    <meta name="citation_pdf_url" content="https://www.cs.columbia.edu/~benyang/pdf/yang2025-task-guidance.pdf">
-    <meta property="og:title" content="Virtual Reality Task Guidance Through Relative 6DoF Pose Specification">
-    <meta property="og:description" content="Virtual reality (VR) systems for guiding remote physical tasks typically require object poses to be specified in absolute world coordinates. However, many of these tasks only need ">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://www.cs.columbia.edu/~benyang/papers/task-guidance.html">
-    <meta property="og:image" content="https://www.cs.columbia.edu/~benyang/images/thumbs/task.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://www.cs.columbia.edu/~benyang/images/thumbs/task.png">
-    <meta name="theme-color" content="#0e0f12">
-    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    <script>(function(){try{var s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s==='light'?'light':'dark');}catch(e){}})();</script>
-    <link rel="preload" href="../fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="../fonts/merriweather-v33-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="../styles.css">
-    <script type="application/ld+json">
-    {
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ffffff">
+<title>Virtual Reality Task Guidance Through Relative 6DoF Pose Specification — Ben Yang</title>
+<meta name="description" content="Virtual reality (VR) systems for guiding remote physical tasks typically require object poses to be specified in absolute world coordinates. However, many of these tasks only need object poses to be…">
+<link rel="canonical" href="https://www.cs.columbia.edu/~benyang/papers/task-guidance.html">
+<meta name="citation_title" content="Virtual Reality Task Guidance Through Relative 6DoF Pose Specification">
+<meta name="citation_author" content="Ben Yang">
+<meta name="citation_author" content="Xichen He">
+<meta name="citation_author" content="Charlie Zou">
+<meta name="citation_author" content="Jen-Shuo Liu">
+<meta name="citation_author" content="Barbara Tversky">
+<meta name="citation_author" content="Steven Feiner">
+<meta name="citation_publication_date" content="2025">
+<meta name="citation_conference_title" content="IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)">
+<meta name="citation_firstpage" content="901">
+<meta name="citation_lastpage" content="902">
+<meta name="citation_doi" content="10.1109/ISMAR-Adjunct68609.2025.00247">
+<meta name="citation_pdf_url" content="https://www.cs.columbia.edu/~benyang/pdf/yang2025-task-guidance.pdf">
+<meta property="og:title" content="Virtual Reality Task Guidance Through Relative 6DoF Pose Specification">
+<meta property="og:description" content="Virtual reality (VR) systems for guiding remote physical tasks typically require object poses to be specified in absolute world coordinates. However, many of these tasks only need object poses to be…">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.cs.columbia.edu/~benyang/papers/task-guidance.html">
+<meta property="og:image" content="https://www.cs.columbia.edu/~benyang/images/og/task-guidance.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.cs.columbia.edu/~benyang/images/og/task-guidance.jpg">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../fonts/ibarra-real-nova-roman.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/source-sans-3-roman.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../styles.css">
+<script>if (matchMedia('(prefers-reduced-motion: no-preference)').matches) document.documentElement.classList.add('fade-ready');</script>
+<script type="application/ld+json">
+{
   "@context": "https://schema.org",
   "@type": "ScholarlyArticle",
   "headline": "Virtual Reality Task Guidance Through Relative 6DoF Pose Specification",
@@ -62,40 +68,45 @@
       "name": "Steven Feiner"
     }
   ],
-  "datePublished": "2025",
-  "isPartOf": "IEEE ISMAR 2025",
+  "datePublished": "2025-10",
+  "isPartOf": "IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)",
   "url": "https://www.cs.columbia.edu/~benyang/papers/task-guidance.html",
-  "image": "https://www.cs.columbia.edu/~benyang/images/thumbs/task.png",
-  "sameAs": "https://doi.org/10.1109/ISMAR-ADJUNCT68609.2025.00247"
+  "image": "https://www.cs.columbia.edu/~benyang/images/og/task-guidance.jpg",
+  "sameAs": "https://doi.org/10.1109/ISMAR-Adjunct68609.2025.00247"
 }
-    </script>
-    <script data-goatcounter="https://theangrybuddhas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</script>
+<script data-goatcounter="https://theangrybuddhas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
-<body id="top">
-    <a class="skip-link" href="#main">Skip to content</a>
-    <nav id="site-nav" aria-label="Sections">
-        <div class="nav-inner">
-            <a class="nav-brand" href="../index.html#publications">&larr; All publications</a>
-        </div>
-    </nav>
-    <main id="main" class="paper-page" tabindex="-1">
-        <p class="eyebrow">IEEE ISMAR 2025 &middot; Adjunct &middot; 2025</p>
-        <h1 class="paper-title">Virtual Reality Task Guidance Through Relative 6DoF Pose Specification</h1>
-        <p class="paper-authors"><strong>Ben Yang</strong>, Xichen He, Charlie Zou, Jen-Shuo Liu, Barbara Tversky, Steven Feiner</p>
-        
-        <div class="pub-links paper-linkrow"><a href="../pdf/yang2025-task-guidance.pdf">PDF</a><a href="https://doi.org/10.1109/ISMAR-ADJUNCT68609.2025.00247" target="_blank" rel="noopener">DOI</a></div>
-        <div class="paper-figure"><img src="../images/thumbs/task.png" alt="Virtual Reality Task Guidance Through Relative 6DoF Pose Specification — figure" loading="lazy"></div>
-        <h2>Abstract</h2><p>Virtual reality (VR) systems for guiding remote physical tasks typically require object poses to be specified in absolute world coordinates. However, many of these tasks only need object poses to be specified relative to each other. Thus, supporting only absolute pose specification can create inefficiencies in giving or following task guidance when unnecessary constraints are imposed. We are developing a VR task-guidance system that avoids this by enabling relative 6DoF poses to be specified within subsets of objects. We describe our user interface, including how geometric relationships are specified and several ways in which they are visualized, and our plans for validating our approach against existing techniques.</p>
-        <details class="paper-bib"><summary>BibTeX</summary><pre>@inproceedings{yang2025taskguidance,
+<body>
+<div class="page">
+<header class="runhead"><p><a href="../">Ben Yang</a></p></header>
+<main class="paper">
+<h1 class="paper-title">Virtual Reality Task Guidance Through Relative 6DoF Pose Specification</h1>
+<p class="paper-authors"><span class="me">Ben Yang</span>, Xichen He, Charlie Zou, Jen-Shuo Liu, Barbara Tversky, Steven Feiner</p>
+<p class="paper-venue"><abbr>IEEE</abbr> International Symposium on Mixed and Augmented Reality Adjunct (<abbr>ISMAR</abbr>-Adjunct), 2025.</p>
+<ul class="links dots"><li><a href="../pdf/yang2025-task-guidance.pdf">PDF (89 KB)</a></li><li><a href="https://doi.org/10.1109/ISMAR-Adjunct68609.2025.00247">DOI</a></li><li><a href="#cite">BibTeX</a></li></ul>
+<figure class="fig">
+<img class="fade" src="../images/figures/task-guidance.jpg" width="983" height="553" alt="VR scene in which three groups of parts are enclosed in translucent hulls.">
+<figcaption><span class="fig-label">Fig. 1.</span> Groups of parts enclosed in translucent hulls. Poses are specified only within each group, so a group can be placed anywhere.</figcaption>
+</figure>
+<h2>Abstract</h2>
+<p>Virtual reality (<abbr>VR</abbr>) systems for guiding remote physical tasks typically require object poses to be specified in absolute world coordinates. However, many of these tasks only need object poses to be specified relative to each other. Thus, supporting only absolute pose specification can create inefficiencies in giving or following task guidance when unnecessary constraints are imposed. We are developing a <abbr>VR</abbr> task-guidance system that avoids this by enabling relative 6DoF poses to be specified within subsets of objects. We describe our user interface, including how geometric relationships are specified and several ways in which they are visualized, and our plans for validating our approach against existing techniques.</p>
+<h2 id="cite">Cite</h2>
+<p class="ref">B. Yang, X. He, C. Zou, J.-S. Liu, B. Tversky, and S. Feiner, “Virtual Reality Task Guidance Through Relative 6DoF Pose Specification,” in <i>Proc. IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)</i>, 2025, pp. 901–902, doi: 10.1109/ISMAR-Adjunct68609.2025.00247.</p>
+<pre id="bibtex">@inproceedings{yang2025taskguidance,
   title={Virtual Reality Task Guidance Through Relative 6DoF Pose Specification},
   author={Yang, Ben and He, Xichen and Zou, Charlie and Liu, Jen-Shuo and Tversky, Barbara and Feiner, Steven},
   booktitle={2025 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)},
+  pages={901--902},
   year={2025},
-  doi={10.1109/ISMAR-ADJUNCT68609.2025.00247}
-}</pre></details>
-    </main>
-    <footer>
-        <p><a href="../index.html">Ben Yang</a> &middot; CS PhD Candidate, Columbia University</p>
-    </footer>
+  doi={10.1109/ISMAR-Adjunct68609.2025.00247}
+}</pre>
+<button class="copy" type="button" data-copy="bibtex" hidden>Copy BibTeX</button>
+</main>
+<footer class="colophon">
+<p>Set in Ibarra Real Nova and Source Sans 3. Updated <time datetime="2026-10-12">12 October 2026</time>.<span class="print-url"> https://www.cs.columbia.edu/~benyang/papers/task-guidance.html</span></p>
+</footer>
+</div>
+<script src="../scripts.js" onerror="document.documentElement.classList.remove('fade-ready')"></script>
 </body>
 </html>

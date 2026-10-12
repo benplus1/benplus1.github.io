@@ -1,35 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies — Ben Yang</title>
-    <meta name="description" content="Capturing real objects as interactive 3D assets in XR typically requires offline photogrammetry. We present Gaussian-Splatted Proxies, a system for fast object digitization in XR u">
-    <link rel="canonical" href="https://www.cs.columbia.edu/~benyang/papers/fast-digitization.html">
-    <meta name="citation_title" content="Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies">
-    <meta name="citation_author" content="Ben Yang">
-    <meta name="citation_author" content="Shanying Liu">
-    <meta name="citation_author" content="Kirthana Natarajan">
-    <meta name="citation_author" content="Steven Feiner">
-    <meta name="citation_publication_date" content="2026">
-    <meta name="citation_conference_title" content="IEEE VR 2026">
-    <meta name="citation_doi" content="10.1109/VRW70859.2026.00389">
-    <meta name="citation_pdf_url" content="https://www.cs.columbia.edu/~benyang/pdf/yang2026-fast-digitization.pdf">
-    <meta property="og:title" content="Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies">
-    <meta property="og:description" content="Capturing real objects as interactive 3D assets in XR typically requires offline photogrammetry. We present Gaussian-Splatted Proxies, a system for fast object digitization in XR u">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://www.cs.columbia.edu/~benyang/papers/fast-digitization.html">
-    <meta property="og:image" content="https://www.cs.columbia.edu/~benyang/images/thumbs/fastdigit.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://www.cs.columbia.edu/~benyang/images/thumbs/fastdigit.jpg">
-    <meta name="theme-color" content="#0e0f12">
-    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    <script>(function(){try{var s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s==='light'?'light':'dark');}catch(e){}})();</script>
-    <link rel="preload" href="../fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="../fonts/merriweather-v33-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="../styles.css">
-    <script type="application/ld+json">
-    {
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ffffff">
+<title>Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies — Ben Yang</title>
+<meta name="description" content="Capturing real objects as interactive 3D assets in XR typically requires offline photogrammetry. We present Gaussian-Splatted Proxies, a system for fast object digitization in XR using feed-forward…">
+<link rel="canonical" href="https://www.cs.columbia.edu/~benyang/papers/fast-digitization.html">
+<meta name="citation_title" content="Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies">
+<meta name="citation_author" content="Ben Yang">
+<meta name="citation_author" content="Shanying Liu">
+<meta name="citation_author" content="Kirthana Natarajan">
+<meta name="citation_author" content="Steven Feiner">
+<meta name="citation_publication_date" content="2026">
+<meta name="citation_conference_title" content="IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)">
+<meta name="citation_firstpage" content="1429">
+<meta name="citation_lastpage" content="1430">
+<meta name="citation_doi" content="10.1109/VRW70859.2026.00389">
+<meta name="citation_pdf_url" content="https://www.cs.columbia.edu/~benyang/pdf/yang2026-fast-digitization.pdf">
+<meta property="og:title" content="Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies">
+<meta property="og:description" content="Capturing real objects as interactive 3D assets in XR typically requires offline photogrammetry. We present Gaussian-Splatted Proxies, a system for fast object digitization in XR using feed-forward…">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.cs.columbia.edu/~benyang/papers/fast-digitization.html">
+<meta property="og:image" content="https://www.cs.columbia.edu/~benyang/images/og/fast-digitization.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.cs.columbia.edu/~benyang/images/og/fast-digitization.jpg">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../fonts/ibarra-real-nova-roman.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/source-sans-3-roman.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../styles.css">
+<script>if (matchMedia('(prefers-reduced-motion: no-preference)').matches) document.documentElement.classList.add('fade-ready');</script>
+<script type="application/ld+json">
+{
   "@context": "https://schema.org",
   "@type": "ScholarlyArticle",
   "headline": "Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies",
@@ -52,40 +58,51 @@
       "name": "Steven Feiner"
     }
   ],
-  "datePublished": "2026",
-  "isPartOf": "IEEE VR 2026",
+  "datePublished": "2026-03",
+  "isPartOf": "IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)",
   "url": "https://www.cs.columbia.edu/~benyang/papers/fast-digitization.html",
-  "image": "https://www.cs.columbia.edu/~benyang/images/thumbs/fastdigit.jpg",
+  "image": "https://www.cs.columbia.edu/~benyang/images/og/fast-digitization.jpg",
   "sameAs": "https://doi.org/10.1109/VRW70859.2026.00389"
 }
-    </script>
-    <script data-goatcounter="https://theangrybuddhas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</script>
+<script data-goatcounter="https://theangrybuddhas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
-<body id="top">
-    <a class="skip-link" href="#main">Skip to content</a>
-    <nav id="site-nav" aria-label="Sections">
-        <div class="nav-inner">
-            <a class="nav-brand" href="../index.html#publications">&larr; All publications</a>
-        </div>
-    </nav>
-    <main id="main" class="paper-page" tabindex="-1">
-        <p class="eyebrow">IEEE VR 2026 &middot; Research Demo &middot; 2026</p>
-        <h1 class="paper-title">Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies</h1>
-        <p class="paper-authors"><strong>Ben Yang</strong>, Shanying Liu, Kirthana Natarajan, Steven Feiner</p>
-        <p class="paper-award"><svg viewBox="0 0 576 512" aria-hidden="true" focusable="false"><path d="M552 64H448V24c0-13.255-10.745-24-24-24H152c-13.255 0-24 10.745-24 24v40H24C10.745 64 0 74.745 0 88v56c0 35.64 22.529 71.674 61.81 98.873 31.717 21.972 70.259 35.607 110.502 39.844 8.747 20.514 20.281 38.815 33.612 53.621 25.453 28.27 53.762 44.184 76.076 53.766V424H192c-22.091 0-40 17.909-40 40v24c0 6.627 5.373 12 12 12h248c6.627 0 12-5.373 12-12v-24c0-22.091-17.909-40-40-40h-96.476v-93.896c22.314-9.582 50.623-25.496 76.076-53.766 13.331-14.806 24.865-33.107 33.612-53.621 40.243-4.237 78.785-17.872 110.502-39.844C553.471 215.674 576 179.64 576 144V88c0-13.255-10.745-24-24-24zM99.788 184.846C76.106 168.444 64 152.351 64 144v-16h64.595c1.612 28.53 6.297 54.95 13.354 78.62-15.769-5.387-30.298-12.819-42.161-21.774zM512 144c0 8.351-12.106 24.444-35.788 40.846-11.863 8.955-26.392 16.387-42.161 21.774 7.057-23.67 11.742-50.09 13.354-78.62H512v16z"/></svg><span>Best Research Demo, Honorable Mention</span></p>
-        <div class="pub-links paper-linkrow"><a href="../pdf/yang2026-fast-digitization.pdf">PDF</a><a href="https://doi.org/10.1109/VRW70859.2026.00389" target="_blank" rel="noopener">DOI</a><a href="https://youtu.be/jwcnjAPASKU" target="_blank" rel="noopener">Video</a></div>
-        <div class="paper-figure"><img src="../images/thumbs/fastdigit.jpg" alt="Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies — figure" loading="lazy"></div>
-        <h2>Abstract</h2><p>Capturing real objects as interactive 3D assets in XR typically requires offline photogrammetry. We present Gaussian-Splatted Proxies, a system for fast object digitization in XR using feed-forward 3D Gaussian splatting. With a Quest 3 headset, users select objects detected by the system through the passthrough cameras, then capture images that an edge server reconstructs as interactive Gausasian splats. Our system extracts individual objects from scene reconstructions without any per-scene training by projecting detection bounding boxes into 3D space. The resulting assets can be grabbed, inspected, rotated, and used to select the corresponding objects in the physical world. https://youtu.be/orx3gFPBNpA</p>
-        <details class="paper-bib"><summary>BibTeX</summary><pre>@inproceedings{yang2026fastdigitization,
+<body>
+<div class="page">
+<header class="runhead"><p><a href="../">Ben Yang</a></p></header>
+<main class="paper">
+<h1 class="paper-title">Fast Digitization in <abbr>XR</abbr> of Reality-Linked Gaussian-Splatted Proxies</h1>
+<p class="paper-authors"><span class="me">Ben Yang</span>, Shanying Liu, Kirthana Natarajan, Steven Feiner</p>
+<p class="paper-venue"><abbr>IEEE</abbr> Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (<abbr>VRW</abbr>), 2026. Research demo.</p>
+<p class="paper-venue"><i>Best Research Demo Award (Honorable Mention).</i></p>
+<ul class="links dots"><li><a href="../pdf/yang2026-fast-digitization.pdf">PDF (125 KB)</a></li><li><a href="https://doi.org/10.1109/VRW70859.2026.00389">DOI</a></li><li><a href="#video">Video (1:46)</a></li><li><a href="#cite">BibTeX</a></li></ul>
+<figure class="fig">
+<img class="fade" src="../images/figures/fast-digitization.jpg" width="1600" height="900" alt="Headset passthrough view of a lab desk. Three small 3D proxies float above it, and a line runs from the laptop proxy to the real laptop, which is outlined in cyan.">
+<figcaption><span class="fig-label">Fig. 1.</span> Three proxies float above the desk. Pointing at the laptop’s proxy draws a line to the real laptop and outlines it.</figcaption>
+</figure>
+<h2>Abstract</h2>
+<p>Capturing real objects as interactive 3D assets in <abbr>XR</abbr> typically requires offline photogrammetry. We present Gaussian-Splatted Proxies, a system for fast object digitization in <abbr>XR</abbr> using feed-forward 3D Gaussian splatting. With a Quest 3 headset, users select objects detected by the system through the passthrough cameras, then capture images that an edge server reconstructs as interactive Gaussian splats. Our system extracts individual objects from scene reconstructions without any per-scene training by projecting detection bounding boxes into 3D space. The resulting assets can be grabbed, inspected, rotated, and used to select the corresponding objects in the physical world.</p>
+<h2 id="video">Video</h2>
+<figure class="fig">
+<a href="https://youtu.be/jwcnjAPASKU"><img class="fade" src="../images/figures/fast-digitization-video.jpg" width="1600" height="900" alt="Still from the video: Lego assemblies on a desk, seen through the headset. Opens on YouTube." loading="lazy" decoding="async"></a>
+<figcaption><span class="fig-label">Video 1.</span> Live capture and use of proxies on a Quest 3, with no cuts. 1 min 46 s; opens on YouTube.</figcaption>
+</figure>
+<h2 id="cite">Cite</h2>
+<p class="ref">B. Yang, S. Liu, K. Natarajan, and S. Feiner, “Fast Digitization in <abbr>XR</abbr> of Reality-Linked Gaussian-Splatted Proxies,” in <i>Proc. IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)</i>, 2026, pp. 1429–1430, doi: 10.1109/VRW70859.2026.00389.</p>
+<pre id="bibtex">@inproceedings{yang2026fastdigitization,
   title={Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies},
   author={Yang, Ben and Liu, Shanying and Natarajan, Kirthana and Feiner, Steven},
   booktitle={2026 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},
+  pages={1429--1430},
   year={2026},
   doi={10.1109/VRW70859.2026.00389}
-}</pre></details>
-    </main>
-    <footer>
-        <p><a href="../index.html">Ben Yang</a> &middot; CS PhD Candidate, Columbia University</p>
-    </footer>
+}</pre>
+<button class="copy" type="button" data-copy="bibtex" hidden>Copy BibTeX</button>
+</main>
+<footer class="colophon">
+<p>Set in Ibarra Real Nova and Source Sans 3. Updated <time datetime="2026-10-12">12 October 2026</time>.<span class="print-url"> https://www.cs.columbia.edu/~benyang/papers/fast-digitization.html</span></p>
+</footer>
+</div>
+<script src="../scripts.js" onerror="document.documentElement.classList.remove('fade-ready')"></script>
 </body>
 </html>

@@ -1,35 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>An XR GUI for Visualizing Messages in ECS Architectures — Ben Yang</title>
-    <meta name="description" content="Entity--Component--System (ECS) architectures are fundamental to many systems for developing extended reality (XR) applications. These applications often contain complex scenes and">
-    <link rel="canonical" href="https://www.cs.columbia.edu/~benyang/papers/mercury-ecs-gui.html">
-    <meta name="citation_title" content="An XR GUI for Visualizing Messages in ECS Architectures">
-    <meta name="citation_author" content="Ben Yang">
-    <meta name="citation_author" content="Xichen He">
-    <meta name="citation_author" content="Jace Li">
-    <meta name="citation_author" content="Carmine Elvezio">
-    <meta name="citation_author" content="Steven Feiner">
-    <meta name="citation_publication_date" content="2024">
-    <meta name="citation_conference_title" content="IEEE ISMAR 2024">
-    <meta name="citation_doi" content="10.1109/ISMAR-Adjunct64951.2024.00189">
-    <meta property="og:title" content="An XR GUI for Visualizing Messages in ECS Architectures">
-    <meta property="og:description" content="Entity--Component--System (ECS) architectures are fundamental to many systems for developing extended reality (XR) applications. These applications often contain complex scenes and">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://www.cs.columbia.edu/~benyang/papers/mercury-ecs-gui.html">
-    <meta property="og:image" content="https://www.cs.columbia.edu/~benyang/images/thumbs/mercury.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://www.cs.columbia.edu/~benyang/images/thumbs/mercury.png">
-    <meta name="theme-color" content="#0e0f12">
-    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    <script>(function(){try{var s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s==='light'?'light':'dark');}catch(e){}})();</script>
-    <link rel="preload" href="../fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="../fonts/merriweather-v33-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="../styles.css">
-    <script type="application/ld+json">
-    {
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ffffff">
+<title>An XR GUI for Visualizing Messages in ECS Architectures — Ben Yang</title>
+<meta name="description" content="Entity--Component--System (ECS) architectures are fundamental to many systems for developing extended reality (XR) applications. These applications often contain complex scenes and require…">
+<link rel="canonical" href="https://www.cs.columbia.edu/~benyang/papers/mercury-ecs-gui.html">
+<meta name="citation_title" content="An XR GUI for Visualizing Messages in ECS Architectures">
+<meta name="citation_author" content="Ben Yang">
+<meta name="citation_author" content="Xichen He">
+<meta name="citation_author" content="Jace Li">
+<meta name="citation_author" content="Carmine Elvezio">
+<meta name="citation_author" content="Steven Feiner">
+<meta name="citation_publication_date" content="2024">
+<meta name="citation_conference_title" content="IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)">
+<meta name="citation_firstpage" content="640">
+<meta name="citation_lastpage" content="641">
+<meta name="citation_doi" content="10.1109/ISMAR-Adjunct64951.2024.00189">
+<meta property="og:title" content="An XR GUI for Visualizing Messages in ECS Architectures">
+<meta property="og:description" content="Entity--Component--System (ECS) architectures are fundamental to many systems for developing extended reality (XR) applications. These applications often contain complex scenes and require…">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.cs.columbia.edu/~benyang/papers/mercury-ecs-gui.html">
+<meta property="og:image" content="https://www.cs.columbia.edu/~benyang/images/og/mercury-ecs-gui.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.cs.columbia.edu/~benyang/images/og/mercury-ecs-gui.jpg">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../fonts/ibarra-real-nova-roman.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/source-sans-3-roman.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../styles.css">
+<script>if (matchMedia('(prefers-reduced-motion: no-preference)').matches) document.documentElement.classList.add('fade-ready');</script>
+<script type="application/ld+json">
+{
   "@context": "https://schema.org",
   "@type": "ScholarlyArticle",
   "headline": "An XR GUI for Visualizing Messages in ECS Architectures",
@@ -56,41 +62,50 @@
       "name": "Steven Feiner"
     }
   ],
-  "datePublished": "2024",
-  "isPartOf": "IEEE ISMAR 2024",
+  "datePublished": "2024-10",
+  "isPartOf": "IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)",
   "url": "https://www.cs.columbia.edu/~benyang/papers/mercury-ecs-gui.html",
-  "image": "https://www.cs.columbia.edu/~benyang/images/thumbs/mercury.png",
+  "image": "https://www.cs.columbia.edu/~benyang/images/og/mercury-ecs-gui.jpg",
   "sameAs": "https://doi.org/10.1109/ISMAR-Adjunct64951.2024.00189"
 }
-    </script>
-    <script data-goatcounter="https://theangrybuddhas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</script>
+<script data-goatcounter="https://theangrybuddhas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
-<body id="top">
-    <a class="skip-link" href="#main">Skip to content</a>
-    <nav id="site-nav" aria-label="Sections">
-        <div class="nav-inner">
-            <a class="nav-brand" href="../index.html#publications">&larr; All publications</a>
-        </div>
-    </nav>
-    <main id="main" class="paper-page" tabindex="-1">
-        <p class="eyebrow">IEEE ISMAR 2024 &middot; Adjunct &middot; 2024</p>
-        <h1 class="paper-title">An XR GUI for Visualizing Messages in ECS Architectures</h1>
-        <p class="paper-authors"><strong>Ben Yang</strong>, Xichen He, Jace Li, Carmine Elvezio, Steven Feiner</p>
-        
-        <div class="pub-links paper-linkrow"><a href="https://doi.org/10.1109/ISMAR-Adjunct64951.2024.00189" target="_blank" rel="noopener">DOI</a><a href="https://youtu.be/dRMyo0BJWqg" target="_blank" rel="noopener">Video</a><a href="https://github.com/ColumbiaCGUI/MercuryMessaging" target="_blank" rel="noopener">Code</a></div>
-        <div class="paper-figure"><img src="../images/thumbs/mercury.png" alt="An XR GUI for Visualizing Messages in ECS Architectures — figure" loading="lazy"></div>
-        <h2>Abstract</h2><p>Entity--Component--System (ECS) architectures are fundamental to many systems for developing extended reality (XR) applications. These applications often contain complex scenes and require intricately connected application logic to connect components together, making debugging and analysis difficult. Graph-based tools have been created to show actions in ECS-based scene hierarchies, but few address interactions that go beyond traditional hierarchical communication. To address this, we present an XR GUI for Mercury (a toolkit to handle cross-component ECS communication) that allows developers to view and edit relationships and interactions between scene entities in Mercury.</p>
-        <details class="paper-bib"><summary>BibTeX</summary><pre>@inproceedings{yang2024xrgui,
+<body>
+<div class="page">
+<header class="runhead"><p><a href="../">Ben Yang</a></p></header>
+<main class="paper">
+<h1 class="paper-title">An <abbr>XR&nbsp;GUI</abbr> for Visualizing Messages in <abbr>ECS</abbr> Architectures</h1>
+<p class="paper-authors"><span class="me">Ben Yang</span>, Xichen He, Jace Li, Carmine Elvezio, Steven Feiner</p>
+<p class="paper-venue"><abbr>IEEE</abbr> International Symposium on Mixed and Augmented Reality Adjunct (<abbr>ISMAR</abbr>-Adjunct), 2024. Demo.</p>
+<ul class="links dots"><li><a href="https://doi.org/10.1109/ISMAR-Adjunct64951.2024.00189">DOI</a></li><li><a href="#video">Video (1:20)</a></li><li><a href="https://github.com/ColumbiaCGUI/MercuryMessaging">Code</a></li><li><a href="#cite">BibTeX</a></li></ul>
+<figure class="fig">
+<img class="fade" src="../images/figures/mercury-ecs-gui.jpg" width="1600" height="900" alt="Headset view of a city street. Traffic lights are outlined in green, with arrows between them.">
+<figcaption><span class="fig-label">Fig. 1.</span> Message routes between traffic lights in a street scene, drawn in the headset.</figcaption>
+</figure>
+<h2>Abstract</h2>
+<p>Entity--Component--System (<abbr>ECS</abbr>) architectures are fundamental to many systems for developing extended reality (<abbr>XR</abbr>) applications. These applications often contain complex scenes and require intricately connected application logic to connect components together, making debugging and analysis difficult. Graph-based tools have been created to show actions in <abbr>ECS</abbr>-based scene hierarchies, but few address interactions that go beyond traditional hierarchical communication. To address this, we present an <abbr>XR&nbsp;GUI</abbr> for Mercury (a toolkit to handle cross-component <abbr>ECS</abbr> communication) that allows developers to view and edit relationships and interactions between scene entities in Mercury.</p>
+<h2 id="video">Video</h2>
+<figure class="fig">
+<a href="https://youtu.be/dRMyo0BJWqg"><img class="fade" src="../images/figures/mercury-ecs-gui-video.jpg" width="1600" height="900" alt="Still from the video: a city street with a traffic light, seen from the headset with tracked hands. Opens on YouTube." loading="lazy" decoding="async"></a>
+<figcaption><span class="fig-label">Video 1.</span> The <abbr>XR&nbsp;GUI</abbr> in a street scene, alongside the developer working in the Unity editor. 1 min 20 s; opens on YouTube.</figcaption>
+</figure>
+<h2 id="cite">Cite</h2>
+<p class="ref">B. Yang, X. He, J. Li, C. Elvezio, and S. Feiner, “An <abbr>XR&nbsp;GUI</abbr> for Visualizing Messages in <abbr>ECS</abbr> Architectures,” in <i>Proc. IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)</i>, 2024, pp. 640–641, doi: 10.1109/ISMAR-Adjunct64951.2024.00189.</p>
+<pre id="bibtex">@inproceedings{yang2024xrgui,
   title={An XR GUI for Visualizing Messages in ECS Architectures},
   author={Yang, Ben and He, Xichen and Li, Jace and Elvezio, Carmine and Feiner, Steven},
   booktitle={2024 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)},
   pages={640--641},
   year={2024},
   doi={10.1109/ISMAR-Adjunct64951.2024.00189}
-}</pre></details>
-    </main>
-    <footer>
-        <p><a href="../index.html">Ben Yang</a> &middot; CS PhD Candidate, Columbia University</p>
-    </footer>
+}</pre>
+<button class="copy" type="button" data-copy="bibtex" hidden>Copy BibTeX</button>
+</main>
+<footer class="colophon">
+<p>Set in Ibarra Real Nova and Source Sans 3. Updated <time datetime="2026-10-12">12 October 2026</time>.<span class="print-url"> https://www.cs.columbia.edu/~benyang/papers/mercury-ecs-gui.html</span></p>
+</footer>
+</div>
+<script src="../scripts.js" onerror="document.documentElement.classList.remove('fade-ready')"></script>
 </body>
 </html>

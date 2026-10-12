@@ -1,38 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation — Ben Yang</title>
-    <meta name="description" content="We present a bimanual XR interaction approach for specifying remote assembly tasks as hierarchies of relative and absolute object constraints that specify high-level teleoperation ">
-    <link rel="canonical" href="https://www.cs.columbia.edu/~benyang/papers/bimanual-teleoperation.html">
-    <meta name="citation_title" content="Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation">
-    <meta name="citation_author" content="Ben Yang">
-    <meta name="citation_author" content="Xichen He">
-    <meta name="citation_author" content="Charlie Zou">
-    <meta name="citation_author" content="Jen-Shuo Liu">
-    <meta name="citation_author" content="Barbara Tversky">
-    <meta name="citation_author" content="Steven Feiner">
-    <meta name="citation_publication_date" content="2026">
-    <meta name="citation_conference_title" content="IEEE VR 2026 Workshops">
-    <meta name="citation_doi" content="10.1109/VRW70859.2026.00191">
-    <meta name="citation_arxiv_id" content="2603.01495">
-    <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2603.01495">
-    <meta property="og:title" content="Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation">
-    <meta property="og:description" content="We present a bimanual XR interaction approach for specifying remote assembly tasks as hierarchies of relative and absolute object constraints that specify high-level teleoperation ">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://www.cs.columbia.edu/~benyang/papers/bimanual-teleoperation.html">
-    <meta property="og:image" content="https://www.cs.columbia.edu/~benyang/images/thumbs/teleop.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://www.cs.columbia.edu/~benyang/images/thumbs/teleop.jpg">
-    <meta name="theme-color" content="#0e0f12">
-    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    <script>(function(){try{var s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s==='light'?'light':'dark');}catch(e){}})();</script>
-    <link rel="preload" href="../fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="../fonts/merriweather-v33-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="../styles.css">
-    <script type="application/ld+json">
-    {
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ffffff">
+<title>Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation — Ben Yang</title>
+<meta name="description" content="We present a bimanual XR interaction approach for specifying remote assembly tasks as hierarchies of relative and absolute object constraints that specify high-level teleoperation goals for robots.…">
+<link rel="canonical" href="https://www.cs.columbia.edu/~benyang/papers/bimanual-teleoperation.html">
+<meta name="citation_title" content="Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation">
+<meta name="citation_author" content="Ben Yang">
+<meta name="citation_author" content="Xichen He">
+<meta name="citation_author" content="Charlie Zou">
+<meta name="citation_author" content="Jen-Shuo Liu">
+<meta name="citation_author" content="Barbara Tversky">
+<meta name="citation_author" content="Steven Feiner">
+<meta name="citation_publication_date" content="2026">
+<meta name="citation_conference_title" content="IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)">
+<meta name="citation_firstpage" content="1033">
+<meta name="citation_lastpage" content="1034">
+<meta name="citation_doi" content="10.1109/VRW70859.2026.00191">
+<meta name="citation_arxiv_id" content="2603.01495">
+<meta name="citation_pdf_url" content="https://arxiv.org/pdf/2603.01495">
+<meta property="og:title" content="Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation">
+<meta property="og:description" content="We present a bimanual XR interaction approach for specifying remote assembly tasks as hierarchies of relative and absolute object constraints that specify high-level teleoperation goals for robots.…">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.cs.columbia.edu/~benyang/papers/bimanual-teleoperation.html">
+<meta property="og:image" content="https://www.cs.columbia.edu/~benyang/images/og/bimanual-teleoperation.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.cs.columbia.edu/~benyang/images/og/bimanual-teleoperation.jpg">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../fonts/ibarra-real-nova-roman.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/source-sans-3-roman.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../styles.css">
+<script>if (matchMedia('(prefers-reduced-motion: no-preference)').matches) document.documentElement.classList.add('fade-ready');</script>
+<script type="application/ld+json">
+{
   "@context": "https://schema.org",
   "@type": "ScholarlyArticle",
   "headline": "Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation",
@@ -63,40 +69,50 @@
       "name": "Steven Feiner"
     }
   ],
-  "datePublished": "2026",
-  "isPartOf": "IEEE VR 2026 Workshops",
+  "datePublished": "2026-03",
+  "isPartOf": "IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)",
   "url": "https://www.cs.columbia.edu/~benyang/papers/bimanual-teleoperation.html",
-  "image": "https://www.cs.columbia.edu/~benyang/images/thumbs/teleop.jpg",
+  "image": "https://www.cs.columbia.edu/~benyang/images/og/bimanual-teleoperation.jpg",
   "sameAs": "https://doi.org/10.1109/VRW70859.2026.00191"
 }
-    </script>
-    <script data-goatcounter="https://theangrybuddhas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</script>
+<script data-goatcounter="https://theangrybuddhas.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
-<body id="top">
-    <a class="skip-link" href="#main">Skip to content</a>
-    <nav id="site-nav" aria-label="Sections">
-        <div class="nav-inner">
-            <a class="nav-brand" href="../index.html#publications">&larr; All publications</a>
-        </div>
-    </nav>
-    <main id="main" class="paper-page" tabindex="-1">
-        <p class="eyebrow">IEEE VR 2026 Workshops &middot; Poster &middot; 2026</p>
-        <h1 class="paper-title">Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation</h1>
-        <p class="paper-authors"><strong>Ben Yang</strong>, Xichen He, Charlie Zou, Jen-Shuo Liu, Barbara Tversky, Steven Feiner</p>
-        
-        <div class="pub-links paper-linkrow"><a href="https://arxiv.org/pdf/2603.01495" target="_blank" rel="noopener">PDF</a><a href="https://doi.org/10.1109/VRW70859.2026.00191" target="_blank" rel="noopener">DOI</a><a href="https://arxiv.org/abs/2603.01495" target="_blank" rel="noopener">arXiv</a><a href="https://youtu.be/_pE681sRjHI" target="_blank" rel="noopener">Video</a></div>
-        <div class="paper-figure"><img src="../images/thumbs/teleop.jpg" alt="Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation — figure" loading="lazy"></div>
-        <h2>Abstract</h2><p>We present a bimanual XR interaction approach for specifying remote assembly tasks as hierarchies of relative and absolute object constraints that specify high-level teleoperation goals for robots. Grabbing one object in each hand creates a constraint group (visualized as a hull) and groups can be nested into hierarchies. Each group can be relative (with a robot-specifiable 6DoF pose) or absolute (with an author-specified fixed 6DoF pose) in relation to its parent. A relative group specifies a subassembly that can be constructed at a location chosen by the robot software for efficiency rather than mandated by the user.</p>
-        <details class="paper-bib"><summary>BibTeX</summary><pre>@inproceedings{yang2026bimanual,
+<body>
+<div class="page">
+<header class="runhead"><p><a href="../">Ben Yang</a></p></header>
+<main class="paper">
+<h1 class="paper-title">Bimanual <abbr>XR</abbr> Specification of Relative and Absolute Assembly Hierarchies for Teleoperation</h1>
+<p class="paper-authors"><span class="me">Ben Yang</span>, Xichen He, Charlie Zou, Jen-Shuo Liu, Barbara Tversky, Steven Feiner</p>
+<p class="paper-venue"><abbr>IEEE</abbr> Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (<abbr>VRW</abbr>), 2026. Poster.</p>
+<ul class="links dots"><li><a href="https://arxiv.org/pdf/2603.01495">PDF</a></li><li><a href="https://arxiv.org/abs/2603.01495">arXiv</a></li><li><a href="https://doi.org/10.1109/VRW70859.2026.00191">DOI</a></li><li><a href="#video">Video (1:00)</a></li><li><a href="#cite">BibTeX</a></li></ul>
+<figure class="fig">
+<img class="fade" src="../images/figures/bimanual-teleoperation.jpg" width="1600" height="900" alt="VR view of two nested hulls: a blue wireframe group of parts inside an orange group that also holds a pink gear.">
+<figcaption><span class="fig-label">Fig. 1.</span> A nested hierarchy of constraint groups. Each group is either relative, built wherever the robot chooses, or absolute, at a pose the author fixes.</figcaption>
+</figure>
+<h2>Abstract</h2>
+<p>We present a bimanual <abbr>XR</abbr> interaction approach for specifying remote assembly tasks as hierarchies of relative and absolute object constraints that specify high-level teleoperation goals for robots. Grabbing one object in each hand creates a constraint group (visualized as a hull) and groups can be nested into hierarchies. Each group can be relative (with a robot-specifiable 6DoF pose) or absolute (with an author-specified fixed 6DoF pose) in relation to its parent. A relative group specifies a subassembly that can be constructed at a location chosen by the robot software for efficiency rather than mandated by the user.</p>
+<h2 id="video">Video</h2>
+<figure class="fig">
+<a href="https://youtu.be/_pE681sRjHI"><img class="fade" src="../images/figures/bimanual-teleoperation-video.jpg" width="1600" height="900" alt="Still from the video: a gear and a group of parts inside nested hulls, with two controllers below. Opens on YouTube." loading="lazy" decoding="async"></a>
+<figcaption><span class="fig-label">Video 1.</span> Grouping parts, nesting groups and switching between relative and absolute constraints, in <abbr>VR</abbr>. 1 min; opens on YouTube.</figcaption>
+</figure>
+<h2 id="cite">Cite</h2>
+<p class="ref">B. Yang, X. He, C. Zou, J.-S. Liu, B. Tversky, and S. Feiner, “Bimanual <abbr>XR</abbr> Specification of Relative and Absolute Assembly Hierarchies for Teleoperation,” in <i>Proc. IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)</i>, 2026, pp. 1033–1034, doi: 10.1109/VRW70859.2026.00191.</p>
+<pre id="bibtex">@inproceedings{yang2026bimanual,
   title={Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation},
   author={Yang, Ben and He, Xichen and Zou, Charlie and Liu, Jen-Shuo and Tversky, Barbara and Feiner, Steven},
   booktitle={2026 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},
+  pages={1033--1034},
   year={2026},
   doi={10.1109/VRW70859.2026.00191}
-}</pre></details>
-    </main>
-    <footer>
-        <p><a href="../index.html">Ben Yang</a> &middot; CS PhD Candidate, Columbia University</p>
-    </footer>
+}</pre>
+<button class="copy" type="button" data-copy="bibtex" hidden>Copy BibTeX</button>
+</main>
+<footer class="colophon">
+<p>Set in Ibarra Real Nova and Source Sans 3. Updated <time datetime="2026-10-12">12 October 2026</time>.<span class="print-url"> https://www.cs.columbia.edu/~benyang/papers/bimanual-teleoperation.html</span></p>
+</footer>
+</div>
+<script src="../scripts.js" onerror="document.documentElement.classList.remove('fade-ready')"></script>
 </body>
 </html>
