@@ -23,7 +23,7 @@
     <meta name="twitter:description" content="Columbia CS PhD candidate working on XR teleoperation, human-robot interaction, and 3D Gaussian splatting; research intern at Toyota Research Institute in 2026.">
     <meta name="twitter:image" content="https://www.cs.columbia.edu/~benyang/images/og-image.png">
 
-    <meta name="theme-color" content="#0e0f12">
+    <meta name="theme-color" content="#0b0f19">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="icon" href="favicon.ico" sizes="any">
 
@@ -39,8 +39,9 @@
       })();
     </script>
 
-    <link rel="preload" href="fonts/inter-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/merriweather-v33-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/inter-v20-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/inter-v20-latin-500.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/merriweather-v33-latin-300.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="styles.css">
 
     <script type="application/ld+json">
@@ -80,6 +81,7 @@
                 <li><a href="#publications">Publications</a></li>
                 <li><a href="#awards">Awards</a></li>
                 <li><a href="#teaching">Talks &amp; Teaching</a></li>
+                <li class="nav-indicator" aria-hidden="true"></li>
             </ul>
             <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false" title="Toggle theme">
                 <svg class="ic" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"/></svg>
@@ -87,47 +89,67 @@
         </div>
     </nav>
 
-    <header class="hero reveal">
-        <div class="hero-text">
-            <h1>Ben Yang</h1>
-            <p class="hero-role">CS PhD Candidate, Columbia University</p>
-            <p class="hero-thesis">I work on XR for teleoperation and robotics, with a focus on 3D reconstruction and Gaussian splatting.</p>
-            <div class="social-links-header">
-                <a href="https://scholar.google.com/citations?user=wyIkKdgAAAAJ"><svg class="ic" viewBox="0 0 640 512" aria-hidden="true" focusable="false"><path d="M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z"/></svg>Scholar</a>
-                <a href="cv.pdf"><svg class="ic" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm64 236c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-64c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-72v8c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm96-114.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"/></svg>CV</a>
-                <a href="https://www.linkedin.com/in/bentyang/"><svg class="ic" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>LinkedIn</a>
-                <a href="https://github.com/benplus1"><svg class="ic" viewBox="0 0 496 512" aria-hidden="true" focusable="false"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>GitHub</a>
-                <a href="https://orcid.org/0009-0006-0284-169X"><svg class="ic" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M294.75 188.19h-45.92V342h47.47c67.62 0 83.12-51.34 83.12-76.91 0-41.64-26.54-76.9-84.67-76.9zM256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm-80.79 360.76h-29.84v-207.5h29.84zm-14.92-231.14a19.57 19.57 0 1 1 19.57-19.57 19.64 19.64 0 0 1-19.57 19.57zM300 369h-81V161.26h80.6c76.73 0 110.44 54.83 110.44 103.85C410 318.39 368.38 369 300 369z"/></svg>ORCID</a>
-                <a href="mailto:by2297@columbia.edu"><svg class="ic" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"/></svg>Email</a>
+    <header class="hero" id="intro">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="hero-inner">
+            <div class="hero-text">
+                <p class="hero-role">CS PhD Candidate, Columbia University</p>
+                <h1 class="hero-name">Ben Yang</h1>
+                <p class="hero-thesis">I work on XR for teleoperation and robotics, with a focus on 3D reconstruction and Gaussian splatting.</p>
+                <ul class="hero-verbs">
+                    <li><span class="verb">Researching</span> <span>XR interfaces for teleoperation and human-robot collaboration</span></li>
+                    <li><span class="verb">Building</span> <span>real-time 3D Gaussian splatting for XR teleoperation</span></li>
+                    <li><span class="verb">Releasing</span> <span>open-source XR tools, including MercuryMessaging 2.0</span></li>
+                </ul>
+                <div class="hero-ctas">
+                    <a class="btn btn-primary" href="#research">Research</a>
+                    <a class="btn" href="#publications">Publications</a>
+                    <a class="btn" href="cv.pdf"><svg class="ic" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm64 236c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-64c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-72v8c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm96-114.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"/></svg>CV</a>
+                </div>
+                <div class="social-links-header">
+                    <a href="https://scholar.google.com/citations?user=wyIkKdgAAAAJ"><svg class="ic" viewBox="0 0 640 512" aria-hidden="true" focusable="false"><path d="M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z"/></svg>Scholar</a>
+                    <a href="https://www.linkedin.com/in/bentyang/"><svg class="ic" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>LinkedIn</a>
+                    <a href="https://github.com/benplus1"><svg class="ic" viewBox="0 0 496 512" aria-hidden="true" focusable="false"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>GitHub</a>
+                    <a href="https://orcid.org/0009-0006-0284-169X"><svg class="ic" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M294.75 188.19h-45.92V342h47.47c67.62 0 83.12-51.34 83.12-76.91 0-41.64-26.54-76.9-84.67-76.9zM256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm-80.79 360.76h-29.84v-207.5h29.84zm-14.92-231.14a19.57 19.57 0 1 1 19.57-19.57 19.64 19.64 0 0 1-19.57 19.57zM300 369h-81V161.26h80.6c76.73 0 110.44 54.83 110.44 103.85C410 318.39 368.38 369 300 369z"/></svg>ORCID</a>
+                    <a href="mailto:by2297@columbia.edu"><svg class="ic" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"/></svg>Email</a>
+                </div>
             </div>
-        </div>
-        <div class="hero-image">
-            <img src="images/profile.jpeg" alt="Ben Yang" width="150" height="150">
+            <div class="hero-portrait">
+                <div class="portrait-frame">
+                    <img src="images/profile.jpeg" alt="Ben Yang" width="300" height="300" fetchpriority="high">
+                </div>
+            </div>
         </div>
     </header>
 
     <main id="main" tabindex="-1">
-        <section id="about" class="reveal">
+        <section id="about">
             <h2 class="visually-hidden">About</h2>
-            <div class="currently">
+            <div class="currently reveal">
                 <span class="currently-label">Currently</span>
                 <p>4th-year PhD candidate, expected to graduate in January 2028, seeking a <strong>Summer 2027 research internship</strong> in robotics and HRI, 3D Gaussian splatting and neural rendering, or XR.</p>
             </div>
-            <p>Hi! I'm a PhD candidate in Computer Science at Columbia University, fortunate to be advised by <a href="http://www.cs.columbia.edu/~feiner/">Professor Steven Feiner</a> in the <a href="https://graphics.cs.columbia.edu/home">Computer Graphics and User Interfaces (CGUI) Lab</a> and part of the <a href="https://columbiahci.github.io/">Columbia HCI</a> group. From May to September 2026, I was a research intern on the Human-Robot Interaction team at <a href="https://www.tri.global/">Toyota Research Institute</a> in Cambridge, MA.</p>
-            <p>As an M.S. student I also worked with <a href="https://www.cs.columbia.edu/~junfeng/">Professor Junfeng Yang</a>. Before Columbia, I received a B.S. in Computer Science, Mathematics, and Cognitive Science from Rutgers University.</p>
+            <p class="reveal">Hi! I'm a PhD candidate in Computer Science at Columbia University, fortunate to be advised by <a href="http://www.cs.columbia.edu/~feiner/">Professor Steven Feiner</a> in the <a href="https://graphics.cs.columbia.edu/home">Computer Graphics and User Interfaces (CGUI) Lab</a> and part of the <a href="https://columbiahci.github.io/">Columbia HCI</a> group. From May to September 2026, I was a research intern on the Human-Robot Interaction team at <a href="https://www.tri.global/">Toyota Research Institute</a> in Cambridge, MA.</p>
+            <p class="reveal">As an M.S. student I also worked with <a href="https://www.cs.columbia.edu/~junfeng/">Professor Junfeng Yang</a>. Before Columbia, I received a B.S. in Computer Science, Mathematics, and Cognitive Science from Rutgers University.</p>
         </section>
 
-        <section id="news" class="reveal">
-            <h2>News</h2>
-            <ul id="news-list" class="news-list"></ul>
+        <section id="news">
+            <div class="sec-head reveal">
+                <p class="eyebrow">Since September 2023</p>
+                <h2>News</h2>
+            </div>
+            <ul id="news-list" class="news-list reveal"></ul>
         </section>
 
-        <section id="research" class="reveal">
-            <h2>Research</h2>
-            <p>My research centers on <strong>XR for teleoperation and human-robot interaction</strong> and on <strong>3D immersive reconstruction with Gaussian splatting</strong>. Three threads:</p>
+        <section id="research">
+            <div class="sec-head reveal">
+                <p class="eyebrow">Projects and open source</p>
+                <h2>Research</h2>
+            </div>
+            <p class="reveal">My research centers on <strong>XR for teleoperation and human-robot interaction</strong> and on <strong>3D immersive reconstruction with Gaussian splatting</strong>. Three threads:</p>
             <div class="threads">
-                <article class="thread">
-                    <img class="thread-img" src="images/thumbs/fastdigit.jpg" alt="Headset passthrough view with detected real objects outlined in colored boxes" width="1280" height="720" loading="lazy" decoding="async">
+                <article class="thread card tilt reveal">
+                    <div class="thread-media"><img class="thread-img" src="images/thumbs/fastdigit.jpg" alt="Headset passthrough view with detected real objects outlined in colored boxes" width="1280" height="720" loading="lazy" decoding="async"></div>
                     <div class="thread-body">
                         <h3 class="thread-title">XR teleoperation with real-time 3D Gaussian splatting scene memory</h3>
                         <p>I use 3D Gaussian splatting, a fast way to rebuild real objects in 3D from camera images, to bring the physical world into XR. On a Meta Quest&nbsp;3, our pipeline digitizes real objects in 2&ndash;4 seconds without per-scene training, as interactive proxies that can be grabbed, inspected, and used to select the physical objects they came from. For teleoperation, a bimanual XR technique lets an operator give a robot high-level assembly goals as nested groups of object constraints, leaving choices such as where to build a subassembly to the robot software.</p>
@@ -137,8 +159,8 @@
                         </div>
                     </div>
                 </article>
-                <article class="thread">
-                    <img class="thread-img" src="images/thumbs/task.png" alt="VR scene with object parts grouped inside translucent hulls" width="1049" height="553" loading="lazy" decoding="async">
+                <article class="thread card tilt reveal">
+                    <div class="thread-media"><img class="thread-img" src="images/thumbs/task.png" alt="VR scene with object parts grouped inside translucent hulls" width="1049" height="553" loading="lazy" decoding="async"></div>
                     <div class="thread-body">
                         <h3 class="thread-title">XR authoring for human-robot collaboration</h3>
                         <p>Many physical tasks only need objects placed relative to each other, not at fixed spots in the room. I design XR interfaces that let people specify just those constraints and delegate the details to a robot. Delegate the Details pairs an XR authoring interface with a robot planner for assembly constraints; we evaluated it in a 20-participant study with offline execution on a UR5e robot arm. Earlier work introduced relative 6DoF pose specification for VR task guidance and compared permanent and temporary proxies (copies of objects used for selection and manipulation), finding permanent proxies more efficient for hard reselection and preferred.</p>
@@ -149,8 +171,8 @@
                         </div>
                     </div>
                 </article>
-                <article class="thread">
-                    <img class="thread-img" src="images/thumbs/mercury.png" alt="XR GUI drawing message routes between traffic lights in a virtual street" width="433" height="197" loading="lazy" decoding="async">
+                <article class="thread card tilt reveal">
+                    <div class="thread-media"><img class="thread-img" src="images/thumbs/mercury.png" alt="XR GUI drawing message routes between traffic lights in a virtual street" width="433" height="197" loading="lazy" decoding="async"></div>
                     <div class="thread-body">
                         <h3 class="thread-title">Toolkits for XR development</h3>
                         <p>XR applications wire many scene objects together with intricate application logic, which makes them hard to build and debug. MercuryMessaging is a Unity toolkit for routing messages and events between objects; I released MercuryMessaging 2.0, which includes networking APIs and speeds up VR app and user study development up to two-fold. Its XR GUI lets developers view and edit the relationships and interactions between scene entities from inside XR.</p>
@@ -161,75 +183,87 @@
                     </div>
                 </article>
             </div>
-            <div class="open-source">
-                <h3 class="service-title">Open source</h3>
+            <div class="open-source reveal">
+                <h3 class="sub-title">Open source</h3>
                 <p><a href="https://github.com/ColumbiaCGUI/MercuryMessaging" target="_blank" rel="noopener">MercuryMessaging</a> &mdash; a network routing / event handling library in Unity that speeds up VR app and user study development up to two-fold, including networking APIs. I released version 2.0.</p>
                 <p><a href="https://github.com/benplus1/CLOD-3DGS/tree/linux-port" target="_blank" rel="noopener">Linux/GCC port of Meta's CLOD-3DGS</a> (continuous level-of-detail 3D Gaussian splatting renderer, Eurographics 2025); upstream project: <a href="https://github.com/facebookresearch/CLOD-3DGS" target="_blank" rel="noopener">facebookresearch/CLOD-3DGS</a>.</p>
             </div>
         </section>
 
-        <section id="publications" class="reveal">
-            <div class="section-head">
-                <h2 id="pub-heading">Selected Publications</h2>
+        <section id="publications">
+            <div class="sec-head sec-head-row reveal">
+                <div>
+                    <p class="eyebrow">Papers at IEEE VR, IEEE ISMAR, ACM CHI and ACM UIST</p>
+                    <h2 id="pub-heading">Selected Publications</h2>
+                </div>
                 <button id="toggle-publications" class="pill-button" type="button" aria-controls="publications-container" aria-expanded="false">Show all</button>
             </div>
-            <div id="pub-filters" class="pub-filters" role="group" aria-label="Filter publications by topic"></div>
+            <div id="pub-filters" class="pub-filters reveal" role="group" aria-label="Filter publications by topic"></div>
             <div id="publications-container"></div>
             <div id="under-review" class="under-review" hidden>
-                <h3 class="service-title">Under review</h3>
+                <h3 class="sub-title">Under review</h3>
                 <ul id="under-review-list" class="under-review-list"></ul>
             </div>
         </section>
 
-        <section id="awards" class="reveal">
-            <h2>Awards</h2>
-            <div class="award-item">
+        <section id="awards">
+            <div class="sec-head reveal">
+                <p class="eyebrow">Fellowships, grants and prizes</p>
+                <h2>Awards</h2>
+            </div>
+            <div class="award-item reveal">
                 <span class="award-year">Mar 2026</span>
                 <div class="award-desc">Best Research Demo, Honorable Mention — IEEE VR 2026</div>
             </div>
-            <div class="award-item">
+            <div class="award-item reveal">
                 <span class="award-year">Sep 2025</span>
                 <div class="award-desc">Columbia-Dream Sports AI Grant</div>
             </div>
-            <div class="award-item">
+            <div class="award-item reveal">
                 <span class="award-year">Oct 2024</span>
                 <div class="award-desc">EGSC Professional Development Scholarship</div>
             </div>
-            <div class="award-item">
+            <div class="award-item reveal">
                 <span class="award-year">2024</span>
                 <div class="award-desc">Greenwoods Fellowship</div>
             </div>
-            <div class="award-item">
+            <div class="award-item reveal">
                 <span class="award-year">Nov 2022</span>
                 <div class="award-desc">Grand Prize, AGU Michael H. Freilich Student Visualization Competition</div>
             </div>
         </section>
 
-        <section id="teaching" class="reveal">
-            <h2>Talks, Teaching &amp; Service</h2>
-            <div class="service-category">
-                <div class="service-title">Talks</div>
+        <section id="teaching">
+            <div class="sec-head reveal">
+                <p class="eyebrow">Conference talks, head TA roles and reviewing</p>
+                <h2>Talks, Teaching &amp; Service</h2>
+            </div>
+            <div class="service-category reveal">
+                <h3 class="sub-title">Talks</h3>
                 <div class="talk-item"><span class="talk-date">Oct 2026</span><div class="talk-desc">IEEE ISMAR 2026, Bari, Italy &mdash; paper talk: &ldquo;<a href="papers/delegate-the-details.html">Delegate the Details: Flexible Assembly Constraint Authoring for Collaborative XR</a>&rdquo;</div></div>
                 <div class="talk-item"><span class="talk-date">Mar 2026</span><div class="talk-desc">IEEE VR 2026, Daegu, South Korea &mdash; research demo: &ldquo;<a href="papers/fast-digitization.html">Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies</a>&rdquo;; poster: &ldquo;<a href="papers/bimanual-teleoperation.html">Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation</a>&rdquo;</div></div>
                 <div class="talk-item"><span class="talk-date">Oct 2025</span><div class="talk-desc">IEEE ISMAR 2025, Daejeon, South Korea &mdash; presentation: &ldquo;<a href="papers/task-guidance.html">Virtual Reality Task Guidance Through Relative 6DoF Pose Specification</a>&rdquo;</div></div>
                 <div class="talk-item"><span class="talk-date">Mar 2025</span><div class="talk-desc">IEEE VR 2025, Saint-Malo, France &mdash; poster: &ldquo;<a href="papers/permanent-proxies.html">Permanent Proxies for Bimanual Selection and Manipulation in VR</a>&rdquo;</div></div>
                 <div class="talk-item"><span class="talk-date">Oct 2024</span><div class="talk-desc">IEEE ISMAR 2024, Bellevue, WA &mdash; demos: &ldquo;<a href="papers/mercury-ecs-gui.html">An XR GUI for Visualizing Messages in ECS Architectures</a>&rdquo; and &ldquo;<a href="papers/vhard.html">VHard: An XR UI for Kinesthetic Rehearsal of Rock Climbing Moves</a>&rdquo;</div></div>
             </div>
-            <div class="service-category">
-                <div class="service-title">Teaching Assistant</div>
+            <div class="service-category reveal">
+                <h3 class="sub-title">Teaching Assistant</h3>
                 <p><a href="https://www.cs.columbia.edu/~feiner/courses/cse6998/">COMS 6173: VR and AR Seminar</a> — Head TA (Fall 2025)</p>
                 <p><a href="https://www.cs.columbia.edu/~feiner/courses/csw4172/">COMS 4172: 3DUI and AR</a> — Head TA (Spring 2024)</p>
                 <p><a href="https://www.cs.columbia.edu/~verma/classes/ml/index.html">COMS 4771: Machine Learning</a> — TA (Summer 2021, Fall 2021)</p>
             </div>
-            <div class="service-category">
-                <div class="service-title">Reviewer</div>
+            <div class="service-category reveal">
+                <h3 class="sub-title">Reviewer</h3>
                 <p>CHI 2025, VRST 2024, ISMAR 2024, CHI 2024</p>
             </div>
         </section>
 
-        <section id="miscellaneous" class="reveal">
-            <h2>Miscellaneous</h2>
-            <div class="misc-item">
+        <section id="miscellaneous">
+            <div class="sec-head reveal">
+                <p class="eyebrow">Outside the lab</p>
+                <h2>Miscellaneous</h2>
+            </div>
+            <div class="misc-item reveal">
                 <p>When not working on research, I like to ski, climb, and play volleyball. I also enjoy fantasy, sci-fi, and literary fiction. Some of my favorites are <em>Piranesi</em> (Susanna Clarke), <em>The Last Samurai</em> (Helen DeWitt), and <em>The Mountain in the Sea</em> (Ray Nayler).</p>
             </div>
         </section>
