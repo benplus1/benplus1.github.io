@@ -365,9 +365,10 @@ function initScrollSpy() {
       if (a === l) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
     });
     place();
-    // on narrow screens the link row scrolls sideways: keep the active link in view
-    if (l && list.scrollWidth > list.clientWidth + 1) {
-      list.scrollTo({ left: Math.max(0, l.offsetLeft - (list.clientWidth - l.offsetWidth) / 2), behavior: prefersReduced ? 'auto' : 'smooth' });
+    // on narrow screens the link row scrolls sideways: keep the active link in view (back to the start over the hero)
+    if (list.scrollWidth > list.clientWidth + 1) {
+      const left = l ? l.offsetLeft - (list.clientWidth - l.offsetWidth) / 2 : 0;
+      list.scrollTo({ left: Math.max(0, left), behavior: prefersReduced ? 'auto' : 'smooth' });
     }
   };
   const spy = new IntersectionObserver((entries) => {
