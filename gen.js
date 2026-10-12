@@ -249,15 +249,17 @@ function underReviewList(data) {
     if (u.decisionExpected && !/^\d{4}-(0[1-9]|1[0-2])-\d{2}$/.test(u.decisionExpected)) {
       fail(`${where}: decisionExpected must be YYYY-MM-DD`);
     }
-    const parts = [];
-    if (u.title && (!u.anonymized || showTitles)) parts.push(`<i>${esc(u.title)}.</i>`);
-    else if (u.anonymized) parts.push('Title withheld during double-blind review.');
-    else fail(`${where}: a single-blind entry needs its title`);
-    if (u.authorRole) parts.push(`${esc(u.authorRole)}.`);
+    const venue = smallCaps(esc(u.venue), where);
     const decision = u.decisionExpected
       ? `; decision expected ${MONTHS[Number(u.decisionExpected.slice(5, 7)) - 1]} ${u.decisionExpected.slice(0, 4)}` : '';
-    parts.push(`${smallCaps(esc(u.venue), where)}${decision}.`);
-    return { submitted: u.submitted, html: `<li><time datetime="${u.submitted}">${monthYear(u.submitted)}</time><span>${parts.join(' ')}</span></li>` };
+    // A titled entry shows its title and venue only; the author role appears only while the title is withheld.
+    let text;
+    if (u.title && (!u.anonymized || showTitles)) text = `<i>${esc(u.title)}.</i> ${venue}${decision}.`;
+    else if (u.anonymized) {
+      const role = u.authorRole ? `${esc(u.authorRole.replace(/ /g, '-'))} paper` : 'Paper';
+      text = `${role} under review at ${venue} (double-blind)${decision}.`;
+    } else fail(`${where}: a single-blind entry needs its title`);
+    return { submitted: u.submitted, html: `<li><time datetime="${u.submitted}">${monthYear(u.submitted)}</time><span>${text}</span></li>` };
   });
   rows.sort((a, b) => b.submitted.localeCompare(a.submitted));
   return `<ol class="dated">\n${rows.map((r) => r.html).join('\n')}\n</ol>`;
