@@ -151,8 +151,18 @@ main > section,
   letter-spacing: -0.01em;
   margin-bottom: 1.25rem;
 }
-.intro {
+/* The photo stacks above the role sentence on phones and moves to the aside track from 48rem. */
+.portrait {
   grid-row: 2;
+  justify-self: start;
+  width: 6rem;
+  height: auto;
+  margin-bottom: 1.25rem;
+  outline: 1px solid var(--hairline);
+  outline-offset: -1px;
+}
+.intro {
+  grid-row: 3;
 }
 .intro > :last-child {
   margin-bottom: 0;
@@ -161,7 +171,7 @@ main > section,
   margin-top: 1.25rem;
 }
 .contents {
-  grid-row: 3;
+  grid-row: 4;
   margin-top: 0.5rem;
   font-size: 0.9375rem;
   line-height: 1.75;
@@ -344,18 +354,6 @@ a.cite {
   color: var(--link);
 }
 
-.bio {
-  display: flow-root;
-}
-.bio img {
-  float: left;
-  width: 6rem;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  margin: 0.5rem 1rem 0.5rem 0;
-  outline: 1px solid var(--hairline);
-  outline-offset: -1px;
-}
 .run-in {
   font-variant-caps: small-caps;
   letter-spacing: 0.05em;
@@ -465,6 +463,18 @@ pre {
     font-size: 3.75rem;
     margin-bottom: 2rem;
   }
+  .portrait {
+    grid-column: aside;
+    width: 9.5rem;
+    /* lowers the photo's top edge to the cap height of the role sentence's first line */
+    margin: 0.42rem 0 0;
+  }
+  .intro {
+    grid-row: 2;
+  }
+  .contents {
+    grid-row: 3;
+  }
   main h2 {
     font-size: 1.75rem;
     margin: 4.5rem 0 1.75rem;
@@ -480,10 +490,6 @@ pre {
     width: auto;
     max-width: none;
     margin: 0.3rem 0 0;
-  }
-  .bio img {
-    width: 7.5rem;
-    margin-right: 1.25rem;
   }
   .colophon p,
   .runhead p {
