@@ -1,6 +1,7 @@
 {
   "publications": [
     {
+      "id": "delegate-the-details",
       "title": "Delegate the Details: Flexible Assembly Constraint Authoring for Collaborative XR",
       "authors": [
         "Ben Yang",
@@ -13,17 +14,21 @@
       "venue": "IEEE ISMAR 2026",
       "venueDetail": "",
       "year": 2026,
+      "date": "2026-10",
       "award": "",
-      "thumbnail": "images/thumbs/teleop.jpg",
       "selected": 1,
       "tags": [
         "Teleoperation"
       ],
+      "thumbnail": "images/thumbs/delegate-the-details.jpg",
+      "teaser": "images/figures/delegate-the-details.jpg",
+      "teaserAlt": "VR view of a gear inside an orange hull and, at right, a rod and a peg held with two controllers inside a blue wireframe hull.",
+      "teaserCaption": "Constraint groups drawn as hulls. Parts in a group keep their poses relative to each other; where a group is assembled is left to the robot.",
       "links": {},
-      "bibtex": "@inproceedings{yang2026delegatedetails,\n  title={Delegate the Details: Flexible Assembly Constraint Authoring for Collaborative XR},\n  author={Yang, Ben and He, Xichen and Zou, Charlie and Liu, Jen-Shuo and Tversky, Barbara and Feiner, Steven},\n  booktitle={2026 IEEE International Symposium on Mixed and Augmented Reality (ISMAR)},\n  year={2026}\n}",
-      "id": "delegate-the-details"
+      "bibtex": "@inproceedings{yang2026delegatedetails,\n  title={Delegate the Details: Flexible Assembly Constraint Authoring for Collaborative XR},\n  author={Yang, Ben and He, Xichen and Zou, Charlie and Liu, Jen-Shuo and Tversky, Barbara and Feiner, Steven},\n  booktitle={2026 IEEE International Symposium on Mixed and Augmented Reality (ISMAR)},\n  year={2026}\n}"
     },
     {
+      "id": "xr-agent-bci",
       "title": "Augmenting Human Performance with an XR Agent Learning from Online Behavior and BCI Evidence",
       "authors": [
         "Z. Li",
@@ -31,7 +36,7 @@
         "H. Chen",
         "C. Zou",
         "S. Bai",
-        "Ben Yang",
+        "B. Yang",
         "M. Wu",
         "J. Ledner",
         "Y.-J. Cheng",
@@ -43,15 +48,16 @@
       "venue": "ACM UIST 2026",
       "venueDetail": "to appear",
       "year": 2026,
+      "date": "2026-11",
       "award": "",
-      "thumbnail": "",
       "selected": 1,
       "tags": [],
+      "thumbnail": "",
       "links": {},
-      "bibtex": "@inproceedings{li2026xragent,\n  title={Augmenting Human Performance with an XR Agent Learning from Online Behavior and BCI Evidence},\n  author={Li, Z. and He, X. and Chen, H. and Zou, C. and Bai, S. and Yang, B. and Wu, M. and Ledner, J. and Cheng, Y.-J. and Yamauchi, A. and Turakhia, D. G. and Feiner, S. and Sajda, P.},\n  booktitle={2026 ACM Symposium on User Interface Software and Technology (UIST)},\n  year={2026}\n}",
-      "id": "xr-agent-bci"
+      "bibtex": "@inproceedings{li2026xragent,\n  title={Augmenting Human Performance with an XR Agent Learning from Online Behavior and BCI Evidence},\n  author={Li, Z. and He, X. and Chen, H. and Zou, C. and Bai, S. and Yang, B. and Wu, M. and Ledner, J. and Cheng, Y.-J. and Yamauchi, A. and Turakhia, D. G. and Feiner, S. and Sajda, P.},\n  booktitle={2026 ACM Symposium on User Interface Software and Technology (UIST)},\n  year={2026}\n}"
     },
     {
+      "id": "fast-digitization",
       "title": "Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies",
       "authors": [
         "Ben Yang",
@@ -60,24 +66,32 @@
         "Steven Feiner"
       ],
       "venue": "IEEE VR 2026 Workshops (VRW)",
-      "venueDetail": "Research Demo",
+      "venueDetail": "research demo",
       "year": 2026,
+      "date": "2026-03",
       "award": "Best Research Demo Award (Honorable Mention)",
-      "thumbnail": "images/thumbs/fastdigit.jpg",
       "selected": 1,
       "tags": [
         "Gaussian Splatting"
       ],
+      "thumbnail": "images/thumbs/fast-digitization.jpg",
+      "teaser": "images/figures/fast-digitization.jpg",
+      "teaserAlt": "Headset passthrough view of a lab desk. Three small 3D proxies float above it, and a line runs from the laptop proxy to the real laptop, which is outlined in cyan.",
+      "teaserCaption": "Three proxies float above the desk. Pointing at the laptop’s proxy draws a line to the real laptop and outlines it.",
       "links": {
         "pdf": "pdf/yang2026-fast-digitization.pdf",
         "doi": "https://doi.org/10.1109/VRW70859.2026.00389",
         "video": "https://youtu.be/jwcnjAPASKU"
       },
+      "videoDuration": "1:46",
+      "videoPoster": "images/figures/fast-digitization-video.jpg",
+      "videoAlt": "Still from the video: Lego assemblies on a desk, seen through the headset.",
+      "videoCaption": "Live capture and use of proxies on a Quest 3, with no cuts",
       "bibtex": "@inproceedings{yang2026fastdigitization,\n  title={Fast Digitization in XR of Reality-Linked Gaussian-Splatted Proxies},\n  author={Yang, Ben and Liu, Shanying and Natarajan, Kirthana and Feiner, Steven},\n  booktitle={2026 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},\n  pages={1429--1430},\n  year={2026},\n  doi={10.1109/VRW70859.2026.00389}\n}",
-      "id": "fast-digitization",
       "abstract": "Capturing real objects as interactive 3D assets in XR typically requires offline photogrammetry. We present Gaussian-Splatted Proxies, a system for fast object digitization in XR using feed-forward 3D Gaussian splatting. With a Quest 3 headset, users select objects detected by the system through the passthrough cameras, then capture images that an edge server reconstructs as interactive Gaussian splats. Our system extracts individual objects from scene reconstructions without any per-scene training by projecting detection bounding boxes into 3D space. The resulting assets can be grabbed, inspected, rotated, and used to select the corresponding objects in the physical world."
     },
     {
+      "id": "bimanual-teleoperation",
       "title": "Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation",
       "authors": [
         "Ben Yang",
@@ -88,25 +102,33 @@
         "Steven Feiner"
       ],
       "venue": "IEEE VR 2026 Workshops (VRW)",
-      "venueDetail": "Poster",
+      "venueDetail": "poster",
       "year": 2026,
+      "date": "2026-03",
       "award": "",
-      "thumbnail": "images/thumbs/teleop.jpg",
       "selected": 1,
       "tags": [
         "Teleoperation"
       ],
+      "thumbnail": "images/thumbs/bimanual-teleoperation.jpg",
+      "teaser": "images/figures/bimanual-teleoperation.jpg",
+      "teaserAlt": "VR view of two nested hulls: a blue wireframe group of parts inside an orange group that also holds a pink gear.",
+      "teaserCaption": "A nested hierarchy of constraint groups. Each group is either relative, built wherever the robot chooses, or absolute, at a pose the author fixes.",
       "links": {
         "pdf": "https://arxiv.org/pdf/2603.01495",
         "doi": "https://doi.org/10.1109/VRW70859.2026.00191",
         "arxiv": "https://arxiv.org/abs/2603.01495",
         "video": "https://youtu.be/_pE681sRjHI"
       },
+      "videoDuration": "1:00",
+      "videoPoster": "images/figures/bimanual-teleoperation-video.jpg",
+      "videoAlt": "Still from the video: a gear and a group of parts inside nested hulls, with two controllers below.",
+      "videoCaption": "Grouping parts, nesting groups and switching between relative and absolute constraints, in VR",
       "bibtex": "@inproceedings{yang2026bimanual,\n  title={Bimanual XR Specification of Relative and Absolute Assembly Hierarchies for Teleoperation},\n  author={Yang, Ben and He, Xichen and Zou, Charlie and Liu, Jen-Shuo and Tversky, Barbara and Feiner, Steven},\n  booktitle={2026 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},\n  pages={1033--1034},\n  year={2026},\n  doi={10.1109/VRW70859.2026.00191}\n}",
-      "id": "bimanual-teleoperation",
       "abstract": "We present a bimanual XR interaction approach for specifying remote assembly tasks as hierarchies of relative and absolute object constraints that specify high-level teleoperation goals for robots. Grabbing one object in each hand creates a constraint group (visualized as a hull) and groups can be nested into hierarchies. Each group can be relative (with a robot-specifiable 6DoF pose) or absolute (with an author-specified fixed 6DoF pose) in relation to its parent. A relative group specifies a subassembly that can be constructed at a location chosen by the robot software for efficiency rather than mandated by the user."
     },
     {
+      "id": "task-guidance",
       "title": "Virtual Reality Task Guidance Through Relative 6DoF Pose Specification",
       "authors": [
         "Ben Yang",
@@ -116,24 +138,28 @@
         "Barbara Tversky",
         "Steven Feiner"
       ],
-      "venue": "IEEE ISMAR 2025",
-      "venueDetail": "Adjunct",
+      "venue": "IEEE ISMAR 2025 Adjunct",
+      "venueDetail": "",
       "year": 2025,
+      "date": "2025-10",
       "award": "",
-      "thumbnail": "images/thumbs/task.png",
       "selected": 1,
       "tags": [
         "Teleoperation"
       ],
+      "thumbnail": "images/thumbs/task-guidance.jpg",
+      "teaser": "images/figures/task-guidance.jpg",
+      "teaserAlt": "VR scene in which three groups of parts are enclosed in translucent hulls.",
+      "teaserCaption": "Groups of parts enclosed in translucent hulls. Poses are specified only within each group, so a group can be placed anywhere.",
       "links": {
         "pdf": "pdf/yang2025-task-guidance.pdf",
         "doi": "https://doi.org/10.1109/ISMAR-Adjunct68609.2025.00247"
       },
       "bibtex": "@inproceedings{yang2025taskguidance,\n  title={Virtual Reality Task Guidance Through Relative 6DoF Pose Specification},\n  author={Yang, Ben and He, Xichen and Zou, Charlie and Liu, Jen-Shuo and Tversky, Barbara and Feiner, Steven},\n  booktitle={2025 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)},\n  pages={901--902},\n  year={2025},\n  doi={10.1109/ISMAR-Adjunct68609.2025.00247}\n}",
-      "id": "task-guidance",
       "abstract": "Virtual reality (VR) systems for guiding remote physical tasks typically require object poses to be specified in absolute world coordinates. However, many of these tasks only need object poses to be specified relative to each other. Thus, supporting only absolute pose specification can create inefficiencies in giving or following task guidance when unnecessary constraints are imposed. We are developing a VR task-guidance system that avoids this by enabling relative 6DoF poses to be specified within subsets of objects. We describe our user interface, including how geometric relationships are specified and several ways in which they are visualized, and our plans for validating our approach against existing techniques."
     },
     {
+      "id": "permanent-proxies",
       "title": "Permanent Proxies for Bimanual Selection and Manipulation in VR",
       "authors": [
         "Ben Yang",
@@ -142,25 +168,33 @@
         "Barbara Tversky",
         "Steven Feiner"
       ],
-      "venue": "IEEE VR 2025 Workshops",
-      "venueDetail": "",
+      "venue": "IEEE VR 2025 Workshops (VRW)",
+      "venueDetail": "poster",
       "year": 2025,
+      "date": "2025-03",
       "award": "",
-      "thumbnail": "images/thumbs/proxies.png",
       "selected": 1,
       "tags": [
         "Proxies"
       ],
+      "thumbnail": "images/thumbs/permanent-proxies.jpg",
+      "teaser": "images/figures/permanent-proxies.jpg",
+      "teaserAlt": "VR view over a table: a motherboard proxy outlined in yellow near the user’s controller, and a red curve running to a small distant object.",
+      "teaserCaption": "Outlined proxies of small and distant objects, each joined to its original by a curve. Manipulating a proxy moves its original, as in the Voodoo Dolls technique.",
       "links": {
         "pdf": "pdf/yang2025-permanent-proxies.pdf",
         "doi": "https://doi.org/10.1109/VRW66409.2025.00311",
         "video": "https://youtu.be/TRDW5mpFBng"
       },
+      "videoDuration": "1:00",
+      "videoPoster": "images/figures/permanent-proxies-video.jpg",
+      "videoAlt": "Still from the video: a motherboard and its proxy on a table, joined by a red curve.",
+      "videoCaption": "The Voodoo Dolls technique, the two study conditions and the results",
       "bibtex": "@inproceedings{yang2025permanentproxies,\n  title={Permanent Proxies for Bimanual Selection and Manipulation in VR},\n  author={Yang, Ben and Liu, Jen-Shuo and He, Xichen and Tversky, Barbara and Feiner, Steven},\n  booktitle={2025 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)},\n  pages={1330--1331},\n  year={2025},\n  doi={10.1109/VRW66409.2025.00311}\n}",
-      "id": "permanent-proxies",
       "abstract": "Copies (proxies) of objects are useful for selecting and manipulating objects in virtual reality (VR). Temporary proxies are destroyed after use and must be recreated for reuse. Permanent proxies persist after use for easy reselection, but can cause clutter. To investigate the benefits and drawbacks of permanent and temporary proxies, we conducted a user study in which participants performed 6DoF tasks with proxies in the Voodoo Dolls technique, revealing that permanent proxies were more efficient for hard reselection and preferred."
     },
     {
+      "id": "mercury-ecs-gui",
       "title": "An XR GUI for Visualizing Messages in ECS Architectures",
       "authors": [
         "Ben Yang",
@@ -169,25 +203,33 @@
         "Carmine Elvezio",
         "Steven Feiner"
       ],
-      "venue": "IEEE ISMAR 2024",
-      "venueDetail": "Adjunct",
+      "venue": "IEEE ISMAR 2024 Adjunct",
+      "venueDetail": "demo",
       "year": 2024,
+      "date": "2024-10",
       "award": "",
-      "thumbnail": "images/thumbs/mercury.png",
       "selected": 1,
       "tags": [
         "Visualization"
       ],
+      "thumbnail": "images/thumbs/mercury-ecs-gui.jpg",
+      "teaser": "images/figures/mercury-ecs-gui.jpg",
+      "teaserAlt": "Headset view of a city street. Traffic lights are outlined in green, with arrows between them.",
+      "teaserCaption": "Message routes between traffic lights in a street scene, drawn in the headset.",
       "links": {
         "doi": "https://doi.org/10.1109/ISMAR-Adjunct64951.2024.00189",
         "video": "https://youtu.be/dRMyo0BJWqg",
         "code": "https://github.com/ColumbiaCGUI/MercuryMessaging"
       },
+      "videoDuration": "1:20",
+      "videoPoster": "images/figures/mercury-ecs-gui-video.jpg",
+      "videoAlt": "Still from the video: a city street with a traffic light, seen from the headset with tracked hands.",
+      "videoCaption": "The XR GUI in a street scene, alongside the developer working in the Unity editor",
       "bibtex": "@inproceedings{yang2024xrgui,\n  title={An XR GUI for Visualizing Messages in ECS Architectures},\n  author={Yang, Ben and He, Xichen and Li, Jace and Elvezio, Carmine and Feiner, Steven},\n  booktitle={2024 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)},\n  pages={640--641},\n  year={2024},\n  doi={10.1109/ISMAR-Adjunct64951.2024.00189}\n}",
-      "id": "mercury-ecs-gui",
       "abstract": "Entity--Component--System (ECS) architectures are fundamental to many systems for developing extended reality (XR) applications. These applications often contain complex scenes and require intricately connected application logic to connect components together, making debugging and analysis difficult. Graph-based tools have been created to show actions in ECS-based scene hierarchies, but few address interactions that go beyond traditional hierarchical communication. To address this, we present an XR GUI for Mercury (a toolkit to handle cross-component ECS communication) that allows developers to view and edit relationships and interactions between scene entities in Mercury."
     },
     {
+      "id": "sweyepinch",
       "title": "SwEYEpinch and Beyond: Exploring Intuitive, Efficient Text Entry for Extended Reality via Eye and Hand Tracking",
       "authors": [
         "Ziheng Li",
@@ -202,22 +244,26 @@
       "venue": "ACM CHI 2026",
       "venueDetail": "",
       "year": 2026,
+      "date": "2026-04",
       "award": "",
-      "thumbnail": "images/thumbs/sweyepinch.jpg",
       "selected": 0,
       "tags": [
         "Text Entry"
       ],
+      "thumbnail": "images/thumbs/sweyepinch.jpg",
+      "teaser": "images/figures/sweyepinch.jpg",
+      "teaserAlt": "Drawing of a virtual keyboard. An eye icon moves from the t key to the o key while a hand holds a pinch, and word suggestions sit above the keys.",
+      "teaserCaption": "Gaze swipes across the keys while the hand holds a pinch, and suggestions appear before the swipe ends. Cropped from the paper’s teaser figure.",
       "links": {
         "pdf": "https://arxiv.org/pdf/2604.03520",
         "doi": "https://doi.org/10.1145/3772318.3791820",
         "arxiv": "https://arxiv.org/abs/2604.03520"
       },
       "bibtex": "@inproceedings{li2026sweyepinch,\n  title={SwEYEpinch and Beyond: Exploring Intuitive, Efficient Text Entry for Extended Reality via Eye and Hand Tracking},\n  author={Li, Ziheng and He, Xichen and Wu, Mengyuan and Tong, Zeyi and Wei, Haowen and Yang, Ben and Feiner, Steven and Sajda, Paul},\n  booktitle={Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems},\n  year={2026},\n  doi={10.1145/3772318.3791820}\n}",
-      "id": "sweyepinch",
       "abstract": "Despite steady progress, text entry in Extended Reality (XR) often remains slower and more effortful than typing on a physical keyboard or touchscreen. We explore a simple idea: use gaze to swipe through a virtual keyboard for the fast, low-effort where and a manual pinch held throughout the swipe for the when, extending and validating it through a series of user studies. We first show that a basic version including a low-latency decoder with spatiotemporal Dynamic Time Warping and fixation filtering outperforms selecting individual keys sequentially, either by finger tapping each or gazing at each while pinching. We then add mid-swipe prediction and in-gesture cancellation, improving words per minute (WPM) without hurting accuracy. We show that this approach is faster and more preferred than previous gaze-swipe approaches, finger tapping with prediction, or hand swiping with the same additions. Furthermore, a seven-day, 30-session study demonstrates sustained learning, with peak performance reaching 64.7 WPM."
     },
     {
+      "id": "vhard",
       "title": "VHard: An XR UI for Kinesthetic Rehearsal of Rock Climbing Moves",
       "authors": [
         "Joel Salzman",
@@ -225,25 +271,33 @@
         "Ben Yang",
         "Steven Feiner"
       ],
-      "venue": "IEEE ISMAR 2024",
-      "venueDetail": "Adjunct",
+      "venue": "IEEE ISMAR 2024 Adjunct",
+      "venueDetail": "demo",
       "year": 2024,
+      "date": "2024-10",
       "award": "",
-      "thumbnail": "images/thumbs/vhard.png",
       "selected": 0,
       "tags": [
         "Climbing"
       ],
+      "thumbnail": "images/thumbs/vhard.jpg",
+      "teaser": "images/figures/vhard.jpg",
+      "teaserAlt": "XR view of a climbing wall with scanned holds. A translucent hand reaches a hold, and green highlights mark the fingertips on it.",
+      "teaserCaption": "A tracked hand on a hold of the MoonBoard digital twin. VHard shows how precisely each hand placement matches the hold.",
       "links": {
         "doi": "https://doi.org/10.1109/ISMAR-Adjunct64951.2024.00188",
         "video": "https://youtu.be/x0IEVw16LZ0",
         "code": "https://github.com/ColumbiaCGUI/VHard"
       },
+      "videoDuration": "1:32",
+      "videoPoster": "images/figures/vhard-video.jpg",
+      "videoAlt": "Still from the video: a translucent hand on a green hold among scanned holds.",
+      "videoCaption": "Rehearsing moves in XR, alongside footage of the same climbs on a real MoonBoard",
       "bibtex": "@inproceedings{salzman2024vhard,\n  title={VHard: An XR UI for Kinesthetic Rehearsal of Rock Climbing Moves},\n  author={Salzman, Joel and Li, Jace and Yang, Ben and Feiner, Steven},\n  booktitle={2024 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)},\n  pages={638--639},\n  year={2024},\n  doi={10.1109/ISMAR-Adjunct64951.2024.00188}\n}",
-      "id": "vhard",
       "abstract": "Rock climbers frequently struggle to complete climbs due to the difficulty of practicing precise movements without actually attempting them. A standard strategy is to kinesthetically rehearse the hand and body positions required while on the ground. However, the lack of live feedback severely hampers this method because climbers can only roughly estimate the distances and positions involved. We introduce VHard, an extended reality (XR) application that visualizes the precision and accuracy of hand placements on a metric digital twin of a MoonBoard climbing wall. VHard augments kinesthetic rehearsal with XR feedback in order to assist climbers in completing difficult boulder problems."
     },
     {
+      "id": "ice-sheet",
       "title": "Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis",
       "authors": [
         "Alexandra Boghosian",
@@ -258,23 +312,30 @@
         "Steven Feiner",
         "Robin Bell"
       ],
-      "venue": "IGARSS 2023",
+      "venue": "IEEE IGARSS 2023",
       "venueDetail": "",
       "year": 2023,
+      "date": "2023-07",
       "award": "",
-      "thumbnail": "images/thumbs/ice.png",
       "selected": 0,
       "tags": [
         "Visualization"
       ],
+      "thumbnail": "images/thumbs/ice-sheet.jpg",
+      "teaser": "images/figures/ice-sheet.jpg",
+      "teaserAlt": "XR view of ice-penetrating radar cross-sections standing as vertical panels above a terrain surface, with a data panel at right.",
+      "teaserCaption": "Ice-penetrating radar cross-sections stand as vertical panels in 3D above the terrain, where they can be inspected and interpreted.",
       "links": {
         "doi": "https://doi.org/10.1109/IGARSS52108.2023.10283077",
         "video": "https://youtu.be/vp7Z44J7t_Q",
         "code": "https://github.com/ColumbiaCGUI/PolXR",
         "project": "https://pgg.ldeo.columbia.edu/projects/VISER"
       },
+      "videoDuration": "9:11",
+      "videoPoster": "images/figures/ice-sheet-video.jpg",
+      "videoAlt": "Still from the video: a presenter beside a large video wall showing radar data in 3D.",
+      "videoCaption": "A live demonstration of the application on a stage video wall",
       "bibtex": "@inproceedings{boghosian2023icesheet,\n  title={Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis},\n  author={Boghosian, Alexandra and Cordero, S. Isabel and Elvezio, Carmine and Sanchez-Zarate, Sofia and Yang, Ben and Guo, Shengyue and Ashikin, Qazi and Salzman, Joel and Tinto, Kirsty and Feiner, Steven and Bell, Robin},\n  booktitle={IGARSS 2023 - 2023 IEEE International Geoscience and Remote Sensing Symposium},\n  pages={52--55},\n  year={2023},\n  doi={10.1109/IGARSS52108.2023.10283077}\n}",
-      "id": "ice-sheet",
       "abstract": "Three-dimensional geospatial thinking is an important skillset used by earth scientists and students to analyze and interpret data [1]. This method of inquiry is useful in glaciology, where traditional geophysical survey techniques have been adapted to map three-dimensional (3D) ice sheet structures and inform studies of ice flow, mass change, and history in both Greenland and Antarctica. Ice-penetrating radar images the ice in two-dimensional (2D) cross-sections from the surface to the base. Analysis of this data often requires visual inspection and 3D interpretation, but is hindered by data visualization tools and techniques that rarely transcend the two-dimensionality of the computer screen [2]. Recent advances in Augmented Reality (AR) and Virtual Reality (VR), together referred to as Extended Reality (XR), offer a glimpse into the future of 3D ice-sheet data analysis [3]. These technologies offer users an immersive experience where 3D geospatial datasets can be understood more immediately than with 2D maps, and gestural user interfaces can enhance understanding. Here we present Pol-XR, an XR application that supports both visualization and interpretation of ice-penetrating radar in Antarctica and Greenland."
     }
   ],
@@ -321,7 +382,8 @@
       "authorRole": "First author",
       "venue": "IEEE ICRA 2027",
       "review": "single-blind",
-      "anonymized": false
+      "anonymized": false,
+      "submitted": "2026-09"
     },
     {
       "title": null,
@@ -329,7 +391,8 @@
       "venue": "IEEE VR 2027",
       "review": "double-blind",
       "anonymized": true,
-      "decisionExpected": "2026-11-30"
+      "decisionExpected": "2026-11-30",
+      "submitted": "2026-08"
     },
     {
       "title": null,
@@ -337,7 +400,8 @@
       "venue": "ACM CHI 2027",
       "review": "double-blind",
       "anonymized": true,
-      "decisionExpected": "2026-12-17"
+      "decisionExpected": "2026-12-17",
+      "submitted": "2026-09"
     }
   ]
 }
