@@ -241,10 +241,12 @@ main:focus { outline: none; }
   margin-top: calc(-1 * var(--nav-h) - 1px); /* slide under the sticky nav and its border */
   padding: calc(var(--nav-h) + var(--sp-5)) var(--gutter) var(--sp-6);
 }
-/* static composition of soft gaussian blooms; the WebGL field (hero-splats.js) draws over it */
-.hero-bg {
-  --fx: 77%; --fy: 47%;
-  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+/* static composition of soft gaussian blooms: the fallback when WebGL2 or motion is off,
+   and a faint base layer under the live splat field (hero-splats.js) */
+.hero-bg { --fx: 77%; --fy: 47%; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.hero-bg::before {
+  content: ""; position: absolute; inset: 0;
+  transition: opacity 1.6s var(--ease-out);
   background:
     radial-gradient(5% 3% at calc(var(--fx) - 18%) calc(var(--fy) - 22%), var(--bloom-c), transparent),
     radial-gradient(3.5% 2.4% at calc(var(--fx) + 14%) calc(var(--fy) - 16%), var(--bloom-a), transparent),
@@ -256,14 +258,19 @@ main:focus { outline: none; }
     radial-gradient(32% 22% at var(--fx) var(--fy), var(--bloom-b), transparent),
     radial-gradient(52% 42% at calc(var(--fx) - 6%) calc(var(--fy) + 4%), var(--bloom-a), transparent),
     radial-gradient(1.5px 1.5px at 30% 40%, var(--bloom-c), transparent) 0 0 / 173px 151px,
-    radial-gradient(1px 1px at 70% 20%, var(--accent), transparent) 0 0 / 241px 199px,
-    var(--bg);
+    radial-gradient(1px 1px at 70% 20%, var(--accent), transparent) 0 0 / 241px 199px;
 }
+#hero-canvas {
+  position: absolute; inset: 0; display: block; width: 100%; height: 100%;
+  opacity: 0; transition: opacity 1.6s var(--ease-out);
+}
+.hero.splats-live #hero-canvas { opacity: 1; }
+.hero.splats-live .hero-bg::before { opacity: 0.18; }
 /* scrim: keeps the text column calm and fades the field into the page */
 .hero::after {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background:
-    linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 80%, transparent) 28%, color-mix(in srgb, var(--bg) 30%, transparent) 52%, transparent 70%),
+    linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 86%, transparent) 32%, color-mix(in srgb, var(--bg) 64%, transparent) 56%, transparent 76%),
     linear-gradient(180deg, transparent 70%, var(--bg) 100%);
 }
 .hero-inner {
