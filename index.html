@@ -86,26 +86,26 @@
 <h2>Research</h2>
 <div class="thread">
 <h3>Telling a robot what to build</h3>
-<p>Many assembly tasks only need parts placed relative to each other, not at fixed spots in the room. I design <abbr>XR</abbr> interfaces that let a person specify just those constraints and leave the rest to a robot, starting from relative 6DoF pose specification for task guidance [<a class="cite" href="#p-task-guidance">5</a>]. Delegate the Details pairs such an interface with a robot planner and was tested in a 20-participant study and offline evaluation with a simulated UR5 robot [<a class="cite" href="#p-delegate-the-details">9</a>]; a bimanual technique lets an operator nest constraint groups into assembly hierarchies for teleoperation [<a class="cite" href="#p-bimanual-teleoperation">6</a>].</p>
+<p>Many assembly tasks only need parts placed relative to each other, not at fixed spots in the room. I design <abbr>XR</abbr> interfaces that let a person specify just those constraints and leave the rest to a robot, starting from relative 6DoF pose specification for task guidance [<a class="cite" href="#p-task-guidance">6</a>]. Delegate the Details pairs such an interface with a robot planner and was tested in a 20-participant study and offline evaluation with a simulated UR5 robot [<a class="cite" href="#p-delegate-the-details">2</a>]; a bimanual technique lets an operator nest constraint groups into assembly hierarchies for teleoperation [<a class="cite" href="#p-bimanual-teleoperation">5</a>].</p>
 <figure class="fig">
 <img class="fade" src="images/figures/fig-hierarchy.jpg" width="1600" height="900" alt="VR view of two nested hulls: a blue wireframe hull around a stack of parts sits inside an orange hull that also holds a pink gear, with a controller at lower right.">
-<figcaption><span class="fig-label">Fig. 1.</span> Constraint groups drawn as hulls. The blue group is nested inside the orange one; parts in a group keep their poses relative to each other, and the robot chooses where to build each relative group [<a class="cite" href="#p-bimanual-teleoperation">6</a>].</figcaption>
+<figcaption><span class="fig-label">Fig. 1.</span> Constraint groups drawn as hulls. The blue group is nested inside the orange one; parts in a group keep their poses relative to each other, and the robot chooses where to build each relative group [<a class="cite" href="#p-bimanual-teleoperation">5</a>].</figcaption>
 </figure>
 </div>
 <div class="thread">
 <h3>Bringing physical objects into the headset</h3>
-<p>With a Meta Quest&nbsp;3, our pipeline uses feed-forward 3D Gaussian splatting to digitize a real object in two to four seconds, with no per-scene training. The result is a proxy that can be grabbed, inspected, and used to select the physical object it came from [<a class="cite" href="#p-fast-digitization">7</a>]. An earlier study found that proxies kept in the scene after use were more efficient than temporary ones for hard reselection, and participants preferred them [<a class="cite" href="#p-permanent-proxies">4</a>].</p>
+<p>With a Meta Quest&nbsp;3, our pipeline uses feed-forward 3D Gaussian splatting to digitize a real object in two to four seconds, with no per-scene training. The result is a proxy that can be grabbed, inspected, and used to select the physical object it came from [<a class="cite" href="#p-fast-digitization">4</a>]. An earlier study found that proxies kept in the scene after use were more efficient than temporary ones for hard reselection, and participants preferred them [<a class="cite" href="#p-permanent-proxies">7</a>].</p>
 <figure class="fig">
 <img class="fade" src="images/figures/fig-proxy-link.jpg" width="1600" height="900" alt="Headset passthrough view of a lab desk. Small 3D proxies of desk objects float in outlined boxes, and a line runs from one of them to a real spray bottle, which is outlined in cyan." loading="lazy" decoding="async">
-<figcaption><span class="fig-label">Fig. 2.</span> Gaussian-splatted proxies float above the desk. Pointing at one draws a line to the physical object it came from, here a spray bottle, and outlines it [<a class="cite" href="#p-fast-digitization">7</a>].</figcaption>
+<figcaption><span class="fig-label">Fig. 2.</span> Gaussian-splatted proxies float above the desk. Pointing at one draws a line to the physical object it came from, here a spray bottle, and outlines it [<a class="cite" href="#p-fast-digitization">4</a>].</figcaption>
 </figure>
 </div>
 <div class="thread">
 <h3>Toolkits for building <abbr>XR</abbr> systems</h3>
-<p><abbr>XR</abbr> applications wire many scene objects together with intricate logic, which makes them hard to build and debug. Our <abbr>XR&nbsp;GUI</abbr> for the MercuryMessaging toolkit lets developers view and edit the messages and relationships between scene entities from inside the headset [<a class="cite" href="#p-mercury-ecs-gui">2</a>].</p>
+<p><abbr>XR</abbr> applications wire many scene objects together with intricate logic, which makes them hard to build and debug. Our <abbr>XR&nbsp;GUI</abbr> for the MercuryMessaging toolkit lets developers view and edit the messages and relationships between scene entities from inside the headset [<a class="cite" href="#p-mercury-ecs-gui">9</a>].</p>
 <figure class="fig">
 <img class="fade" src="images/figures/mercury-ecs-gui.jpg" width="1600" height="900" alt="Headset view of a city street. Traffic lights are outlined in green, and arrows run between them along the road." loading="lazy" decoding="async">
-<figcaption><span class="fig-label">Fig. 3.</span> Message routes between traffic lights in a street scene, drawn in the headset by the <abbr>XR&nbsp;GUI</abbr> [<a class="cite" href="#p-mercury-ecs-gui">2</a>].</figcaption>
+<figcaption><span class="fig-label">Fig. 3.</span> Message routes between traffic lights in a street scene, drawn in the headset by the <abbr>XR&nbsp;GUI</abbr> [<a class="cite" href="#p-mercury-ecs-gui">9</a>].</figcaption>
 </figure>
 </div>
 <h3>Software</h3>
@@ -120,7 +120,7 @@
 <li class="pub" id="p-xr-agent-bci">
 <span class="pub-year">2026</span>
 <div class="pub-body">
-<p class="pub-title"><span class="pub-num">[10]</span><a href="papers/xr-agent-bci.html">Augmenting Human Performance with an <abbr>XR</abbr> Agent Learning from Online Behavior and <abbr>BCI</abbr> Evidence</a></p>
+<p class="pub-title"><span class="pub-num">[1]</span><a href="papers/xr-agent-bci.html">Augmenting Human Performance with an <abbr>XR</abbr> Agent Learning from Online Behavior and <abbr>BCI</abbr> Evidence</a></p>
 <p class="pub-meta pub-authors"><span class="nobr">Z. Li</span>, <span class="nobr">X. He</span>, <span class="nobr">H. Chen</span>, <span class="nobr">C. Zou</span>, <span class="nobr">S. Bai</span>, <span class="me">B. Yang</span>, <span class="nobr">M. Wu</span>, <span class="nobr">J. Ledner</span>, <span class="nobr">Y.-J. Cheng</span>, <span class="nobr">A. Yamauchi</span>, <span class="nobr">D. G. Turakhia</span>, <span class="nobr">S. Feiner</span>, <span class="nobr">P. Sajda</span></p>
 <p class="pub-meta"><abbr title="ACM Symposium on User Interface Software and Technology (UIST)">ACM&nbsp;UIST</abbr> 2026, to appear</p>
 <ul class="pub-meta links dots"><li><a href="https://arxiv.org/abs/2608.30369">arXiv</a></li><li><a href="papers/xr-agent-bci.html#cite">BibTeX</a></li></ul>
@@ -129,7 +129,7 @@
 </li>
 <li class="pub" id="p-delegate-the-details">
 <div class="pub-body">
-<p class="pub-title"><span class="pub-num">[9]</span><a href="papers/delegate-the-details.html">Delegate the Details: Flexible Assembly Constraint Authoring for Collaborative <abbr>XR</abbr></a></p>
+<p class="pub-title"><span class="pub-num">[2]</span><a href="papers/delegate-the-details.html">Delegate the Details: Flexible Assembly Constraint Authoring for Collaborative <abbr>XR</abbr></a></p>
 <p class="pub-meta pub-authors"><span class="me">Ben Yang</span>, <span class="nobr">Xichen He</span>, <span class="nobr">Charlie Zou</span>, <span class="nobr">Jen-Shuo Liu</span>, <span class="nobr">Barbara Tversky</span>, <span class="nobr">Steven Feiner</span></p>
 <p class="pub-meta"><abbr title="IEEE International Symposium on Mixed and Augmented Reality (ISMAR)">IEEE&nbsp;ISMAR</abbr> 2026</p>
 <ul class="pub-meta links dots"><li><a href="papers/delegate-the-details.html#cite">BibTeX</a></li></ul>
@@ -138,7 +138,7 @@
 </li>
 <li class="pub" id="p-sweyepinch">
 <div class="pub-body">
-<p class="pub-title"><span class="pub-num">[8]</span><a href="papers/sweyepinch.html">SwEYEpinch and Beyond: Exploring Intuitive, Efficient Text Entry for Extended Reality via Eye and Hand Tracking</a></p>
+<p class="pub-title"><span class="pub-num">[3]</span><a href="papers/sweyepinch.html">SwEYEpinch and Beyond: Exploring Intuitive, Efficient Text Entry for Extended Reality via Eye and Hand Tracking</a></p>
 <p class="pub-meta pub-authors"><span class="nobr">Ziheng Li</span>, <span class="nobr">Xichen He</span>, <span class="nobr">Mengyuan Wu</span>, <span class="nobr">Zeyi Tong</span>, <span class="nobr">Haowen Wei</span>, <span class="me">Ben Yang</span>, <span class="nobr">Steven Feiner</span>, <span class="nobr">Paul Sajda</span></p>
 <p class="pub-meta"><abbr title="CHI Conference on Human Factors in Computing Systems">ACM&nbsp;CHI</abbr> 2026</p>
 <ul class="pub-meta links dots"><li><a href="https://arxiv.org/pdf/2604.03520">PDF</a></li><li><a href="https://arxiv.org/abs/2604.03520">arXiv</a></li><li><a href="https://doi.org/10.1145/3772318.3791820">DOI</a></li><li><a href="papers/sweyepinch.html#cite">BibTeX</a></li></ul>
@@ -147,7 +147,7 @@
 </li>
 <li class="pub" id="p-fast-digitization">
 <div class="pub-body">
-<p class="pub-title"><span class="pub-num">[7]</span><a href="papers/fast-digitization.html">Fast Digitization in <abbr>XR</abbr> of <span class="nobr">Reality-Linked</span> <span class="nobr">Gaussian-Splatted</span> Proxies</a></p>
+<p class="pub-title"><span class="pub-num">[4]</span><a href="papers/fast-digitization.html">Fast Digitization in <abbr>XR</abbr> of <span class="nobr">Reality-Linked</span> <span class="nobr">Gaussian-Splatted</span> Proxies</a></p>
 <p class="pub-meta pub-authors"><span class="me">Ben Yang</span>, <span class="nobr">Shanying Liu</span>, <span class="nobr">Kirthana Natarajan</span>, <span class="nobr">Steven Feiner</span></p>
 <p class="pub-meta"><abbr title="IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)">IEEE&nbsp;VR</abbr> 2026 Workshops (<abbr>VRW</abbr>), research demo. <i>Best Research Demo Award (Honorable Mention).</i></p>
 <ul class="pub-meta links dots"><li><a href="pdf/yang2026-fast-digitization.pdf">PDF</a></li><li><a href="https://doi.org/10.1109/VRW70859.2026.00389">DOI</a></li><li><a href="https://youtu.be/jwcnjAPASKU">Video (1:46)</a></li><li><a href="papers/fast-digitization.html#cite">BibTeX</a></li></ul>
@@ -156,7 +156,7 @@
 </li>
 <li class="pub" id="p-bimanual-teleoperation">
 <div class="pub-body">
-<p class="pub-title"><span class="pub-num">[6]</span><a href="papers/bimanual-teleoperation.html">Bimanual <abbr>XR</abbr> Specification of Relative and Absolute Assembly Hierarchies for Teleoperation</a></p>
+<p class="pub-title"><span class="pub-num">[5]</span><a href="papers/bimanual-teleoperation.html">Bimanual <abbr>XR</abbr> Specification of Relative and Absolute Assembly Hierarchies for Teleoperation</a></p>
 <p class="pub-meta pub-authors"><span class="me">Ben Yang</span>, <span class="nobr">Xichen He</span>, <span class="nobr">Charlie Zou</span>, <span class="nobr">Jen-Shuo Liu</span>, <span class="nobr">Barbara Tversky</span>, <span class="nobr">Steven Feiner</span></p>
 <p class="pub-meta"><abbr title="IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)">IEEE&nbsp;VR</abbr> 2026 Workshops (<abbr>VRW</abbr>), poster</p>
 <ul class="pub-meta links dots"><li><a href="https://arxiv.org/pdf/2603.01495">PDF</a></li><li><a href="https://arxiv.org/abs/2603.01495">arXiv</a></li><li><a href="https://doi.org/10.1109/VRW70859.2026.00191">DOI</a></li><li><a href="https://youtu.be/_pE681sRjHI">Video (1:00)</a></li><li><a href="papers/bimanual-teleoperation.html#cite">BibTeX</a></li></ul>
@@ -166,7 +166,7 @@
 <li class="pub" id="p-task-guidance">
 <span class="pub-year">2025</span>
 <div class="pub-body">
-<p class="pub-title"><span class="pub-num">[5]</span><a href="papers/task-guidance.html">Virtual Reality Task Guidance Through Relative 6DoF Pose Specification</a></p>
+<p class="pub-title"><span class="pub-num">[6]</span><a href="papers/task-guidance.html">Virtual Reality Task Guidance Through Relative 6DoF Pose Specification</a></p>
 <p class="pub-meta pub-authors"><span class="me">Ben Yang</span>, <span class="nobr">Xichen He</span>, <span class="nobr">Charlie Zou</span>, <span class="nobr">Jen-Shuo Liu</span>, <span class="nobr">Barbara Tversky</span>, <span class="nobr">Steven Feiner</span></p>
 <p class="pub-meta"><abbr title="IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)">IEEE&nbsp;ISMAR</abbr> 2025 Adjunct</p>
 <ul class="pub-meta links dots"><li><a href="pdf/yang2025-task-guidance.pdf">PDF</a></li><li><a href="https://doi.org/10.1109/ISMAR-Adjunct68609.2025.00247">DOI</a></li><li><a href="papers/task-guidance.html#cite">BibTeX</a></li></ul>
@@ -175,7 +175,7 @@
 </li>
 <li class="pub" id="p-permanent-proxies">
 <div class="pub-body">
-<p class="pub-title"><span class="pub-num">[4]</span><a href="papers/permanent-proxies.html">Permanent Proxies for Bimanual Selection and Manipulation in <abbr>VR</abbr></a></p>
+<p class="pub-title"><span class="pub-num">[7]</span><a href="papers/permanent-proxies.html">Permanent Proxies for Bimanual Selection and Manipulation in <abbr>VR</abbr></a></p>
 <p class="pub-meta pub-authors"><span class="me">Ben Yang</span>, <span class="nobr">Jen-Shuo Liu</span>, <span class="nobr">Xichen He</span>, <span class="nobr">Barbara Tversky</span>, <span class="nobr">Steven Feiner</span></p>
 <p class="pub-meta"><abbr title="IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)">IEEE&nbsp;VR</abbr> 2025 Workshops (<abbr>VRW</abbr>), poster</p>
 <ul class="pub-meta links dots"><li><a href="pdf/yang2025-permanent-proxies.pdf">PDF</a></li><li><a href="https://doi.org/10.1109/VRW66409.2025.00311">DOI</a></li><li><a href="https://youtu.be/TRDW5mpFBng">Video (1:00)</a></li><li><a href="papers/permanent-proxies.html#cite">BibTeX</a></li></ul>
@@ -185,7 +185,7 @@
 <li class="pub" id="p-vhard">
 <span class="pub-year">2024</span>
 <div class="pub-body">
-<p class="pub-title"><span class="pub-num">[3]</span><a href="papers/vhard.html">VHard: An <abbr>XR&nbsp;UI</abbr> for Kinesthetic Rehearsal of Rock Climbing Moves</a></p>
+<p class="pub-title"><span class="pub-num">[8]</span><a href="papers/vhard.html">VHard: An <abbr>XR&nbsp;UI</abbr> for Kinesthetic Rehearsal of Rock Climbing Moves</a></p>
 <p class="pub-meta pub-authors"><span class="nobr">Joel Salzman</span>, <span class="nobr">Jace Li</span>, <span class="me">Ben Yang</span>, <span class="nobr">Steven Feiner</span></p>
 <p class="pub-meta"><abbr title="IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)">IEEE&nbsp;ISMAR</abbr> 2024 Adjunct, demo</p>
 <ul class="pub-meta links dots"><li><a href="https://doi.org/10.1109/ISMAR-Adjunct64951.2024.00188">DOI</a></li><li><a href="https://youtu.be/x0IEVw16LZ0">Video (1:32)</a></li><li><a href="https://github.com/ColumbiaCGUI/VHard">Code</a></li><li><a href="papers/vhard.html#cite">BibTeX</a></li></ul>
@@ -194,7 +194,7 @@
 </li>
 <li class="pub" id="p-mercury-ecs-gui">
 <div class="pub-body">
-<p class="pub-title"><span class="pub-num">[2]</span><a href="papers/mercury-ecs-gui.html">An <abbr>XR&nbsp;GUI</abbr> for Visualizing Messages in <abbr>ECS</abbr> Architectures</a></p>
+<p class="pub-title"><span class="pub-num">[9]</span><a href="papers/mercury-ecs-gui.html">An <abbr>XR&nbsp;GUI</abbr> for Visualizing Messages in <abbr>ECS</abbr> Architectures</a></p>
 <p class="pub-meta pub-authors"><span class="me">Ben Yang</span>, <span class="nobr">Xichen He</span>, <span class="nobr">Jace Li</span>, <span class="nobr">Carmine Elvezio</span>, <span class="nobr">Steven Feiner</span></p>
 <p class="pub-meta"><abbr title="IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)">IEEE&nbsp;ISMAR</abbr> 2024 Adjunct, demo</p>
 <ul class="pub-meta links dots"><li><a href="https://doi.org/10.1109/ISMAR-Adjunct64951.2024.00189">DOI</a></li><li><a href="https://youtu.be/dRMyo0BJWqg">Video (1:20)</a></li><li><a href="https://github.com/ColumbiaCGUI/MercuryMessaging">Code</a></li><li><a href="papers/mercury-ecs-gui.html#cite">BibTeX</a></li></ul>
@@ -204,7 +204,7 @@
 <li class="pub" id="p-ice-sheet">
 <span class="pub-year">2023</span>
 <div class="pub-body">
-<p class="pub-title"><span class="pub-num">[1]</span><a href="papers/ice-sheet.html">Augmented Reality and Virtual Reality for <span class="nobr">Ice-Sheet</span> Data Analysis</a></p>
+<p class="pub-title"><span class="pub-num">[10]</span><a href="papers/ice-sheet.html">Augmented Reality and Virtual Reality for <span class="nobr">Ice-Sheet</span> Data Analysis</a></p>
 <p class="pub-meta pub-authors"><span class="nobr">Alexandra Boghosian</span>, <span class="nobr">S. Isabel Cordero</span>, <span class="nobr">Carmine Elvezio</span>, <span class="nobr">Sofia Sanchez-Zarate</span>, <span class="me">Ben Yang</span>, <span class="nobr">Shengyue Guo</span>, <span class="nobr">Qazi Ashikin</span>, <span class="nobr">Joel Salzman</span>, <span class="nobr">Kirsty Tinto</span>, <span class="nobr">Steven Feiner</span>, <span class="nobr">Robin Bell</span></p>
 <p class="pub-meta"><abbr title="IEEE International Geoscience and Remote Sensing Symposium">IEEE&nbsp;IGARSS</abbr> 2023</p>
 <ul class="pub-meta links dots"><li><a href="https://doi.org/10.1109/IGARSS52108.2023.10283077">DOI</a></li><li><a href="https://youtu.be/vp7Z44J7t_Q">Video (9:11)</a></li><li><a href="https://github.com/ColumbiaCGUI/PolXR">Code</a></li><li><a href="https://pgg.ldeo.columbia.edu/projects/VISER">Project</a></li><li><a href="papers/ice-sheet.html#cite">BibTeX</a></li></ul>

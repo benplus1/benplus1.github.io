@@ -243,7 +243,7 @@ function pubItem(p, showYear) {
 // Newest first; the year is printed on the first entry of each year.
 function pubList(list) {
   let year = null;
-  const items = list.slice().sort((a, b) => b.num - a.num).map((p) => {
+  const items = list.slice().sort((a, b) => a.num - b.num).map((p) => {
     const item = pubItem(p, p.year !== year);
     year = p.year;
     return item;
@@ -455,10 +455,11 @@ function main() {
     p.venueFull = fullVenue(p.bib);
     byId.set(p.id, p);
   }
-  // Oldest is [1]; preprints follow the papers, so a new paper never renumbers an older one.
-  const byDate = (a, b) => a.date.localeCompare(b.date) || a.id.localeCompare(b.id);
-  papers.sort(byDate).forEach((p, i) => { p.num = i + 1; });
-  preprints.sort(byDate).forEach((p, i) => { p.num = papers.length + i + 1; });
+  // Numbers follow the display order: the newest paper is [1], and preprints continue the count after the papers.
+  // Adding a paper renumbers the list; the in-text citations are regenerated from the ids.
+  const newestFirst = (a, b) => b.date.localeCompare(a.date) || b.id.localeCompare(a.id);
+  papers.sort(newestFirst).forEach((p, i) => { p.num = i + 1; });
+  preprints.sort(newestFirst).forEach((p, i) => { p.num = papers.length + i + 1; });
 
   const now = new Date();
   const iso = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
