@@ -227,7 +227,8 @@ main > section,
 .runhead a:hover {
   text-decoration-color: var(--ink);
 }
-.theme-toggle {
+.theme-toggle,
+.pub-switch button {
   padding: 0;
   border: 0;
   background: none;
@@ -239,7 +240,8 @@ main > section,
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
 }
-.theme-toggle:hover {
+.theme-toggle:hover,
+.pub-switch button:hover {
   text-decoration-color: var(--ink);
 }
 
@@ -390,6 +392,20 @@ a.cite {
   object-fit: cover;
   outline: 1px solid var(--hairline);
   outline-offset: -1px;
+}
+/* Selected view: html.pubs-selected (set by the inline head script, switched by scripts.js) hides the entries whose
+   selected is 0, and the Preprints heading and list when no preprint is selected. Print overrides both rules. */
+html.pubs-selected #publications [data-selected="0"] {
+  display: none;
+}
+/* The last entry on view drops its bottom margin, as the last entry of the full list does. */
+html.pubs-selected #publications .pub:not(:has(~ [data-selected="1"])) {
+  margin-bottom: 0;
+}
+/* The Show all / Show selected switch; its button is styled with .theme-toggle. */
+.pub-switch {
+  font-size: 0.9375rem;
+  line-height: 1.6;
 }
 
 .dated > li {
@@ -553,6 +569,17 @@ pre {
     max-width: none;
     margin: 0.3rem 0 0;
   }
+  /* The switch shares the heading's row, at the end of the aside track and on the heading's baseline. */
+  #publications-heading,
+  .pub-switch {
+    grid-row: 1;
+    align-self: baseline;
+  }
+  .pub-switch {
+    grid-column: aside;
+    justify-self: end;
+    margin: 0;
+  }
   .colophon {
     margin-top: 4.5rem;
   }
@@ -668,7 +695,7 @@ pre {
   .thread,
   .pubs,
   .pub,
-  .pub-year,
+  .pub-year:not([hidden]),
   .pub-thumb,
   .thread > .fig,
   main.paper > .fig {
@@ -703,8 +730,16 @@ pre {
     break-inside: avoid;
   }
   .contents,
-  .copy {
+  .copy,
+  .pub-switch {
     display: none;
+  }
+  /* Print shows every entry, whichever view is on screen. */
+  html.pubs-selected #publications [data-selected="0"] {
+    display: block;
+  }
+  html.pubs-selected #publications .pub:not(:last-child) {
+    margin-bottom: 1.75rem;
   }
   a,
   a:visited,

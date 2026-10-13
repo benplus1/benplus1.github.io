@@ -2,6 +2,10 @@
 // Run by hand after editing either file or a citation in index.html:  node gen.js
 // In index.html it rewrites only the regions between <!-- name:start --> and <!-- name:end --> (publications,
 // news, updated) and the numbers in [<a class="cite" href="#p-<id>">n</a>]; everything else there is hand-written.
+// The publications region lists every entry, so the page is complete without JavaScript. Each <li class="pub">
+// carries data-selected (its selected flag, 1 or 0) and data-year, and a year label that is hidden unless the entry
+// is the first of its year in its list; the Preprints heading and list carry data-selected too (1 if any preprint is
+// selected). scripts.js uses these to open on the selected entries and to switch between them and all entries.
 // Bad data stops it with a non-zero exit that names the entry, before any file is written.
 'use strict';
 const fs = require('fs');
@@ -172,6 +176,7 @@ function checkEntry(p, kind) {
   if (Number(p.date.slice(0, 4)) !== p.year) fail(`${where}: year ${p.year} does not match date ${p.date}`);
   if (!p.venue) fail(`${where}: venue is empty`);
   if (!p.bibtex) fail(`${where}: bibtex is empty`);
+  if (p.selected !== 0 && p.selected !== 1) fail(`${where}: selected must be the number 1 or 0`);
   const L = p.links || {};
   for (const key of Object.keys(L)) {
     if (!LINK_ORDER.some(([k]) => k === key)) fail(`${where}: unknown link "${key}"`);
@@ -222,8 +227,8 @@ function linkItems(p, onPage) {
 }
 
 function pubItem(p, showYear) {
-  const out = [`<li class="pub" id="p-${p.id}">`];
-  if (showYear) out.push(`<span class="pub-year">${p.year}</span>`);
+  const out = [`<li class="pub" id="p-${p.id}" data-selected="${p.selected}" data-year="${p.year}">`,
+    `<span class="pub-year"${showYear ? '' : ' hidden'}>${p.year}</span>`];
   out.push('<div class="pub-body">',
     `<p class="pub-title"><span class="pub-num">[${p.num}]</span><a href="papers/${p.id}.html">${keepCompounds(smallCaps(esc(p.title), p.id))}</a></p>`,
     `<p class="pub-meta pub-authors">${authorsHtml(p)}</p>`,
@@ -240,15 +245,16 @@ function pubItem(p, showYear) {
   return out.join('\n');
 }
 
-// Newest first; the year is printed on the first entry of each year.
-function pubList(list) {
+// Newest first. Every entry has a year label, shown only on the first entry of each year; in the Selected view
+// scripts.js moves it to the first entry on view. attrs adds attributes to the <ol>.
+function pubList(list, attrs = '') {
   let year = null;
   const items = list.slice().sort((a, b) => a.num - b.num).map((p) => {
     const item = pubItem(p, p.year !== year);
     year = p.year;
     return item;
   });
-  return `<ol class="pubs">\n${items.join('\n')}\n</ol>`;
+  return `<ol class="pubs"${attrs}>\n${items.join('\n')}\n</ol>`;
 }
 
 function underReviewList(data) {
@@ -466,7 +472,10 @@ function main() {
   const updated = `<time datetime="${iso}">${now.getDate()}&nbsp;${MONTHS[now.getMonth()]}&nbsp;${now.getFullYear()}</time>`;
 
   const pubParts = [pubList(papers)];
-  if (preprints.length) pubParts.push('<h3>Preprints</h3>', pubList(preprints));
+  if (preprints.length) {
+    const selectedAttr = ` data-selected="${preprints.some((p) => p.selected === 1) ? 1 : 0}"`;
+    pubParts.push(`<h3${selectedAttr}>Preprints</h3>`, pubList(preprints, selectedAttr));
+  }
   if ((data.underReview || []).length) pubParts.push('<h3>Under review</h3>', underReviewList(data));
 
   let home = read('index.html');

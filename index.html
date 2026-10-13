@@ -31,6 +31,7 @@
 <script>(function () { try { var theme = localStorage.getItem('theme'); if (theme === 'dark' || theme === 'light') document.documentElement.setAttribute('data-theme', theme); } catch (err) { console.warn('The stored theme could not be read.', err); } })();</script>
 <link rel="stylesheet" href="styles.css">
 <script>if (matchMedia('(prefers-reduced-motion: no-preference)').matches) document.documentElement.classList.add('fade-ready');</script>
+<script>document.documentElement.classList.add('pubs-selected');</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -114,10 +115,11 @@
 </section>
 
 <section id="publications">
-<h2>Publications</h2>
+<h2 id="publications-heading">Publications</h2>
+<p class="pub-switch" hidden><button type="button" data-pub-toggle aria-controls="publications" aria-expanded="false">Show all</button></p>
 <!-- publications:start -->
 <ol class="pubs">
-<li class="pub" id="p-xr-agent-bci">
+<li class="pub" id="p-xr-agent-bci" data-selected="1" data-year="2026">
 <span class="pub-year">2026</span>
 <div class="pub-body">
 <p class="pub-title"><span class="pub-num">[1]</span><a href="papers/xr-agent-bci.html">Augmenting Human Performance with an <abbr>XR</abbr> Agent Learning from Online Behavior and <abbr>BCI</abbr> Evidence</a></p>
@@ -127,7 +129,8 @@
 </div>
 <a class="pub-thumb" href="papers/xr-agent-bci.html" aria-hidden="true" tabindex="-1"><img class="fade" src="images/thumbs/xr-agent-bci.jpg" alt="" width="960" height="540" loading="lazy" decoding="async"></a>
 </li>
-<li class="pub" id="p-delegate-the-details">
+<li class="pub" id="p-delegate-the-details" data-selected="1" data-year="2026">
+<span class="pub-year" hidden>2026</span>
 <div class="pub-body">
 <p class="pub-title"><span class="pub-num">[2]</span><a href="papers/delegate-the-details.html">Delegate the Details: Flexible Assembly Constraint Authoring for Collaborative <abbr>XR</abbr></a></p>
 <p class="pub-meta pub-authors"><span class="me">Ben Yang</span>, <span class="nobr">Xichen He</span>, <span class="nobr">Charlie Zou</span>, <span class="nobr">Jen-Shuo Liu</span>, <span class="nobr">Barbara Tversky</span>, <span class="nobr">Steven Feiner</span></p>
@@ -136,7 +139,8 @@
 </div>
 <a class="pub-thumb" href="papers/delegate-the-details.html" aria-hidden="true" tabindex="-1"><img class="fade" src="images/thumbs/delegate-the-details.jpg" alt="" width="960" height="540" loading="lazy" decoding="async"></a>
 </li>
-<li class="pub" id="p-sweyepinch">
+<li class="pub" id="p-sweyepinch" data-selected="0" data-year="2026">
+<span class="pub-year" hidden>2026</span>
 <div class="pub-body">
 <p class="pub-title"><span class="pub-num">[3]</span><a href="papers/sweyepinch.html">SwEYEpinch and Beyond: Exploring Intuitive, Efficient Text Entry for Extended Reality via Eye and Hand Tracking</a></p>
 <p class="pub-meta pub-authors"><span class="nobr">Ziheng Li</span>, <span class="nobr">Xichen He</span>, <span class="nobr">Mengyuan Wu</span>, <span class="nobr">Zeyi Tong</span>, <span class="nobr">Haowen Wei</span>, <span class="me">Ben Yang</span>, <span class="nobr">Steven Feiner</span>, <span class="nobr">Paul Sajda</span></p>
@@ -145,7 +149,8 @@
 </div>
 <a class="pub-thumb" href="papers/sweyepinch.html" aria-hidden="true" tabindex="-1"><img class="fade" src="images/thumbs/sweyepinch.jpg" alt="" width="960" height="540" loading="lazy" decoding="async"></a>
 </li>
-<li class="pub" id="p-fast-digitization">
+<li class="pub" id="p-fast-digitization" data-selected="1" data-year="2026">
+<span class="pub-year" hidden>2026</span>
 <div class="pub-body">
 <p class="pub-title"><span class="pub-num">[4]</span><a href="papers/fast-digitization.html">Fast Digitization in <abbr>XR</abbr> of <span class="nobr">Reality-Linked</span> <span class="nobr">Gaussian-Splatted</span> Proxies</a></p>
 <p class="pub-meta pub-authors"><span class="me">Ben Yang</span>, <span class="nobr">Shanying Liu</span>, <span class="nobr">Kirthana Natarajan</span>, <span class="nobr">Steven Feiner</span></p>
@@ -154,7 +159,8 @@
 </div>
 <a class="pub-thumb" href="papers/fast-digitization.html" aria-hidden="true" tabindex="-1"><img class="fade" src="images/thumbs/fast-digitization.jpg" alt="" width="960" height="540" loading="lazy" decoding="async"></a>
 </li>
-<li class="pub" id="p-bimanual-teleoperation">
+<li class="pub" id="p-bimanual-teleoperation" data-selected="1" data-year="2026">
+<span class="pub-year" hidden>2026</span>
 <div class="pub-body">
 <p class="pub-title"><span class="pub-num">[5]</span><a href="papers/bimanual-teleoperation.html">Bimanual <abbr>XR</abbr> Specification of Relative and Absolute Assembly Hierarchies for Teleoperation</a></p>
 <p class="pub-meta pub-authors"><span class="me">Ben Yang</span>, <span class="nobr">Xichen He</span>, <span class="nobr">Charlie Zou</span>, <span class="nobr">Jen-Shuo Liu</span>, <span class="nobr">Barbara Tversky</span>, <span class="nobr">Steven Feiner</span></p>
@@ -163,7 +169,7 @@
 </div>
 <a class="pub-thumb" href="papers/bimanual-teleoperation.html" aria-hidden="true" tabindex="-1"><img class="fade" src="images/thumbs/bimanual-teleoperation.jpg" alt="" width="864" height="486" loading="lazy" decoding="async"></a>
 </li>
-<li class="pub" id="p-task-guidance">
+<li class="pub" id="p-task-guidance" data-selected="1" data-year="2025">
 <span class="pub-year">2025</span>
 <div class="pub-body">
 <p class="pub-title"><span class="pub-num">[6]</span><a href="papers/task-guidance.html">Virtual Reality Task Guidance Through Relative 6DoF Pose Specification</a></p>
@@ -173,7 +179,8 @@
 </div>
 <a class="pub-thumb" href="papers/task-guidance.html" aria-hidden="true" tabindex="-1"><img class="fade" src="images/thumbs/task-guidance.jpg" alt="" width="960" height="540" loading="lazy" decoding="async"></a>
 </li>
-<li class="pub" id="p-permanent-proxies">
+<li class="pub" id="p-permanent-proxies" data-selected="1" data-year="2025">
+<span class="pub-year" hidden>2025</span>
 <div class="pub-body">
 <p class="pub-title"><span class="pub-num">[7]</span><a href="papers/permanent-proxies.html">Permanent Proxies for Bimanual Selection and Manipulation in <abbr>VR</abbr></a></p>
 <p class="pub-meta pub-authors"><span class="me">Ben Yang</span>, <span class="nobr">Jen-Shuo Liu</span>, <span class="nobr">Xichen He</span>, <span class="nobr">Barbara Tversky</span>, <span class="nobr">Steven Feiner</span></p>
@@ -182,7 +189,7 @@
 </div>
 <a class="pub-thumb" href="papers/permanent-proxies.html" aria-hidden="true" tabindex="-1"><img class="fade" src="images/thumbs/permanent-proxies.jpg" alt="" width="960" height="540" loading="lazy" decoding="async"></a>
 </li>
-<li class="pub" id="p-vhard">
+<li class="pub" id="p-vhard" data-selected="0" data-year="2024">
 <span class="pub-year">2024</span>
 <div class="pub-body">
 <p class="pub-title"><span class="pub-num">[8]</span><a href="papers/vhard.html">VHard: An <abbr>XR&nbsp;UI</abbr> for Kinesthetic Rehearsal of Rock Climbing Moves</a></p>
@@ -192,7 +199,8 @@
 </div>
 <a class="pub-thumb" href="papers/vhard.html" aria-hidden="true" tabindex="-1"><img class="fade" src="images/thumbs/vhard.jpg" alt="" width="960" height="540" loading="lazy" decoding="async"></a>
 </li>
-<li class="pub" id="p-mercury-ecs-gui">
+<li class="pub" id="p-mercury-ecs-gui" data-selected="1" data-year="2024">
+<span class="pub-year" hidden>2024</span>
 <div class="pub-body">
 <p class="pub-title"><span class="pub-num">[9]</span><a href="papers/mercury-ecs-gui.html">An <abbr>XR&nbsp;GUI</abbr> for Visualizing Messages in <abbr>ECS</abbr> Architectures</a></p>
 <p class="pub-meta pub-authors"><span class="me">Ben Yang</span>, <span class="nobr">Xichen He</span>, <span class="nobr">Jace Li</span>, <span class="nobr">Carmine Elvezio</span>, <span class="nobr">Steven Feiner</span></p>
@@ -201,7 +209,7 @@
 </div>
 <a class="pub-thumb" href="papers/mercury-ecs-gui.html" aria-hidden="true" tabindex="-1"><img class="fade" src="images/thumbs/mercury-ecs-gui.jpg" alt="" width="960" height="540" loading="lazy" decoding="async"></a>
 </li>
-<li class="pub" id="p-ice-sheet">
+<li class="pub" id="p-ice-sheet" data-selected="0" data-year="2023">
 <span class="pub-year">2023</span>
 <div class="pub-body">
 <p class="pub-title"><span class="pub-num">[10]</span><a href="papers/ice-sheet.html">Augmented Reality and Virtual Reality for <span class="nobr">Ice-Sheet</span> Data Analysis</a></p>
@@ -212,9 +220,9 @@
 <a class="pub-thumb" href="papers/ice-sheet.html" aria-hidden="true" tabindex="-1"><img class="fade" src="images/thumbs/ice-sheet.jpg" alt="" width="960" height="540" loading="lazy" decoding="async"></a>
 </li>
 </ol>
-<h3>Preprints</h3>
-<ol class="pubs">
-<li class="pub" id="p-pointgrade">
+<h3 data-selected="0">Preprints</h3>
+<ol class="pubs" data-selected="0">
+<li class="pub" id="p-pointgrade" data-selected="0" data-year="2026">
 <span class="pub-year">2026</span>
 <div class="pub-body">
 <p class="pub-title"><span class="pub-num">[11]</span><a href="papers/pointgrade.html">PointGrade: Geometric Priors for Grading MoonBoard Problems</a></p>
@@ -306,10 +314,10 @@
 </main>
 
 <footer class="colophon">
-<p>Set in Ibarra Real Nova and Source Sans 3. Updated <!-- updated:start --><time datetime="2026-10-12">12&nbsp;October&nbsp;2026</time><!-- updated:end -->.<span class="print-url"> https://www.cs.columbia.edu/~benyang/</span></p>
+<p>Set in Ibarra Real Nova and Source Sans 3. Updated <!-- updated:start --><time datetime="2026-10-13">13&nbsp;October&nbsp;2026</time><!-- updated:end -->.<span class="print-url"> https://www.cs.columbia.edu/~benyang/</span></p>
 </footer>
 
 </div>
-<script src="scripts.js" onerror="document.documentElement.classList.remove('fade-ready')"></script>
+<script src="scripts.js" onerror="document.documentElement.classList.remove('fade-ready', 'pubs-selected')"></script>
 </body>
 </html>

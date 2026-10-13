@@ -87,3 +87,64 @@
   label();
   button.parentElement.hidden = false;
 })();
+
+// Home page: Publications opens on the entries marked selected in publications.json, and the button by its heading
+// switches between them and all entries, renaming the heading and moving each year label to the first entry on view.
+// The state is html.pubs-selected, which the inline head script sets before the first paint so the full list never
+// flashes; the choice is not remembered. Print shows every entry, so the heading and labels follow it while printing.
+// Without JavaScript, or if this fails, every entry shows under the static heading and the button stays hidden.
+(function pubSwitch() {
+  var root = document.documentElement;
+  var button = document.querySelector('button[data-pub-toggle]');
+  if (!button && !root.classList.contains('pubs-selected')) return;
+  try {
+    if (!button) throw new Error('html.pubs-selected is set, but the page has no button[data-pub-toggle].');
+    var heading = document.getElementById('publications-heading');
+    var section = document.getElementById(button.getAttribute('aria-controls'));
+    if (!heading || !section) throw new Error('#publications-heading or the section the button controls is missing.');
+    // One array per <ol class="pubs">, read and checked before anything on the page changes.
+    var lists = Array.prototype.map.call(section.querySelectorAll('ol.pubs'), function (list) {
+      return Array.prototype.map.call(list.querySelectorAll('li.pub'), function (item) {
+        var entry = {
+          label: item.querySelector('.pub-year'),
+          year: item.getAttribute('data-year'),
+          selected: item.getAttribute('data-selected')
+        };
+        if (!entry.label || !entry.year || (entry.selected !== '0' && entry.selected !== '1')) {
+          throw new Error('Publication #' + item.id + ' lacks its year label, data-year or data-selected.');
+        }
+        return entry;
+      });
+    });
+    var printing = window.matchMedia('print');
+    // all: every entry is on view. Within each list a year is labeled once, on its first entry on view.
+    var show = function (all) {
+      heading.textContent = all ? 'Publications' : 'Selected publications';
+      button.textContent = all ? 'Show selected' : 'Show all';
+      button.setAttribute('aria-expanded', String(all));
+      lists.forEach(function (entries) {
+        var seen = {};
+        entries.forEach(function (entry) {
+          var first = (all || entry.selected === '1') && !seen[entry.year];
+          entry.label.hidden = !first;
+          if (first) seen[entry.year] = true;
+        });
+      });
+    };
+    var render = function () {
+      show(printing.matches || !root.classList.contains('pubs-selected'));
+    };
+    button.addEventListener('click', function () {
+      root.classList.toggle('pubs-selected');
+      render();
+    });
+    window.addEventListener('beforeprint', function () { show(true); });
+    window.addEventListener('afterprint', render);
+    printing.addEventListener('change', render);
+    render();
+    button.parentElement.hidden = false;
+  } catch (err) {
+    console.error('The publications switch failed, so every entry is shown.', err);
+    root.classList.remove('pubs-selected');
+  }
+})();
