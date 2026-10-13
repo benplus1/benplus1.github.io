@@ -383,15 +383,15 @@
       "abstract": "A MoonBoard is a standardized bouldering wall used in gyms around the world. Climbs up the wall limited to only a subset of holds are known as problems. We introduce PointGrade, a novel machine learning approach to predicting the difficulty of a MoonBoard problem. By sampling a point cloud from pre-scanned meshes of every hold, our model combines 3D object classification architecture with existing sequence-based approaches to difficulty grade prediction. Our method captures latent geometric information contained the climb, outperforming other work on the problem that neglect this data."
     }
   ],
-  "_underReviewNote": "underReview renders as the Under review block under Publications; gen.js makes no pages for it. A titled entry shows its title and venue only. An anonymized (double-blind) entry reads 'First-author paper under review at <venue> (double-blind)', built from authorRole, until showDoubleBlindTitles is true and its title is filled in. The double-blind titles must stay out of this public repo while the papers are under review. After the decisions (IEEE VR 2027 about 2026-11-30, ACM CHI 2027 about 2026-12-17), copy each title from the Manuscripts Under Review section of main.tex in Ben's private CV repo (benplus1/CV), then set showDoubleBlindTitles to true.",
+  "_underReviewNote": "underReview renders as the Under review block under Publications; gen.js makes no pages for it. A titled entry shows its title and venue only. An anonymized (double-blind) entry reads 'First-author paper under review at <venue> (double-blind)', built from authorRole, until showDoubleBlindTitles is true and its title is filled in. All three entries are anonymized while they are under double-blind review. Fill in each title after its decision (IEEE VR 2027 about 2026-11-30, ACM CHI 2027 about 2026-12-17, IEEE ICRA 2027 early 2027) by copying it from the Manuscripts Under Review comments in main.tex of Ben's private CV repo (benplus1/CV). Set showDoubleBlindTitles to true only once all three are decided; until then the titles must stay out of this public repo.",
   "showDoubleBlindTitles": false,
   "underReview": [
     {
-      "title": "TeleSplat: Real-Time 3DGS Memory for Immersive XR Teleoperation",
+      "title": null,
       "authorRole": "First author",
       "venue": "IEEE ICRA 2027",
-      "review": "single-blind",
-      "anonymized": false,
+      "review": "double-blind",
+      "anonymized": true,
       "submitted": "2026-09"
     },
     {
