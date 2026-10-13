@@ -22,7 +22,6 @@ const ACRONYMS = ['ACM', 'AGU', 'AI', 'AR', 'BCI', 'CGUI', 'CHI', 'COMS', 'ECS',
 const LINK_ORDER = [['pdf', 'PDF'], ['arxiv', 'arXiv'], ['doi', 'DOI'], ['video', 'Video'], ['code', 'Code'],
   ['project', 'Project']];
 const NO_SMALL_CAPS = new Set(['i', 'em', 'cite', 'abbr', 'code', 'pre', 'script', 'style']);
-const NEWS_VISIBLE = 5;
 const FADE_SCRIPT = '<script>if (matchMedia(\'(prefers-reduced-motion: no-preference)\').matches) '
   + 'document.documentElement.classList.add(\'fade-ready\');</script>';
 // Applies the reader's stored Dark/Light choice before the first paint; index.html carries the same script.
@@ -292,12 +291,9 @@ function newsRegion(news) {
     if (/<\s*(strong|b)\b/i.test(n.html)) fail(`${where}: no <strong> or <b> in news; italics are for titles only`);
     return { date: n.date, html: `<li><time datetime="${n.date}">${monthYear(n.date)}</time><span>${smallCaps(n.html, where)}</span></li>` };
   }).sort((a, b) => b.date.localeCompare(a.date)).map((r) => r.html);
-  let out = `<ol class="dated">\n${rows.slice(0, NEWS_VISIBLE).join('\n')}\n</ol>`;
-  const rest = rows.slice(NEWS_VISIBLE);
-  if (rest.length) {
-    out += `\n<details class="more">\n<summary>Earlier news (${rest.length})</summary>\n<ol class="dated">\n${rest.join('\n')}\n</ol>\n</details>`;
-  }
-  return out;
+  // Every item, newest first, in one list inside a box that shows about five and scrolls (.news-scroll in styles.css).
+  // tabindex lets a keyboard scroll the box; print shows the whole list.
+  return `<div class="news-scroll" tabindex="0" role="region" aria-label="News">\n<ol class="dated">\n${rows.join('\n')}\n</ol>\n</div>`;
 }
 
 function fillRegion(html, name, content, inline) {
@@ -476,7 +472,7 @@ function main() {
     const selectedAttr = ` data-selected="${preprints.some((p) => p.selected === 1) ? 1 : 0}"`;
     pubParts.push(`<h3${selectedAttr}>Preprints</h3>`, pubList(preprints, selectedAttr));
   }
-  if ((data.underReview || []).length) pubParts.push('<h3>Under review</h3>', underReviewList(data));
+  if ((data.underReview || []).length) pubParts.push('<h3>Under Review</h3>', underReviewList(data));
 
   let home = read('index.html');
   home = fillRegion(home, 'publications', pubParts.join('\n'));

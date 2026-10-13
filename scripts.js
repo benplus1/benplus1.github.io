@@ -119,7 +119,7 @@
     var printing = window.matchMedia('print');
     // all: every entry is on view. Within each list a year is labeled once, on its first entry on view.
     var show = function (all) {
-      heading.textContent = all ? 'Publications' : 'Selected publications';
+      heading.textContent = all ? 'Publications' : 'Selected Publications';
       button.textContent = all ? 'Show selected' : 'Show all';
       button.setAttribute('aria-expanded', String(all));
       lists.forEach(function (entries) {

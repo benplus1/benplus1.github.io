@@ -265,12 +265,14 @@ main > section,
   color: var(--ink-muted);
 }
 
+/* The rule belongs to the heading below it: the space above the rule is about twice the space between the rule and
+   the heading text. */
 main h2 {
   grid-column: margin-start / aside-end;
   font-size: 1.5rem;
   line-height: 1.2;
-  margin: 3.25rem 0 1.5rem;
-  padding-top: 0.6rem;
+  margin: 2.25rem 0 1.5rem;
+  padding-top: 1.1rem;
   border-top: 1px solid var(--rule);
 }
 h3 {
@@ -420,12 +422,16 @@ html.pubs-selected #publications .pub:not(:has(~ [data-selected="1"])) {
   color: var(--ink-muted);
   font-variant-numeric: lining-nums tabular-nums;
 }
-.more > summary {
-  margin: 0.75rem 0 0 calc(var(--date-col) + var(--date-gap));
-  color: var(--link);
-}
-.more[open] > summary {
-  margin-bottom: 0.75rem;
+/* News holds every item in a box that scrolls. Each breakpoint's max-height was measured from the rendered rows (at
+   390, 1024 and 1440 px wide): five items and the top half of the sixth's first line, which shows the list goes on.
+   Print shows the whole list. */
+.news-scroll {
+  max-height: 34.2rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 0.75rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--hairline) transparent;
 }
 
 .run-in {
@@ -476,7 +482,7 @@ main.paper > :has(+ h2) {
 }
 main.paper h2 {
   font-size: 1.5rem;
-  margin: 2.75rem 0 1.25rem;
+  margin: 2.25rem 0 1.25rem;
 }
 .ref {
   font-size: 1rem;
@@ -555,7 +561,14 @@ pre {
   }
   main h2 {
     font-size: 1.75rem;
-    margin: 4.5rem 0 1.75rem;
+    margin: 3rem 0 1.75rem;
+    padding-top: 1.4rem;
+  }
+  main.paper h2 {
+    margin-top: 2.5rem;
+  }
+  .news-scroll {
+    max-height: 22.05rem;
   }
   h3 {
     font-size: 1.375rem;
@@ -654,8 +667,11 @@ pre {
     padding-left: 0;
   }
   .dated,
-  .more {
+  .news-scroll {
     grid-column: margin-start / text-end;
+  }
+  .news-scroll {
+    max-height: 20.3rem;
   }
   .colophon p,
   .runhead p {
@@ -742,10 +758,14 @@ pre {
     margin-bottom: 1.75rem;
   }
   a,
-  a:visited,
-  .more > summary {
+  a:visited {
     color: var(--ink);
     text-decoration-line: none;
+  }
+  .news-scroll {
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
   }
   .fade-ready img.fade:not(.shown) {
     opacity: 1;

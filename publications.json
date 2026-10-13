@@ -344,7 +344,7 @@
       "abstract": "Three-dimensional geospatial thinking is an important skillset used by earth scientists and students to analyze and interpret data [1]. This method of inquiry is useful in glaciology, where traditional geophysical survey techniques have been adapted to map three-dimensional (3D) ice sheet structures and inform studies of ice flow, mass change, and history in both Greenland and Antarctica. Ice-penetrating radar images the ice in two-dimensional (2D) cross-sections from the surface to the base. Analysis of this data often requires visual inspection and 3D interpretation, but is hindered by data visualization tools and techniques that rarely transcend the two-dimensionality of the computer screen [2]. Recent advances in Augmented Reality (AR) and Virtual Reality (VR), together referred to as Extended Reality (XR), offer a glimpse into the future of 3D ice-sheet data analysis [3]. These technologies offer users an immersive experience where 3D geospatial datasets can be understood more immediately than with 2D maps, and gestural user interfaces can enhance understanding. Here we present Pol-XR, an XR application that supports both visualization and interpretation of ice-penetrating radar in Antarctica and Greenland."
     }
   ],
-  "_selectedNote": "Every publication and preprint needs selected, the number 1 or 0. The home page opens on the entries marked 1 under 'Selected publications', and its Show all button reveals the rest; without JavaScript and in print every entry shows, and the [n] numbers are the same in both views.",
+  "_selectedNote": "Every publication and preprint needs selected, the number 1 or 0. The home page opens on the entries marked 1 under 'Selected Publications', and its Show all button reveals the rest; without JavaScript and in print every entry shows, and the [n] numbers are the same in both views.",
   "_preprintsNote": "Preprints render under Publications after the published papers and are numbered after them; gen.js makes a page for each.",
   "preprints": [
     {
@@ -383,7 +383,7 @@
       "abstract": "A MoonBoard is a standardized bouldering wall used in gyms around the world. Climbs up the wall limited to only a subset of holds are known as problems. We introduce PointGrade, a novel machine learning approach to predicting the difficulty of a MoonBoard problem. By sampling a point cloud from pre-scanned meshes of every hold, our model combines 3D object classification architecture with existing sequence-based approaches to difficulty grade prediction. Our method captures latent geometric information contained the climb, outperforming other work on the problem that neglect this data."
     }
   ],
-  "_underReviewNote": "underReview renders as the Under review block under Publications; gen.js makes no pages for it. A titled entry shows its title and venue only. An anonymized (double-blind) entry reads 'First-author paper under review at <venue> (double-blind)', built from authorRole, until showDoubleBlindTitles is true and its title is filled in. All three entries are anonymized while they are under double-blind review. Fill in each title after its decision (IEEE VR 2027 about 2026-11-30, ACM CHI 2027 about 2026-12-17, IEEE ICRA 2027 early 2027) by copying it from the Manuscripts Under Review comments in main.tex of Ben's private CV repo (benplus1/CV). Set showDoubleBlindTitles to true only once all three are decided; until then the titles must stay out of this public repo.",
+  "_underReviewNote": "underReview renders as the Under Review block under Publications; gen.js makes no pages for it. A titled entry shows its title and venue only. An anonymized (double-blind) entry reads 'First-author paper under review at <venue> (double-blind)', built from authorRole, until showDoubleBlindTitles is true and its title is filled in. All three entries are anonymized while they are under double-blind review. Fill in each title after its decision (IEEE VR 2027 about 2026-11-30, ACM CHI 2027 about 2026-12-17, IEEE ICRA 2027 about 2027-01-31) by copying it from the Manuscripts Under Review comments in main.tex of Ben's private CV repo (benplus1/CV). Set showDoubleBlindTitles to true only once all three are decided; until then the titles must stay out of this public repo.",
   "showDoubleBlindTitles": false,
   "underReview": [
     {
@@ -392,6 +392,7 @@
       "venue": "IEEE ICRA 2027",
       "review": "double-blind",
       "anonymized": true,
+      "decisionExpected": "2027-01-31",
       "submitted": "2026-09"
     },
     {
