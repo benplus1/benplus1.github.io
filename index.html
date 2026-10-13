@@ -88,24 +88,24 @@
 <h3>Telling a robot what to build</h3>
 <p>Many assembly tasks only need parts placed relative to each other, not at fixed spots in the room. I design <abbr>XR</abbr> interfaces that let a person specify just those constraints and leave the rest to a robot, starting from relative 6DoF pose specification for task guidance [<a class="cite" href="#p-task-guidance">6</a>]. Delegate the Details pairs such an interface with a robot planner and was tested in a 20-participant study and offline evaluation with a simulated UR5 robot [<a class="cite" href="#p-delegate-the-details">2</a>]; a bimanual technique lets an operator nest constraint groups into assembly hierarchies for teleoperation [<a class="cite" href="#p-bimanual-teleoperation">5</a>].</p>
 <figure class="fig">
-<img class="fade" src="images/figures/fig-hierarchy.jpg" width="1600" height="900" alt="VR view of two nested hulls: a blue wireframe hull around a stack of parts sits inside an orange hull that also holds a pink gear, with a controller at lower right.">
-<figcaption><span class="fig-label">Fig. 1.</span> Constraint groups drawn as hulls. The blue group is nested inside the orange one; parts in a group keep their poses relative to each other, and the robot chooses where to build each relative group [<a class="cite" href="#p-bimanual-teleoperation">5</a>].</figcaption>
+<img class="fade" src="images/figures/fig-hierarchy.jpg" width="1120" height="630" alt="VR view of pipe parts staged on a wooden pallet. A gray pipe and a brass flanged pipe, joined by a solid blue line, share one glowing orange hull, and a T-pipe with a red valve wheel sits in a second hull at right. Dashed orange lines run from the pallet to the gray pipe, the T-pipe and a small valve, and two controllers point at the gray pipe and the T-pipe.">
+<figcaption><span class="fig-label">Fig. 1.</span> Parts staged on a pallet. Solid blue links mark poses the author prescribes, and dashed orange links mark poses delegated to the robot. Making the flanged pipe a prescribed child of the delegated gray pipe extends the gray pipe&rsquo;s bounding hull around it [<a class="cite" href="#p-delegate-the-details">2</a>].</figcaption>
 </figure>
 </div>
 <div class="thread">
 <h3>Bringing physical objects into the headset</h3>
 <p>With a Meta Quest&nbsp;3, our pipeline uses feed-forward 3D Gaussian splatting to digitize a real object in two to four seconds, with no per-scene training. The result is a proxy that can be grabbed, inspected, and used to select the physical object it came from [<a class="cite" href="#p-fast-digitization">4</a>]. An earlier study found that proxies kept in the scene after use were more efficient than temporary ones for hard reselection, and participants preferred them [<a class="cite" href="#p-permanent-proxies">7</a>].</p>
 <figure class="fig">
-<img class="fade" src="images/figures/fig-proxy-link.jpg" width="1600" height="900" alt="Headset passthrough view of a lab desk. Small 3D proxies of desk objects float in outlined boxes, and a line runs from one of them to a real spray bottle, which is outlined in cyan." loading="lazy" decoding="async">
-<figcaption><span class="fig-label">Fig. 2.</span> Gaussian-splatted proxies float above the desk. Pointing at one draws a line to the physical object it came from, here a spray bottle, and outlines it [<a class="cite" href="#p-fast-digitization">4</a>].</figcaption>
+<img class="fade" src="images/figures/fig-proxy-link.jpg" width="1088" height="612" alt="Headset passthrough view of a lab desk. Proxies of a spray bottle, a bag and a laptop float in wireframe boxes. A controller ray points at the bag proxy, whose box turns yellow, and a yellow line runs from it to the real bag, which is outlined by a yellow box labeled Handbag/Satchel." loading="lazy" decoding="async">
+<figcaption><span class="fig-label">Fig. 2.</span> Gaussian-splatted proxies float above the desk. Pointing at one draws a line to the physical object it came from, here a bag, and outlines it [<a class="cite" href="#p-fast-digitization">4</a>].</figcaption>
 </figure>
 </div>
 <div class="thread">
 <h3>Toolkits for building <abbr>XR</abbr> systems</h3>
 <p><abbr>XR</abbr> applications wire many scene objects together with intricate logic, which makes them hard to build and debug. Our <abbr>XR&nbsp;GUI</abbr> for the MercuryMessaging toolkit lets developers view and edit the messages and relationships between scene entities from inside the headset [<a class="cite" href="#p-mercury-ecs-gui">9</a>].</p>
 <figure class="fig">
-<img class="fade" src="images/figures/mercury-ecs-gui.jpg" width="1600" height="900" alt="Headset view of a city street. Traffic lights are outlined in green, and arrows run between them along the road." loading="lazy" decoding="async">
-<figcaption><span class="fig-label">Fig. 3.</span> Message routes between traffic lights in a street scene, drawn in the headset by the <abbr>XR&nbsp;GUI</abbr> [<a class="cite" href="#p-mercury-ecs-gui">9</a>].</figcaption>
+<img class="fade" src="images/figures/mercury-ecs-gui.jpg" width="1600" height="900" alt="Headset view of a city street crossing. Traffic lights are outlined in orange nearby and in bluish green farther away, red arrowheads run along the links between them, and blue arrowheads mark messages in transit." loading="lazy" decoding="async">
+<figcaption><span class="fig-label">Fig. 3.</span> Message routes in a street scene, drawn in the headset by the <abbr>XR&nbsp;GUI</abbr>. Outlines show how far a message has propagated, red arrowheads trace the links, and blue arrowheads are messages in transit [<a class="cite" href="#p-mercury-ecs-gui">9</a>].</figcaption>
 </figure>
 </div>
 <h3>Software</h3>
@@ -161,7 +161,7 @@
 <p class="pub-meta"><abbr title="IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)">IEEE&nbsp;VR</abbr> 2026 Workshops (<abbr>VRW</abbr>), poster</p>
 <ul class="pub-meta links dots"><li><a href="https://arxiv.org/pdf/2603.01495">PDF</a></li><li><a href="https://arxiv.org/abs/2603.01495">arXiv</a></li><li><a href="https://doi.org/10.1109/VRW70859.2026.00191">DOI</a></li><li><a href="https://youtu.be/_pE681sRjHI">Video (1:00)</a></li><li><a href="papers/bimanual-teleoperation.html#cite">BibTeX</a></li></ul>
 </div>
-<a class="pub-thumb" href="papers/bimanual-teleoperation.html" aria-hidden="true" tabindex="-1"><img class="fade" src="images/thumbs/bimanual-teleoperation.jpg" alt="" width="960" height="540" loading="lazy" decoding="async"></a>
+<a class="pub-thumb" href="papers/bimanual-teleoperation.html" aria-hidden="true" tabindex="-1"><img class="fade" src="images/thumbs/bimanual-teleoperation.jpg" alt="" width="864" height="486" loading="lazy" decoding="async"></a>
 </li>
 <li class="pub" id="p-task-guidance">
 <span class="pub-year">2025</span>

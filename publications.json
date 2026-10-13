@@ -81,8 +81,8 @@
       ],
       "thumbnail": "images/thumbs/fast-digitization.jpg",
       "teaser": "images/figures/fast-digitization.jpg",
-      "teaserAlt": "Headset passthrough view of a lab desk. Three small 3D proxies float above it, and a line runs from the laptop proxy to the real laptop, which is outlined in cyan.",
-      "teaserCaption": "Three proxies float above the desk. Pointing at the laptop’s proxy draws a line to the real laptop and outlines it.",
+      "teaserAlt": "Headset passthrough view of a lab desk. Gaussian-splatted proxies of a spray bottle, a bag and a laptop float in pink wireframe boxes above the real bag, bottles and laptop on the desk.",
+      "teaserCaption": "Proxies of a spray bottle, a bag and a laptop, reconstructed by feed-forward 3D Gaussian splatting, float in boxes above the desk. Each can be grabbed, inspected and used to select the physical object it came from.",
       "links": {
         "pdf": "pdf/yang2026-fast-digitization.pdf",
         "doi": "https://doi.org/10.1109/VRW70859.2026.00389",
@@ -117,8 +117,8 @@
       ],
       "thumbnail": "images/thumbs/bimanual-teleoperation.jpg",
       "teaser": "images/figures/bimanual-teleoperation.jpg",
-      "teaserAlt": "VR view of two nested hulls: a blue wireframe group of parts inside an orange group that also holds a pink gear.",
-      "teaserCaption": "A nested hierarchy of constraint groups. Each group is either relative, built wherever the robot chooses, or absolute, at a pose the author fixes.",
+      "teaserAlt": "VR view of two nested hulls above a floor grid. A blue wireframe hull around a red shaft with two cyan gears sits inside a translucent orange hull, which also holds a pink gear on a green shaft.",
+      "teaserCaption": "An absolute group, drawn as a blue wireframe hull, nested inside a relative group, drawn as an orange hull. The robot chooses where to build a relative group, while an absolute group keeps the pose the author gives it within its parent.",
       "links": {
         "pdf": "https://arxiv.org/pdf/2603.01495",
         "doi": "https://doi.org/10.1109/VRW70859.2026.00191",
@@ -154,8 +154,8 @@
       ],
       "thumbnail": "images/thumbs/task-guidance.jpg",
       "teaser": "images/figures/task-guidance.jpg",
-      "teaserAlt": "VR scene in which three groups of parts are enclosed in translucent hulls.",
-      "teaserCaption": "Groups of parts enclosed in translucent hulls. Poses are specified only within each group, so a group can be placed anywhere.",
+      "teaserAlt": "VR scene with three groups of motor parts, each in its own translucent blue hull: two orange shell parts and two screws at upper left, two yellow frame parts at lower left, and the assembled inner chassis, a red ring around a gray disk, at right.",
+      "teaserCaption": "The orange shell parts, the yellow frame parts and the assembled inner chassis of a motor, each set enclosed in a translucent hull. Poses are specified only within each set, so a set can be placed anywhere.",
       "links": {
         "pdf": "pdf/yang2025-task-guidance.pdf",
         "doi": "https://doi.org/10.1109/ISMAR-Adjunct68609.2025.00247"
@@ -184,8 +184,8 @@
       ],
       "thumbnail": "images/thumbs/permanent-proxies.jpg",
       "teaser": "images/figures/permanent-proxies.jpg",
-      "teaserAlt": "VR view over a table: a motherboard proxy outlined in yellow near the user’s controller, and a red curve running to a small distant object.",
-      "teaserCaption": "Outlined proxies of small and distant objects, each joined to its original by a curve. Manipulating a proxy moves its original, as in the Voodoo Dolls technique.",
+      "teaserAlt": "VR view over a wooden table. The left controller holds a motherboard proxy outlined in yellow, joined by a yellow arc to the original motherboard on the table. The right controller holds a RAM proxy outlined in red, joined by a red arc to the original RAM module, and a red outline on the motherboard proxy marks where the RAM goes.",
+      "teaserCaption": "Proxies of a motherboard and a RAM module, pulled into the hands and joined to their originals by arcs, with the RAM’s target pose outlined in red on the motherboard proxy. Manipulating a proxy moves its original, as in the Voodoo Dolls technique.",
       "links": {
         "pdf": "pdf/yang2025-permanent-proxies.pdf",
         "doi": "https://doi.org/10.1109/VRW66409.2025.00311",
@@ -219,8 +219,8 @@
       ],
       "thumbnail": "images/thumbs/mercury-ecs-gui.jpg",
       "teaser": "images/figures/mercury-ecs-gui.jpg",
-      "teaserAlt": "Headset view of a city street. Traffic lights are outlined in green, with arrows between them.",
-      "teaserCaption": "Message routes between traffic lights in a street scene, drawn in the headset.",
+      "teaserAlt": "Headset view of a city street crossing. Nearby traffic lights are outlined in orange and farther ones in bluish green, red arrowheads run along the links between them, blue arrowheads mark messages in transit, and the right controller is outlined in yellow.",
+      "teaserCaption": "Entities in a street scene are outlined by how far a message has propagated, yellow for the right controller, then orange and bluish green for successive sets of traffic lights. Red arrowheads trace the links, and blue arrowheads are messages traveling along them.",
       "links": {
         "doi": "https://doi.org/10.1109/ISMAR-Adjunct64951.2024.00189",
         "video": "https://youtu.be/dRMyo0BJWqg",
@@ -287,8 +287,8 @@
       ],
       "thumbnail": "images/thumbs/vhard.jpg",
       "teaser": "images/figures/vhard.jpg",
-      "teaserAlt": "XR view of a climbing wall with scanned holds. A translucent hand reaches a hold, and green highlights mark the fingertips on it.",
-      "teaserCaption": "A tracked hand on a hold of the MoonBoard digital twin. VHard shows how precisely each hand placement matches the hold.",
+      "teaserAlt": "Two views of one grip. Left, a photo of a hand gripping a white climbing hold. Right, the same grip in VHard, where a translucent hand closes on the scanned hold and the hold is highlighted green where the hand touches it.",
+      "teaserCaption": "A hand gripping the physical H10 hold of a MoonBoard, and the same grip in VHard, where the scanned hold is highlighted green to show where it is gripped.",
       "links": {
         "doi": "https://doi.org/10.1109/ISMAR-Adjunct64951.2024.00188",
         "video": "https://youtu.be/x0IEVw16LZ0",
