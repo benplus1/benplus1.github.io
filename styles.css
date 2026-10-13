@@ -166,7 +166,7 @@ main > section,
   display: grid;
   grid-template-columns: subgrid;
 }
-:where(.opening, main > section, main.paper, .thread, .pub, .runhead, .colophon) > * {
+:where(.opening, .lead, main > section, main.paper, .thread, .pub, .runhead, .colophon) > * {
   grid-column: text;
 }
 /* Grid items keep their margins (nothing collapses), so the last block of a section, thread or list drops
@@ -177,24 +177,22 @@ main > section,
   margin-bottom: 0;
 }
 
-.opening > h1 {
+.opening h1 {
   font-size: 2.75rem;
   line-height: 1;
   letter-spacing: -0.01em;
   margin-bottom: 1.25rem;
 }
-/* The photo stacks above the role sentence on phones and moves to the aside track from 48rem. */
+/* On phones the photo floats at the top right of the opening, so the name sits to its left and the role sentence
+   wraps around it (a float needs the .lead block). From 48rem .lead is display: contents, so the photo, name and
+   intro are grid items of the opening again and the photo moves to the aside track. */
 .portrait {
-  grid-row: 2;
-  justify-self: start;
-  width: 6rem;
+  float: right;
+  width: 5.5rem;
   height: auto;
-  margin-bottom: 1.25rem;
+  margin: 0.3rem 0 0.75rem 1rem;
   outline: 1px solid var(--hairline);
   outline-offset: -1px;
-}
-.intro {
-  grid-row: 3;
 }
 .intro > :last-child {
   margin-bottom: 0;
@@ -203,7 +201,7 @@ main > section,
   margin-top: 1.25rem;
 }
 .contents {
-  grid-row: 4;
+  grid-row: 2;
   margin-top: 1.25rem;
   font-size: 0.9375rem;
   line-height: 1.75;
@@ -541,13 +539,18 @@ pre {
       minmax(1.5rem, 1fr) [full-end];
     padding-block: 3.5rem 2.5rem;
   }
-  .opening > h1 {
+  .lead {
+    display: contents;
+  }
+  .opening h1 {
     grid-column: text-start / aside-end;
     font-size: 3.75rem;
     margin-bottom: 2rem;
   }
   .portrait {
     grid-column: aside;
+    grid-row: 2;
+    justify-self: start;
     width: 9.5rem;
     /* lowers the photo's top edge to the cap height of the role sentence's first line */
     margin: 0.42rem 0 0;
@@ -622,7 +625,7 @@ pre {
       minmax(1.5rem, 1fr) [full-end];
     padding-block: 4.5rem 3rem;
   }
-  .opening > h1 {
+  .opening h1 {
     grid-column: margin-start / aside-end;
     font-size: 4.5rem;
   }
