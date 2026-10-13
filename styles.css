@@ -596,6 +596,8 @@ pre {
   }
   main h2 {
     font-size: 1.875rem;
+    /* the text starts on the text track (margin track + gutter); the rule above it still spans the margin column */
+    padding-left: 11rem;
   }
   h3 {
     font-size: 1.4375rem;
