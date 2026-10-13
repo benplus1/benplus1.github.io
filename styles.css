@@ -278,9 +278,10 @@ h3 {
   line-height: 1.25;
   margin-bottom: 0.6rem;
 }
+/* On phones a subsection gap stays below the 2.25rem above a section rule. */
 main > section > h3,
 .thread + .thread {
-  margin-top: 2.75rem;
+  margin-top: 2rem;
 }
 
 .fig {
@@ -420,11 +421,13 @@ html.pubs-selected #publications .pub:not(:has(~ [data-selected="1"])) {
   color: var(--ink-muted);
   font-variant-numeric: lining-nums tabular-nums;
 }
-/* News holds every item in a box that scrolls. Each breakpoint's max-height was measured from the rendered rows (at
-   390, 1024 and 1440 px wide): five items and the top half of the sixth's first line, which shows the list goes on.
-   Print shows the whole list. */
+/* News holds every item in a box that scrolls; each max-height was measured from the rendered rows, and the cut line
+   at the bottom shows the list goes on. On phones (measured at 360 to 414 px wide) it shows three items and cuts
+   through the letters of the fourth, which keeps the box short enough to scroll the page past it. From 48rem
+   (measured at 1024 and 1440) it shows five items and the top half of the sixth's first line. Print shows the whole
+   list. */
 .news-scroll {
-  max-height: 34.2rem;
+  max-height: 21.25rem;
   overflow-y: auto;
   overscroll-behavior: contain;
   padding-right: 0.75rem;
@@ -575,6 +578,10 @@ pre {
   }
   h3 {
     font-size: 1.375rem;
+  }
+  main > section > h3,
+  .thread + .thread {
+    margin-top: 2.75rem;
   }
   .pub-title {
     font-size: 1.25rem;
