@@ -53,7 +53,7 @@ function assertSegments(segments, expected) {
 
 function assertExpansion(result, expected, warnings = []) {
   assertSegments(result.segments, expected.map(([label, seconds, kind]) => [
-    `Test — ${label}`, seconds, kind
+    label === 'Test' ? 'Test' : `Test — ${label}`, seconds, kind
   ]));
   assert.deepEqual(result.warnings, warnings);
 }
@@ -71,7 +71,7 @@ function assertDose(text, expected) {
 
 function assertOracle(schedule, oracle, total) {
   const expected = oracle.flatMap(([exercise, steps]) => steps.map(([label, seconds, kind]) => [
-    `${exercise} — ${label}`, seconds, kind
+    label === exercise ? exercise : `${exercise} — ${label}`, seconds, kind
   ]));
   assertSegments(schedule.segments, expected);
   assert.equal(schedule.total, total);
@@ -84,7 +84,7 @@ function assertMetadata(schedule, rows) {
     assert.ok(Number.isInteger(segment.rowIndex));
     assert.ok(segment.rowIndex >= 0 && segment.rowIndex < rows.length);
     const source = rows[segment.rowIndex];
-    assert.ok(segment.label.startsWith(`${source.exercise} — `));
+    assert.ok(segment.label === source.exercise || segment.label.startsWith(`${source.exercise} — `));
     assert.equal(segment.clock, source.clock);
     assert.equal(segment.link, source.link);
     assert.deepEqual(segment.notes, source.notes.split(/\r\n|\r|\n/).filter(line => line.trim()));
@@ -321,18 +321,83 @@ test('findSessions requires a nonempty session banner and exercise', () => {
   }
 });
 
-test('findSessions requires exactly five columns in banners, headers and data rows', () => {
-  const valid = [['Routine', '', '', '', ''], header, ['0:00-1:00', 'Test', '30 s', '', '']];
-  for (const index of [0, 1, 2]) {
-    for (const count of [4, 6]) {
-      const malformed = valid.map(cells => [...cells]);
-      malformed[index] = count === 4 ? malformed[index].slice(0, 4) : [...malformed[index], 'extra'];
-      assert.throws(() => findSessions(malformed), /column|five|5|row/i);
+test('findSessions ignores an empty sixth cell and extra whitespace cells in data rows', () => {
+  const valid = [
+    ['Routine', '', '', '', ''], header,
+    ['0:00-1:00', 'Test', '30 s', 'https://example.com/demo', 'First cue\nSecond cue']
+  ];
+  const expected = findSessions(valid);
+  for (const extra of [[''], [' \t\r\n '], ['', ' \t', '\n']]) {
+    assert.deepEqual(findSessions([...valid.slice(0, 2), [...valid[2], ...extra]]), expected);
+  }
+});
+
+test('findSessions ignores extra empty or whitespace cells in every row type', () => {
+  const valid = [
+    ['Routine', '', '', '', ''], header, ['0:00-1:00', 'Test', '30 s', '', ''],
+    ['After climbing, optional', 'Wrist stretch', '15 s', '', ''], blank,
+    ['Second routine', '', '', '', ''], header, ['0:00-1:00', 'Second', '30 s', '', '']
+  ];
+  const expected = findSessions(valid);
+  for (const index of [0, 1, 2, 3, 4]) {
+    for (const extra of [[''], [' \t\r\n '], ['', ' \t', '', '\n']]) {
+      const padded = valid.map((cells, rowIndex) => rowIndex === index ? [...cells, ...extra] : cells);
+      assert.deepEqual(findSessions(padded), expected, `Sheet row ${index + 1}`);
     }
   }
-  assert.throws(() => findSessions([
-    ...valid, ['After climbing, optional', 'Wrist stretch', '15 s', '']
-  ]), /column|five|5|row/i);
+});
+
+for (const [description, extra] of [
+  ['an added empty column', ['']],
+  ['added whitespace columns', [' \t', '\n', ' \r\n ']]
+]) {
+  test(`findSessions ignores ${description} across the fixture`, () => {
+    const rows = parseCsv(fixture);
+    assert.deepEqual(findSessions(rows.map(cells => [...cells, ...extra])), findSessions(rows));
+  });
+}
+
+test('findSessions rejects content beyond E in every row type with the exact Sheet row', () => {
+  const valid = [
+    ['Routine', '', '', '', ''], header, ['0:00-1:00', 'Test', '30 s', '', ''],
+    ['After climbing, optional', 'Wrist stretch', '15 s', '', ''], blank
+  ];
+  for (const index of [0, 1, 2, 3, 4]) {
+    for (const extra of [['x'], ['', 'extra'], [' \t', ' \r\n', 'extra'], ['', '', '', 'extra']]) {
+      const malformed = valid.map((cells, rowIndex) => rowIndex === index ? [...cells, ...extra] : cells);
+      assert.throws(() => findSessions(malformed), {
+        name: 'Error', message: new RegExp(`^Sheet row ${index + 1}\\b.*beyond column E`)
+      });
+    }
+  }
+});
+
+test('findSessions requires five columns A-E in nonempty banners, headers and data rows', () => {
+  const valid = [
+    ['Routine', '', '', '', ''], header, ['0:00-1:00', 'Test', '30 s', '', ''],
+    ['After climbing, optional', 'Wrist stretch', '15 s', '', '']
+  ];
+  for (const index of [0, 1, 2, 3]) {
+    for (const count of [1, 2, 3, 4]) {
+      const malformed = valid.map(cells => [...cells]);
+      malformed[index] = malformed[index].slice(0, count);
+      assert.throws(() => findSessions(malformed), {
+        name: 'Error', message: new RegExp(`^Sheet row ${index + 1}\\b.*five required columns A-E`)
+      });
+    }
+  }
+});
+
+test('findSessions allows nonzero shorter blank separators and rejects zero-column rows', () => {
+  const first = [['Routine', '', '', '', ''], header, ['0:00-1:00', 'Test', '30 s', '', '']];
+  const second = [['Second routine', '', '', '', ''], header, ['0:00-1:00', 'Second', '30 s', '', '']];
+  const expected = findSessions([...first, blank, ...second]);
+  for (const count of [1, 2, 3, 4]) {
+    for (const cell of ['', ' \t\r\n ']) {
+      assert.deepEqual(findSessions([...first, Array(count).fill(cell), ...second]), expected);
+    }
+  }
+  assert.throws(() => findSessions([...first, [], ...second]), /Sheet row 4\b.*column/);
 });
 
 test('parseDose recognizes repeated holds, default resets and explicit reset/rest lengths', () => {
@@ -529,7 +594,8 @@ test('expandRow uses the exercise for an empty dose', () => {
   const result = expandRow(row('', { exercise: 'Buffer', slot: 120 }), {
     slot: 120, isLast: true, nextName: ''
   });
-  assertSegments(result.segments, [['Buffer — Buffer', 120, 'work']]);
+  assertSegments(result.segments, [['Buffer', 120, 'work']]);
+  assert.equal(result.segments[0].speech, 'Buffer');
   assert.deepEqual(result.warnings, []);
 });
 
@@ -608,6 +674,16 @@ test('buildSchedule matches every splits segment in order for exactly 1320 secon
   const schedule = buildSchedule(splits, { includeOptional: false });
   assertOracle(schedule, splitsOracle, 1320);
   assertMetadata(schedule, splits.rows);
+});
+
+test('buildSchedule ends the splits fixture with a 120-second Buffer work segment', () => {
+  const [, splits] = fixtureSessions();
+  const schedule = buildSchedule(splits, { includeOptional: false });
+  const last = schedule.segments.at(-1);
+  assert.equal(last.label, 'Buffer');
+  assert.equal(last.speech, 'Buffer');
+  assert.equal(last.seconds, 120);
+  assert.equal(last.kind, 'work');
 });
 
 test('buildSchedule ends each optional group independently', () => {

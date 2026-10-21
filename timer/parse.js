@@ -107,9 +107,12 @@ export function findSessions(rows) {
     if (!Array.isArray(cells) || cells.some(cell => typeof cell !== 'string')) {
       throw new TypeError(`${context} must be an array of string cells`);
     }
+    if (cells.slice(5).some(cell => cell.trim())) {
+      throw new Error(`${context} must not have content beyond column E`);
+    }
     const empty = cells.every(cell => !cell.trim());
-    if (cells.length !== 5 && !(empty && cells.length > 0 && cells.length < 5)) {
-      throw new Error(`${context} must have exactly five columns (found ${cells.length})`);
+    if (cells.length < 5 && !(empty && cells.length > 0)) {
+      throw new Error(`${context} must have five required columns A-E (found ${cells.length})`);
     }
     if (empty) {
       session = null;
@@ -132,7 +135,7 @@ export function findSessions(rows) {
       return;
     }
     if (session === null) {
-      if (!clock.trim() || cells.slice(1).some(cell => cell.trim())) {
+      if (!clock.trim() || cells.slice(1, 5).some(cell => cell.trim())) {
         throw new Error(`${context}: data requires a session banner and Clock/Exercise header`);
       }
       banner = clock.trim();
@@ -345,7 +348,7 @@ export function expandRow(row, options) {
 
   return {
     segments: segments.filter(segment => segment.seconds > 0).map(segment => ({
-      label: `${row.exercise} — ${segment.label}`,
+      label: segment.label === row.exercise ? row.exercise : `${row.exercise} — ${segment.label}`,
       speech: segmentSpeech(row.exercise, segment),
       seconds: segment.seconds,
       kind: segment.kind
