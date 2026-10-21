@@ -1,0 +1,300 @@
+@font-face {
+  font-family: "Ibarra Real Nova";
+  src: url("../fonts/ibarra-real-nova-roman.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ibarra Real Nova";
+  src: url("../fonts/ibarra-real-nova-italic.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("../fonts/source-sans-3-roman.woff2") format("woff2");
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("../fonts/source-sans-3-italic.woff2") format("woff2");
+  font-weight: 400 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+  --paper: #ffffff;
+  --ink: #111111;
+  --ink-muted: #5e5e5e;
+  --rule: #111111;
+  --hairline: #d4d4d4;
+  --link: #0033a0;
+  --link-underline: #6685c6;
+  --link-visited: #022169;
+  --serif: "Ibarra Real Nova", Baskerville, "Baskerville Old Face", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: "Source Sans 3", "Source Sans Pro", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, Menlo, monospace;
+  /* Date column of the dated rows; at 72rem it equals the page's margin track and gutter. */
+  --date-col: 4.75rem;
+  --date-gap: 0.75rem;
+}
+/* Dark palette: follows the system unless the reader picked Light; the Dark/Light button sets data-theme. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #141414;
+    --ink: #e6e4e0;
+    --ink-muted: #a3a09b;
+    --rule: #e6e4e0;
+    --hairline: #2e2e2e;
+    --link: #9db8f0;
+    --link-underline: #5a77b3;
+    --link-visited: #b9ccf5;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #141414;
+  --ink: #e6e4e0;
+  --ink-muted: #a3a09b;
+  --rule: #e6e4e0;
+  --hairline: #2e2e2e;
+  --link: #9db8f0;
+  --link-underline: #5a77b3;
+  --link-visited: #b9ccf5;
+}
+
+.timer {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.125rem;
+  line-height: 1.45;
+  font-variant-numeric: lining-nums;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+.timer *,
+.timer *::before,
+.timer *::after {
+  box-sizing: border-box;
+}
+.timer [hidden] {
+  display: none !important;
+}
+.timer .timer-page {
+  max-width: 40rem;
+  margin-inline: auto;
+  padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1.5rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+  overflow-wrap: anywhere;
+}
+.timer h1,
+.timer h2,
+.timer p,
+.timer ul,
+.timer ol {
+  margin: 0 0 1rem;
+}
+.timer h1,
+.timer h2 {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 1.25rem;
+}
+.timer h1 {
+  margin-bottom: 0.5rem;
+}
+.timer a,
+.timer button {
+  color: var(--link);
+  text-decoration-line: underline;
+  text-decoration-color: var(--link-underline);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-skip-ink: auto;
+}
+.timer a:visited,
+.timer a:active {
+  color: var(--link-visited);
+}
+.timer a:hover,
+.timer button:hover {
+  text-decoration-color: currentColor;
+}
+.timer button {
+  min-height: 44px;
+  padding: 0.35rem 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.timer button:disabled {
+  color: var(--ink-muted);
+  text-decoration-color: var(--hairline);
+  cursor: default;
+}
+.timer :focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+}
+.timer .timer-status {
+  color: var(--ink-muted);
+  font-size: 1rem;
+}
+.timer .timer-messages {
+  padding-left: 1.25rem;
+  font-size: 1rem;
+}
+.timer .timer-messages li + li {
+  margin-top: 0.5rem;
+}
+.timer section {
+  margin-top: 1.5rem;
+}
+.timer .timer-sessions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+.timer .timer-sessions button {
+  color: var(--ink);
+  text-decoration-line: none;
+}
+.timer .timer-sessions button[aria-pressed="true"] {
+  text-decoration-line: underline;
+  text-decoration-color: var(--ink);
+}
+.timer fieldset {
+  margin: 0 0 1.25rem;
+  padding: 1rem 0 0;
+  min-width: 0;
+  border: 0;
+  border-top: 1px solid var(--hairline);
+}
+.timer legend {
+  padding: 0 0.5rem 0 0;
+}
+.timer .timer-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 44px;
+  cursor: pointer;
+}
+.timer .timer-option input {
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: 0;
+  accent-color: var(--ink);
+}
+.timer .timer-routine {
+  padding: 0;
+  list-style: none;
+}
+.timer .timer-routine li {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr);
+  gap: 0.15rem 0.75rem;
+  padding-block: 0.75rem;
+  border-top: 1px solid var(--hairline);
+}
+.timer .timer-row-clock {
+  grid-row: 1 / 3;
+  font-variant-numeric: tabular-nums;
+}
+.timer .timer-row-dose {
+  grid-column: 2;
+  color: var(--ink-muted);
+}
+.timer .timer-start {
+  font-size: 2rem;
+}
+.timer .timer-countdown {
+  margin: 0 0 0.25rem;
+  font-family: var(--serif);
+  font-size: clamp(5rem, 26vw, 11rem);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
+}
+.timer .timer-segment {
+  margin-bottom: 1.25rem;
+  font-family: var(--serif);
+  font-size: clamp(2.25rem, 8vw, 3.5rem);
+  line-height: 1.12;
+}
+.timer .timer-progress {
+  height: 2px;
+  margin-bottom: 0.75rem;
+  background: var(--hairline);
+}
+.timer .timer-progress-fill {
+  width: 100%;
+  height: 2px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.timer .timer-timing {
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+.timer .timer-next,
+.timer .timer-notes {
+  font-size: 1.375rem;
+}
+.timer .timer-notes {
+  padding-left: 1.25rem;
+}
+.timer .timer-notes li + li {
+  margin-top: 0.5rem;
+}
+.timer .timer-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.75rem;
+  font-size: 1.375rem;
+}
+.timer .timer-footer {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--hairline);
+}
+.timer .timer-footer p {
+  margin-bottom: 0.25rem;
+}
+.timer .timer-done {
+  font-size: 3rem;
+}
+
+@media print {
+  /* Paper is white whatever the screen theme. */
+  :root,
+  :root:not([data-theme="light"]),
+  :root[data-theme="dark"] {
+    color-scheme: light;
+    --paper: #ffffff;
+    --ink: #111111;
+    --ink-muted: #5e5e5e;
+    --rule: #111111;
+    --hairline: #d4d4d4;
+    --link: #0033a0;
+    --link-underline: #6685c6;
+    --link-visited: #022169;
+  }
+  .timer .timer-page {
+    padding: 0;
+  }
+}

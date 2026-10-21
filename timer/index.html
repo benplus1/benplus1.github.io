@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141414" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Mobility timer</title>
+<script>(function () { try { var theme = localStorage.getItem('theme'); if (theme === 'dark' || theme === 'light') document.documentElement.setAttribute('data-theme', theme); } catch (err) { console.warn('The stored theme could not be read.', err); } })();</script>
+<link rel="stylesheet" href="timer.css">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="icon" href="icon.png" type="image/png">
+<script type="module" src="app.js"></script>
+</head>
+<body class="timer">
+<main class="timer-page">
+<h1>Mobility timer</h1>
+<p id="source-status" class="timer-status" role="status">Loading routine…</p>
+<ul id="errors" class="timer-messages" role="alert" hidden></ul>
+<ul id="warnings" class="timer-messages" aria-live="polite" hidden></ul>
+<button id="offline" type="button" hidden>Use the saved copy</button>
+<noscript><p>JavaScript is required to load the routine and run the timer.</p></noscript>
+
+<section id="preparation" aria-labelledby="preparation-heading">
+<h2 id="preparation-heading">Choose a session</h2>
+<div id="sessions" class="timer-sessions" aria-label="Sessions"></div>
+<fieldset id="optional" hidden>
+<legend>Optional</legend>
+<div id="optional-groups"></div>
+</fieldset>
+<ol id="routine" class="timer-routine" aria-label="Session routine"></ol>
+<p id="session-total"></p>
+<button id="start" class="timer-start" type="button" disabled>Start</button>
+</section>
+
+<section id="running" class="timer-running" aria-label="Timer" tabindex="-1" hidden>
+<p id="countdown" class="timer-countdown" aria-label="Time remaining">0:00</p>
+<h2 id="segment" class="timer-segment" aria-live="polite"></h2>
+<div id="progress" class="timer-progress" role="progressbar" aria-label="Current segment progress" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0"><div id="progress-fill" class="timer-progress-fill"></div></div>
+<p id="timing" class="timer-timing"></p>
+<p id="next" class="timer-next"></p>
+<ul id="notes" class="timer-notes"></ul>
+<p id="demo-line" hidden><a id="demo" target="_blank" rel="noopener">Demo video</a></p>
+<div class="timer-controls" aria-label="Timer controls">
+<button id="pause" type="button">Pause</button>
+<button id="back" type="button">Back</button>
+<button id="skip" type="button">Skip</button>
+<button id="stop" type="button">Stop</button>
+</div>
+</section>
+
+<section id="finished" aria-labelledby="done-heading" hidden>
+<h2 id="done-heading" class="timer-done" tabindex="-1">Done</h2>
+<p id="done-total"></p>
+<button id="return" type="button">Stop</button>
+</section>
+
+<footer class="timer-footer">
+<p id="wake" class="timer-status" role="status">Screen wake lock will be requested on Start</p>
+<button id="voice" type="button" aria-pressed="true">Voice on</button>
+</footer>
+<div id="tones" hidden></div>
+</main>
+</body>
+</html>
