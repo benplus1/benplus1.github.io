@@ -250,11 +250,11 @@ function holdSegments(part, reset) {
   const segments = [];
   const sides = part.perSide ? ['left', 'right'] : [''];
   for (const side of sides) {
-    if (side === 'right') segments.push(step('Switch sides', null, 'switch'));
     const suffix = side ? `, ${side}` : '';
     if (part.seconds < 10) {
-      segments.push(step(`${part.count} x ${part.seconds} s${suffix}`, part.count * part.seconds, 'hold'));
+      segments.push(step(`${part.count} x ${part.seconds} s${suffix}`, null, 'work'));
     } else {
+      if (side === 'right') segments.push(step('Switch sides', null, 'switch'));
       for (let index = 1; index <= part.count; index++) {
         if (index > 1) segments.push({ ...reset });
         const label = part.count === 1 ? 'Hold' : `Hold ${index} of ${part.count}`;

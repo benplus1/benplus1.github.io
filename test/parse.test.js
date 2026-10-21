@@ -114,7 +114,8 @@ const routineOracle = [
     ['Lean right', 25, 'hold'], ['Next: High-step lift-offs', 5, 'next']
   ]],
   ['High-step lift-offs', [
-    ['3 x 5 s, left', 15, 'hold'], ['3 x 5 s, right', 15, 'hold']
+    ['3 x 5 s, left', 12, 'work'], ['3 x 5 s, right', 12, 'work'],
+    ['Next: Bench overhead reach, palms up', 6, 'next']
   ]],
   ['Bench overhead reach, palms up', [
     ['Hold 1 of 2', 60, 'hold'], ['Reset', 10, 'reset'], ['Hold 2 of 2', 60, 'hold'],
@@ -517,12 +518,15 @@ test('parseDose emits no segment or warning for a modifier-only dose', () => {
   assertDose('5 s pause', []);
 });
 
-test('parseDose merges short holds and uses the upper end of timed ranges', () => {
-  assertDose('3 x 5 s', [['3 x 5 s', 15, 'hold']]);
-  assertDose('3 x 4-5 s per side', [
-    ['3 x 5 s, left', 15, 'hold'], ['Switch sides', null, 'switch'],
-    ['3 x 5 s, right', 15, 'hold']
+test('parseDose treats short repeated holds as untimed work and uses the upper end of timed ranges', () => {
+  for (const dose of ['3 x 5 s', '2 x 9 s']) {
+    const result = assertDose(dose, [[dose, null, 'work']]);
+    assert.equal(result.segments[0].seconds, null);
+  }
+  const perSide = assertDose('3 x 4-5 s per side', [
+    ['3 x 5 s, left', null, 'work'], ['3 x 5 s, right', null, 'work']
   ]);
+  assert.ok(perSide.segments.every(segment => segment.seconds === null));
   assertDose('2 x 10 s', [
     ['Hold 1 of 2', 10, 'hold'], ['Reset', null, 'reset'], ['Hold 2 of 2', 10, 'hold']
   ]);
@@ -691,9 +695,22 @@ test('expandRow divides small slack among work before gaps and drops zero durati
     ['Next: Next exercise', 1, 'next']
   ]);
   assertExpansion(expand('3 x 5 s per side', { slot: 30, isLast: false, nextName: 'Next exercise' }), [
-    ['3 x 5 s, left', 15, 'hold'], ['3 x 5 s, right', 15, 'hold']
+    ['3 x 5 s, left', 12, 'work'], ['3 x 5 s, right', 12, 'work'],
+    ['Next: Next exercise', 6, 'next']
   ]);
   assertExpansion(expand('2 min / 3 reps', { slot: 120 }), [['Test', 120, 'hold']]);
+});
+
+test('expandRow allocates short High-step lift-offs as per-side work with a trailing Next', () => {
+  const result = expandRow(row('3 x 5 s per side', { exercise: 'High-step lift-offs', slot: 60 }), {
+    slot: 60, isLast: false, nextName: 'Bench overhead reach, palms up'
+  });
+  assertSegments(result.segments, [
+    ['High-step lift-offs — 3 x 5 s, left', 27, 'work'],
+    ['High-step lift-offs — 3 x 5 s, right', 27, 'work'],
+    ['High-step lift-offs — Next: Bench overhead reach, palms up', 6, 'next']
+  ]);
+  assert.deepEqual(result.warnings, []);
 });
 
 test('expandRow adds Rest only when timed segments leave slack with no untimed segment', () => {
@@ -761,6 +778,10 @@ test('expandRow uses fixed unclocked work, switch, reset and Next lengths', () =
     ['3 reps per side, left', 30, 'work'], ['3 reps per side, right', 30, 'work'],
     ['Next: Next exercise', 10, 'next']
   ]);
+  assertExpansion(expand('3 x 5 s per side', { slot: null, isLast: false, nextName: 'Next exercise' }), [
+    ['3 x 5 s, left', 30, 'work'], ['3 x 5 s, right', 30, 'work'],
+    ['Next: Next exercise', 10, 'next']
+  ]);
   assertExpansion(expand('15 s per side', { slot: null, isLast: false, nextName: 'Next exercise' }), [
     ['Left', 15, 'hold'], ['Switch sides', 10, 'switch'], ['Right', 15, 'hold'],
     ['Next: Next exercise', 10, 'next']
@@ -791,12 +812,14 @@ test('expandRow gives side, switch and Next segments human speech', () => {
   ]);
 });
 
-test('buildSchedule matches every routine segment in order for exactly 1320 seconds', () => {
-  const [routine] = fixtureSessions();
-  const schedule = buildSchedule(routine, { includeOptional: false });
-  assertOracle(schedule, routineOracle, 1320);
-  assertMetadata(schedule, routine.rows);
-});
+for (const [date, text] of [['2026-10-20', fixture], ['2026-10-21', warmupFixture]]) {
+  test(`buildSchedule matches every routine segment including High-step work in order for exactly 1320 seconds (${date})`, () => {
+    const [routine] = findSessions(parseCsv(text));
+    const schedule = buildSchedule(routine, { includeOptional: false });
+    assertOracle(schedule, routineOracle, 1320);
+    assertMetadata(schedule, routine.rows);
+  });
+}
 
 test('buildSchedule matches the optional block alone for exactly 130 seconds', () => {
   const [routine] = fixtureSessions();
@@ -820,12 +843,14 @@ test('buildSchedule appends optional rows without adding Next to the last main r
     'Wrist-extensor stretch — Left');
 });
 
-test('buildSchedule matches every splits segment in order for exactly 1320 seconds', () => {
-  const [, splits] = fixtureSessions();
-  const schedule = buildSchedule(splits, { includeOptional: false });
-  assertOracle(schedule, splitsOracle, 1320);
-  assertMetadata(schedule, splits.rows);
-});
+for (const [date, text] of [['2026-10-20', fixture], ['2026-10-21', warmupFixture]]) {
+  test(`buildSchedule matches every splits segment in order for exactly 1320 seconds (${date})`, () => {
+    const [, splits] = findSessions(parseCsv(text));
+    const schedule = buildSchedule(splits, { includeOptional: false });
+    assertOracle(schedule, splitsOracle, 1320);
+    assertMetadata(schedule, splits.rows);
+  });
+}
 
 test('buildSchedule matches every warm-up segment and metadata in order for exactly 1200 seconds', () => {
   const [, , warmup] = findSessions(parseCsv(warmupFixture));
