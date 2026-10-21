@@ -50,7 +50,7 @@ case "$CS_DIR" in
   *) URL="(none: ~/$CS_DIR is outside ~/html, so the web server does not publish it)" ;;
 esac
 # In a submodule checkout .git is a file rather than a directory, so it is matched as either.
-EXCLUDES=(.git .claude/ CLAUDE.md AGENTS.md deploy.sh gen.js node_modules/ '*.bak')
+EXCLUDES=(.git .claude/ CLAUDE.md AGENTS.md deploy.sh gen.js node_modules/ test/ '*.bak')
 RSYNC_EXCLUDES=()
 for pat in "${EXCLUDES[@]}"; do RSYNC_EXCLUDES+=(--exclude "$pat"); done
 SSH_OPTS=(-o ConnectTimeout=20)
@@ -64,7 +64,7 @@ esac
 
 # Files to publish, relative to SITE_DIR (call from inside it); the same rules as EXCLUDES.
 list_files() {
-  find . \( -name .git -o \( -type d \( -name .claude -o -name node_modules \) \) \) -prune -o \
+  find . \( -name .git -o \( -type d \( -name .claude -o -name node_modules -o -name test \) \) \) -prune -o \
     -type f ! -name CLAUDE.md ! -name AGENTS.md ! -name deploy.sh ! -name gen.js ! -name '*.bak' -print |
     sed 's|^\./||' | LC_ALL=C sort
 }
