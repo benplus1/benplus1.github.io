@@ -1,6 +1,6 @@
 const DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTsUIH8LDFYsEKvsa0S7FKy5fkKFbA2FDA6a70tyUByPn62Y50gQwVvjdzJbpFCilxERpGecWGZeKEl/pub?gid=900002&single=true&output=csv';
 
-import {parseCsv, findSessions, buildSchedule} from './parse.js';
+import {parseCsv, findSessions, buildSchedule, rowStarts} from './parse.js';
 
 const CSV_KEY = 'mobility-timer:csv';
 const VOICE_KEY = 'mobility-timer:voice';
@@ -8,7 +8,7 @@ const elements = Object.fromEntries([
   'source-status', 'errors', 'warnings', 'offline', 'preparation', 'sessions',
   'optional', 'optional-groups', 'routine', 'session-total', 'start', 'running',
   'countdown', 'segment', 'progress', 'progress-fill', 'timing', 'next', 'notes',
-  'demo-line', 'demo', 'pause', 'back', 'skip', 'stop', 'finished', 'done-heading',
+  'demo-line', 'demo', 'pause', 'back', 'skip', 'next-row', 'stop', 'finished', 'done-heading',
   'done-total', 'return', 'wake', 'voice', 'tones'
 ].map(id => [id, document.getElementById(id)]));
 
@@ -21,6 +21,7 @@ let selectedSession = 0;
 let optionalChoices = new Set();
 let schedule = null;
 let offsets = [];
+let rowOffsets = [];
 let rowEnds = new Map();
 let segmentLinks = [];
 let cachedCopy = null;
@@ -284,6 +285,7 @@ function updateSchedule(propagate = false) {
   try {
     const built = buildSchedule(chosen, {includeOptional: true});
     validateSchedule(built);
+    rowOffsets = rowStarts(built.segments);
     let total = 0;
     offsets = [];
     rowEnds = new Map();
@@ -295,15 +297,20 @@ function updateSchedule(propagate = false) {
     for (const warning of built.warnings) routineWarning(warning);
     segmentLinks = built.segments.map(segment => safeLink(segment.link));
     const rows = [...chosen.rows, ...chosen.optional.flatMap(block => block.rows)];
-    for (const row of rows) {
+    for (const [rowIndex, row] of rows.entries()) {
+      const fromSeconds = rowOffsets[rowIndex];
       const item = document.createElement('li');
       for (const [className, value] of [
         ['timer-row-clock', row.clock], ['timer-row-exercise', row.exercise],
         ['timer-row-dose', row.dose]
       ]) {
-        const text = document.createElement('span');
+        const text = document.createElement(className === 'timer-row-exercise' ? 'button' : 'span');
         text.className = className;
         text.textContent = value;
+        if (className === 'timer-row-exercise') {
+          text.type = 'button';
+          text.addEventListener('click', () => start(fromSeconds));
+        }
         item.append(text);
       }
       elements.routine.append(item);
@@ -634,7 +641,8 @@ function tick({suppressTick = false} = {}) {
   previousRemaining = remaining;
   elements.countdown.textContent = formatTime(remaining);
   elements.countdown.setAttribute('aria-label', formatTime(remaining) + ' remaining');
-  elements.timing.textContent = 'Slot ' + segment.clock + ' · ' +
+  elements.timing.textContent = 'Row ' + (segment.rowIndex + 1) + ' of ' + rowOffsets.length + ' · ' +
+    'Slot ' + segment.clock + ' · ' +
     formatTime(rowEnds.get(segment.rowIndex) - elapsed) + ' left in slot · ' +
     formatTime(Math.floor(elapsed)) + ' / ' + formatTime(schedule.total) + ' elapsed';
   elements.progress.setAttribute('aria-valuemax', String(segment.seconds));
@@ -642,11 +650,16 @@ function tick({suppressTick = false} = {}) {
   elements['progress-fill'].style.transform = 'scaleX(' + (segmentElapsed / segment.seconds) + ')';
 }
 
-function start() {
+function start(fromSeconds = 0) {
   if (!schedule || active()) return;
+  if (typeof fromSeconds !== 'number' || !Number.isFinite(fromSeconds) ||
+      fromSeconds < 0 || fromSeconds >= schedule.total) {
+    reportError(new Error('The start offset must be a finite nonnegative number below the session total'));
+    return;
+  }
   runId++;
   phase = 'running';
-  startedAt = Date.now();
+  startedAt = Date.now() - fromSeconds * 1000;
   pausedAt = 0;
   currentSegment = -1;
   previousRemaining = null;
@@ -716,6 +729,18 @@ function skip() {
   seek(index + 1 < offsets.length ? offsets[index + 1] : schedule.total);
 }
 
+function nextRow() {
+  if (!active()) return;
+  const elapsed = elapsedAt();
+  if (elapsed >= schedule.total) {
+    finish();
+    return;
+  }
+  const index = segmentAt(elapsed);
+  const nextRowIndex = schedule.segments[index].rowIndex + 1;
+  seek(nextRowIndex < rowOffsets.length ? rowOffsets[nextRowIndex] : schedule.total);
+}
+
 function clearRun() {
   clearInterval(interval);
   interval = null;
@@ -745,10 +770,11 @@ function stop() {
   elements.start.focus();
 }
 
-elements.start.addEventListener('click', start);
+elements.start.addEventListener('click', () => start());
 elements.pause.addEventListener('click', togglePause);
 elements.back.addEventListener('click', back);
 elements.skip.addEventListener('click', skip);
+elements['next-row'].addEventListener('click', nextRow);
 elements.stop.addEventListener('click', stop);
 elements.return.addEventListener('click', stop);
 elements.voice.addEventListener('click', () => {
