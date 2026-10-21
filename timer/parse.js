@@ -328,7 +328,7 @@ export function expandRow(row, options) {
       const initial = work.length > 0 ? Math.min(10, Math.floor(remaining / work.length)) : 0;
       for (const segment of work) segment.seconds = initial;
       remaining -= initial * work.length;
-      const caps = { switch: 10, reset: 15, next: 15 };
+      const caps = { switch: 10, reset: work.length > 0 ? 10 : 15, next: work.length > 0 ? 5 : 15 };
       for (const gap of gaps) {
         gap.seconds = Math.min(caps[gap.kind], remaining);
         remaining -= gap.seconds;
@@ -346,8 +346,13 @@ export function expandRow(row, options) {
     }
   }
 
+  segments = segments.filter(segment => segment.seconds > 0);
+  if (segments.length === 1 && segments[0].kind === 'hold' && segments[0].label === 'Hold') {
+    segments[0].label = row.exercise;
+  }
+
   return {
-    segments: segments.filter(segment => segment.seconds > 0).map(segment => ({
+    segments: segments.map(segment => ({
       label: segment.label === row.exercise ? row.exercise : `${row.exercise} — ${segment.label}`,
       speech: segmentSpeech(row.exercise, segment),
       seconds: segment.seconds,
@@ -395,9 +400,10 @@ export function buildSchedule(session, options) {
       const expanded = expandRow(row, {
         slot: row.slot, isLast, nextName: isLast ? '' : rows[index + 1].exercise
       });
-      const notes = row.notes.split(/\r\n|\r|\n/).filter(line => line.trim());
       for (const segment of expanded.segments) {
-        segments.push({ ...segment, rowIndex, clock: row.clock, link: row.link, notes: [...notes] });
+        const details = segment.kind === 'next' ? rows[index + 1] : row;
+        const notes = details.notes.split(/\r\n|\r|\n/).filter(line => line.trim());
+        segments.push({ ...segment, rowIndex, clock: row.clock, link: details.link, notes: [...notes] });
       }
       warnings.push(...expanded.warnings.map(warning => `Row ${rowIndex + 1} (${row.exercise}): ${warning}`));
       rowIndex++;

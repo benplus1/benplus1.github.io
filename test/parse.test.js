@@ -12,6 +12,7 @@ import {
 } from '../timer/parse.js';
 
 const fixture = readFileSync(new URL('./fixtures/mobility-2026-10-20.csv', import.meta.url), 'utf8');
+const warmupFixture = readFileSync(new URL('./fixtures/mobility-2026-10-21.csv', import.meta.url), 'utf8');
 const header = ['Clock', 'Exercise', 'Dose', 'Link', 'Notes'];
 const blank = ['', '', '', '', ''];
 const kinds = new Set(['hold', 'reset', 'switch', 'work', 'next', 'rest']);
@@ -87,8 +88,10 @@ function assertMetadata(schedule, rows) {
     const source = rows[segment.rowIndex];
     assert.ok(segment.label === source.exercise || segment.label.startsWith(`${source.exercise} — `));
     assert.equal(segment.clock, source.clock);
-    assert.equal(segment.link, source.link);
-    assert.deepEqual(segment.notes, source.notes.split(/\r\n|\r|\n/).filter(line => line.trim()));
+    const details = segment.kind === 'next' ? rows[segment.rowIndex + 1] : source;
+    assert.ok(details, `Missing metadata source for ${segment.label}`);
+    assert.equal(segment.link, details.link);
+    assert.deepEqual(segment.notes, details.notes.split(/\r\n|\r|\n/).filter(line => line.trim()));
   }
   assert.deepEqual([...new Set(schedule.segments.map(segment => segment.rowIndex))],
     rows.map((_, index) => index));
@@ -107,15 +110,15 @@ const routineOracle = [
     ['Next: 90/90 hip switches and leans', 20, 'next']
   ]],
   ['90/90 hip switches and leans', [
-    ['4 switches', 45, 'work'], ['Lean left', 25, 'hold'], ['Switch sides', 10, 'switch'],
-    ['Lean right', 25, 'hold'], ['Next: High-step lift-offs', 15, 'next']
+    ['4 switches', 55, 'work'], ['Lean left', 25, 'hold'], ['Switch sides', 10, 'switch'],
+    ['Lean right', 25, 'hold'], ['Next: High-step lift-offs', 5, 'next']
   ]],
   ['High-step lift-offs', [
     ['3 x 5 s, left', 15, 'hold'], ['3 x 5 s, right', 15, 'hold']
   ]],
   ['Bench overhead reach, palms up', [
-    ['Hold 1 of 2', 60, 'hold'], ['Reset', 15, 'reset'], ['Hold 2 of 2', 60, 'hold'],
-    ['3 lift-offs of 2 s', 10, 'work'], ['Next: Doorway chest stretch, arm high', 5, 'next']
+    ['Hold 1 of 2', 60, 'hold'], ['Reset', 10, 'reset'], ['Hold 2 of 2', 60, 'hold'],
+    ['3 lift-offs of 2 s', 15, 'work'], ['Next: Doorway chest stretch, arm high', 5, 'next']
   ]],
   ['Doorway chest stretch, arm high', [
     ['Left', 60, 'hold'], ['Switch sides', 10, 'switch'], ['Right', 60, 'hold'],
@@ -126,15 +129,15 @@ const routineOracle = [
     ['Next: Lumbar-locked thoracic rotation', 20, 'next']
   ]],
   ['Lumbar-locked thoracic rotation', [
-    ['3 reps per side, left', 22, 'work'], ['3 reps per side, right', 22, 'work'],
-    ['Next: Thoracic extension over a rolled towel', 16, 'next']
+    ['3 reps per side, left', 27, 'work'], ['3 reps per side, right', 27, 'work'],
+    ['Next: Thoracic extension over a rolled towel', 6, 'next']
   ]],
   ['Thoracic extension over a rolled towel', [
     ['Hold 1 of 2', 20, 'hold'], ['Reset', 15, 'reset'], ['Hold 2 of 2', 20, 'hold'],
     ['Next: Wall slides with lift-off', 5, 'next']
   ]],
   ['Wall slides with lift-off', [
-    ['6 reps', 45, 'work'], ['Next: Side-lying external rotation', 15, 'next']
+    ['6 reps', 55, 'work'], ['Next: Side-lying external rotation', 5, 'next']
   ]],
   ['Side-lying external rotation', [
     ['6 slow reps per side, left', 45, 'work'], ['6 slow reps per side, right', 45, 'work']
@@ -164,10 +167,10 @@ const splitsOracle = [
     ['Reset', 20, 'reset'], ['Hold 3 of 3', 60, 'hold'], ['Next: Cossack squat', 20, 'next']
   ]],
   ['Cossack squat', [
-    ['Set 1, left', 41, 'work'], ['Set 1, right', 41, 'work'],
-    ['Set 2, left', 41, 'work'], ['Set 2, right', 41, 'work'], ['Next: Pike', 16, 'next']
+    ['Set 1, left', 43, 'work'], ['Set 1, right', 43, 'work'],
+    ['Set 2, left', 43, 'work'], ['Set 2, right', 43, 'work'], ['Next: Pike', 8, 'next']
   ]],
-  ['Pike', [['Hold', 120, 'hold']]],
+  ['Pike', [['Pike', 120, 'hold']]],
   ['Couch stretch', [['Left', 60, 'hold'], ['Right', 60, 'hold']]],
   ['Thoracic extension over a rolled towel', [
     ['Hold 1 of 2', 30, 'hold'], ['Hold 2 of 2', 30, 'hold']
@@ -177,6 +180,37 @@ const splitsOracle = [
     ['Rest', 60, 'rest'], ['Hold 3 of 3', 20, 'hold'], ['Next: Buffer', 60, 'next']
   ]],
   ['Buffer', [['Buffer', 120, 'work']]]
+];
+
+const warmupOracle = [
+  ['General movement: walk, arm swings, forearm rotations, wrist circles, tendon glides', [
+    ['1-3 min', 115, 'work'], ['Next: Cossack squats', 5, 'next']
+  ]],
+  ['Cossack squats', [
+    ['1 x 5-6 per side, left', 27, 'work'], ['1 x 5-6 per side, right', 27, 'work'],
+    ['Next: 90/90 hip switches', 6, 'next']
+  ]],
+  ['90/90 hip switches', [
+    ['1 x 5-6 switches', 55, 'work'], ['Next: Wall slides', 5, 'next']
+  ]],
+  ['Wall slides', [
+    ['1 x 5-6', 55, 'work'], ['Next: Lumbar-locked thoracic rotation', 5, 'next']
+  ]],
+  ['Lumbar-locked thoracic rotation', [
+    ['1 x 5-6 per side, left', 27, 'work'], ['1 x 5-6 per side, right', 27, 'work'],
+    ['Next: On-wall high-step drill', 6, 'next']
+  ]],
+  ['On-wall high-step drill', [
+    ['1 x 4-6 per side, left', 42, 'work'], ['1 x 4-6 per side, right', 42, 'work'],
+    ['Next: Easy climbing on jugs', 6, 'next']
+  ]],
+  ['Easy climbing on jugs', [
+    ['3-5 min', 205, 'work'], ['Next: Moderate problems on good edges', 5, 'next']
+  ]],
+  ['Moderate problems on good edges', [
+    ['2-4 problems', 235, 'work'], ['Next: Problems about 2 grades below limit', 5, 'next']
+  ]],
+  ['Problems about 2 grades below limit', [['2-3 problems', 300, 'work']]]
 ];
 
 test('parseCsv handles a leading BOM, doubled quotes, commas and embedded CR/LF', () => {
@@ -278,6 +312,29 @@ test('findSessions discovers the two fixture sessions and preserves source cells
       for (const source of group.rows) assert.equal(source.slot, null);
     }
   }
+});
+
+test('findSessions discovers all three sessions in the 46-record warm-up fixture', () => {
+  const records = parseCsv(warmupFixture);
+  assert.equal(records.length, 46);
+  const sessions = findSessions(records);
+  assert.deepEqual(sessions.map(session => session.name), [
+    'The 22-minute routine (Mon, Wed, Sat)',
+    'Weekly splits session (Thu evening, 22 min)',
+    'Climbing warm-up (Mon, Sat; 20 min, 10-15 when already warm)'
+  ]);
+  assert.deepEqual(sessions.map(session => session.rows.length), [12, 8, 9]);
+  assert.deepEqual(sessions[2].optional, []);
+  const warmupStart = records.findIndex(cells => cells[0] === sessions[2].name) + 2;
+  sessions[2].rows.forEach((source, index) => {
+    const cells = records[warmupStart + index];
+    assert.equal(source.slot, parseClock(source.clock).seconds);
+    assert.equal(typeof source.slot, 'number');
+    assert.deepEqual(source, {
+      clock: cells[0], exercise: cells[1], dose: cells[2], link: cells[3], notes: cells[4],
+      slot: source.slot
+    });
+  });
 });
 
 test('findSessions uses the nearest prior nonempty A cell and stops at an empty A-E row', () => {
@@ -539,9 +596,22 @@ test('parseDose preserves number-leading work and warns about unrecognized prose
   assert.deepEqual(result.warnings, ['Dose not understood: "until it releases"']);
 });
 
+test('parseDose preserves ranged repetitions and minutes as literal untimed work', () => {
+  for (const dose of ['1-3 min', '3-5 min', '1 x 5-6', '1 x 5-6 switches', '2-4 problems']) {
+    const result = assertDose(dose, [[dose, null, 'work']]);
+    assert.equal(result.segments[0].seconds, null);
+  }
+  for (const dose of ['1 x 5-6 per side', '1 x 4-6 per side']) {
+    const result = assertDose(dose, [
+      [`${dose}, left`, null, 'work'], [`${dose}, right`, null, 'work']
+    ]);
+    assert.ok(result.segments.every(segment => segment.seconds === null));
+  }
+});
+
 test('expandRow allocates unrecognized work and reports the dose warning', () => {
   assertExpansion(expand('until it releases', { slot: 60, isLast: false, nextName: 'Next exercise' }), [
-    ['until it releases', 45, 'work'], ['Next: Next exercise', 15, 'next']
+    ['until it releases', 55, 'work'], ['Next: Next exercise', 5, 'next']
   ], ['Dose not understood: "until it releases"']);
 });
 
@@ -558,9 +628,38 @@ test('expandRow gives work its initial share before switch and Next caps', () =>
   assertExpansion(expand('4 switches\n25 s lean per side', {
     slot: 120, isLast: false, nextName: 'High-step lift-offs'
   }), [
-    ['4 switches', 45, 'work'], ['Lean left', 25, 'hold'], ['Switch sides', 10, 'switch'],
-    ['Lean right', 25, 'hold'], ['Next: High-step lift-offs', 15, 'next']
+    ['4 switches', 55, 'work'], ['Lean left', 25, 'hold'], ['Switch sides', 10, 'switch'],
+    ['Lean right', 25, 'hold'], ['Next: High-step lift-offs', 5, 'next']
   ]);
+});
+
+test('expandRow caps untimed Reset at 10 and Next at 5 when any untimed work is present', () => {
+  assertExpansion(expand('2 x 20 s / 3 reps', {
+    slot: 90, isLast: false, nextName: 'Next exercise'
+  }), [
+    ['Hold 1 of 2', 20, 'hold'], ['Reset', 10, 'reset'], ['Hold 2 of 2', 20, 'hold'],
+    ['3 reps', 35, 'work'], ['Next: Next exercise', 5, 'next']
+  ]);
+});
+
+test('expandRow preserves 15-second gap caps without untimed work', () => {
+  assertExpansion(expand('2 x 20 s', { slot: 70, isLast: false, nextName: 'Next exercise' }), [
+    ['Hold 1 of 2', 20, 'hold'], ['Reset', 15, 'reset'], ['Hold 2 of 2', 20, 'hold'],
+    ['Next: Next exercise', 15, 'next']
+  ]);
+});
+
+test('expandRow preserves explicit Reset and Rest durations alongside untimed work', () => {
+  for (const [configuration, label, kind] of [
+    ['25 s reset', 'Reset', 'reset'], ['25 s rest', 'Rest', 'rest']
+  ]) {
+    assertExpansion(expand(`2 x 20 s / ${configuration} / 3 reps`, {
+      slot: 100, isLast: false, nextName: 'Next exercise'
+    }), [
+      ['Hold 1 of 2', 20, 'hold'], [label, 25, kind], ['Hold 2 of 2', 20, 'hold'],
+      ['3 reps', 30, 'work'], ['Next: Next exercise', 5, 'next']
+    ]);
+  }
 });
 
 test('expandRow allocates gaps in appearance order and lets Next absorb the remainder', () => {
@@ -569,8 +668,8 @@ test('expandRow allocates gaps in appearance order and lets Next absorb the rema
     ['Next: Next exercise', 5, 'next']
   ]);
   assertExpansion(expand('3 reps per side', { slot: 60, isLast: false, nextName: 'Next exercise' }), [
-    ['3 reps per side, left', 22, 'work'], ['3 reps per side, right', 22, 'work'],
-    ['Next: Next exercise', 16, 'next']
+    ['3 reps per side, left', 27, 'work'], ['3 reps per side, right', 27, 'work'],
+    ['Next: Next exercise', 6, 'next']
   ]);
   assertExpansion(expand('30 s', { slot: 100, isLast: false, nextName: 'Next exercise' }), [
     ['Hold', 30, 'hold'], ['Next: Next exercise', 70, 'next']
@@ -594,12 +693,46 @@ test('expandRow divides small slack among work before gaps and drops zero durati
   assertExpansion(expand('3 x 5 s per side', { slot: 30, isLast: false, nextName: 'Next exercise' }), [
     ['3 x 5 s, left', 15, 'hold'], ['3 x 5 s, right', 15, 'hold']
   ]);
-  assertExpansion(expand('2 min / 3 reps', { slot: 120 }), [['Hold', 120, 'hold']]);
+  assertExpansion(expand('2 min / 3 reps', { slot: 120 }), [['Test', 120, 'hold']]);
 });
 
 test('expandRow adds Rest only when timed segments leave slack with no untimed segment', () => {
   assertExpansion(expand('2 min', { slot: 150 }), [['Hold', 120, 'hold'], ['Rest', 30, 'rest']]);
-  assertExpansion(expand('60 s'), [['Hold', 60, 'hold']]);
+  assertExpansion(expand('60 s'), [['Test', 60, 'hold']]);
+});
+
+test('expandRow names a sole generic Hold after the exercise after zero-duration filtering', () => {
+  for (const [dose, options] of [
+    ['2 min', { slot: 120 }],
+    ['2 min', { slot: 120, isLast: false, nextName: 'Next exercise' }],
+    ['2 min / 3 reps', { slot: 120 }],
+    ['2 min', { slot: null }]
+  ]) {
+    const result = expand(dose, options);
+    assertExpansion(result, [['Test', 120, 'hold']]);
+    assert.equal(result.segments[0].speech, 'Test');
+  }
+});
+
+test('expandRow preserves Hold beside positive Rest, Next, work or another Hold', () => {
+  assertExpansion(expand('30 s', { slot: 40 }), [['Hold', 30, 'hold'], ['Rest', 10, 'rest']]);
+  assertExpansion(expand('30 s', { slot: 40, isLast: false, nextName: 'Next exercise' }), [
+    ['Hold', 30, 'hold'], ['Next: Next exercise', 10, 'next']
+  ]);
+  assertExpansion(expand('30 s / 3 reps', { slot: 40 }), [
+    ['Hold', 30, 'hold'], ['3 reps', 10, 'work']
+  ]);
+  assertExpansion(expand('2 x 30 s', { slot: 60 }), [
+    ['Hold 1 of 2', 30, 'hold'], ['Hold 2 of 2', 30, 'hold']
+  ]);
+});
+
+test('expandRow preserves a sole named hold', () => {
+  for (const [dose, label] of [['30 s lean', 'Lean'], ['30 s stretch', 'Stretch']]) {
+    const result = expand(dose, { slot: 30 });
+    assertExpansion(result, [[label, 30, 'hold']]);
+    assert.equal(result.segments[0].speech, `Test, ${label.toLowerCase()}`);
+  }
 });
 
 test('expandRow uses the exercise for an empty dose', () => {
@@ -634,6 +767,12 @@ test('expandRow uses fixed unclocked work, switch, reset and Next lengths', () =
   ]);
   assertExpansion(expand('2 x 20 s', { slot: null }), [
     ['Hold 1 of 2', 20, 'hold'], ['Reset', 15, 'reset'], ['Hold 2 of 2', 20, 'hold']
+  ]);
+  assertExpansion(expand('2 x 20 s / 3 reps', {
+    slot: null, isLast: false, nextName: 'Next exercise'
+  }), [
+    ['Hold 1 of 2', 20, 'hold'], ['Reset', 15, 'reset'], ['Hold 2 of 2', 20, 'hold'],
+    ['3 reps', 30, 'work'], ['Next: Next exercise', 10, 'next']
   ]);
 });
 
@@ -686,6 +825,77 @@ test('buildSchedule matches every splits segment in order for exactly 1320 secon
   const schedule = buildSchedule(splits, { includeOptional: false });
   assertOracle(schedule, splitsOracle, 1320);
   assertMetadata(schedule, splits.rows);
+});
+
+test('buildSchedule matches every warm-up segment and metadata in order for exactly 1200 seconds', () => {
+  const [, , warmup] = findSessions(parseCsv(warmupFixture));
+  const schedule = buildSchedule(warmup, { includeOptional: false });
+  assertOracle(schedule, warmupOracle, 1200);
+  assertMetadata(schedule, warmup.rows);
+  assert.deepEqual(buildSchedule(warmup, { includeOptional: true }), schedule);
+});
+
+test('buildSchedule gives Couch Next the half-split details and keeps its own row clock and index', () => {
+  const [routine] = fixtureSessions();
+  const schedule = buildSchedule(routine, { includeOptional: false });
+  const couch = schedule.segments.filter(segment => segment.rowIndex === 1);
+  const next = couch.find(segment => segment.kind === 'next');
+  assert.equal(next.label, 'Couch stretch — Next: Half-split hamstring stretch');
+  assert.equal(next.link, 'https://youtu.be/gTjRgU8M_B0');
+  assert.deepEqual(next.notes, routine.rows[2].notes.split(/\r\n|\r|\n/).filter(line => line.trim()));
+  assert.equal(next.rowIndex, 1);
+  assert.equal(next.clock, '2:30-5:00');
+  for (const segment of couch.filter(segment => segment.kind !== 'next')) {
+    assert.equal(segment.link, routine.rows[1].link);
+    assert.deepEqual(segment.notes, routine.rows[1].notes.split(/\r\n|\r|\n/).filter(line => line.trim()));
+    assert.equal(segment.rowIndex, 1);
+    assert.equal(segment.clock, '2:30-5:00');
+  }
+});
+
+test('buildSchedule gives Bridge Next the Buffer details and keeps its own row clock and index', () => {
+  const [, splits] = fixtureSessions();
+  const schedule = buildSchedule(splits, { includeOptional: false });
+  const next = schedule.segments.find(segment => segment.rowIndex === 6 && segment.kind === 'next');
+  assert.equal(next.label, 'Bridge, or elevated-hand bridge — Next: Buffer');
+  assert.equal(next.link, '');
+  assert.deepEqual(next.notes, splits.rows[7].notes.split(/\r\n|\r|\n/).filter(line => line.trim()));
+  assert.equal(next.rowIndex, 6);
+  assert.equal(next.clock, '16-20 min');
+});
+
+test('buildSchedule names the sole Pike hold without a Hold suffix or speech', () => {
+  const [, splits] = fixtureSessions();
+  const schedule = buildSchedule(splits, { includeOptional: false });
+  const pike = schedule.segments.filter(segment => segment.rowIndex === 3);
+  assertSegments(pike, [['Pike', 120, 'hold']]);
+  assert.equal(pike[0].speech, 'Pike');
+});
+
+test('buildSchedule keeps work metadata on its own row and Next details within each group', () => {
+  const session = {
+    name: 'Group metadata',
+    rows: [row('3 reps', { exercise: 'Main', link: 'main', notes: 'Main cue' })],
+    optional: [
+      { label: 'First group', rows: [
+        row('3 reps', { exercise: 'One', slot: null, link: 'one', notes: 'One cue' }),
+        row('3 reps', { exercise: 'Two', slot: null, link: 'two', notes: 'Two cue\r\n\r\nAnother cue' })
+      ] },
+      { label: 'Second group', rows: [
+        row('3 reps', { exercise: 'Three', slot: null, link: 'three', notes: 'Three cue' }),
+        row('3 reps', { exercise: 'Four', slot: null, link: 'four', notes: 'Four cue' })
+      ] }
+    ]
+  };
+  const schedule = buildSchedule(session, { includeOptional: true });
+  assertMetadata(schedule, [...session.rows, ...session.optional.flatMap(group => group.rows)]);
+  assert.deepEqual(schedule.segments.filter(segment => segment.kind === 'next').map(segment => [
+    segment.rowIndex, segment.link, segment.notes
+  ]), [[1, 'two', ['Two cue', 'Another cue']], [3, 'four', ['Four cue']]]);
+  for (const rowIndex of [0, 2, 4]) {
+    assert.ok(schedule.segments.filter(segment => segment.rowIndex === rowIndex)
+      .every(segment => segment.kind !== 'next'));
+  }
 });
 
 test('buildSchedule ends the splits fixture with a 120-second Buffer work segment', () => {
