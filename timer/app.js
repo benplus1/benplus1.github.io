@@ -1,4 +1,4 @@
-const DATA_URL = '';
+const DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTsUIH8LDFYsEKvsa0S7FKy5fkKFbA2FDA6a70tyUByPn62Y50gQwVvjdzJbpFCilxERpGecWGZeKEl/pub?gid=900002&single=true&output=csv';
 
 import {parseCsv, findSessions, buildSchedule} from './parse.js';
 
@@ -177,7 +177,7 @@ async function loadRoutine() {
   }
   cachedCopy = readCachedCopy();
   try {
-    const response = await fetch(source);
+    const response = await fetch(source, {cache: 'no-store'});
     if (!response.ok) throw new Error('Routine request failed: HTTP ' + response.status);
     const csv = await response.text();
     const found = parseRoutine(csv);

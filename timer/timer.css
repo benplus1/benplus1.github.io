@@ -216,6 +216,7 @@
 .timer .timer-row-dose {
   grid-column: 2;
   color: var(--ink-muted);
+  white-space: pre-line;
 }
 .timer .timer-start {
   font-size: 2rem;
