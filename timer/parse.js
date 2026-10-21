@@ -405,3 +405,19 @@ export function buildSchedule(session, options) {
   }
   return { segments, total: segments.reduce((sum, segment) => sum + segment.seconds, 0), warnings };
 }
+
+export function rowStarts(segments) {
+  if (!Array.isArray(segments)) throw new TypeError('Schedule segments must be an array');
+  const starts = [];
+  let elapsed = 0;
+  for (const segment of segments) {
+    const rowIndex = segment?.rowIndex;
+    if (!Number.isInteger(rowIndex) || rowIndex < 0 ||
+        (rowIndex !== starts.length - 1 && rowIndex !== starts.length)) {
+      throw new RangeError('Segment rowIndex must be a nonnegative integer in contiguous order starting at 0');
+    }
+    if (rowIndex === starts.length) starts.push(elapsed);
+    elapsed += segment.seconds;
+  }
+  return starts;
+}

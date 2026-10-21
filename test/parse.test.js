@@ -7,7 +7,8 @@ import {
   findSessions,
   parseDose,
   expandRow,
-  buildSchedule
+  buildSchedule,
+  rowStarts
 } from '../timer/parse.js';
 
 const fixture = readFileSync(new URL('./fixtures/mobility-2026-10-20.csv', import.meta.url), 'utf8');
@@ -236,7 +237,8 @@ test('parseClock returns null for optional labels and malformed ranges', () => {
 });
 
 test('findSessions discovers the two fixture sessions and preserves source cells', () => {
-  const sessions = fixtureSessions();
+  const rows = parseCsv(fixture);
+  const sessions = findSessions(rows);
   assert.deepEqual(sessions.map(session => session.name), [
     'The 22-minute routine (Mon, Wed, Sat)', 'Weekly splits session (Thu evening, 22 min)'
   ]);
@@ -246,17 +248,27 @@ test('findSessions discovers the two fixture sessions and preserves source cells
     ['After climbing, optional', 3]
   ]);
   assert.deepEqual(splits.optional, []);
+  const firstCells = rows.find(cells => cells[1] === 'Frog rock-backs into hold');
   assert.deepEqual(routine.rows[0], {
     clock: '0:00-2:30',
     exercise: 'Frog rock-backs into hold',
     dose: '2 x 60 s, 30 s reset',
     link: 'https://youtu.be/orMZYFWo9P0',
-    notes: 'Adductors\nLow back flat\nKnees over ankles\nGroin pinch = narrow the knees',
+    notes: firstCells[4],
     slot: 150
   });
-  assert.equal(routine.rows[3].dose, '4 switches\n25 s lean per side');
+  assert.equal(routine.rows[0].notes.replace(/\r\n/g, '\n'),
+    'Adductors\nLow back flat\nKnees over ankles\nGroin pinch = narrow the knees');
+  const hipSwitches = routine.rows.find(source => source.exercise === '90/90 hip switches and leans');
+  const hipSwitchesCells = rows.find(cells => cells[1] === hipSwitches.exercise);
+  assert.equal(hipSwitches.dose, hipSwitchesCells[2]);
+  assert.equal(hipSwitches.dose.replace(/\r\n/g, '\n'), '4 switches\n25 s lean per side');
   assert.equal(routine.rows[5].exercise, 'Bench overhead reach, palms up');
-  assert.equal(routine.optional[0].rows[2].dose, '3 glide cycles\n5 s thumb');
+  const tendonGlides = routine.optional[0].rows.find(source =>
+    source.exercise === 'Tendon glides and thumb opposition');
+  const tendonGlidesCells = rows.find(cells => cells[1] === tendonGlides.exercise);
+  assert.equal(tendonGlides.dose, tendonGlidesCells[2]);
+  assert.equal(tendonGlides.dose.replace(/\r\n/g, '\n'), '3 glide cycles\n5 s thumb');
   for (const session of sessions) {
     for (const source of session.rows) {
       assert.equal(typeof source.slot, 'number');
@@ -726,4 +738,67 @@ test('buildSchedule propagates warnings and totals the actual overlong duration'
   ]);
   assert.equal(schedule.total, 120);
   assert.ok(schedule.warnings.some(warning => warning.includes('Dose exceeds the slot by 60 s')));
+});
+
+test('rowStarts returns cumulative offsets without changing frozen segments or their array', () => {
+  const segments = Object.freeze([
+    { rowIndex: 0, seconds: 10 }, { rowIndex: 0, seconds: 5 },
+    { rowIndex: 1, seconds: 20 }, { rowIndex: 1, seconds: 7 },
+    { rowIndex: 2, seconds: 3 }
+  ].map(segment => Object.freeze(segment)));
+  assert.deepEqual(rowStarts(segments), [0, 15, 42]);
+  assert.deepEqual(rowStarts(segments), [0, 15, 42]);
+});
+
+test('rowStarts returns an empty array for no segments', () => {
+  assert.deepEqual(rowStarts([]), []);
+});
+
+test('rowStarts locates routine fixture rows by elapsed segment time', () => {
+  const [routine] = fixtureSessions();
+  const starts = rowStarts(buildSchedule(routine, { includeOptional: false }).segments);
+  assert.equal(starts.length, 12);
+  assert.deepEqual([starts[0], starts[1], starts[6], starts[11]], [0, 150, 750, 1230]);
+});
+
+test('rowStarts includes the optional routine rows after the main routine', () => {
+  const [routine] = fixtureSessions();
+  const starts = rowStarts(buildSchedule(routine, { includeOptional: true }).segments);
+  assert.equal(starts.length, 15);
+  assert.equal(starts[12], 1320);
+});
+
+test('rowStarts locates splits fixture rows by elapsed segment time', () => {
+  const [, splits] = fixtureSessions();
+  const starts = rowStarts(buildSchedule(splits, { includeOptional: false }).segments);
+  assert.equal(starts.length, 8);
+  assert.deepEqual([starts[2], starts[7]], [480, 1200]);
+});
+
+test('rowStarts rejects nonarray input with TypeError', () => {
+  for (const value of [undefined, null, {}, { length: 0 }, 'segments', 42, true, new Set()]) {
+    assert.throws(() => rowStarts(value), TypeError);
+  }
+});
+
+test('rowStarts rejects missing row indices with RangeError', () => {
+  for (const segment of [{}, { seconds: 10 }, null, undefined]) {
+    assert.throws(() => rowStarts([segment]), RangeError);
+    assert.throws(() => rowStarts([{ rowIndex: 0, seconds: 10 }, segment]), RangeError);
+  }
+  assert.throws(() => rowStarts(new Array(1)), RangeError);
+});
+
+test('rowStarts rejects invalid row indices with RangeError', () => {
+  for (const rowIndex of [-1, 0.5, '0', null, undefined, NaN, Infinity, -Infinity, true, 0n]) {
+    const segment = { rowIndex, seconds: 10 };
+    assert.throws(() => rowStarts([segment]), RangeError);
+    assert.throws(() => rowStarts([{ rowIndex: 0, seconds: 10 }, segment]), RangeError);
+  }
+});
+
+test('rowStarts requires rows to begin at zero and advance contiguously in order', () => {
+  for (const indices of [[1], [2], [0, 2], [0, 0, 2], [0, 1, 0], [0, 1, 2, 1], [0, 1, 3]]) {
+    assert.throws(() => rowStarts(indices.map(rowIndex => ({ rowIndex, seconds: 10 }))), RangeError);
+  }
 });
