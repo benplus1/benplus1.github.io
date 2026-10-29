@@ -1,15 +1,17 @@
 const DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTsUIH8LDFYsEKvsa0S7FKy5fkKFbA2FDA6a70tyUByPn62Y50gQwVvjdzJbpFCilxERpGecWGZeKEl/pub?gid=900002&single=true&output=csv';
 
-import {parseCsv, findSessions, buildSchedule, rowStarts} from './parse.js';
+import {parseCsv, findSessions, buildSchedule, rowStarts, changePoints} from './parse.js';
 
 const CSV_KEY = 'mobility-timer:csv';
 const VOICE_KEY = 'mobility-timer:voice';
+const CHANGES_KEY = 'mobility-timer:changes';
+const AUDIO_PAUSED = 'Sound is paused by the browser; tap the page to turn it back on';
 const elements = Object.fromEntries([
   'source-status', 'errors', 'warnings', 'offline', 'preparation', 'sessions',
   'optional', 'optional-groups', 'routine', 'session-total', 'start', 'running',
   'countdown', 'segment', 'progress', 'progress-fill', 'timing', 'next', 'notes',
-  'demo-line', 'demo', 'pause', 'back', 'skip', 'next-row', 'stop', 'finished', 'done-heading',
-  'done-total', 'return', 'wake', 'voice', 'tones'
+  'demo-line', 'demo', 'ready', 'pause', 'back', 'skip', 'next-row', 'stop', 'finished', 'done-heading',
+  'done-total', 'return', 'wake', 'voice', 'changes'
 ].map(id => [id, document.getElementById(id)]));
 
 const errors = new Map();
@@ -24,26 +26,33 @@ let offsets = [];
 let rowOffsets = [];
 let rowEnds = new Map();
 let segmentLinks = [];
+let gates = [];
+let crossedChanges = new Set();
+let waitingGate = null;
 let cachedCopy = null;
 let phase = 'preparation';
 let startedAt = 0;
-let pausedAt = 0;
+let heldElapsed = 0;
 let interval = null;
 let currentSegment = -1;
 let previousRemaining = null;
 let soundedTicks = new Set();
 let runId = 0;
 let voiceOn = true;
-let speechGesture = false;
-let currentUtterance = null;
-const speechSupported = typeof window.speechSynthesis !== 'undefined' &&
-  typeof window.SpeechSynthesisUtterance === 'function';
+let changesMode = 'wait';
+let audioContext = null;
+const toneNodes = new Set();
+let announcement = null;
+let voiceIndex = null;
+let preparedVoice = null;
+const clipCache = new Map();
+const clipQueue = [];
+let clipFetches = 0;
 const wakeSupported = Boolean(navigator.wakeLock &&
   typeof navigator.wakeLock.request === 'function');
 let wakeSentinel = null;
 let wakePending = null;
 let wakeVersion = 0;
-const tones = new Map();
 
 function asError(value, context) {
   const error = value instanceof Error ? value : new Error(String(value));
@@ -221,6 +230,8 @@ function installRoutine(found) {
 }
 
 function chooseSession(index, propagate = false) {
+  preparedVoice = null;
+  warnings.delete('voice-missing');
   selectedSession = index;
   optionalChoices = new Set();
   elements.sessions.querySelectorAll('button').forEach((button, buttonIndex) => {
@@ -275,6 +286,8 @@ function safeLink(value) {
 
 function updateSchedule(propagate = false) {
   schedule = null;
+  preparedVoice = null;
+  warnings.delete('voice-missing');
   elements.start.disabled = true;
   elements.routine.replaceChildren();
   elements['session-total'].textContent = '';
@@ -297,6 +310,17 @@ function updateSchedule(propagate = false) {
     for (const warning of built.warnings) routineWarning(warning);
     segmentLinks = built.segments.map(segment => safeLink(segment.link));
     const rows = [...chosen.rows, ...chosen.optional.flatMap(block => block.rows)];
+    gates = changePoints(built.segments).map(point => {
+      const index = offsets.indexOf(rowOffsets[point.rowIndex]);
+      const segment = built.segments[index];
+      const row = rows[point.rowIndex];
+      if (!row || !segment || segment.rowIndex !== point.rowIndex ||
+          !Number.isFinite(point.at) || point.at < 0 || point.at > rowOffsets[point.rowIndex]) {
+        throw new Error('Invalid row change point for row ' + (point.rowIndex + 1));
+      }
+      return {...point, start: rowOffsets[point.rowIndex], exercise: row.exercise,
+        notes: segment.notes, link: segmentLinks[index], cue: nextCue(row.exercise)};
+    });
     for (const [rowIndex, row] of rows.entries()) {
       const fromSeconds = rowOffsets[rowIndex];
       const item = document.createElement('li');
@@ -316,6 +340,7 @@ function updateSchedule(propagate = false) {
       elements.routine.append(item);
     }
     schedule = built;
+    prepareVoice(built);
     elements['session-total'].textContent = 'Session total ' + formatTime(built.total);
     elements.start.disabled = false;
   } catch (error) {
@@ -341,158 +366,276 @@ function renderVoice() {
   elements.voice.setAttribute('aria-pressed', String(voiceOn));
 }
 
-function cancelSpeech() {
-  if (!speechSupported) return;
-  if (currentUtterance) currentUtterance.cancelled = true;
-  currentUtterance = null;
+function readChanges() {
   try {
-    window.speechSynthesis.cancel();
+    const stored = localStorage.getItem(CHANGES_KEY);
+    if (stored === 'wait' || stored === 'timed') changesMode = stored;
+    else if (stored !== null) throw new Error('Invalid stored changes setting: ' + stored);
   } catch (error) {
-    reportError(error, 'Speech could not be cancelled');
+    reportWarning(error, 'The changes setting could not be read; changes start in wait mode');
   }
+  renderChanges();
 }
 
-function speak(text) {
-  if (!voiceOn || !speechSupported || !speechGesture) return;
-  try {
-    const utterance = new window.SpeechSynthesisUtterance(text);
-    const entry = {utterance, cancelled: false};
-    currentUtterance = entry;
-    utterance.onerror = event => {
-      if (entry.cancelled && (event.error === 'canceled' || event.error === 'interrupted')) return;
-      reportError(new Error('Speech synthesis failed: ' + event.error));
-      if (currentUtterance === entry) currentUtterance = null;
-    };
-    utterance.onend = () => {
-      if (currentUtterance === entry) currentUtterance = null;
-    };
-    window.speechSynthesis.speak(utterance);
-  } catch (error) {
-    currentUtterance = null;
-    reportError(error, 'Speech could not start');
-  }
+function renderChanges() {
+  elements.changes.textContent = 'Changes: ' + changesMode;
+  elements.changes.setAttribute('aria-pressed', String(changesMode === 'wait'));
 }
 
-function wavDataUri(milliseconds, frequency) {
-  const sampleRate = 22050;
-  const samples = Math.round(sampleRate * milliseconds / 1000);
-  const buffer = new ArrayBuffer(44 + samples * 2);
-  const view = new DataView(buffer);
-  const text = (offset, value) => {
-    for (let index = 0; index < value.length; index++) {
-      view.setUint8(offset + index, value.charCodeAt(index));
+function nextCue(exercise) {
+  return 'Next, ' + exercise[0].toLowerCase() + exercise.slice(1);
+}
+
+async function loadVoiceIndex() {
+  const url = new URL('voice/index.json', location.href);
+  const response = await fetch(url.href, {cache: 'no-cache'});
+  if (!response.ok) throw new Error('Voice index request failed: HTTP ' + response.status);
+  const index = await response.json();
+  if (!index || typeof index !== 'object' || Array.isArray(index) ||
+      typeof index.engine !== 'string' || !index.engine.trim() ||
+      typeof index.voice !== 'string' || !index.voice.trim() ||
+      !index.clips || typeof index.clips !== 'object' || Array.isArray(index.clips)) {
+    throw new Error('The voice index must contain engine, voice, and a clips object');
+  }
+  const clips = new Map();
+  const directory = new URL('./', url);
+  for (const [cue, file] of Object.entries(index.clips)) {
+    if (!cue.trim() || typeof file !== 'string' || !file.trim() ||
+        /^(?:[a-z][a-z\d+.-]*:|[\/\\])/i.test(file)) {
+      throw new Error('Invalid voice clip entry: ' + cue);
     }
-  };
-  text(0, 'RIFF');
-  view.setUint32(4, buffer.byteLength - 8, true);
-  text(8, 'WAVE');
-  text(12, 'fmt ');
-  view.setUint32(16, 16, true);
-  view.setUint16(20, 1, true);
-  view.setUint16(22, 1, true);
-  view.setUint32(24, sampleRate, true);
-  view.setUint32(28, sampleRate * 2, true);
-  view.setUint16(32, 2, true);
-  view.setUint16(34, 16, true);
-  text(36, 'data');
-  view.setUint32(40, samples * 2, true);
-  for (let index = 0; index < samples; index++) {
-    const envelope = Math.min(1, index / 100, (samples - 1 - index) / 100);
-    const sample = Math.sin(2 * Math.PI * frequency * index / sampleRate) * envelope;
-    view.setInt16(44 + index * 2, Math.round(sample * 24575), true);
+    const clipUrl = new URL(file, directory);
+    if (clipUrl.origin !== directory.origin || !clipUrl.pathname.startsWith(directory.pathname) ||
+        !/\.mp3$/i.test(clipUrl.pathname) || clipUrl.search || clipUrl.hash) {
+      throw new Error('Voice clip must be a relative MP3 file within voice/: ' + cue);
+    }
+    clips.set(cue, clipUrl.href);
   }
-  const bytes = new Uint8Array(buffer);
-  const chunks = [];
-  for (let offset = 0; offset < bytes.length; offset += 8192) {
-    chunks.push(String.fromCharCode(...bytes.subarray(offset, offset + 8192)));
-  }
-  return 'data:audio/wav;base64,' + btoa(chunks.join(''));
+  voiceIndex = clips;
+  if (preparedVoice) loadPreparedVoice(preparedVoice);
 }
 
-function createTones() {
-  for (const [name, duration, frequency] of [['short', 80, 880], ['long', 250, 1320]]) {
+function prepareVoice(built) {
+  const cues = [...new Set([...built.segments.map(segment => segment.speech),
+    ...gates.map(gate => gate.cue), 'Done'])].sort();
+  preparedVoice = {schedule: built, cues, entries: new Map()};
+  if (voiceIndex) loadPreparedVoice(preparedVoice);
+}
+
+function loadPreparedVoice(prepared) {
+  if (prepared !== preparedVoice) return;
+  const missing = [];
+  for (const cue of prepared.cues) {
+    const url = voiceIndex.get(cue);
+    if (url) prepared.entries.set(cue, queueClip(url));
+    else missing.push(cue);
+  }
+  warnings.delete('voice-missing');
+  if (missing.length) {
+    const message = 'No voice clip for: ' + missing.join(', ') + '; beeps only there';
+    console.warn(new Error(message));
+    warnings.set('voice-missing', message);
+  }
+  renderMessages();
+  playAnnouncement();
+}
+
+function queueClip(url) {
+  if (clipCache.has(url)) return clipCache.get(url);
+  const entry = {url, bytes: null, buffer: null, decoding: null};
+  entry.loaded = new Promise((resolve, reject) => {
+    clipQueue.push({entry, resolve, reject});
+  });
+  clipCache.set(url, entry);
+  entry.loaded.then(bytes => {
+    entry.bytes = bytes;
+    decodeClip(entry);
+  }, error => reportError(error, 'Voice clip could not be loaded: ' + url));
+  fetchClips();
+  return entry;
+}
+
+function fetchClips() {
+  while (clipFetches < 4 && clipQueue.length) {
+    const job = clipQueue.shift();
+    clipFetches++;
+    fetchClip(job.entry.url).then(job.resolve, job.reject).finally(() => {
+      clipFetches--;
+      fetchClips();
+    });
+  }
+}
+
+async function fetchClip(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error('Voice clip request failed: HTTP ' + response.status);
+  const bytes = await response.arrayBuffer();
+  if (!bytes.byteLength) throw new Error('The voice clip is empty');
+  return bytes;
+}
+
+function decodeClip(entry) {
+  if (!audioContext || !entry.bytes || entry.decoding) return;
+  entry.decoding = Promise.resolve().then(() => audioContext.decodeAudioData(entry.bytes.slice(0)));
+  entry.decoding.then(buffer => {
+    entry.buffer = buffer;
+    playAnnouncement();
+  }, error => reportError(error, 'Voice clip could not be decoded: ' + entry.url));
+}
+
+function audioStateChanged() {
+  if (audioContext.state === 'running') {
+    if (warnings.delete(AUDIO_PAUSED)) renderMessages();
+    playAnnouncement();
+  }
+}
+
+function resumeAudio(create = false) {
+  if (!audioContext && create) {
     try {
-      const audio = document.createElement('audio');
-      audio.setAttribute('playsinline', '');
-      audio.preload = 'auto';
-      audio.src = wavDataUri(duration, frequency);
-      const tone = {audio, playback: null};
-      audio.addEventListener('error', () => {
-        const media = audio.error;
-        reportError(new Error('The ' + name + ' tone failed: ' +
-          (media ? 'media error ' + media.code + ' ' + media.message : 'unknown media error')));
-      });
-      tones.set(name, tone);
-      elements.tones.append(audio);
+      if (navigator.audioSession) navigator.audioSession.type = 'ambient';
     } catch (error) {
-      reportError(error, 'The ' + name + ' tone could not be created');
+      reportWarning(error, 'Ambient audio mode could not be set');
+    }
+    try {
+      const Context = window.AudioContext || window.webkitAudioContext;
+      if (!Context) throw new Error('Web Audio is unsupported here');
+      audioContext = new Context();
+      audioContext.addEventListener('statechange', audioStateChanged);
+    } catch (error) {
+      reportError(error, 'Sound could not be initialized');
     }
   }
+  if (!audioContext) return;
+  try {
+    // Resume must be invoked before leaving the original gesture, including Start.
+    const pending = audioContext.resume();
+    Promise.resolve(pending).then(audioStateChanged,
+      error => reportError(error, 'Sound could not be resumed'));
+  } catch (error) {
+    reportError(error, 'Sound could not be resumed');
+  }
+  for (const entry of clipCache.values()) decodeClip(entry);
 }
 
-function stopTone(tone) {
-  if (tone.playback) tone.playback.cancelled = true;
-  tone.playback = null;
-  try {
-    tone.audio.pause();
-    tone.audio.currentTime = 0;
-  } catch (error) {
-    reportError(error, 'A tone could not be stopped');
-  }
+function soundRunning() {
+  if (audioContext && audioContext.state === 'running') return true;
+  if (!warnings.has(AUDIO_PAUSED)) reportWarning(new Error(AUDIO_PAUSED));
+  return false;
 }
 
 function stopTones() {
-  for (const tone of tones.values()) stopTone(tone);
-}
-
-function unlockTones() {
-  try {
-    if (navigator.audioSession) {
-      navigator.audioSession.type = 'playback';
-    }
-  } catch (error) {
-    reportWarning(error, 'Audio playback mode could not be set');
-  }
-  for (const [name, tone] of tones) {
-    let deliberatelyPaused = false;
+  for (const tone of toneNodes) {
     try {
-      const pending = tone.audio.play();
-      tone.audio.pause();
-      deliberatelyPaused = true;
-      tone.audio.currentTime = 0;
-      if (pending && typeof pending.catch === 'function') {
-        pending.catch(error => {
-          if (deliberatelyPaused && error.name === 'AbortError') return;
-          reportError(error, 'The ' + name + ' tone could not be unlocked');
-        });
-      }
+      tone.oscillator.stop();
+      tone.oscillator.disconnect();
+      tone.gain.disconnect();
     } catch (error) {
-      reportError(error, 'The ' + name + ' tone could not be unlocked');
+      reportError(error, 'A tone could not be stopped');
     }
   }
+  toneNodes.clear();
 }
 
 function playTone(name) {
-  const tone = tones.get(name);
-  if (!tone) return; // Creation failures are already visible and logged.
-  stopTone(tone);
-  const playback = {cancelled: false};
-  tone.playback = playback;
+  if (!soundRunning()) return null;
   try {
-    const pending = tone.audio.play();
-    if (pending && typeof pending.catch === 'function') {
-      pending.catch(error => {
-        if (playback.cancelled && error.name === 'AbortError') return;
-        reportError(error, 'The ' + name + ' tone could not play');
-      });
-    }
+    const start = audioContext.currentTime;
+    const end = start + (name === 'short' ? 0.08 : 0.25);
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(name === 'short' ? 880 : 1320, start);
+    gain.gain.setValueAtTime(0, start);
+    gain.gain.linearRampToValueAtTime(0.25, start + 0.005);
+    gain.gain.setValueAtTime(0.25, end - 0.01);
+    gain.gain.linearRampToValueAtTime(0, end);
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+    const tone = {oscillator, gain};
+    toneNodes.add(tone);
+    oscillator.onended = () => {
+      oscillator.disconnect();
+      gain.disconnect();
+      toneNodes.delete(tone);
+    };
+    oscillator.start(start);
+    oscillator.stop(end);
+    return end;
   } catch (error) {
     reportError(error, 'The ' + name + ' tone could not play');
+    return null;
+  }
+}
+
+function cancelVoice() {
+  const previous = announcement;
+  announcement = null;
+  if (!previous || !previous.source) return;
+  try {
+    previous.source.stop();
+    previous.source.disconnect();
+  } catch (error) {
+    reportError(error, 'The voice clip could not be stopped');
+  }
+}
+
+function announce(cue) {
+  cancelVoice();
+  stopTones();
+  announcement = {cue, after: null, played: false, tonePending: true,
+    prepared: preparedVoice, source: null, run: runId, phase,
+    segment: currentSegment, gate: waitingGate};
+  if (!soundRunning()) return;
+  playAnnouncement();
+}
+
+function playAnnouncement() {
+  const current = announcement;
+  if (!current) return;
+  if (current.prepared !== preparedVoice || current.run !== runId || current.phase !== phase ||
+      (phase === 'waiting' && current.gate !== waitingGate)) {
+    cancelVoice();
+    return;
+  }
+  if (phase === 'running') {
+    const elapsed = elapsedAt();
+    if (elapsed >= schedule.total || segmentAt(elapsed) !== current.segment ||
+        (changesMode === 'wait' && gates.some(gate =>
+          !crossedChanges.has(gate.rowIndex) && gate.at <= elapsed))) {
+      cancelVoice();
+      return;
+    }
+  }
+  if (!audioContext || audioContext.state !== 'running') return;
+  if (current.tonePending) {
+    const after = playTone('long');
+    if (after === null) return;
+    current.after = after;
+    current.tonePending = false;
+  }
+  if (current.played || !voiceOn) return;
+  const entry = preparedVoice && preparedVoice.entries.get(current.cue);
+  if (!entry || !entry.buffer) return;
+  try {
+    const source = audioContext.createBufferSource();
+    source.buffer = entry.buffer;
+    source.connect(audioContext.destination);
+    current.source = source;
+    source.onended = () => {
+      source.disconnect();
+      if (current.source === source) current.source = null;
+    };
+    source.start(Math.max(audioContext.currentTime, current.after));
+    current.played = true;
+  } catch (error) {
+    current.played = true;
+    reportError(error, 'The voice clip could not play: ' + current.cue);
   }
 }
 
 function active() {
-  return phase === 'running' || phase === 'paused';
+  return phase === 'running' || phase === 'paused' || phase === 'waiting';
 }
 
 function wakeRefused(value) {
@@ -575,7 +718,8 @@ function releaseWakeLock() {
 }
 
 function elapsedAt(now = Date.now()) {
-  return Math.max(0, ((phase === 'paused' ? pausedAt : now) - startedAt) / 1000);
+  if (phase === 'paused' || phase === 'waiting') return heldElapsed;
+  return Math.max(0, (now - startedAt) / 1000);
 }
 
 function segmentAt(elapsed) {
@@ -594,22 +738,64 @@ function showSegment(index) {
   elements.segment.textContent = segment.label;
   elements.next.textContent = 'Next: ' +
     (index + 1 < schedule.segments.length ? schedule.segments[index + 1].label : 'Done');
+  showDetails(segment.notes, segmentLinks[index]);
+}
+
+function showDetails(notes, link) {
   elements.notes.replaceChildren();
-  for (const line of segment.notes) {
+  for (const line of notes) {
     const item = document.createElement('li');
     item.textContent = line;
     elements.notes.append(item);
   }
-  elements.notes.hidden = !segment.notes.length;
-  const link = segmentLinks[index];
+  elements.notes.hidden = !notes.length;
   elements['demo-line'].hidden = !link;
   if (link) elements.demo.href = link;
   else elements.demo.removeAttribute('href');
 }
 
+function renderControls() {
+  elements.ready.hidden = phase !== 'waiting';
+  elements.pause.hidden = phase === 'waiting';
+  elements.pause.textContent = phase === 'paused' ? 'Resume' : 'Pause';
+}
+
+function waitForReady(gate) {
+  heldElapsed = gate.at;
+  waitingGate = gate;
+  phase = 'waiting';
+  currentSegment = -1;
+  previousRemaining = null;
+  soundedTicks.clear();
+  elements.countdown.textContent = 'Ready';
+  elements.countdown.setAttribute('aria-label', 'Waiting for Ready');
+  elements.segment.textContent = 'Next: ' + gate.exercise;
+  elements.next.textContent = 'Press Ready to begin';
+  elements.timing.textContent = 'Row ' + (gate.rowIndex + 1) + ' of ' + rowOffsets.length +
+    ' · waiting for Ready';
+  elements.progress.setAttribute('aria-valuemax', '1');
+  elements.progress.setAttribute('aria-valuenow', '0');
+  elements['progress-fill'].style.transform = 'scaleX(0)';
+  showDetails(gate.notes, gate.link);
+  renderControls();
+  announce(gate.cue);
+}
+
+function resetChanges(elapsed, includeCurrent = false) {
+  crossedChanges = new Set(gates.filter(gate => gate.at < elapsed ||
+    (includeCurrent && gate.at === elapsed)).map(gate => gate.rowIndex));
+}
+
 function tick({suppressTick = false} = {}) {
-  if (!active()) return;
+  if (!active() || phase === 'waiting') return;
   const elapsed = elapsedAt();
+  if (phase === 'running' && changesMode === 'wait') {
+    const gate = gates.find(point => !crossedChanges.has(point.rowIndex) && point.at <= elapsed);
+    if (gate) {
+      waitForReady(gate);
+      return;
+    }
+  }
   if (elapsed >= schedule.total) {
     finish();
     return;
@@ -622,13 +808,12 @@ function tick({suppressTick = false} = {}) {
   if (changed) {
     soundedTicks.clear();
     previousRemaining = null;
-    cancelSpeech();
+    cancelVoice();
     stopTones();
     currentSegment = index;
     showSegment(index);
     if (phase === 'running') {
-      speak(segment.speech);
-      playTone('long');
+      announce(segment.speech);
     }
   }
   const tickKey = index + ':' + remaining;
@@ -660,17 +845,18 @@ function start(fromSeconds = 0) {
   runId++;
   phase = 'running';
   startedAt = Date.now() - fromSeconds * 1000;
-  pausedAt = 0;
+  heldElapsed = fromSeconds;
+  waitingGate = null;
+  resetChanges(fromSeconds, true);
   currentSegment = -1;
   previousRemaining = null;
   soundedTicks = new Set();
-  speechGesture = true;
   elements.preparation.hidden = true;
   elements.finished.hidden = true;
   elements.running.hidden = false;
-  elements.pause.textContent = 'Pause';
+  renderControls();
   requestWakeLock(runId);
-  unlockTones();
+  resumeAudio(true);
   tick();
   interval = setInterval(tick, 200);
   elements.running.focus();
@@ -679,35 +865,53 @@ function start(fromSeconds = 0) {
 function togglePause() {
   if (phase === 'running') {
     tick();
-    if (!active()) return;
-    pausedAt = Date.now();
+    if (phase !== 'running') return;
+    heldElapsed = elapsedAt();
     phase = 'paused';
-    elements.pause.textContent = 'Resume';
-    cancelSpeech();
+    renderControls();
+    cancelVoice();
     stopTones();
     tick({suppressTick: true});
   } else if (phase === 'paused') {
-    startedAt += Date.now() - pausedAt;
-    pausedAt = 0;
+    resumeAudio();
+    startedAt = Date.now() - heldElapsed * 1000;
     phase = 'running';
-    elements.pause.textContent = 'Pause';
+    renderControls();
     tick({suppressTick: true});
     if (document.visibilityState === 'visible') requestWakeLock(runId);
   }
 }
 
-function seek(desiredElapsed) {
+function seek(desiredElapsed, {bypassChanges = false, run = false} = {}) {
   if (!active()) return;
-  const currentElapsed = elapsedAt();
-  startedAt -= (desiredElapsed - currentElapsed) * 1000;
+  if (run || phase === 'waiting') phase = 'running';
+  heldElapsed = desiredElapsed;
+  startedAt = Date.now() - desiredElapsed * 1000;
+  waitingGate = null;
+  resetChanges(desiredElapsed, bypassChanges);
   currentSegment = -1;
-  cancelSpeech();
+  cancelVoice();
   stopTones();
+  renderControls();
   tick({suppressTick: true});
+}
+
+function ready() {
+  if (phase !== 'waiting') return;
+  resumeAudio();
+  seek(waitingGate.start, {bypassChanges: true, run: true});
+  requestWakeLock(runId);
 }
 
 function back() {
   if (!active()) return;
+  tick();
+  if (!active()) return;
+  if (phase === 'waiting') {
+    const target = Math.max(0, segmentAt(waitingGate.at) - 1);
+    seek(offsets[target], {bypassChanges: true, run: true});
+    return;
+  }
   const elapsed = elapsedAt();
   if (elapsed >= schedule.total) {
     finish();
@@ -715,11 +919,18 @@ function back() {
   }
   const index = segmentAt(elapsed);
   const target = elapsed - offsets[index] > 3 ? index : Math.max(0, index - 1);
-  seek(offsets[target]);
+  seek(offsets[target], {bypassChanges: schedule.segments[target].kind !== 'next'});
 }
 
 function skip() {
   if (!active()) return;
+  resumeAudio();
+  tick();
+  if (!active()) return;
+  if (phase === 'waiting') {
+    ready();
+    return;
+  }
   const elapsed = elapsedAt();
   if (elapsed >= schedule.total) {
     finish();
@@ -731,6 +942,13 @@ function skip() {
 
 function nextRow() {
   if (!active()) return;
+  resumeAudio();
+  tick();
+  if (!active()) return;
+  if (phase === 'waiting') {
+    ready();
+    return;
+  }
   const elapsed = elapsedAt();
   if (elapsed >= schedule.total) {
     finish();
@@ -738,13 +956,14 @@ function nextRow() {
   }
   const index = segmentAt(elapsed);
   const nextRowIndex = schedule.segments[index].rowIndex + 1;
-  seek(nextRowIndex < rowOffsets.length ? rowOffsets[nextRowIndex] : schedule.total);
+  seek(nextRowIndex < rowOffsets.length ? rowOffsets[nextRowIndex] : schedule.total,
+    {bypassChanges: true});
 }
 
 function clearRun() {
   clearInterval(interval);
   interval = null;
-  cancelSpeech();
+  cancelVoice();
   stopTones();
   releaseWakeLock();
 }
@@ -753,11 +972,10 @@ function finish() {
   if (!active()) return;
   phase = 'done';
   clearRun();
-  playTone('long');
   elements.running.hidden = true;
   elements.finished.hidden = false;
   elements['done-total'].textContent = 'Session total ' + formatTime(schedule.total);
-  speak('Done');
+  announce('Done');
   elements['done-heading'].focus();
 }
 
@@ -770,8 +988,28 @@ function stop() {
   elements.start.focus();
 }
 
+function toggleChanges() {
+  if (phase === 'running') tick();
+  changesMode = changesMode === 'wait' ? 'timed' : 'wait';
+  if (phase === 'waiting') {
+    resumeAudio();
+    seek(heldElapsed, {bypassChanges: true, run: true});
+    requestWakeLock(runId);
+  } else if (active()) {
+    resetChanges(elapsedAt(), true);
+  }
+  renderChanges();
+  try {
+    localStorage.setItem(CHANGES_KEY, changesMode);
+  } catch (error) {
+    reportWarning(error, 'The changes setting could not be saved');
+  }
+}
+
 elements.start.addEventListener('click', () => start());
 elements.pause.addEventListener('click', togglePause);
+elements.ready.addEventListener('click', ready);
+elements.changes.addEventListener('click', toggleChanges);
 elements.back.addEventListener('click', back);
 elements.skip.addEventListener('click', skip);
 elements['next-row'].addEventListener('click', nextRow);
@@ -779,7 +1017,7 @@ elements.stop.addEventListener('click', stop);
 elements.return.addEventListener('click', stop);
 elements.voice.addEventListener('click', () => {
   voiceOn = !voiceOn;
-  if (!voiceOn) cancelSpeech();
+  cancelVoice();
   renderVoice();
   try {
     localStorage.setItem(VOICE_KEY, voiceOn ? 'on' : 'off');
@@ -808,10 +1046,22 @@ document.addEventListener('keydown', event => {
   if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
   const target = event.target;
   if (target instanceof Element && (target.isContentEditable ||
+      target.closest('input, textarea, select, [contenteditable]:not([contenteditable="false"])'))) return;
+  if (phase === 'waiting') {
+    event.preventDefault();
+    ready();
+    return;
+  }
+  if (target instanceof Element && (target.isContentEditable ||
       target.closest('input, textarea, select, button, a, summary, [role="button"], [contenteditable]:not([contenteditable="false"])'))) return;
   event.preventDefault();
   togglePause();
 });
+for (const type of ['pointerdown', 'keydown']) {
+  document.addEventListener(type, () => {
+    if (audioContext && audioContext.state !== 'running') resumeAudio();
+  }, {capture: true});
+}
 document.addEventListener('visibilitychange', () => {
   if (!active()) return;
   tick();
@@ -822,12 +1072,10 @@ window.addEventListener('pagehide', () => {
 });
 
 readVoice();
-if (!speechSupported) {
-  reportWarning(new Error('Speech synthesis unsupported here; the timer and tones still work'));
-}
+readChanges();
 if (!wakeSupported) {
   elements.wake.textContent = 'Wake lock unsupported here';
   reportWarning(new Error('Wake lock unsupported here'));
 }
-createTones();
+loadVoiceIndex().catch(error => reportError(error, 'The voice index could not be loaded'));
 loadRoutine();

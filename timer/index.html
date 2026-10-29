@@ -46,6 +46,7 @@
 <p id="next" class="timer-next"></p>
 <ul id="notes" class="timer-notes"></ul>
 <p id="demo-line" hidden><a id="demo" target="_blank" rel="noopener">Demo video</a></p>
+<button id="ready" class="timer-ready" type="button" hidden>Ready</button>
 <div class="timer-controls" aria-label="Timer controls">
 <button id="pause" type="button">Pause</button>
 <button id="back" type="button">Back</button>
@@ -63,9 +64,12 @@
 
 <footer class="timer-footer">
 <p id="wake" class="timer-status" role="status">Screen wake lock will be requested on Start</p>
+<div class="timer-toggles">
 <button id="voice" type="button" aria-pressed="true">Voice on</button>
+<button id="changes" type="button" aria-pressed="true">Changes: wait</button>
+</div>
+<p class="timer-status">Sounds mix with other audio; silent mode mutes them.</p>
 </footer>
-<div id="tones" hidden></div>
 </main>
 </body>
 </html>
