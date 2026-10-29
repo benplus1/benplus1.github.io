@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import * as parser from '../timer/parse.js';
 import {
   parseCsv,
   parseClock,
@@ -1035,5 +1037,388 @@ test('rowStarts rejects invalid row indices with RangeError', () => {
 test('rowStarts requires rows to begin at zero and advance contiguously in order', () => {
   for (const indices of [[1], [2], [0, 2], [0, 0, 2], [0, 1, 0], [0, 1, 2, 1], [0, 1, 3]]) {
     assert.throws(() => rowStarts(indices.map(rowIndex => ({ rowIndex, seconds: 10 }))), RangeError);
+  }
+});
+
+const currentFixture = readFileSync(new URL('./fixtures/mobility-2026-10-28.csv', import.meta.url), 'utf8');
+const currentRoutineOracle = [
+  ['Frog rock-backs into hold', [
+    ['Hold 1 of 2', 60, 'hold'], ['Reset', 30, 'reset'], ['Hold 2 of 2', 60, 'hold'],
+    ['Next: Couch stretch', 10, 'next']
+  ]],
+  ['Couch stretch', [
+    ['Left', 60, 'hold'], ['Switch sides', 10, 'switch'], ['Right', 60, 'hold'],
+    ['Next: Half-split hamstring stretch', 10, 'next']
+  ]],
+  ['Half-split hamstring stretch', [
+    ['Left', 60, 'hold'], ['Switch sides', 10, 'switch'], ['Right', 60, 'hold'],
+    ['Next: 90/90 hip switches and leans', 10, 'next']
+  ]],
+  ['90/90 hip switches and leans', [
+    ['4 switches', 80, 'work'], ['Lean left', 25, 'hold'], ['Switch sides', 10, 'switch'],
+    ['Lean right', 25, 'hold'], ['Next: Puppy pose', 10, 'next']
+  ]],
+  ['Puppy pose', [
+    ['Hold 1 of 2', 60, 'hold'], ['Reset', 15, 'reset'], ['Hold 2 of 2', 60, 'hold'],
+    ['3 lift-offs of 2 s', 15, 'work'], ['Next: Lumbar-locked thoracic rotation', 10, 'next']
+  ]],
+  ['Lumbar-locked thoracic rotation', [
+    ['3 reps, left', 60, 'work'], ['3 reps, right', 60, 'work'],
+    ['Next: High-step lift-offs', 10, 'next']
+  ]],
+  ['High-step lift-offs', [
+    ['3 x 5 s, left', 40, 'work'], ['3 x 5 s, right', 40, 'work'],
+    ['Next: Doorway chest stretch, arm high', 10, 'next']
+  ]],
+  ['Doorway chest stretch, arm high', [
+    ['Left', 60, 'hold'], ['Switch sides', 10, 'switch'], ['Right', 60, 'hold'],
+    ['Next: Wall slides with lift-off', 10, 'next']
+  ]],
+  ['Wall slides with lift-off', [['6 reps', 70, 'work']]]
+];
+const currentRoutineSpeeches = [
+  'Frog rock-backs into hold, hold 1 of 2', 'Reset',
+  'Frog rock-backs into hold, hold 2 of 2', 'Next, couch stretch',
+  'Couch stretch, left', 'Switch sides', 'Couch stretch, right',
+  'Next, half-split hamstring stretch',
+  'Half-split hamstring stretch, left', 'Switch sides', 'Half-split hamstring stretch, right',
+  'Next, 90/90 hip switches and leans',
+  '90/90 hip switches and leans, 4 switches', '90/90 hip switches and leans, lean left',
+  'Switch sides', '90/90 hip switches and leans, lean right', 'Next, puppy pose',
+  'Puppy pose, hold 1 of 2', 'Reset', 'Puppy pose, hold 2 of 2',
+  'Puppy pose, 3 lift-offs of 2 s', 'Next, lumbar-locked thoracic rotation',
+  'Lumbar-locked thoracic rotation, 3 reps, left', 'Lumbar-locked thoracic rotation, 3 reps, right',
+  'Next, high-step lift-offs',
+  'High-step lift-offs, 3 x 5 s, left', 'High-step lift-offs, 3 x 5 s, right',
+  'Next, doorway chest stretch, arm high',
+  'Doorway chest stretch, arm high, left', 'Switch sides',
+  'Doorway chest stretch, arm high, right', 'Next, wall slides with lift-off',
+  'Wall slides with lift-off, 6 reps'
+];
+
+function freezeData(value) {
+  if (value !== null && typeof value === 'object') {
+    Object.values(value).forEach(freezeData);
+    Object.freeze(value);
+  }
+  return value;
+}
+
+function exportedHelper(name) {
+  assert.equal(typeof parser[name], 'function', `${name} must be exported`);
+  return parser[name];
+}
+
+for (const [dose, label, seconds, perSide] of [
+  ['4 switches in 80 s', '4 switches', 80, false],
+  ['4 switches in 80 s per side', '4 switches', 80, true],
+  ['3 reps in 60 s', '3 reps', 60, false],
+  ['3 reps in 60 s per side', '3 reps', 60, true],
+  ['3 x 5 s in 40 s', '3 x 5 s', 40, false],
+  ['3 x 5 s in 40 s per side', '3 x 5 s', 40, true],
+  ['6 reps in 70 s', '6 reps', 70, false],
+  ['then 3 lift-offs of 2 s in 15 s', '3 lift-offs of 2 s', 15, false],
+  ['5 s pause in 20 s', '5 s pause', 20, false],
+  ['2 min in 30 s', '2 min', 30, false],
+  ['  then 3 X 5 S IN 40 S PER SIDE  ', '3 X 5 S', 40, true],
+  ['4  quick switches in 80 s', '4  quick switches', 80, false]
+]) {
+  test(`parseDose recognizes explicit work duration before other clause rules: ${dose}`, () => {
+    const expected = (perSide ? [`${label}, left`, `${label}, right`] : [label])
+      .map(label => ({ label, seconds, kind: 'work' }));
+    const result = assertDose(dose, expected.map(({ label, seconds, kind }) => [label, seconds, kind]));
+    assert.deepEqual(result.segments, expected);
+  });
+}
+
+test('parseDose retains exact untimed behavior when no explicit work duration is given', () => {
+  for (const [dose, labels] of [
+    ['4 switches', ['4 switches']],
+    ['3 reps per side', ['3 reps per side, left', '3 reps per side, right']],
+    ['3 x 5 s per side', ['3 x 5 s, left', '3 x 5 s, right']],
+    ['6 reps', ['6 reps']],
+    ['then 3 lift-offs of 2 s', ['3 lift-offs of 2 s']]
+  ]) {
+    assert.deepEqual(parseDose(dose), {
+      segments: labels.map(label => ({ label, seconds: null, kind: 'work' })), warnings: []
+    });
+  }
+});
+
+test('parseDose requires an initial digit for explicit-duration labels and retains prose warnings', () => {
+  for (const clause of [
+    'Switches in 80 s', 'reps in 60 s per side', 'x3 reps in 60 s',
+    '.3 reps in 60 s', 'PUPPY_LINK in 15 s', 'Four switches in 80 s'
+  ]) {
+    assert.deepEqual(parseDose(`then ${clause}`), {
+      segments: [{ label: clause, seconds: null, kind: 'work' }],
+      warnings: [`Dose not understood: "${clause}"`]
+    });
+  }
+});
+
+test('parseDose rejects zero and unsafe explicit work times including per-side times', () => {
+  for (const time of ['0', '00', '9007199254740992', '9999999999999999999999999999999999999999']) {
+    for (const side of ['', ' per side']) {
+      assert.throws(() => parseDose(`3 x 5 s in ${time} s${side}`), {
+        name: 'RangeError', message: /positive safe integers/
+      });
+    }
+  }
+  assertDose('1 rep in 1 s', [['1 rep', 1, 'work']]);
+  assertDose('1 rep in 9007199254740991 s', [['1 rep', Number.MAX_SAFE_INTEGER, 'work']]);
+});
+
+test('expandRow leaves all timed work fixed and gives trailing Next all leftover seconds', () => {
+  assertExpansion(expand('4 switches in 80 s', {
+    slot: 140, isLast: false, nextName: 'Next exercise'
+  }), [['4 switches', 80, 'work'], ['Next: Next exercise', 60, 'next']]);
+  assertExpansion(expand('3 reps in 60 s per side', {
+    slot: 160, isLast: false, nextName: 'Next exercise'
+  }), [
+    ['3 reps, left', 60, 'work'], ['3 reps, right', 60, 'work'],
+    ['Next: Next exercise', 40, 'next']
+  ]);
+  assertExpansion(expand('2 x 20 s / 3 lift-offs of 2 s in 15 s', {
+    slot: 110, isLast: false, nextName: 'Next exercise'
+  }), [
+    ['Hold 1 of 2', 20, 'hold'], ['Reset', 15, 'reset'], ['Hold 2 of 2', 20, 'hold'],
+    ['3 lift-offs of 2 s', 15, 'work'], ['Next: Next exercise', 40, 'next']
+  ]);
+});
+
+test('expandRow preserves explicit work times when optional or over their slot', () => {
+  assertExpansion(expand('3 x 5 s in 40 s per side', { slot: null }), [
+    ['3 x 5 s, left', 40, 'work'], ['3 x 5 s, right', 40, 'work']
+  ]);
+  assertExpansion(expand('6 reps in 70 s', {
+    slot: 60, isLast: false, nextName: 'Next exercise'
+  }), [['6 reps', 70, 'work']], ['Dose exceeds the slot by 10 s']);
+});
+
+test('findSessions preserves all 41 current CSV records and finds nine routine rows and one optional wrist row', () => {
+  const records = parseCsv(currentFixture);
+  assert.equal(records.length, 41);
+  const sessions = findSessions(records);
+  assert.deepEqual(sessions.map(session => session.name), [
+    'The 20-minute routine (Mon, Wed, Sat)',
+    'Weekly splits session (Thu evening, 22 min)',
+    'Climbing warm-up (Mon, Sat; 20 min, 10-15 when already warm)'
+  ]);
+  assert.deepEqual(sessions.map(session => session.rows.length), [9, 8, 9]);
+  assert.deepEqual(sessions[0].optional.map(group => [group.label, group.rows.length]), [
+    ['After climbing, optional', 1]
+  ]);
+  assert.deepEqual(sessions.slice(1).map(session => session.optional), [[], []]);
+  assert.equal(sessions[0].optional[0].rows[0].exercise, 'Wrist and finger drills (follow the video)');
+  for (const session of sessions) {
+    for (const source of [...session.rows, ...session.optional.flatMap(group => group.rows)]) {
+      const cells = records.find(cells => cells[0] === source.clock && cells[1] === source.exercise);
+      assert.deepEqual(source, {
+        clock: cells[0], exercise: cells[1], dose: cells[2], link: cells[3], notes: cells[4],
+        slot: parseClock(cells[0])?.seconds ?? null
+      });
+    }
+  }
+});
+
+for (const includeOptional of [false, true]) {
+  test(`buildSchedule matches the full 1180-second current routine oracle (includeOptional=${includeOptional})`, () => {
+    const [routine] = findSessions(parseCsv(currentFixture));
+    const schedule = buildSchedule(routine, { includeOptional });
+    const optional = routine.optional[0].rows[0];
+    assertOracle(schedule, includeOptional ? [
+      ...currentRoutineOracle, [optional.exercise, [[optional.exercise, 720, 'hold']]]
+    ] : currentRoutineOracle, includeOptional ? 1900 : 1180);
+    assertMetadata(schedule, includeOptional ? [...routine.rows, optional] : routine.rows);
+    assert.deepEqual(schedule.segments.map(segment => segment.speech),
+      includeOptional ? [...currentRoutineSpeeches, optional.exercise] : currentRoutineSpeeches);
+    assert.ok(schedule.segments.filter(segment => segment.rowIndex === 8)
+      .every(segment => segment.kind !== 'next'));
+  });
+}
+
+test('buildSchedule leaves splits and warm-up exactly equal to main on the same current fixture', async () => {
+  const source = execFileSync('git', ['show', 'main:timer/parse.js'], {
+    cwd: new URL('..', import.meta.url), encoding: 'utf8'
+  });
+  const baseline = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
+  const sessions = findSessions(parseCsv(currentFixture));
+  const baselineSessions = baseline.findSessions(baseline.parseCsv(currentFixture));
+  for (const sessionIndex of [1, 2]) {
+    assert.deepEqual(sessions[sessionIndex], baselineSessions[sessionIndex]);
+    for (const includeOptional of [false, true]) {
+      const schedule = buildSchedule(sessions[sessionIndex], { includeOptional });
+      assert.deepEqual(schedule, baseline.buildSchedule(baselineSessions[sessionIndex], { includeOptional }));
+      assertMetadata(schedule, sessions[sessionIndex].rows);
+    }
+  }
+});
+
+test('spokenCues returns the independent sorted unique union of real schedule speech and every row cue', () => {
+  const spokenCues = exportedHelper('spokenCues');
+  const sessions = freezeData([fixture, warmupFixture, currentFixture]
+    .flatMap(text => findSessions(parseCsv(text))));
+  const before = structuredClone(sessions);
+  const expected = new Set(['Done']);
+  for (const session of sessions) {
+    for (const segment of buildSchedule(session, { includeOptional: true }).segments) {
+      expected.add(segment.speech);
+    }
+    const rows = [...session.rows, ...session.optional.flatMap(group => group.rows)];
+    for (const source of rows) {
+      expected.add(`Next, ${source.exercise.replace(/^./, letter => letter.toLowerCase())}`);
+    }
+  }
+  const cues = spokenCues(sessions);
+  assert.deepEqual(cues, [...expected].sort());
+  assert.deepEqual(spokenCues(sessions), cues);
+  assert.deepEqual(sessions, before);
+  assert.equal(new Set(cues).size, cues.length);
+  for (const cue of [
+    'Next, frog rock-backs into hold', 'Next, wrist and finger drills (follow the video)',
+    'Next, wall slides with lift-off', 'Next, seated pancake',
+    'Next, general movement: walk, arm swings, forearm rotations, wrist circles, tendon glides',
+    'Done'
+  ]) assert.ok(cues.includes(cue), `Missing gate cue: ${cue}`);
+  for (const session of sessions) {
+    for (const source of [...session.rows, ...session.optional.flatMap(group => group.rows)]) {
+      if (source.link) assert.ok(cues.every(cue => !cue.includes(source.link)));
+      for (const note of source.notes.split(/\r\n|\r|\n/).filter(line => line.trim())) {
+        assert.ok(!cues.includes(note), `Notes must not be spoken: ${note}`);
+      }
+    }
+  }
+  assert.ok(cues.every(cue => !cue.includes('PUPPY_LINK')));
+});
+
+test('spokenCues includes rows with no preceding Next and lowers only the first exercise letter', () => {
+  const spokenCues = exportedHelper('spokenCues');
+  const session = freezeData({
+    name: 'Gate cues',
+    rows: [
+      row('60 s', { exercise: 'NASA Reach' }),
+      row('60 s', { exercise: 'Last MAIN Row' })
+    ],
+    optional: [
+      { label: 'First optional group', rows: [
+        row('3 reps', { exercise: 'Élan UPPER', slot: null, link: 'PUPPY_LINK', notes: 'PRIVATE NOTE' })
+      ] },
+      { label: 'Second optional group', rows: [row('', { exercise: 'Zero Row', slot: 0 })] }
+    ]
+  });
+  assert.ok(buildSchedule(session, { includeOptional: true }).segments
+    .every(segment => segment.kind !== 'next'));
+  assert.deepEqual(spokenCues([session, session]), [
+    'Done', 'Last MAIN Row', 'NASA Reach', 'Next, last MAIN Row',
+    'Next, nASA Reach', 'Next, zero Row', 'Next, élan UPPER', 'Élan UPPER, 3 reps'
+  ].sort());
+});
+
+test('spokenCues accepts empty sessions and validates input using buildSchedule rules', () => {
+  const spokenCues = exportedHelper('spokenCues');
+  assert.deepEqual(spokenCues([]), ['Done']);
+  assert.deepEqual(spokenCues([{ name: 'Empty', rows: [], optional: [] }]), ['Done']);
+  for (const value of [undefined, null, {}, 'sessions', 42, true, new Set()]) {
+    assert.throws(() => spokenCues(value), TypeError);
+  }
+  for (const session of [
+    null, undefined, [], {}, { name: '', rows: [], optional: [] },
+    { name: 'Bad rows', rows: null, optional: [] },
+    { name: 'Bad row', rows: [row('', { exercise: '' })], optional: [] },
+    { name: 'Bad optional', rows: [], optional: null },
+    { name: 'Bad group', rows: [], optional: [{ label: 'Optional', rows: [row('', { notes: null })] }] }
+  ]) {
+    let expectedError;
+    assert.throws(() => buildSchedule(session, { includeOptional: true }), error => {
+      expectedError = error;
+      return true;
+    });
+    assert.throws(() => spokenCues([session]), {
+      name: expectedError.name, message: expectedError.message
+    });
+  }
+  assert.throws(() => spokenCues(new Array(1)), TypeError);
+});
+
+test('changePoints uses preceding Next offsets and optional row starts on the current routine', () => {
+  const changePoints = exportedHelper('changePoints');
+  const [routine] = findSessions(parseCsv(currentFixture));
+  const expected = [
+    { rowIndex: 1, at: 150 }, { rowIndex: 2, at: 290 },
+    { rowIndex: 3, at: 430 }, { rowIndex: 4, at: 580 },
+    { rowIndex: 5, at: 740 }, { rowIndex: 6, at: 870 },
+    { rowIndex: 7, at: 960 }, { rowIndex: 8, at: 1100 }
+  ];
+  assert.deepEqual(changePoints(buildSchedule(routine, { includeOptional: false }).segments), expected);
+  assert.deepEqual(changePoints(buildSchedule(routine, { includeOptional: true }).segments), [
+    ...expected, { rowIndex: 9, at: 1180 }
+  ]);
+});
+
+test('changePoints locates every real schedule transition with and without Next segments', () => {
+  const changePoints = exportedHelper('changePoints');
+  for (const text of [fixture, warmupFixture, currentFixture]) {
+    for (const session of findSessions(parseCsv(text))) {
+      for (const includeOptional of [false, true]) {
+        const { segments } = buildSchedule(session, { includeOptional });
+        const expected = [];
+        for (let rowIndex = 1; rowIndex <= segments.at(-1).rowIndex; rowIndex++) {
+          let index = segments.findIndex(segment => segment.rowIndex === rowIndex - 1 && segment.kind === 'next');
+          if (index === -1) index = segments.findIndex(segment => segment.rowIndex === rowIndex);
+          expected.push({ rowIndex, at: segments.slice(0, index).reduce((sum, segment) => sum + segment.seconds, 0) });
+        }
+        assert.deepEqual(changePoints(segments), expected);
+      }
+    }
+  }
+});
+
+test('changePoints handles synthetic rows with and without Next without mutating frozen input', () => {
+  const changePoints = exportedHelper('changePoints');
+  const segments = freezeData([
+    { rowIndex: 0, seconds: 10, kind: 'work' }, { rowIndex: 0, seconds: 5, kind: 'next' },
+    { rowIndex: 1, seconds: 20, kind: 'work' }, { rowIndex: 1, seconds: 7, kind: 'rest' },
+    { rowIndex: 2, seconds: 3, kind: 'next' }, { rowIndex: 3, seconds: 8, kind: 'hold' },
+    { rowIndex: 3, seconds: 2, kind: 'next' }
+  ]);
+  const before = structuredClone(segments);
+  const expected = [{ rowIndex: 1, at: 10 }, { rowIndex: 2, at: 42 }, { rowIndex: 3, at: 42 }];
+  assert.deepEqual(changePoints(segments), expected);
+  assert.deepEqual(changePoints(segments), expected);
+  assert.deepEqual(segments, before);
+  assert.deepEqual(changePoints([{ rowIndex: 0, seconds: 10 }, { rowIndex: 1, seconds: 20 }]), [
+    { rowIndex: 1, at: 10 }
+  ]);
+  assert.deepEqual(changePoints([]), []);
+  assert.deepEqual(changePoints([{ rowIndex: 0, seconds: 10, kind: 'next' }]), []);
+});
+
+test('changePoints validates exactly like rowStarts without imposing extra segment requirements', () => {
+  const changePoints = exportedHelper('changePoints');
+  for (const value of [undefined, null, {}, { length: 0 }, 'segments', 42, true, new Set()]) {
+    assert.throws(() => changePoints(value), TypeError);
+  }
+  const invalid = [new Array(1)];
+  for (const segment of [
+    {}, { seconds: 10 }, null, undefined,
+    ...[-1, 0.5, '0', null, undefined, NaN, Infinity, -Infinity, true, 0n]
+      .map(rowIndex => ({ rowIndex, seconds: 10 }))
+  ]) {
+    invalid.push([segment], [{ rowIndex: 0, seconds: 10 }, segment]);
+  }
+  for (const indices of [[1], [2], [0, 2], [0, 0, 2], [0, 1, 0], [0, 1, 2, 1], [0, 1, 3]]) {
+    invalid.push(indices.map(rowIndex => ({ rowIndex, seconds: 10 })));
+  }
+  for (const segments of invalid) {
+    assert.throws(() => changePoints(segments), RangeError);
+  }
+  for (const segments of [
+    [{ rowIndex: 0 }, { rowIndex: 1 }],
+    [{ rowIndex: 0, seconds: 0 }, { rowIndex: 1, seconds: -1 }],
+    [{ rowIndex: 0, seconds: NaN }, { rowIndex: 1, seconds: 1 }]
+  ]) {
+    const starts = rowStarts(segments);
+    assert.deepEqual(changePoints(segments), [{ rowIndex: 1, at: starts[1] }]);
   }
 });

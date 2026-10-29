@@ -186,7 +186,16 @@ function rangeSeconds(lower, upper, clause) {
 }
 
 function dosePart(clause, warnings) {
-  let match = /^(\d+)\s*x\s*(\d+)(?:\s*-\s*(\d+))?\s*s(?:\s+(per side))?$/i.exec(clause);
+  let match = /^(\d.*?)\s+in\s+(\d+)\s*s(?:\s+(per side))?$/i.exec(clause);
+  if (match) {
+    const label = match[1];
+    const seconds = positiveInteger(match[2], clause);
+    const segments = match[3] ? [
+      step(`${label}, left`, seconds, 'work'), step(`${label}, right`, seconds, 'work')
+    ] : [step(label, seconds, 'work')];
+    return { type: 'segments', segments };
+  }
+  match = /^(\d+)\s*x\s*(\d+)(?:\s*-\s*(\d+))?\s*s(?:\s+(per side))?$/i.exec(clause);
   if (match) {
     const count = positiveInteger(match[1], clause);
     const seconds = rangeSeconds(match[2], match[3], clause);
@@ -426,4 +435,30 @@ export function rowStarts(segments) {
     elapsed += segment.seconds;
   }
   return starts;
+}
+
+export function spokenCues(sessions) {
+  if (!Array.isArray(sessions)) throw new TypeError('Sessions must be an array');
+  const cues = new Set(['Done']);
+  for (const session of sessions) {
+    const schedule = buildSchedule(session, { includeOptional: true });
+    for (const segment of schedule.segments) cues.add(segment.speech);
+    for (const rows of [session.rows, ...session.optional.map(group => group.rows)]) {
+      for (const row of rows) cues.add(`Next, ${lowerFirst(row.exercise)}`);
+    }
+  }
+  return [...cues].sort();
+}
+
+export function changePoints(segments) {
+  const starts = rowStarts(segments);
+  const points = starts.slice(1).map((at, index) => ({ rowIndex: index + 1, at }));
+  let elapsed = 0;
+  for (const segment of segments) {
+    if (segment.kind === 'next' && segment.rowIndex < points.length) {
+      points[segment.rowIndex].at = elapsed;
+    }
+    elapsed += segment.seconds;
+  }
+  return points;
 }
