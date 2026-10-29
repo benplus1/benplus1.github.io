@@ -30,6 +30,11 @@ def normalize(text):
         flags=re.IGNORECASE,
     )
     text = re.sub(rf"\b({NUMBER})\s*[-–]\s*({NUMBER})\b", r"\1 to \2", text)
+    text = re.sub(
+        rf"\b({NUMBER}(?:\s+to\s+{NUMBER})?)\s*min\b",
+        lambda match: f"{match[1]} {'minute' if 'to' not in match[1] and float(match[1]) == 1 else 'minutes'}",
+        text,
+    )
     return re.sub(
         rf"\b({NUMBER})\s*s\b",
         lambda match: f"{match[1]} {'second' if float(match[1]) == 1 else 'seconds'}",
